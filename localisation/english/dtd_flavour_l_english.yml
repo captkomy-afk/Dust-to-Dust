@@ -1,0 +1,38 @@
+﻿l_english:
+ dtd_flavour.1.t: "Millennium celebrations come to an end"
+ dtd_flavour.1.d: "With the end of the 20th century, the world coordinated celebration to commemorate the end of 1999 has come to an end. The celebrations were held as marking the end of the 2nd millennium, the 20th century, and the 201st decade. Countries across the globe held official - and unofficial - celeberations for the new millennium"
+ dtd_flavour.1.a: "Let's hope it's a good one!"
+ 
+ dtd_flavour.2.t: "Century Leap Year"
+ dtd_flavour.2.d: "In the 16th century, the Gregorian calendar became the most ubiquitous calendar in the modern world. Like most calendars of the past millennia, it attempts to rectify its long-term imprecision by adding leap days and years with mathematical calculation.\n\nEvery year divisible by four is a leap year and therefore receives an extra day, the 29th of February. However, this simple system results in three additional leap days every 400 years. Within the Gregorian calendar, century years are only considered leap years if divisible by 400, thus this results in century leap years every 400 years. This year is one of those rare years, being only the second to occur since the introduction of the Gregorian calendar itself.""
+ dtd_flavour.2.a: "And the clock keeps ticking..."
+ 
+ dtd_flavour.3.t: "The Millennium Summit"
+ dtd_flavour.3.d: "The Millennium Summit has been held at the United Nations headquarters in New York City. Being the largest gathering of world leaders in history, this has presented countries with a unique opportunity to negotiate and clarify agreements. As well as for the United Nations to set out a firm vision for the future.\n\nBoth President [USA.GetLeader] and President [SOV.GetLeader] delivered a plea for disarmament and the reduction of global conflicts, with a particular focus on the growing violence in Palestine and East Timor.\n\nAttempts were also made to bolster peacekeeping forces, with Prime Minister [ENG.GetLeader] proposing an overhaul of the entire system. However, this attempt was quickly struck down by both [USA.GetLeader] and [SOV.GetLeader], with both providing a variety of reasons for why their nations would not support the cause."
+ dtd_flavour.3.a: "Same as it ever was..."
+ 
+ dtd_flavour.4.t: "ILOVEYOU Virus Spreads"
+ dtd_flavour.4.d: "LOVEYOU, sometimes referred to as the Love Bug or Loveletter, was a computer worm that infected over ten million Windows personal computers beginning on 4 May 2000. It started spreading as an email message with the subject line "ILOVEYOU" and the attachment "LOVE-LETTER-FOR-YOU.TXT.vbs". Windows computers often hide the VBS file extension (a type of interpreted file) by default, because it is an extension for a file type that Windows knows, leading unwitting users to think it was a normal text file. Opening the attachment activated the VBScript script. First, the worm inflicted damage on the local machine, overwriting files (including image files; however, it hid MP3 files instead of deleting them). Then, it copied itself to all addresses in the Windows Address Book used by Microsoft Outlook, allowing it to spread faster than previous email worms. ILOVEYOU has repeatedly been named as one of the most destructive and virulent pieces of malware in history. Within ten days of the first reported cases, over fifty million infections had been reported, and it is estimated that 10% of Internet-connected computers in the world were eventually affected."
+ dtd_flavour.4.a: "Better check my anti virus"
+ 
+ dtd_flavour.5.t: "Chris First Photograph"
+ dtd_flavour.5.d: "From at least 2002 up until the summer of 2008, Chris hung out at the GAMe PLACe on a regular basis, going there every Friday without fail to play the Pokémon and Yu-Gi-Oh! TCGs. The shop hosted the Pokémon TCG League, where Chris served as a self-proclaimed volunteer gym leader (though he was not endorsed in any way, and was largely simply tolerated by the store).\n\n The other two best-known patrons of the shop, aside from Chris himself, are Mimms and Lucas. The two friends are the primary source of most of what is known about Chris's behavior at The GAMe PLACe, and are now famous for having taken and uploaded the first photograph of Chris to reach the Internet."
+ dtd_flavour.5.a: "Uh oh?"
+
+ dtd_flavour.6.t: "Chris First Photograph"
+ dtd_flavour.6.d: "From at least 2002 up until the summer of 2008, Chris hung out at the GAMe PLACe on a regular basis, going there every Friday without fail to play the Pokémon and Yu-Gi-Oh! TCGs. The shop hosted the Pokémon TCG League, where Chris served as a self-proclaimed volunteer gym leader (though he was not endorsed in any way, and was largely simply tolerated by the store).\n\n The other two best-known patrons of the shop, aside from Chris himself, are Mimms and Lucas. The two friends are the primary source of most of what is known about Chris's behavior at The GAMe PLACe, and are now famous for having taken and uploaded the first photograph of Chris to reach the Internet."
+ dtd_flavour.6.a: "Uh oh?"
+
+  # CPRF REWORK
+ cprf.1.t: "CPRF Wins Elections"
+ cprf.1.d: "In a monumental electoral event that will undoubtedly be etched in the annals of Russian history, the Communist Party of the Russian Federation has emerged victorious, sending ripples of jubilation through the streets of Moscow and other major urban centers. The sight of victory banners fluttering in the wind alongside Soviet flags was a poignant symbol of the resounding triumph that had been achieved.\n\nDespite the euphoria that engulfed the nation, there were dissenting voices that sought to cast a shadow of doubt over the legitimacy of the election results. Allegations of fraud and unfounded conspiracy theories were concocted in an attempt to undermine the significance of the Communist Party's win. The Western press, ever quick to sound alarms and raise specters of fear, painted a picture of the Communist Party as a bastion of nationalists and revanchists, intent on restoring the USSR and posing a grave threat to Western imperialism.\nHowever, amidst the cacophony of skepticism and fear-mongering, one undeniable truth remained: the people had spoken. Through their votes, they had expressed a fervent desire for the resurgence of the glorious Union that once stood as a beacon of hope and strength."
+ cprf.1.a: "Communists, Forwards!"
+
+ cprf.2.t: "[SOV.getleader] Restores the RSFSR"
+ cprf.2.d: "Despite the death of the Union in 1991, it seems like a spectre, the Union has risen from the dead. Today the newly elected president [SOV.getleader], by approving a law renaming the country, have declared the end of the Russian Federation, and the rebirth of the Russian Soviet Federative Socialist Republic.\n\nAnnounced in front of a domestic crowd, the anthem of the Soviet Union was aired for the first time in over three decades, sung in tandemn with crowds throughout the streets. Although the domestic attitude is jubiliant with a hopeful return to superpower status and the glory of the old Union, the international community has been mixed. Reactions from the former Eastern Bloc has been the harshest, with the Baltic nations warning against repeating the mistakes of the 20th century, and Ukraine denouncing the move."
+ cprf.2.a: "All Power to the Soviets!"
+
+ cprf.3.t: "Rejoin the U.S.S.R.?"
+ cprf.3.d: "do we rejoin the ussr or are we cringe?"
+ cprf.3.a: "No"
+ cprf.3.b: "Yes"

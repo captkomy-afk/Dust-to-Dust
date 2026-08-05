@@ -1,0 +1,74 @@
+﻿l_english:
+ # CKEdited - loc for events/dev_laws_flavor.txt (fixes bugs #1/#2)
+
+ dev_laws.1.t:0 "Academic Reforms Take Hold" # CKEdited
+ dev_laws.1.d:0 "Universities and research institutes report steady gains. The government moves to formalize a stronger academic development policy." # CKEdited
+ dev_laws.1.a:0 "Encouraging." # CKEdited
+
+ dev_laws.2.t:0 "Academic Institutions Struggling" # CKEdited
+ dev_laws.2.d:0 "Falling investment and brain drain have taken their toll. Our academic development standing is regressing." # CKEdited
+ dev_laws.2.a:0 "Unfortunate." # CKEdited
+
+ dev_laws.3.t:0 "Education Policy Formally Updated" # CKEdited
+ dev_laws.3.d:0 "The relevant ministries have finished updating national policy to reflect our new level of academic development." # CKEdited
+ dev_laws.3.a:0 "Understood." # CKEdited
+
+ dev_laws.4.t:0 "Agricultural Output Rising" # CKEdited
+ dev_laws.4.d:0 "New techniques and infrastructure are improving yields across the countryside. Farming development continues to advance." # CKEdited
+ dev_laws.4.a:0 "Good news." # CKEdited
+
+ dev_laws.5.t:0 "Agricultural Decline" # CKEdited
+ dev_laws.5.d:0 "Poor harvests and neglected infrastructure are eroding our agricultural base. Farming development is regressing." # CKEdited
+ dev_laws.5.a:0 "Concerning." # CKEdited
+
+ dev_laws.6.t:0 "Farming Policy Formally Updated" # CKEdited
+ dev_laws.6.d:0 "The agriculture ministry has finished updating national policy to reflect our new level of farming development." # CKEdited
+ dev_laws.6.a:0 "Understood." # CKEdited
+
+ dev_laws.7.t:0 "Living Standards Improve" # CKEdited
+ dev_laws.7.d:0 "Fewer citizens are falling below the poverty line. Our poverty development standing is improving." # CKEdited
+ dev_laws.7.a:0 "Good news." # CKEdited
+
+ dev_laws.8.t:0 "Poverty on the Rise" # CKEdited
+ dev_laws.8.d:0 "Economic hardship is spreading. Our poverty development standing is regressing." # CKEdited
+ dev_laws.8.a:0 "Concerning." # CKEdited
+
+ dev_laws.9.t:0 "Social Policy Formally Updated" # CKEdited
+ dev_laws.9.d:0 "The relevant ministries have finished updating national policy to reflect our new level of poverty development." # CKEdited
+ dev_laws.9.a:0 "Understood." # CKEdited
+
+ dev_laws.10.t:0 "Industrial Base Expanding" # CKEdited
+ dev_laws.10.d:0 "New factories and modernized production lines are coming online. Industrial development continues to advance." # CKEdited
+ dev_laws.10.a:0 "Good news." # CKEdited
+
+ dev_laws.11.t:0 "Industrial Decline" # CKEdited
+ dev_laws.11.d:0 "Aging infrastructure and underinvestment are hurting output. Industrial development is regressing." # CKEdited
+ dev_laws.11.a:0 "Concerning." # CKEdited
+
+ dev_laws.12.t:0 "Industrial Policy Formally Updated" # CKEdited
+ dev_laws.12.d:0 "The relevant ministries have finished updating national policy to reflect our new level of industrial development." # CKEdited
+ dev_laws.12.a:0 "Understood." # CKEdited
+
+ dev_laws.13.t:0 "Armed Forces Modernizing" # CKEdited
+ dev_laws.13.d:0 "Training standards and unit readiness are improving across the armed forces. Military development continues to advance." # CKEdited
+ dev_laws.13.a:0 "Good news." # CKEdited
+
+ dev_laws.14.t:0 "Military Readiness Slipping" # CKEdited
+ dev_laws.14.d:0 "Budget cuts and neglected training are hurting the armed forces. Military development is regressing." # CKEdited
+ dev_laws.14.a:0 "Concerning." # CKEdited
+
+ dev_laws.15.t:0 "Military Policy Formally Updated" # CKEdited
+ dev_laws.15.d:0 "The general staff has finished updating national policy to reflect our new level of military development." # CKEdited
+ dev_laws.15.a:0 "Understood." # CKEdited
+
+ dev_laws.16.t:0 "Society Flourishing" # CKEdited
+ dev_laws.16.d:0 "Civic institutions and public trust are strengthening. Societal development continues to advance." # CKEdited
+ dev_laws.16.a:0 "Good news." # CKEdited
+
+ dev_laws.17.t:0 "Societal Cohesion Weakening" # CKEdited
+ dev_laws.17.d:0 "Institutions are under strain and public trust is eroding. Societal development is regressing." # CKEdited
+ dev_laws.17.a:0 "Concerning." # CKEdited
+
+ dev_laws.18.t:0 "Social Policy Formally Updated" # CKEdited
+ dev_laws.18.d:0 "The relevant ministries have finished updating national policy to reflect our new level of societal development." # CKEdited
+ dev_laws.18.a:0 "Understood." # CKEdited

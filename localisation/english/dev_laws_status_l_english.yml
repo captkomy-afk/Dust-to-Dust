@@ -1,0 +1,65 @@
+﻿l_english:
+ # CKEdited - loc for the new "Development Laws" decisions tab (status-only)
+
+ development_laws_status_category:0 "Development Laws" # CKEdited
+
+ academic_development_status:0 "Academic Development" # CKEdited
+ academic_development_status_desc:0 "[dev_status_academic]" # CKEdited
+ farming_development_status:0 "Farming Development" # CKEdited
+ farming_development_status_desc:0 "[dev_status_farming]" # CKEdited
+ poverty_development_status:0 "Poverty & Living Standards" # CKEdited
+ poverty_development_status_desc:0 "[dev_status_poverty]" # CKEdited
+ industrial_development_status:0 "Industrial Development" # CKEdited
+ industrial_development_status_desc:0 "[dev_status_industry]" # CKEdited
+ military_development_status:0 "Military Development" # CKEdited
+ military_development_status_desc:0 "[dev_status_military]" # CKEdited
+ society_development_status:0 "Societal Development" # CKEdited
+ society_development_status_desc:0 "[dev_status_society]" # CKEdited
+
+ # --- Academic ---
+ dev_status_academic_01:0 "§YCurrent standing:§! §GCognitive Struggle§! (Lowest)\n\n§YMomentum:§! [?academic_development_var|3] §!(ranges -1.00 to +1.00)\nRising to §G+1.00§! advances to: §GBasic Literacy Attainment§!\nAlready at the lowest possible tier - it cannot regress further." # CKEdited
+ dev_status_academic_02:0 "§YCurrent standing:§! §GBasic Literacy Attainment§! (Low)\n\n§YMomentum:§! [?academic_development_var|3] §!(ranges -1.00 to +1.00)\nRising to §G+1.00§! advances to: §GFunctional Competence§!\nFalling to §R-1.00§! regresses to: §RCognitive Struggle§!" # CKEdited
+ dev_status_academic_03:0 "§YCurrent standing:§! §GFunctional Competence§! (Medium)\n\n§YMomentum:§! [?academic_development_var|3] §!(ranges -1.00 to +1.00)\nRising to §G+1.00§! advances to: §GCritical Thinkers§!\nFalling to §R-1.00§! regresses to: §RBasic Literacy Attainment§!" # CKEdited
+ dev_status_academic_04:0 "§YCurrent standing:§! §GCritical Thinkers§! (High)\n\n§YMomentum:§! [?academic_development_var|3] §!(ranges -1.00 to +1.00)\nRising to §G+1.00§! advances to: §GIntellectual Excellence§!\nFalling to §R-1.00§! regresses to: §RFunctional Competence§!" # CKEdited
+ dev_status_academic_05:0 "§YCurrent standing:§! §GIntellectual Excellence§! (Higher)\n\n§YMomentum:§! [?academic_development_var|3] §!(ranges -1.00 to +1.00)\nRising to §G+1.00§! advances to: §GAcademic Ingenuity§!\nFalling to §R-1.00§! regresses to: §RCritical Thinkers§!" # CKEdited
+ dev_status_academic_06:0 "§YCurrent standing:§! §GAcademic Ingenuity§! (Highest)\n\n§YMomentum:§! [?academic_development_var|3] §!(ranges -1.00 to +1.00)\nAlready at the highest possible tier - it cannot advance further.\nFalling to §R-1.00§! regresses to: §RIntellectual Excellence§!" # CKEdited
+
+ # --- Farming ---
+ dev_status_farming_01:0 "§YCurrent standing:§! §GSubsistence Farming§! (Lowest)\n\n§YMomentum:§! [?farming_development_var|3] §!(ranges -1.00 to +1.00)\nRising to §G+1.00§! advances to: §GBasic Food Security§!\nAlready at the lowest possible tier - it cannot regress further." # CKEdited
+ dev_status_farming_02:0 "§YCurrent standing:§! §GBasic Food Security§! (Low)\n\n§YMomentum:§! [?farming_development_var|3] §!(ranges -1.00 to +1.00)\nRising to §G+1.00§! advances to: §GSustainable Food Production§!\nFalling to §R-1.00§! regresses to: §RSubsistence Farming§!" # CKEdited
+ dev_status_farming_03:0 "§YCurrent standing:§! §GSustainable Food Production§! (Medium)\n\n§YMomentum:§! [?farming_development_var|3] §!(ranges -1.00 to +1.00)\nRising to §G+1.00§! advances to: §GDiversified Agricultural Prosperity§!\nFalling to §R-1.00§! regresses to: §RBasic Food Security§!" # CKEdited
+ dev_status_farming_04:0 "§YCurrent standing:§! §GDiversified Agricultural Prosperity§! (High)\n\n§YMomentum:§! [?farming_development_var|3] §!(ranges -1.00 to +1.00)\nRising to §G+1.00§! advances to: §GModernized Agriculture§!\nFalling to §R-1.00§! regresses to: §RSustainable Food Production§!" # CKEdited
+ dev_status_farming_05:0 "§YCurrent standing:§! §GModernized Agriculture§! (Higher)\n\n§YMomentum:§! [?farming_development_var|3] §!(ranges -1.00 to +1.00)\nRising to §G+1.00§! advances to: §GAgro-Technological Advancement§!\nFalling to §R-1.00§! regresses to: §RDiversified Agricultural Prosperity§!" # CKEdited
+ dev_status_farming_06:0 "§YCurrent standing:§! §GAgro-Technological Advancement§! (Highest)\n\n§YMomentum:§! [?farming_development_var|3] §!(ranges -1.00 to +1.00)\nAlready at the highest possible tier - it cannot advance further.\nFalling to §R-1.00§! regresses to: §RModernized Agriculture§!" # CKEdited
+
+ # --- Poverty ---
+ dev_status_poverty_01:0 "§YCurrent standing:§! §GGrinding Poverty§! (Lowest)\n\n§YMomentum:§! [?poverty_development_var|3] §!(ranges -1.00 to +1.00)\nRising to §G+1.00§! advances to: §GLow End Development§!\nAlready at the lowest possible tier - it cannot regress further." # CKEdited
+ dev_status_poverty_02:0 "§YCurrent standing:§! §GLow End Development§! (Low)\n\n§YMomentum:§! [?poverty_development_var|3] §!(ranges -1.00 to +1.00)\nRising to §G+1.00§! advances to: §GModerate Income Hardships§!\nFalling to §R-1.00§! regresses to: §RGrinding Poverty§!" # CKEdited
+ dev_status_poverty_03:0 "§YCurrent standing:§! §GModerate Income Hardships§! (Medium)\n\n§YMomentum:§! [?poverty_development_var|3] §!(ranges -1.00 to +1.00)\nRising to §G+1.00§! advances to: §GGrowing Middle-Income Aspirations§!\nFalling to §R-1.00§! regresses to: §RLow End Development§!" # CKEdited
+ dev_status_poverty_04:0 "§YCurrent standing:§! §GGrowing Middle-Income Aspirations§! (High)\n\n§YMomentum:§! [?poverty_development_var|3] §!(ranges -1.00 to +1.00)\nRising to §G+1.00§! advances to: §GSustained Prosperity and Development§!\nFalling to §R-1.00§! regresses to: §RModerate Income Hardships§!" # CKEdited
+ dev_status_poverty_05:0 "§YCurrent standing:§! §GSustained Prosperity and Development§! (Higher)\n\n§YMomentum:§! [?poverty_development_var|3] §!(ranges -1.00 to +1.00)\nRising to §G+1.00§! advances to: §GNear-Eradicated Scarcity and Poverty§!\nFalling to §R-1.00§! regresses to: §RGrowing Middle-Income Aspirations§!" # CKEdited
+ dev_status_poverty_06:0 "§YCurrent standing:§! §GNear-Eradicated Scarcity and Poverty§! (Highest)\n\n§YMomentum:§! [?poverty_development_var|3] §!(ranges -1.00 to +1.00)\nAlready at the highest possible tier - it cannot advance further.\nFalling to §R-1.00§! regresses to: §RSustained Prosperity and Development§!" # CKEdited
+
+ # --- Industry ---
+ dev_status_industry_01:0 "§YCurrent standing:§! §GMeager Industrial Base§! (Lowest)\n\n§YMomentum:§! [?industrial_development_var|3] §!(ranges -1.00 to +1.00)\nRising to §G+1.00§! advances to: §GLight Industry§!\nAlready at the lowest possible tier - it cannot regress further." # CKEdited
+ dev_status_industry_02:0 "§YCurrent standing:§! §GLight Industry§! (Low)\n\n§YMomentum:§! [?industrial_development_var|3] §!(ranges -1.00 to +1.00)\nRising to §G+1.00§! advances to: §GIntermediate Manufacturing§!\nFalling to §R-1.00§! regresses to: §RMeager Industrial Base§!" # CKEdited
+ dev_status_industry_03:0 "§YCurrent standing:§! §GIntermediate Manufacturing§! (Medium)\n\n§YMomentum:§! [?industrial_development_var|3] §!(ranges -1.00 to +1.00)\nRising to §G+1.00§! advances to: §GComplex Industry§!\nFalling to §R-1.00§! regresses to: §RLight Industry§!" # CKEdited
+ dev_status_industry_04:0 "§YCurrent standing:§! §GComplex Industry§! (High)\n\n§YMomentum:§! [?industrial_development_var|3] §!(ranges -1.00 to +1.00)\nRising to §G+1.00§! advances to: §GIndustrial Powerhouse§!\nFalling to §R-1.00§! regresses to: §RIntermediate Manufacturing§!" # CKEdited
+ dev_status_industry_05:0 "§YCurrent standing:§! §GIndustrial Powerhouse§! (Higher)\n\n§YMomentum:§! [?industrial_development_var|3] §!(ranges -1.00 to +1.00)\nRising to §G+1.00§! advances to: §GMassive Industrial Base§!\nFalling to §R-1.00§! regresses to: §RComplex Industry§!" # CKEdited
+ dev_status_industry_06:0 "§YCurrent standing:§! §GMassive Industrial Base§! (Highest)\n\n§YMomentum:§! [?industrial_development_var|3] §!(ranges -1.00 to +1.00)\nAlready at the highest possible tier - it cannot advance further.\nFalling to §R-1.00§! regresses to: §RIndustrial Powerhouse§!" # CKEdited
+
+ # --- Military ---
+ dev_status_military_01:0 "§YCurrent standing:§! §GUnorganized Rabble§! (Lowest)\n\n§YMomentum:§! [?military_development_var|3] §!(ranges -1.00 to +1.00)\nRising to §G+1.00§! advances to: §GNovice Formation§!\nAlready at the lowest possible tier - it cannot regress further." # CKEdited
+ dev_status_military_02:0 "§YCurrent standing:§! §GNovice Formation§! (Low)\n\n§YMomentum:§! [?military_development_var|3] §!(ranges -1.00 to +1.00)\nRising to §G+1.00§! advances to: §GCompetent Cohort§!\nFalling to §R-1.00§! regresses to: §RUnorganized Rabble§!" # CKEdited
+ dev_status_military_03:0 "§YCurrent standing:§! §GCompetent Cohort§! (Medium)\n\n§YMomentum:§! [?military_development_var|3] §!(ranges -1.00 to +1.00)\nRising to §G+1.00§! advances to: §GExpert Brigade§!\nFalling to §R-1.00§! regresses to: §RNovice Formation§!" # CKEdited
+ dev_status_military_04:0 "§YCurrent standing:§! §GExpert Brigade§! (High)\n\n§YMomentum:§! [?military_development_var|3] §!(ranges -1.00 to +1.00)\nRising to §G+1.00§! advances to: §GElite Vanguard§!\nFalling to §R-1.00§! regresses to: §RCompetent Cohort§!" # CKEdited
+ dev_status_military_05:0 "§YCurrent standing:§! §GElite Vanguard§! (Higher)\n\n§YMomentum:§! [?military_development_var|3] §!(ranges -1.00 to +1.00)\nRising to §G+1.00§! advances to: §GAdvanced Warfare Tactics§!\nFalling to §R-1.00§! regresses to: §RExpert Brigade§!" # CKEdited
+ dev_status_military_06:0 "§YCurrent standing:§! §GAdvanced Warfare Tactics§! (Highest)\n\n§YMomentum:§! [?military_development_var|3] §!(ranges -1.00 to +1.00)\nAlready at the highest possible tier - it cannot advance further.\nFalling to §R-1.00§! regresses to: §RElite Vanguard§!" # CKEdited
+
+ # --- Society ---
+ dev_status_society_01:0 "§YCurrent standing:§! §GAnarchic§! (Lowest)\n\n§YMomentum:§! [?society_development_var|3] §!(ranges -1.00 to +1.00)\nRising to §G+1.00§! advances to: §GMeager Development§!\nAlready at the lowest possible tier - it cannot regress further." # CKEdited
+ dev_status_society_02:0 "§YCurrent standing:§! §GMeager Development§! (Low)\n\n§YMomentum:§! [?society_development_var|3] §!(ranges -1.00 to +1.00)\nRising to §G+1.00§! advances to: §GStable Development§!\nFalling to §R-1.00§! regresses to: §RAnarchic§!" # CKEdited
+ dev_status_society_03:0 "§YCurrent standing:§! §GStable Development§! (Medium)\n\n§YMomentum:§! [?society_development_var|3] §!(ranges -1.00 to +1.00)\nRising to §G+1.00§! advances to: §GAdvancing Development§!\nFalling to §R-1.00§! regresses to: §RMeager Development§!" # CKEdited
+ dev_status_society_04:0 "§YCurrent standing:§! §GAdvancing Development§! (High)\n\n§YMomentum:§! [?society_development_var|3] §!(ranges -1.00 to +1.00)\nRising to §G+1.00§! advances to: §GModern Society§!\nFalling to §R-1.00§! regresses to: §RStable Development§!" # CKEdited
+ dev_status_society_05:0 "§YCurrent standing:§! §GModern Society§! (Higher)\n\n§YMomentum:§! [?society_development_var|3] §!(ranges -1.00 to +1.00)\nRising to §G+1.00§! advances to: §GPinnacle of Civilization§!\nFalling to §R-1.00§! regresses to: §RAdvancing Development§!" # CKEdited
+ dev_status_society_06:0 "§YCurrent standing:§! §GPinnacle of Civilization§! (Highest)\n\n§YMomentum:§! [?society_development_var|3] §!(ranges -1.00 to +1.00)\nAlready at the highest possible tier - it cannot advance further.\nFalling to §R-1.00§! regresses to: §RModern Society§!" # CKEdited
