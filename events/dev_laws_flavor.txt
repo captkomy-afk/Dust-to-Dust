@@ -1,0 +1,252 @@
+# CKEdited - new file: dedicated flavor events for the development-law system
+# (fixes bugs #1/#2: check_*_development previously fired nonexistent/hijacked
+# vanilla "generic.*" alliance events; these replace them 1:1, see
+# common/scripted_effects/00_TFR_scripted_effects_ZZZ_generic.txt)
+
+add_namespace = dev_laws # CKEdited
+
+# --- Academic development ---
+
+country_event = { # CKEdited
+	id = dev_laws.1
+	title = dev_laws.1.t
+	desc = dev_laws.1.d
+	picture = GFX_politics_speak
+	is_triggered_only = yes
+
+	option = {
+		name = dev_laws.1.a
+		log = "[GetDateText]: [This.GetName]: dev_laws.1.a executed"
+	}
+}
+
+country_event = { # CKEdited
+	id = dev_laws.2
+	title = dev_laws.2.t
+	desc = dev_laws.2.d
+	picture = GFX_politics_speak
+	is_triggered_only = yes
+
+	option = {
+		name = dev_laws.2.a
+		log = "[GetDateText]: [This.GetName]: dev_laws.2.a executed"
+	}
+}
+
+country_event = { # CKEdited
+	id = dev_laws.3
+	title = dev_laws.3.t
+	desc = dev_laws.3.d
+	picture = GFX_message_signing
+	is_triggered_only = yes
+
+	option = {
+		name = dev_laws.3.a
+		log = "[GetDateText]: [This.GetName]: dev_laws.3.a executed"
+	}
+}
+
+# --- Farming development ---
+
+country_event = { # CKEdited
+	id = dev_laws.4
+	title = dev_laws.4.t
+	desc = dev_laws.4.d
+	picture = GFX_politics_speak
+	is_triggered_only = yes
+
+	option = {
+		name = dev_laws.4.a
+		log = "[GetDateText]: [This.GetName]: dev_laws.4.a executed"
+	}
+}
+
+country_event = { # CKEdited
+	id = dev_laws.5
+	title = dev_laws.5.t
+	desc = dev_laws.5.d
+	picture = GFX_politics_speak
+	is_triggered_only = yes
+
+	option = {
+		name = dev_laws.5.a
+		log = "[GetDateText]: [This.GetName]: dev_laws.5.a executed"
+	}
+}
+
+country_event = { # CKEdited
+	id = dev_laws.6
+	title = dev_laws.6.t
+	desc = dev_laws.6.d
+	picture = GFX_message_signing
+	is_triggered_only = yes
+
+	option = {
+		name = dev_laws.6.a
+		log = "[GetDateText]: [This.GetName]: dev_laws.6.a executed"
+	}
+}
+
+# --- Poverty development ---
+
+country_event = { # CKEdited
+	id = dev_laws.7
+	title = dev_laws.7.t
+	desc = dev_laws.7.d
+	picture = GFX_politics_speak
+	is_triggered_only = yes
+
+	option = {
+		name = dev_laws.7.a
+		log = "[GetDateText]: [This.GetName]: dev_laws.7.a executed"
+	}
+}
+
+country_event = { # CKEdited
+	id = dev_laws.8
+	title = dev_laws.8.t
+	desc = dev_laws.8.d
+	picture = GFX_politics_speak
+	is_triggered_only = yes
+
+	option = {
+		name = dev_laws.8.a
+		log = "[GetDateText]: [This.GetName]: dev_laws.8.a executed"
+	}
+}
+
+country_event = { # CKEdited
+	id = dev_laws.9
+	title = dev_laws.9.t
+	desc = dev_laws.9.d
+	picture = GFX_message_signing
+	is_triggered_only = yes
+
+	option = {
+		name = dev_laws.9.a
+		log = "[GetDateText]: [This.GetName]: dev_laws.9.a executed"
+	}
+}
+
+# --- Industrial development ---
+
+country_event = { # CKEdited
+	id = dev_laws.10
+	title = dev_laws.10.t
+	desc = dev_laws.10.d
+	picture = GFX_politics_speak
+	is_triggered_only = yes
+
+	option = {
+		name = dev_laws.10.a
+		log = "[GetDateText]: [This.GetName]: dev_laws.10.a executed"
+	}
+}
+
+country_event = { # CKEdited
+	id = dev_laws.11
+	title = dev_laws.11.t
+	desc = dev_laws.11.d
+	picture = GFX_politics_speak
+	is_triggered_only = yes
+
+	option = {
+		name = dev_laws.11.a
+		log = "[GetDateText]: [This.GetName]: dev_laws.11.a executed"
+	}
+}
+
+country_event = { # CKEdited
+	id = dev_laws.12
+	title = dev_laws.12.t
+	desc = dev_laws.12.d
+	picture = GFX_message_signing
+	is_triggered_only = yes
+
+	option = {
+		name = dev_laws.12.a
+		log = "[GetDateText]: [This.GetName]: dev_laws.12.a executed"
+	}
+}
+
+# --- Military development ---
+
+country_event = { # CKEdited
+	id = dev_laws.13
+	title = dev_laws.13.t
+	desc = dev_laws.13.d
+	picture = GFX_politics_speak
+	is_triggered_only = yes
+
+	option = {
+		name = dev_laws.13.a
+		log = "[GetDateText]: [This.GetName]: dev_laws.13.a executed"
+	}
+}
+
+country_event = { # CKEdited
+	id = dev_laws.14
+	title = dev_laws.14.t
+	desc = dev_laws.14.d
+	picture = GFX_politics_speak
+	is_triggered_only = yes
+
+	option = {
+		name = dev_laws.14.a
+		log = "[GetDateText]: [This.GetName]: dev_laws.14.a executed"
+	}
+}
+
+country_event = { # CKEdited
+	id = dev_laws.15
+	title = dev_laws.15.t
+	desc = dev_laws.15.d
+	picture = GFX_message_signing
+	is_triggered_only = yes
+
+	option = {
+		name = dev_laws.15.a
+		log = "[GetDateText]: [This.GetName]: dev_laws.15.a executed"
+	}
+}
+
+# --- Societal development ---
+
+country_event = { # CKEdited
+	id = dev_laws.16
+	title = dev_laws.16.t
+	desc = dev_laws.16.d
+	picture = GFX_politics_speak
+	is_triggered_only = yes
+
+	option = {
+		name = dev_laws.16.a
+		log = "[GetDateText]: [This.GetName]: dev_laws.16.a executed"
+	}
+}
+
+country_event = { # CKEdited
+	id = dev_laws.17
+	title = dev_laws.17.t
+	desc = dev_laws.17.d
+	picture = GFX_politics_speak
+	is_triggered_only = yes
+
+	option = {
+		name = dev_laws.17.a
+		log = "[GetDateText]: [This.GetName]: dev_laws.17.a executed"
+	}
+}
+
+country_event = { # CKEdited
+	id = dev_laws.18
+	title = dev_laws.18.t
+	desc = dev_laws.18.d
+	picture = GFX_message_signing
+	is_triggered_only = yes
+
+	option = {
+		name = dev_laws.18.a
+		log = "[GetDateText]: [This.GetName]: dev_laws.18.a executed"
+	}
+}

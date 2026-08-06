@@ -1,0 +1,164 @@
+add_namespace = dtd_flavour
+add_namespace = cprf
+add_namespace = ogas
+
+# test one 
+news_event = {
+	id = cprf.1
+	title = cprf.1.t
+	desc = cprf.1.d
+	picture = GFX_gennady_zyuganov_news
+	is_triggered_only = yes
+
+	option = {
+		name = cprf.1.a
+	}
+}
+news_event = {
+	id = cprf.2
+	title = cprf.2.t
+	desc = cprf.2.d
+	picture = GFX_cccp
+	is_triggered_only = yes
+
+	option = {
+		name = cprf.2.a
+	}
+}
+# invite to join ussr
+country_event = {
+	id = cprf.3
+	title = cprf.3.t
+	desc = cprf.3.d
+	picture = GFX_politics_communism_lenin
+	is_triggered_only = yes
+
+	option = {
+		name = cprf.3.a
+	}
+	option = {
+		name = cprf.3.b
+		SOV = { puppet = { target = ROOT } }
+	}
+}
+news_event = {
+	id = ogas.1
+	title = ogas.1.t
+	desc = ogas.1.d
+	picture = commie_dodon_elected
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = ogas.1.a
+	}
+}
+# test two 
+news_event = {
+	id = dtd_flavour.2
+	title = dtd_flavour.2.t
+	desc = dtd_flavour.2.d
+	picture = GFX_p2 
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = dtd_flavour.2.a
+	}
+}
+news_event = {
+	id = dtd_flavour.3
+	title = dtd_flavour.3.t
+	desc = dtd_flavour.3.d
+	picture = GFX_trade_agreement
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = dtd_flavour.3.a
+	}
+}
+news_event = {
+	id = dtd_flavour.4
+	title = dtd_flavour.4.t
+	desc = dtd_flavour.4.d
+	picture = GFX_impop_bitc
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = dtd_flavour.4.a
+	}
+}
+news_event = {
+	id = dtd_flavour.5
+	title = dtd_flavour.5.t
+	desc = dtd_flavour.5.d
+	picture = GFX_p6
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = dtd_flavour.5.a
+	}
+}
+news_event = {
+	id = dtd_flavour.6
+	title = dtd_flavour.6.t
+	desc = dtd_flavour.6.d
+	picture = GFX_p6
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = dtd_flavour.6.a
+	}
+}
+news_event = {
+	id = dtd_flavour.7
+	title = dtd_flavour.7.t
+	desc = dtd_flavour.7.d
+	picture = GFX_impop_bitc
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = dtd_flavour.7.a
+	}
+}
+news_event = {
+	id = dtd_flavour.8
+	title = dtd_flavour.8.t
+	desc = dtd_flavour.8.d
+	picture = GFX_impop_bitc
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = dtd_flavour.8.a
+	}
+}
+news_event = {
+	id = dtd_flavour.9
+	title = dtd_flavour.9.t
+	desc = dtd_flavour.9.d
+	picture = GFX_impop_bitc
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = dtd_flavour.9.a
+	}
+}
+news_event = {
+	id = dtd_flavour.10
+	title = dtd_flavour.10.t
+	desc = dtd_flavour.10.d
+	picture = GFX_impop_bitc
+	is_triggered_only = yes
+	major = yes
+
+	option = {
+		name = dtd_flavour.10.a
+	}
+}
