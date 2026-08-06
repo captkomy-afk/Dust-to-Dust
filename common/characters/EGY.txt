@@ -610,8 +610,8 @@ characters = {
 			traits = {
 				western_liberalism
 				diplomat
-				western_technocrat
 				democratic_reformer
+				career_politician # CKEdited - western_technocrat removed (-30% political_power_factor was too strong)
 			}
 		}
 	}

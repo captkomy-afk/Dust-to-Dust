@@ -458,6 +458,12 @@ un_on_game_start_war_add = {
 }
 
 update_sc_vote = {
+	# CKEdited - UNSC voting silenced for multiplayer: every SC vote request across the whole mod funnels
+	# through this single effect regardless of source (sanctions decisions, recognition events, etc.), so
+	# gating it here with "always = no" silences the entire system without touching each caller or
+	# deleting any content. Remove this wrapper (keep the body) to re-enable.
+	if = {
+		limit = { always = no }
 	if = {
 		limit = {
 			OR = {
@@ -492,6 +498,7 @@ update_sc_vote = {
 
 		recompute_un_2_3_number = yes
 		international_systems_update = yes
+	}
 	}
 }
 
@@ -606,6 +613,11 @@ manipulate_ga_vote_front = {
 }
 
 update_ga_vote = {
+	# CKEdited - UNGA voting silenced for multiplayer, same reasoning as update_sc_vote above: every GA vote
+	# request funnels through this single effect, so gating it here silences the whole system. Remove this
+	# wrapper (keep the body) to re-enable.
+	if = {
+		limit = { always = no }
 	if = {
 		limit = {
 			OR = {
@@ -653,9 +665,15 @@ update_ga_vote = {
 		recompute_un_2_3_number = yes
 		international_systems_update = yes
 	}
+	}
 }
 
 start_unsc_next_term_voting = {
+	# CKEdited - UNSC council-seat elections silenced for multiplayer along with vote proposals (see
+	# update_sc_vote/update_ga_vote above). This is the separate yearly background driver that reshuffles
+	# who sits on the council; gating it here stops that too without touching MD_on_actions.txt's caller.
+	if = {
+		limit = { always = no }
 	set_global_flag = { flag = electing_new_unsc_members days = 200 value = 1 }
 	clear_variable = global.unsc_reroll_count
 	clear_array = global.new_council_members
@@ -786,9 +804,15 @@ start_unsc_next_term_voting = {
 	set_temp_variable = { ga_new_vote_type = 6 }
 	set_temp_variable = { ga_new_vote_nation = global.new_council_members^0 }
 	update_ga_vote = yes
+	}
 }
 
 update_security_council_peeps = {
+	# CKEdited - silenced along with the rest of the UNSC/UNGA system (see update_sc_vote above). With
+	# start_unsc_next_term_voting also silenced this would only ever run on empty arrays anyway, but gating
+	# it too keeps this fully inert rather than relying on that indirectly.
+	if = {
+		limit = { always = no }
 	# Confirmed in June but dead or capitulated by January: drop before seating.
 	clear_array = md_valid_confirmed_members
 	for_each_loop = {
@@ -866,6 +890,7 @@ update_security_council_peeps = {
 	clear_array = global.confirmed_new_council_members
 
 	international_systems_update = yes
+	}
 }
 
 un_sc_new_members_step_next = {

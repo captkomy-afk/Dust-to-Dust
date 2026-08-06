@@ -1,32 +1,36 @@
 ideas = {
 	hidden_ideas = {
+		# CKEdited - drift raised from 0.1 to 0.25. Outlooks share one normalized pool, so a flat 0.1 was
+		# routinely fought to a standstill (observed stalling around ~20%) by ordinary competing drift from
+		# other active ideas (e.g. ruling_party_western + economic_boom_western = 0.05 pulling the other way).
+		# 0.25 gives campaigns enough force to reliably keep winning that tug-of-war instead of just barely.
 		MD_propaganda_prowestern = {
 			modifier = {
-				democratic_drift = 0.1
+				democratic_drift = 0.25
 				political_power_factor = -0.25
 			}
 		}
 		MD_propaganda_emerging = {
 			modifier = {
-				communism_drift = 0.1
+				communism_drift = 0.25
 				political_power_factor = -0.25
 			}
 		}
 		MD_propaganda_nonaligned = {
 			modifier = {
-				neutrality_drift = 0.1
+				neutrality_drift = 0.25
 				political_power_factor = -0.25
 			}
 		}
 		MD_propaganda_nationalist = {
 			modifier = {
-				nationalist_drift = 0.1
+				nationalist_drift = 0.25
 				political_power_factor = -0.25
 			}
 		}
 		MD_propaganda_fascism = {
 			modifier = {
-				fascism_drift = 0.1
+				fascism_drift = 0.25
 				political_power_factor = -0.25
 			}
 		}

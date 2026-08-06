@@ -618,11 +618,12 @@ country_event = { # KDP Proposes Re-Unification
 				target = PUK
 				transfer_troops = yes
 			}
-			set_temp_variable = { add_col_one = 15 }
-			add_coalition_members_effect = yes
-			set_temp_variable = { party_index = 15 }
-			set_temp_variable = { party_popularity_increase = 0.25 }
-			change_relative_party_popularity = yes
+			# CKEdited - calling add_coalition_members_effect/change_relative_party_popularity directly here
+			# (immediately inside this KUR scope switch) threw "Invalid Scope, provided: None" every time.
+			# Routing through a hidden immediate country_event instead, matching the proven-working
+			# KUR = { country_event = { id = X } } pattern already used elsewhere in this file - firing an
+			# event gives its own effects a clean scope, unlike calling a named effect straight after a switch.
+			country_event = Kurdistan.21
 		}
 		ai_chance = {
 			base = 5
@@ -700,6 +701,21 @@ country_event = { # PUK Refuses Re-Unification Talks
 		ai_chance = {
 			base = 5
 		}
+	}
+}
+
+country_event = { # CKEdited - new hidden event: applies the post-reunification coalition/party
+	# popularity effects for KUR, fired from Kurdistan.18's option (see comment there)
+	id = Kurdistan.21
+	hidden = yes
+	is_triggered_only = yes
+
+	immediate = {
+		set_temp_variable = { add_col_one = 15 }
+		add_coalition_members_effect = yes
+		set_temp_variable = { party_index = 15 }
+		set_temp_variable = { party_popularity_increase = 0.25 }
+		change_relative_party_popularity = yes
 	}
 }
 
