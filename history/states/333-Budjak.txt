@@ -1,0 +1,31 @@
+state = {
+	id = 333
+	name = "STATE_333"
+
+	history = {
+		owner = UKR
+		set_variable = { state_renewable_capacity_factor_modifier_var = 1.162 }
+		victory_points = {
+			3704 1
+		}
+		buildings = {
+			infrastructure = 1
+			internet_station = 1
+		}
+		add_core_of = UKR
+		add_core_of = ROM
+		set_variable = { productivity_state_var = 363 }
+
+		add_province_modifier = {
+			static_modifiers = { terrain_izmail }
+			province = { id = 3704 }
+		}
+	}
+
+	provinces = {
+		3701 3704 6727 9683
+	}
+	manpower = 664368
+	buildings_max_level_factor = 1.000
+	state_category = state_01
+}
