@@ -1,0 +1,39 @@
+ideas = {
+	dtd_national_ideas = {
+		law = yes
+		use_list_view = yes
+
+		# have sex - yes, that means you, Hungarian shitbag from Imperia
+		have_sex = {
+			cost = 150
+			removal_cost = 150
+			picture = idea_sex
+			visible = {
+
+			}
+			cancel = { 
+
+			}
+			on_remove = {
+
+			}
+			modifier = {
+				monthly_population = 0.25
+				population_tax_income_multiplier_modifier = -0.08
+				social_cost_multiplier_modifier = 0.1
+				total_workforce_modifier = -0.02
+				political_power_factor = -0.01
+			}
+			research_bonus = {	
+
+			}
+			equipment_bonus = {
+
+			}
+			ai_will_do = { 
+				factor = -10
+			}
+			cancel_if_invalid = yes
+		}
+    }
+}

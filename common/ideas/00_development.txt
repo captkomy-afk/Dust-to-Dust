@@ -1,0 +1,5 @@
+# CKEdited - the on_actions block that used to live here was moved to
+# common/on_actions/dev_laws_on_actions.txt. Files under common/ideas/ are
+# only parsed for "ideas = { ... }" blocks - the game's on_actions loader
+# only scans common/on_actions/*.txt, so this block was never actually
+# executing. See dev_laws_on_actions.txt for the working version.

@@ -1,0 +1,1945 @@
+#WHITE LEGION BATTALION CREATE
+BLR_whitelegion_battalion_category = {
+	BLR_white_legion_battalion_create = {
+		icon = GFX_decision_whitelegion_button
+		days_remove = 30
+
+		available = {
+			custom_trigger_tooltip = {
+				tooltip = BLR_whitelegion_recruit_2000
+				check_variable = { SOV.white_legion > 1999 }
+			}
+		}
+		visible = {
+			OR = {
+				nationalist_right_wing_populists_are_in_power = yes
+				nationalist_monarchists_are_in_power = yes
+			}
+			has_completed_focus = BLR_white_legion_battalion
+		}
+		cost = 30
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove BLR_white_legion_battalion_create"
+			set_temp_variable = { modify_white_legion = -2000 }
+			modify_white_legion_support = yes
+			set_temp_variable = { treasury_change = -7 }
+			modify_treasury_effect = yes
+			703 = {
+				create_unit = {
+					division = "name = \"White Legion Battalion\" division_template = \"White Legion\" start_experience_factor = 1.0"
+					prioritize_location = 11370
+					owner = BLR
+				}
+			}
+		}
+		ai_will_do = { base = 0 }
+	}
+	BLR_white_legion_recruit_youngfront = {
+		cost = 75
+		icon = GFX_decision_whitelegion_button
+		days_remove = 30
+		fire_only_once = yes
+		visible = {
+			OR = {
+				nationalist_right_wing_populists_are_in_power = yes
+				nationalist_monarchists_are_in_power = yes
+			}
+			has_completed_focus = BLR_white_legion_battalion
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove BLR_white_legion_recruit_youngfront"
+			set_temp_variable = { modify_white_legion = 300 }
+			modify_white_legion_support = yes
+		}
+		ai_will_do = { base = 0 }
+	}
+	BLR_white_legion_recruit_people = {
+		cost = 55
+		icon = GFX_decision_whitelegion_button
+		days_remove = 100
+		visible = {
+			OR = {
+				nationalist_right_wing_populists_are_in_power = yes
+				nationalist_monarchists_are_in_power = yes
+			}
+			has_completed_focus = BLR_white_legion_battalion
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove BLR_white_legion_recruit_people"
+			set_temp_variable = { modify_white_legion = 500 }
+			modify_white_legion_support = yes
+		}
+		ai_will_do = { base = 0 }
+	}
+	BLR_white_legion_recruit_revansh = {
+		cost = 55
+		icon = GFX_decision_whitelegion_button
+		days_remove = 370
+		visible = {
+			has_idea = BLR_revanshh
+			OR = {
+				nationalist_right_wing_populists_are_in_power = yes
+				nationalist_monarchists_are_in_power = yes
+			}
+			has_completed_focus = BLR_white_legion_battalion
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove BLR_white_legion_recruit_revansh"
+			set_temp_variable = { modify_white_legion = 1500 }
+			modify_white_legion_support = yes
+			remove_ideas = BLR_revanshh
+			add_timed_idea = {
+				idea = BLR_revanshh1
+				days = 730
+			}
+		}
+		ai_will_do = { base = 0 }
+	}
+}
+#BELARUS INTERNAL TROOPS AND TERRITORIAL DEFENCE
+BLR_belarus_support_category = {
+	BLR_ter_oboronaup_start = {
+		custom_cost_trigger = {
+			command_power > 20
+		}
+		custom_cost_text = command_power_more_than_20
+		icon = GFX_decision_ter_oborona
+		days_remove = 45
+		fire_only_once = yes
+		available = {
+			has_war = yes
+		}
+		visible = {
+			has_completed_focus = BLR_Brigade_Territorial_Defence
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove BLR_ter_oboronaup_start"
+			add_manpower = -5000
+			set_temp_variable = { treasury_change = -6 }
+			add_command_power = -25
+			modify_treasury_effect = yes
+			703 = {
+				create_unit = {
+					division = "name = \"Territorial Defense Brigade\" division_template = \"Territorial Defense Brigade\" start_experience_factor = 1.0"
+					prioritize_location = 11370
+					owner = BLR
+				}
+			}
+			702 = {
+				create_unit = {
+					division = "name = \"Territorial Defense Brigade\" division_template = \"Territorial Defense Brigade\" start_experience_factor = 1.0"
+					prioritize_location = 3393
+					owner = BLR
+				}
+			}
+			704 = {
+				create_unit = {
+					division = "name = \"Territorial Defense Brigade\" division_template = \"Territorial Defense Brigade\" start_experience_factor = 1.0"
+					prioritize_location = 9288
+					owner = BLR
+				}
+			}
+			1094 = {
+				create_unit = {
+					division = "name = \"Territorial Defense Brigade\" division_template = \"Territorial Defense Brigade\" start_experience_factor = 1.0"
+					prioritize_location = 11241
+					owner = BLR
+				}
+			}
+			1093 = {
+				create_unit = {
+					division = "name = \"Territorial Defense Brigade\" division_template = \"Territorial Defense Brigade\" start_experience_factor = 1.0"
+					prioritize_location = 3392
+					owner = BLR
+				}
+			}
+			1092 = {
+				create_unit = {
+					division = "name = \"Territorial Defense Brigade\" division_template = \"Territorial Defense Brigade\" start_experience_factor = 1.0"
+					prioritize_location = 9289
+					owner = BLR
+				}
+			}
+		}
+		ai_will_do = { base = 0 }
+	}
+	BLR_internalup_start = {
+		custom_cost_trigger = {
+			command_power > 20
+		}
+		custom_cost_text = command_power_more_than_20
+		icon = GFX_decision_internal_troops
+		days_remove = 35
+		fire_only_once = yes
+		available = {
+			has_war = yes
+		}
+		visible = {
+			has_completed_focus = BLR_Internal_troops
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision remove BLR_internalup_start"
+			add_manpower = -1000
+			set_temp_variable = { treasury_change = -3 }
+			modify_treasury_effect = yes
+			add_command_power = -25
+			703 = {
+				create_unit = {
+					division = "name = \"3rd Separate Special-Purpose Brigade\" division_template = \"Internal Troops\" start_experience_factor = 1.2"
+					prioritize_location = 11370
+					owner = BLR
+				}
+			}
+		}
+		ai_will_do = { base = 0 }
+	}
+}
+#BALTIC COMMUNIST REVOLUTION
+BLR_baltic_revolution_category = {
+	# Lithuania - Establish Cooperation
+	BLR_establish_cooperation_lit = {
+		icon = GFX_decision_generic_civil_support
+		available = {
+			country_exists = LIT
+		}
+		cost = 15
+		fire_only_once = yes
+		days_remove = 10
+		visible = {
+			has_completed_focus = BLR_the_litbel_start
+			LIT = { emerging_communist_state_are_in_power = no }
+		}
+		remove_effect = {
+			set_country_flag = BLR_cooperation_lit
+			LIT = {
+				hidden_effect = {
+					add_popularity = {
+						ideology = communism
+						popularity = 0.03
+					}
+					recalculate_party = yes
+				}
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLR_establish_cooperation_lit"
+			LIT = {
+				add_popularity = {
+					ideology = communism
+					popularity = 0.01
+				}
+			}
+		}
+		ai_will_do = { base = 0 }
+	}
+	# Lithuania - Finance Protests
+	BLR_finance_protests_lit = {
+		icon = GFX_decision_money_dec
+		cost = 20
+		fire_only_once = no
+		days_remove = 120
+		visible = {
+			has_country_flag = BLR_cooperation_lit
+			country_exists = LIT
+			LIT = { emerging_communist_state_are_in_power = no }
+		}
+		remove_effect = {
+			set_temp_variable = { treasury_change = -0.20 }
+			modify_treasury_effect = yes
+			LIT = {
+				set_temp_variable = { party_index = 4 }
+				set_temp_variable = { party_popularity_increase = 0.05 }
+				set_temp_variable = { temp_outlook_increase = 0.05 }
+				change_relative_party_popularity = yes
+				add_stability = -0.015
+				country_event = { id = belarus_LTB.1 days = 3 }
+			}
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLR_finance_protests_lit"
+		}
+		ai_will_do = { base = 0 }
+	}
+	# Lithuania - Recruit Local Sympathizers
+	BLR_recruit_sympathizers_lit = {
+		icon = GFX_decision_generic_political_discourse
+		cost = 35
+		fire_only_once = no
+		days_remove = 160
+		visible = {
+			has_country_flag = BLR_cooperation_lit
+			NOT = { LIT = { is_subject_of = BLR } }
+			country_exists = LIT
+		}
+		remove_effect = {
+			set_temp_variable = { percent_change = 1 }
+			set_temp_variable = { influence_target = LIT }
+			change_influence_percentage = yes
+			LIT = {
+				set_temp_variable = { party_index = 4 }
+				set_temp_variable = { party_popularity_increase = 0.02 }
+				set_temp_variable = { temp_outlook_increase = 0.02 }
+				change_relative_party_popularity = yes
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLR_recruit_sympathizers_lit"
+		}
+		ai_will_do = { base = 0 }
+	}
+	# Lithuania - LitBel Propaganda
+	BLR_spread_propaganda_lit = {
+		icon = GFX_decision_litbel_button
+		cost = 30
+		fire_only_once = no
+		days_remove = 180
+		visible = {
+			has_country_flag = BLR_cooperation_lit
+			NOT = { LIT = { is_subject_of = BLR } }
+			country_exists = LIT
+		}
+		remove_effect = {
+			set_temp_variable = { percent_change = 1 }
+			set_temp_variable = { influence_target = LIT }
+			change_influence_percentage = yes
+			LIT = {
+				set_temp_variable = { party_index = 4 }
+				set_temp_variable = { party_popularity_increase = 0.03 }
+				set_temp_variable = { temp_outlook_increase = 0.03 }
+				change_relative_party_popularity = yes
+				country_event = { id = belarus_LTB.2 days = 3 }
+			}
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLR_spread_propaganda_lit"
+		}
+		ai_will_do = { base = 0 }
+	}
+	# Lithuania - Bribe Military Officers
+	BLR_bribe_military_lit = {
+		icon = GFX_decision_generic_military
+		cost = 45
+		fire_only_once = yes
+		days_remove = 300
+		visible = {
+			has_country_flag = BLR_cooperation_lit
+			NOT = { LIT = { is_subject_of = BLR } }
+			country_exists = LIT
+		}
+		remove_effect = {
+			set_temp_variable = { treasury_change = -1.50 }
+			modify_treasury_effect = yes
+			set_temp_variable = { percent_change = 3 }
+			set_temp_variable = { influence_target = LIT }
+			change_influence_percentage = yes
+			LIT = {
+				set_temp_variable = { party_index = 4 }
+				set_temp_variable = { party_popularity_increase = 0.05 }
+				set_temp_variable = { temp_outlook_increase = 0.05 }
+				change_relative_party_popularity = yes
+				add_stability = -0.01
+				country_event = { id = belarus_LTB.3 days = 3 }
+			}
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLR_bribe_military_lit"
+		}
+		ai_will_do = { base = 0 }
+	}
+	# Lithuania - Bribe Politicians
+	BLR_bribe_politicians_lit = {
+		icon = GFX_decision_generic_political_rally
+		available = {
+			LIT = {
+				exists = yes
+				emerging_communist_state_are_in_power = no
+			}
+		}
+		cost = 70
+		fire_only_once = yes
+		days_remove = 150
+		visible = {
+			has_country_flag = BLR_cooperation_lit
+			emerging_communist_state_are_in_power = yes
+			NOT = { LIT = { is_subject_of = BLR } }
+			country_exists = LIT
+		}
+		remove_effect = {
+			set_temp_variable = { treasury_change = -3 }
+			modify_treasury_effect = yes
+			LIT = {
+				set_temp_variable = { party_index = 4 }
+				set_temp_variable = { party_popularity_increase = 0.10 }
+				set_temp_variable = { temp_outlook_increase = 0.10 }
+				change_relative_party_popularity = yes
+				add_stability = -0.02
+				country_event = { id = belarus_LTB.4 days = 3 }
+			}
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLR_bribe_politicians_lit"
+		}
+		ai_will_do = { base = 0 }
+	}
+	# Lithuania - Raise Revolt
+	BLR_raise_revolt_lit = {
+		icon = GFX_decision_generic_prepare_civil_war_new
+		cost = 25
+		days_remove = 60
+		fire_only_once = yes
+		visible = {
+			has_country_flag = BLR_cooperation_lit
+			country_exists = LIT
+			LIT = { emerging_communist_state_are_in_power = no }
+			NOT = { LIT = { is_subject_of = BLR } }
+		}
+		available = {
+			LIT = { influence_higher_50 = yes }
+			emerging_communist_state_are_in_power = yes
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLR_raise_revolt_lit"
+			puppet = LIT
+			LIT = {
+				set_temp_variable = { rul_party_temp = 4 }
+				if = {
+					limit = { has_elections = no }
+					set_temp_variable = { disable_elections = 1 }
+				}
+				else = {
+					set_temp_variable = { disable_elections = 0 }
+				}
+				change_ruling_party_effect = yes
+
+				set_temp_variable = { party_index = 4 }
+				set_temp_variable = { party_popularity_increase = 0.25 }
+				set_temp_variable = { temp_outlook_increase = 0.25 }
+				change_relative_party_popularity = yes
+
+				start_civil_war = {
+					ideology = democratic
+					keep_political_leader = yes
+					keep_political_party_members = yes
+					size = 0.35
+				}
+				country_event = { id = belarus_LTB.5 days = 1 }
+			}
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+		}
+		ai_will_do = { base = 0 }
+	}
+
+	# Latvia - Establish Cooperation
+	BLR_establish_cooperation_lat = {
+		icon = GFX_decision_generic_civil_support
+		available = {
+			country_exists = LAT
+		}
+		cost = 15
+		fire_only_once = yes
+		days_remove = 10
+		visible = {
+			has_completed_focus = BLR_litbel_attack_lat
+			LAT = { emerging_communist_state_are_in_power = no }
+		}
+		remove_effect = {
+			set_country_flag = BLR_cooperation_lat
+			LAT = {
+				hidden_effect = {
+					add_popularity = {
+						ideology = communism
+						popularity = 0.03
+					}
+					recalculate_party = yes
+				}
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLR_establish_cooperation_lat"
+			LAT = {
+				add_popularity = {
+					ideology = communism
+					popularity = 0.01
+				}
+			}
+		}
+		ai_will_do = { base = 0 }
+	}
+	# Latvia - Finance Protests
+	BLR_finance_protests_lat = {
+		icon = GFX_decision_money_dec
+		cost = 20
+		fire_only_once = no
+		days_remove = 120
+		visible = {
+			has_country_flag = BLR_cooperation_lat
+			country_exists = LAT
+			LAT = { emerging_communist_state_are_in_power = no }
+		}
+		remove_effect = {
+			set_temp_variable = { treasury_change = -0.20 }
+			modify_treasury_effect = yes
+			LAT = {
+				set_temp_variable = { party_index = 4 }
+				set_temp_variable = { party_popularity_increase = 0.05 }
+				set_temp_variable = { temp_outlook_increase = 0.05 }
+				change_relative_party_popularity = yes
+				add_stability = -0.015
+				country_event = { id = belarus_LTB.1 days = 3 }
+			}
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLR_finance_protests_lat"
+		}
+		ai_will_do = { base = 0 }
+	}
+	# Latvia - Recruit Local Sympathizers
+	BLR_recruit_sympathizers_lat = {
+		icon = GFX_decision_generic_political_discourse
+		cost = 35
+		fire_only_once = no
+		days_remove = 160
+		visible = {
+			has_country_flag = BLR_cooperation_lat
+			NOT = { LAT = { is_subject_of = BLR } }
+			country_exists = LAT
+		}
+		remove_effect = {
+			set_temp_variable = { percent_change = 1 }
+			set_temp_variable = { influence_target = LAT }
+			change_influence_percentage = yes
+			LAT = {
+				set_temp_variable = { party_index = 4 }
+				set_temp_variable = { party_popularity_increase = 0.02 }
+				set_temp_variable = { temp_outlook_increase = 0.02 }
+				change_relative_party_popularity = yes
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLR_recruit_sympathizers_lat"
+		}
+		ai_will_do = { base = 0 }
+	}
+	# Latvia - LitBel Propaganda
+	BLR_spread_propaganda_lat = {
+		icon = GFX_decision_litbel_button
+		cost = 30
+		fire_only_once = no
+		days_remove = 180
+		visible = {
+			has_country_flag = BLR_cooperation_lat
+			NOT = { LAT = { is_subject_of = BLR } }
+			country_exists = LAT
+		}
+		remove_effect = {
+			set_temp_variable = { percent_change = 1 }
+			set_temp_variable = { influence_target = LAT }
+			change_influence_percentage = yes
+			LAT = {
+				set_temp_variable = { party_index = 4 }
+				set_temp_variable = { party_popularity_increase = 0.03 }
+				set_temp_variable = { temp_outlook_increase = 0.03 }
+				change_relative_party_popularity = yes
+				country_event = { id = belarus_LTB.2 days = 3 }
+			}
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLR_spread_propaganda_lat"
+		}
+		ai_will_do = { base = 0 }
+	}
+	# Latvia - Bribe Military Officers
+	BLR_bribe_military_lat = {
+		icon = GFX_decision_generic_military
+		cost = 45
+		fire_only_once = yes
+		days_remove = 300
+		visible = {
+			has_country_flag = BLR_cooperation_lat
+			NOT = { LAT = { is_subject_of = BLR } }
+			country_exists = LAT
+		}
+		remove_effect = {
+			set_temp_variable = { treasury_change = -1.50 }
+			modify_treasury_effect = yes
+			set_temp_variable = { percent_change = 3 }
+			set_temp_variable = { influence_target = LAT }
+			change_influence_percentage = yes
+			LAT = {
+				set_temp_variable = { party_index = 4 }
+				set_temp_variable = { party_popularity_increase = 0.05 }
+				set_temp_variable = { temp_outlook_increase = 0.05 }
+				change_relative_party_popularity = yes
+				add_stability = -0.01
+				country_event = { id = belarus_LTB.3 days = 3 }
+			}
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLR_bribe_military_lat"
+		}
+		ai_will_do = { base = 0 }
+	}
+	# Latvia - Bribe Politicians
+	BLR_bribe_politicians_lat = {
+		icon = GFX_decision_generic_political_rally
+		available = {
+			LAT = {
+				exists = yes
+				emerging_communist_state_are_in_power = no
+			}
+		}
+		cost = 70
+		fire_only_once = yes
+		days_remove = 150
+		visible = {
+			has_country_flag = BLR_cooperation_lat
+			emerging_communist_state_are_in_power = yes
+			NOT = { LAT = { is_subject_of = BLR } }
+			country_exists = LAT
+		}
+		remove_effect = {
+			set_temp_variable = { treasury_change = -3 }
+			modify_treasury_effect = yes
+			LAT = {
+				set_temp_variable = { party_index = 4 }
+				set_temp_variable = { party_popularity_increase = 0.10 }
+				set_temp_variable = { temp_outlook_increase = 0.10 }
+				change_relative_party_popularity = yes
+				add_stability = -0.02
+				country_event = { id = belarus_LTB.4 days = 3 }
+			}
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLR_bribe_politicians_lat"
+		}
+		ai_will_do = { base = 0 }
+	}
+	# Latvia - Raise Revolt
+	BLR_raise_revolt_lat = {
+		icon = GFX_decision_generic_prepare_civil_war_new
+		cost = 25
+		days_remove = 60
+		fire_only_once = yes
+		visible = {
+			has_country_flag = BLR_cooperation_lat
+			country_exists = LAT
+			LAT = { emerging_communist_state_are_in_power = no }
+			NOT = { LAT = { is_subject_of = BLR } }
+		}
+		available = {
+			LAT = { influence_higher_50 = yes }
+			emerging_communist_state_are_in_power = yes
+		}
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLR_raise_revolt_lat"
+			puppet = LAT
+			LAT = {
+				set_temp_variable = { rul_party_temp = 4 }
+				if = {
+					limit = { has_elections = no }
+					set_temp_variable = { disable_elections = 1 }
+				}
+				else = {
+					set_temp_variable = { disable_elections = 0 }
+				}
+				change_ruling_party_effect = yes
+
+				set_temp_variable = { party_index = 4 }
+				set_temp_variable = { party_popularity_increase = 0.25 }
+				set_temp_variable = { temp_outlook_increase = 0.25 }
+				change_relative_party_popularity = yes
+
+				start_civil_war = {
+					ideology = democratic
+					keep_political_leader = yes
+					keep_political_party_members = yes
+					size = 0.35
+				}
+				country_event = { id = belarus_LTB.5 days = 1 }
+			}
+			custom_effect_tooltip = TT_IF_THEY_ACCEPT
+		}
+		ai_will_do = { base = 0 }
+	}
+}
+
+#DUCHY CLAIMS
+BLR_Duchy_claims_category = {
+	BLR_ukraine_claims = {
+		icon = GFX_decision_ukraine
+		cost = 50
+		fire_only_once = yes
+		days_remove = 2
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLR_ukraine_claims"
+			add_state_claim = 700
+			add_state_claim = 699
+			add_state_claim = 698
+			add_state_claim = 695
+			UKR = {
+				 add_opinion_modifier = { target = BLR modifier = recent_actions_negative }
+			}
+		}
+		ai_will_do = { base = 0 }
+	}
+	BLR_poland_claims = {
+		icon = GFX_decision_poland
+		cost = 50
+		fire_only_once = yes
+		days_remove = 2
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLR_poland_claims"
+			add_state_claim = 1014
+			POL = {
+			add_opinion_modifier = { target = BLR modifier = recent_actions_negative }
+			}
+		}
+		ai_will_do = { base = 0 }
+	}
+	BLR_russia_claims = {
+		icon = GFX_decision_russia
+		cost = 50
+		fire_only_once = yes
+		days_remove = 2
+		visible = {
+			NOT = { is_subject_of = SOV }
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLR_russia_claims"
+			add_state_claim = 654
+			add_state_claim = 653
+			SOV = {
+				add_opinion_modifier = { target = BLR modifier = recent_actions_negative }
+			}
+		}
+		ai_will_do = { base = 0 }
+	}
+	BLR_transnistria_claims = {
+		icon = GFX_decision_transistira
+		cost = 50
+		fire_only_once = yes
+		days_remove = 2
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLR_transnistria_claims"
+			add_state_claim = 149
+			PMR = {
+				add_opinion_modifier = { target = BLR modifier = recent_actions_negative }
+			}
+		}
+		ai_will_do = { base = 0 }
+	}
+	BLR_latgale_claims = {
+		icon = GFX_decision_latvia
+		cost = 50
+		fire_only_once = yes
+		days_remove = 2
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLR_latgale_claims"
+			add_state_claim = 1013
+			LAT = {
+				add_opinion_modifier = { target = BLR modifier = recent_actions_negative }
+			}
+		}
+		ai_will_do = { base = 0 }
+	}
+}
+### POLAND REVOULT
+BLR_pol_revol_category = {
+	BLR_Establish_cooperation_pol = {
+		icon = GFX_decision_poland_connection_nati
+		available = {
+			country_exists = POL
+			POL = {
+				nationalist_right_wing_populists_are_in_power = no
+			}
+		}
+		cost = 65
+		fire_only_once = yes
+		days_remove = 10
+		visible = {
+			POL = {
+				nationalist_right_wing_populists_are_in_power = no
+			}
+		}
+		remove_effect = {
+			set_country_flag = Establish_cooperation_pol_nat
+			POL = {
+				hidden_effect = {
+					set_temp_variable = { party_index = 20 }
+					set_temp_variable = { party_popularity_increase = 0.03 }
+					set_temp_variable = { temp_outlook_increase = 0.03 }
+					change_relative_party_popularity = yes
+				}
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLR_Establish_cooperation_pol"
+			add_popularity = {
+				ideology = nationalist
+				popularity = 0.01
+			}
+			set_temp_variable = { percent_change = 1.2 }
+			set_temp_variable = { influence_target = POL }
+			change_influence_percentage = yes
+		}
+		ai_will_do = { base = 0 }
+	}
+
+	BLR_Financing_protests_in_pol = {
+		icon = GFX_decision_poland_nati_protest
+		available = {
+			country_exists = POL
+			POL = {
+				nationalist_right_wing_populists_are_in_power = no
+			}
+		}
+		cost = 80
+		fire_only_once = no
+		days_remove = 50
+		visible = {
+			has_country_flag = Establish_cooperation_pol_nat
+			POL = {
+				nationalist_right_wing_populists_are_in_power = no
+			}
+		}
+		remove_effect = {
+			set_temp_variable = { treasury_change = -1.35 }
+			modify_treasury_effect = yes
+			set_temp_variable = { percent_change = 3.2 }
+			set_temp_variable = { influence_target = POL }
+			change_influence_percentage = yes
+			POL = {
+				set_temp_variable = { party_index = 20 }
+				set_temp_variable = { party_popularity_increase = 0.03 }
+				set_temp_variable = { temp_outlook_increase = 0.03 }
+				change_relative_party_popularity = yes
+				add_stability = -0.04
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLR_Financing_protests_in_pol"
+		}
+		ai_will_do = { base = 0 }
+	}
+	BLR_parlament_pol_places = {
+		icon = GFX_decision_zsr_parlament
+		available = {
+			country_exists = POL
+			POL = {
+				nationalist_right_wing_populists_are_in_power = no
+			}
+		}
+		cost = 250
+		fire_only_once = yes
+		days_remove = 150
+		visible = {
+			has_country_flag = Establish_cooperation_pol_nat
+			POL = {
+				nationalist_right_wing_populists_are_in_power = no
+			}
+		}
+		remove_effect = {
+			set_country_flag = BLR_poland_parlament_belarus_agent_flag
+			set_temp_variable = { treasury_change = -1 }
+			modify_treasury_effect = yes
+			set_temp_variable = { percent_change = 5.2 }
+			set_temp_variable = { influence_target = POL }
+			change_influence_percentage = yes
+			POL = {
+				set_temp_variable = { party_index = 20 }
+				set_temp_variable = { party_popularity_increase = 0.08 }
+				set_temp_variable = { temp_outlook_increase = 0.08 }
+				change_relative_party_popularity = yes
+			}
+		}
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLR_parlament_pol_places"
+		}
+		ai_will_do = { base = 0 }
+	}
+}
+
+BLR_Litva_belarusizations_category = {
+	BLR_vilnius_returns = {
+		icon = GFX_decision_belorussia_button
+		cost = 70
+		fire_only_once = yes
+		days_remove = 120
+
+		available = {
+			owns_state = 110
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLR_vilnius_returns"
+			add_state_core = 110
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+	BLR_samogitia_returns = {
+		icon = GFX_decision_belorussia_button
+		cost = 70
+		fire_only_once = yes
+		days_remove = 120
+
+		available = {
+			owns_state = 109
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLR_samogitia_returns"
+			add_state_core = 109
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+	BLR_sudovia_returns = {
+		icon = GFX_decision_belorussia_button
+		cost = 70
+		fire_only_once = yes
+		days_remove = 120
+
+		available = {
+			owns_state = 1044
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLR_sudovia_returns"
+			add_state_core = 1044
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+	BLR_klaipeda_returns = {
+		icon = GFX_decision_belorussia_button
+		cost = 70
+		fire_only_once = yes
+		days_remove = 120
+
+		available = {
+			owns_state = 1043
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLR_klaipeda_returns"
+			add_state_core = 1043
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+}
+
+####LUKA DECISIONS
+BLR_Lukashenko_category = {
+	BLR_send_russian_omon = {
+		icon = GFX_decision_russian_omon
+		fire_only_once = yes
+		days_remove = 10
+
+		available = {
+			emerging_reactionaries_are_in_power = yes
+			has_completed_focus = BLR_Another_Elections
+		}
+
+		visible = {
+			has_country_leader = {
+				name = "Alexander Lukashenko"
+				ruling_only = yes
+			}
+		}
+		remove_effect = {
+			set_temp_variable = { percent_change = 5.00 }
+			set_temp_variable = { tag_index = SOV }
+			change_influence_percentage = yes
+		}
+
+		cost = 50
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision 	BLR_send_russian_omon"
+			add_stability = 0.15
+			set_temp_variable = { party_index = 6 }
+			set_temp_variable = { party_popularity_increase = -0.05 }
+			set_temp_variable = { temp_outlook_increase = -0.05 }
+			change_relative_party_popularity = yes
+		}
+		ai_will_do = {
+			base = 20
+			modifier = {
+				factor = 20
+				is_historical_focus_on = yes
+			}
+		}
+	}
+	BLR_go_to_jail_scum = {
+		icon = GFX_decision_go_to_jail
+		fire_only_once = yes
+		days_remove = 20
+
+		available = {
+			emerging_reactionaries_are_in_power = yes
+			has_completed_focus = BLR_Liquidation_pub_assoc
+		}
+
+		visible = {
+			has_country_leader = {
+				name = "Alexander Lukashenko"
+				ruling_only = yes
+			}
+		}
+		cost = 50
+
+		remove_effect = {
+			add_stability = -0.15
+			add_popularity = {
+				ideology = neutrality
+				popularity = -0.1
+			}
+			add_popularity = {
+				ideology = democratic
+				popularity = -0.1
+			}
+		}
+		ai_will_do = {
+			base = 20
+		}
+	}
+
+	BLR_trade_with_iraq = {
+		icon = GFX_decision_trade_irq
+		fire_only_once = yes
+
+		days_remove = 15
+
+		available = {
+			emerging_reactionaries_are_in_power = yes
+			IRQ = {
+				has_government = nationalist
+			}
+		}
+
+		visible = {
+			has_country_leader = {
+				name = "Alexander Lukashenko"
+				ruling_only = yes
+			}
+		}
+
+		cost = 35
+
+		remove_effect = {
+			add_opinion_modifier = {
+				target = IRQ
+				modifier = declaration_of_friendship
+			}
+			reverse_add_opinion_modifier = {
+				target = IRQ
+				modifier = declaration_of_friendship
+			}
+			country_event = { id = belarus_another.25 days = 1 }
+		}
+		ai_will_do = {
+			base = 100
+		}
+	}
+	BLR_fly_protasevich = {
+		icon = GFX_decision_ryanair
+		fire_only_once = yes
+		days_remove = 1
+
+		available = {
+			emerging_reactionaries_are_in_power = yes
+			has_completed_focus = BLR_Bye_opposition
+		}
+		visible = {
+			has_country_leader = {
+				name = "Alexander Lukashenko"
+				ruling_only = yes
+			}
+		}
+
+		cost = 35
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision 	BLR_fly_protasevich"
+			if = {
+				limit = { NOT = { has_global_flag = GAME_RULE_eu_disabled } }
+				for_each_scope_loop = {
+					array = global.EU_member
+					tooltip = TT_ALL_EU_MEMBER_NATIONS_GAIN
+					if = {
+						limit = { NOT = { tag = ROOT } }
+						add_opinion_modifier = { target = ROOT modifier = recent_actions_negative }
+					}
+				}
+			}
+			set_temp_variable = { percent_change = 2 }
+			change_domestic_influence_percentage = yes
+			country_event = { id = belarus_another.26 days = 1 }
+		}
+		ai_will_do = {
+			base = 100
+		}
+	}
+	BLR_Great_stone_china = {
+		icon = GFX_decision_great_stone
+		cost = 55
+		fire_only_once = yes
+		days_remove = 100
+
+		available = {
+			emerging_reactionaries_are_in_power = yes
+			has_completed_focus = BLR_china_friendship
+		}
+
+
+		visible = {
+			has_country_leader = {
+				name = "Alexander Lukashenko"
+				ruling_only = yes
+			}
+		}
+
+		remove_effect = {
+			one_office_construction = yes
+			set_temp_variable = { percent_change = 7 }
+			set_temp_variable = { tag_index = CHI }
+			set_temp_variable = { influence_target = BLR }
+			change_influence_percentage = yes
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+	BLR_Deal_with_Poland = {
+		icon = GFX_decision_union_of_poles
+		fire_only_once = yes
+		days_remove = 1
+
+		available = {
+			emerging_reactionaries_are_in_power = yes
+			has_completed_focus = BLR_PolBel_Dplomatic_war
+		}
+
+		visible = {
+			has_country_leader = {
+				name = "Alexander Lukashenko"
+				ruling_only = yes
+			}
+		}
+		cost = 40
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision 	BLR_Deal_with_Poland"
+			BLR = {
+				country_event = { id = belarus_another.28 days = 1 }
+			}
+		}
+		ai_will_do = {
+			base = 100
+		}
+	}
+	BLR_belorusisation_samogitia = {
+		icon = GFX_decision_decree8
+		fire_only_once = yes
+		days_remove = 120
+
+
+
+		visible = {
+			owns_state = 109
+		}
+
+		cost = 40
+
+		remove_effect = {
+			BLR = {
+				add_state_core = 109
+			}
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+	}
+	BLR_belorusisation_klaipeda = {
+		icon = GFX_decision_decree8
+		fire_only_once = yes
+		days_remove = 120
+
+
+
+		visible = {
+			owns_state = 1043
+		}
+
+		cost = 40
+
+		remove_effect = {
+			BLR = {
+				add_state_core = 1043
+			}
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+
+	}
+	BLR_belorusisation_sudovia = {
+		icon = GFX_decision_decree8
+		cost = 40
+		fire_only_once = yes
+		days_remove = 120
+
+
+
+		visible = {
+			owns_state = 1044
+		}
+
+		remove_effect = {
+			BLR = {
+				add_state_core = 1044
+			}
+		}
+
+		ai_will_do = {
+			base = 100
+		}
+
+	}
+	BLR_belorusisation_vilnius = {
+		icon = GFX_decision_decree8
+
+		fire_only_once = yes
+		days_remove = 120
+
+
+
+		visible = {
+			owns_state = 110
+		}
+
+		cost = 40
+
+		remove_effect = {
+			BLR = {
+				add_state_core = 110
+			}
+		}
+		ai_will_do = {
+			base = 100
+		}
+	}
+}
+###KOMMUNARKA DECISION
+BLR_Kommunarka_category = {
+	BLR_Go_to_Russia = {
+		icon = GFX_decision_komminarka_button
+		cost = 15
+		fire_only_once = yes
+		days_remove = 100
+
+		available = {
+			SOV = {
+				has_opinion = {
+					target = BLR
+					value > 40
+				}
+			}
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLR_Go_to_Russia"
+			set_temp_variable = { percent_change = 0.5 }
+			set_temp_variable = { influence_target = SOV }
+			change_influence_percentage = yes
+			set_temp_variable = { treasury_change = -1.50 }
+			modify_treasury_effect = yes
+			add_ideas = BLR_Kommunarka_invest
+			set_country_flag = BLR_kommunarka_russia_flag
+		}
+		ai_will_do = { base = 100 }
+	}
+	BLR_Go_to_Latvia = {
+		icon = GFX_decision_komminarka_button
+		cost = 15
+		fire_only_once = yes
+		days_remove = 100
+
+		available = {
+			LAT = {
+				has_opinion = {
+					target = BLR
+					value > 40
+				}
+			}
+			has_country_flag = BLR_kommunarka_russia_flag
+		}
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLR_Go_to_Latvia"
+			set_country_flag = BLR_kommunarka_latvia_flag
+			set_temp_variable = { percent_change = 0.5 }
+			set_temp_variable = { influence_target = LAT }
+			change_influence_percentage = yes
+
+		}
+		ai_will_do = { base = 100 }
+	}
+	BLR_Go_to_Kazakhstan = {
+		icon = GFX_decision_komminarka_button
+		cost = 15
+		fire_only_once = yes
+		days_remove = 100
+
+		available = {
+			KAZ = {
+				has_opinion = {
+					target = BLR
+					value > 40
+				}
+			}
+			has_country_flag = BLR_kommunarka_russia_flag
+		}
+
+		remove_effect = {
+			set_country_flag = BLR_kommunarka_kazakhstan_flag
+			set_temp_variable = { percent_change = 0.5 }
+			set_temp_variable = { influence_target = KAZ }
+			change_influence_percentage = yes
+		}
+		ai_will_do = { base = 100 }
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLR_Go_to_Kazakhstan"
+
+		}
+	}
+	BLR_Go_to_Georgia = {
+		icon = GFX_decision_komminarka_button
+		cost = 15
+		fire_only_once = yes
+		days_remove = 100
+
+		available = {
+			GEO = {
+				has_opinion = {
+					target = BLR
+					value > 40
+				}
+			}
+			has_country_flag = BLR_kommunarka_russia_flag
+		}
+
+		remove_effect = {
+			set_country_flag = BLR_kommunarka_georgia_flag
+			set_temp_variable = { percent_change = 0.5 }
+			set_temp_variable = { influence_target = GEO }
+			change_influence_percentage = yes
+		}
+		ai_will_do = { base = 100 }
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLR_Go_to_Georgia"
+
+		}
+	}
+	BLR_Go_to_Moldova = {
+		icon = GFX_decision_komminarka_button
+		cost = 15
+		fire_only_once = yes
+		days_remove = 100
+
+		available = {
+			MLV = {
+				has_opinion = {
+					target = BLR
+					value > 40
+				}
+			}
+			has_country_flag = BLR_kommunarka_russia_flag
+		}
+
+		remove_effect = {
+			set_country_flag = BLR_kommunarka_moldova_flag
+			set_temp_variable = { percent_change = 0.5 }
+			set_temp_variable = { influence_target = MLV }
+			change_influence_percentage = yes
+		}
+		ai_will_do = { base = 100 }
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLR_Go_to_Moldova"
+
+		}
+	}
+	BLR_Go_to_Armenia = {
+		icon = GFX_decision_komminarka_button
+		cost = 15
+		fire_only_once = yes
+		days_remove = 100
+
+		available = {
+			ARM = {
+				has_opinion = {
+					target = BLR
+					value > 40
+				}
+			}
+			has_country_flag = BLR_kommunarka_russia_flag
+		}
+
+
+		remove_effect = {
+			set_country_flag = BLR_kommunarka_armenia_flag
+			set_temp_variable = { percent_change = 0.5 }
+			set_temp_variable = { influence_target = ARM }
+			change_influence_percentage = yes
+		}
+		ai_will_do = { base = 100 }
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLR_Go_to_Armenia"
+
+		}
+	}
+	BLR_Produst_all_CIS = {
+		icon = GFX_decision_komminarka_button
+		cost = 25
+		fire_only_once = yes
+		days_remove = 130
+
+		available = {
+			has_country_flag = BLR_kommunarka_moldova_flag
+			has_country_flag = BLR_kommunarka_georgia_flag
+			has_country_flag = BLR_kommunarka_kazakhstan_flag
+			has_country_flag = BLR_kommunarka_latvia_flag
+			has_country_flag = BLR_kommunarka_armenia_flag
+		}
+
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLR_Produst_all_CIS"
+			swap_ideas = {
+				remove_idea = BLR_Kommunarka_invest
+				add_idea = BLR_Kommunarka_invest_cis
+			}
+		}
+
+		ai_will_do = { base = 100 }
+	}
+}
+BLR_Azot_category = {
+	BLR_expand_azot_production = {
+		icon = GFX_decisions_grodnoazot_button
+		visible = {
+			check_variable = { ROOT.current_max_azot_capacity < ROOT.max_azot_capacity }
+		}
+
+		days_remove = 100
+		days_re_enable = 150
+
+
+		cost = 50
+
+		remove_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision BLR_expand_azot_production"
+			set_temp_variable = { treasury_change = -5 }
+			modify_treasury_effect = yes
+			add_to_variable = { ROOT.current_max_azot_capacity = 1 }
+		}
+
+		ai_will_do = {
+			base = 100
+			modifier = {
+				factor = 0
+				has_active_mission = bankruptcy_incoming_collapse
+			}
+		}
+	}
+
+	BLR_mission_to_Poland = {
+		icon = GFX_decisions_grodnoazot_button
+		fire_only_once = no
+
+		visible = {
+			country_exists = POL
+			NOT = { POL = { has_idea = BLR_azot_fertilizers_idea } }
+		}
+		available = {
+			BLR_can_send_azot_mission = yes
+			BLR_is_not_currently_sending_azot_mission = yes
+		}
+
+		days_remove = 10
+		days_re_enable = 250
+
+		cost = 25
+
+		remove_effect = {
+			set_country_flag = BLR_pending_offer
+			if = {
+				limit = { tag = SOV }
+				POL = { country_event = sov_economic.16 }
+			}
+			else_if = {
+				limit = { tag = BLR }
+				POL = { country_event = belarus_azot.1 }
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				factor = 20
+				ROOT = { has_opinion = { target = POL value < -20 } }
+			}
+		}
+
+	}
+
+	BLR_mission_to_Germany = {
+		icon = GFX_decisions_grodnoazot_button
+		fire_only_once = no
+
+		visible = {
+			country_exists = GER
+			NOT = { GER = { has_idea = BLR_azot_fertilizers_idea } }
+		}
+		available = {
+			BLR_can_send_azot_mission = yes
+			BLR_is_not_currently_sending_azot_mission = yes
+		}
+
+		days_remove = 10
+		days_re_enable = 250
+
+		cost = 25
+
+		remove_effect = {
+			set_country_flag = BLR_pending_offer
+			if = {
+				limit = { tag = SOV }
+				GER = { country_event = sov_economic.16 }
+			}
+			else_if = {
+				limit = { tag = BLR }
+				GER = { country_event = belarus_azot.1 }
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				factor = 20
+				ROOT = { has_opinion = { target = GER value < -20 } }
+			}
+		}
+
+	}
+
+	BLR_mission_to_France = {
+		icon = GFX_decisions_grodnoazot_button
+		fire_only_once = no
+		visible = {
+			country_exists = FRA
+			NOT = { FRA = { has_idea = BLR_azot_fertilizers_idea } }
+		}
+		available = {
+			BLR_can_send_azot_mission = yes
+			BLR_is_not_currently_sending_azot_mission = yes
+		}
+
+		days_remove = 10
+		days_re_enable = 250
+
+		cost = 25
+
+		remove_effect = {
+			set_country_flag = BLR_pending_offer
+			if = {
+				limit = { tag = SOV }
+				FRA = { country_event = sov_economic.16 }
+			}
+			else_if = {
+				limit = { tag = BLR }
+				FRA = { country_event = belarus_azot.1 }
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				factor = 20
+				ROOT = { has_opinion = { target = FRA value < -20 } }
+			}
+		}
+	}
+
+	BLR_mission_to_Norway = {
+		icon = GFX_decisions_grodnoazot_button
+		fire_only_once = no
+		visible = {
+			country_exists = NRY
+			NOT = { NRY = { has_idea = BLR_azot_fertilizers_idea } }
+		}
+		available = {
+			BLR_can_send_azot_mission = yes
+			BLR_is_not_currently_sending_azot_mission = yes
+		}
+
+		days_remove = 10
+		days_re_enable = 250
+
+		cost = 25
+
+		remove_effect = {
+			set_country_flag = BLR_pending_offer
+			if = {
+				limit = { tag = SOV }
+				NRY = { country_event = sov_economic.16 }
+			}
+			else_if = {
+				limit = { tag = BLR }
+				NRY = { country_event = belarus_azot.1 }
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				factor = 20
+				ROOT = { has_opinion = { target = NRY value < -20 } }
+			}
+		}
+	}
+
+	BLR_mission_to_Sweden = {
+		icon = GFX_decisions_grodnoazot_button
+		fire_only_once = no
+		visible = {
+			country_exists = SWE
+			NOT = { SWE = { has_idea = BLR_azot_fertilizers_idea } }
+		}
+		available = {
+			BLR_can_send_azot_mission = yes
+			BLR_is_not_currently_sending_azot_mission = yes
+		}
+
+		days_remove = 10
+		days_re_enable = 250
+
+
+		cost = 25
+
+		remove_effect = {
+			set_country_flag = BLR_pending_offer
+			if = {
+				limit = { tag = SOV }
+				SWE = { country_event = sov_economic.16 }
+			}
+			else_if = {
+				limit = { tag = BLR }
+				SWE = { country_event = belarus_azot.1 }
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				factor = 20
+				ROOT = { has_opinion = { target = SWE value < -20 } }
+			}
+		}
+	}
+
+	BLR_mission_to_Russia = {
+		allowed = { original_tag = BLR }
+		icon = GFX_decisions_grodnoazot_button
+		fire_only_once = no
+
+		visible = {
+			country_exists = SOV
+			NOT = { SOV = { has_idea = BLR_azot_fertilizers_idea } }
+		}
+		available = {
+			BLR_can_send_azot_mission = yes
+			BLR_is_not_currently_sending_azot_mission = yes
+		}
+
+		days_remove = 10
+		days_re_enable = 250
+
+		cost = 25
+
+		remove_effect = {
+			set_country_flag = BLR_pending_offer
+			SOV = { country_event = belarus_azot.1 }
+		}
+
+		ai_will_do = {
+			base = 20
+			modifier = {
+				factor = 20
+				ROOT = { has_opinion = { target = SOV value < -20 } }
+			}
+		}
+
+	}
+
+	BLR_mission_to_Ukraine = {
+		icon = GFX_decisions_grodnoazot_button
+		fire_only_once = no
+
+		visible = {
+			country_exists = UKR
+			NOT = { UKR = { has_idea = BLR_azot_fertilizers_idea } }
+		}
+		available = {
+			BLR_can_send_azot_mission = yes
+			BLR_is_not_currently_sending_azot_mission = yes
+		}
+
+		days_remove = 10
+		days_re_enable = 250
+
+		cost = 25
+
+		remove_effect = {
+			set_country_flag = BLR_pending_offer
+			if = {
+				limit = { tag = SOV }
+				UKR = { country_event = sov_economic.16 }
+			}
+			else_if = {
+				limit = { tag = BLR }
+				UKR = { country_event = belarus_azot.1 }
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				factor = 20
+				ROOT = { has_opinion = { target = UKR value < -20 } }
+			}
+		}
+	}
+
+	BLR_mission_to_Kazahstan = {
+		icon = GFX_decisions_grodnoazot_button
+		fire_only_once = no
+
+		visible = {
+			country_exists = KAZ
+			NOT = { KAZ = { has_idea = BLR_azot_fertilizers_idea } }
+		}
+		available = {
+			BLR_can_send_azot_mission = yes
+			BLR_is_not_currently_sending_azot_mission = yes
+		}
+
+		days_remove = 10
+		days_re_enable = 250
+
+		cost = 25
+
+		remove_effect = {
+			set_country_flag = BLR_pending_offer
+			if = {
+				limit = { tag = SOV }
+				KAZ = { country_event = sov_economic.16 }
+			}
+			else_if = {
+				limit = { tag = BLR }
+				KAZ = { country_event = belarus_azot.1 }
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				factor = 20
+				ROOT = { has_opinion = { target = KAZ value < -20 } }
+			}
+		}
+	}
+
+	BLR_mission_to_Czechia = {
+		icon = GFX_decisions_grodnoazot_button
+		fire_only_once = no
+
+		visible = {
+			country_exists = CZE
+			NOT = { CZE = { has_idea = BLR_azot_fertilizers_idea } }
+		}
+		available = {
+			BLR_can_send_azot_mission = yes
+			BLR_is_not_currently_sending_azot_mission = yes
+		}
+
+		days_remove = 10
+		days_re_enable = 250
+
+		cost = 25
+
+		remove_effect = {
+			set_country_flag = BLR_pending_offer
+			if = {
+				limit = { tag = SOV }
+				CZE = { country_event = sov_economic.16 }
+			}
+			else_if = {
+				limit = { tag = BLR }
+				CZE = { country_event = belarus_azot.1 }
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				factor = 20
+				ROOT = { has_opinion = { target = CZE value < -20 } }
+			}
+		}
+	}
+
+	BLR_mission_to_Netherland = {
+		icon = GFX_decisions_grodnoazot_button
+		fire_only_once = no
+
+		visible = {
+			country_exists = HOL
+			NOT = { HOL = { has_idea = BLR_azot_fertilizers_idea } }
+		}
+		available = {
+			BLR_can_send_azot_mission = yes
+			BLR_is_not_currently_sending_azot_mission = yes
+		}
+
+		days_remove = 10
+		days_re_enable = 250
+
+		cost = 25
+
+		remove_effect = {
+			set_country_flag = BLR_pending_offer
+			if = {
+				limit = { tag = SOV }
+				HOL = { country_event = sov_economic.16 }
+			}
+			else_if = {
+				limit = { tag = BLR }
+				HOL = { country_event = belarus_azot.1 }
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				factor = 20
+				ROOT = { has_opinion = { target = HOL value < -20 } }
+			}
+		}
+	}
+	BLR_mission_to_Zimbabwe = {
+		allowed = { original_tag = BLR }
+		icon = GFX_decisions_grodnoazot_button
+		fire_only_once = no
+
+		visible = {
+			country_exists = ZIM
+			has_completed_focus = BLR_Zimbabwe
+			NOT = { ZIM = { has_idea = BLR_azot_fertilizers_idea } }
+		}
+		available = {
+			BLR_can_send_azot_mission = yes
+			BLR_is_not_currently_sending_azot_mission = yes
+		}
+
+		days_remove = 10
+		days_re_enable = 250
+
+		cost = 25
+
+		remove_effect = {
+			set_country_flag = BLR_pending_offer
+			ZIM = { country_event = belarus_azot.1 }
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				factor = 20
+				ROOT = { has_opinion = { target = HOL value < -20 } }
+			}
+		}
+	}
+}
+
+# Can be put into separate file, since it is foreign powers
+BLR_Foreign_azot_trade_category = {
+	cancel_BLR_trade = {
+		icon = GFX_decisions_grodnoazot_button
+		cost = 50
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision cancel_BLR_trade"
+			BLR = { country_event = belarus_azot.4 }
+			remove_ideas = BLR_azot_fertilizers_idea
+			subtract_from_variable = { BLR.current_azot_capacity = 1 }
+		}
+
+		ai_will_do = {
+			base = 1
+			modifier = {
+				THIS = { has_opinion = { target = BLR value < -10 } }
+				add = 10
+			}
+		}
+	}
+}
+
+
+BLR_agricultural_districts = {
+	BLR_get_to_work = {
+		activation = {
+			always = no
+		}
+		available = {
+			1094 = { agriculture_district > 0 }
+			704 = { agriculture_district > 0 }
+			1092 = { agriculture_district > 0 }
+		}
+		days_mission_timeout = 180
+		is_good = yes
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision complete BLR_get_to_work"
+			set_temp_variable = { temp_opinion = 15 }
+			change_farmers_opinion = yes
+			newline = yes
+			increase_economic_growth = yes
+		}
+		timeout_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision timeout BLR_get_to_work"
+			set_temp_variable = { temp_opinion = -50 }
+			change_farmers_opinion = yes
+		}
+	}
+}

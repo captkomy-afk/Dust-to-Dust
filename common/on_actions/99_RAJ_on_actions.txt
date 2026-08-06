@@ -1,0 +1,54 @@
+on_actions = {
+	on_monthly_RAJ = {
+		random_events = {
+			1000 = 0
+
+			170 = RAJ_naxal.11
+			80 = RAJ_naxal.13
+			60 = RAJ_naxal.14
+			30 = RAJ_regional.9
+			30 = RAJ_regional.12
+		}
+
+		effect = {
+			india_religious_events = yes
+			RAJ_check_religious_harmony = yes
+			RAJ_check_regional_faith = yes
+			RAJ_update_religious_climate = yes
+			RAJ_naxalite_monthly_escalation = yes
+
+			random = {
+				chance = 20
+				subtract_from_variable = { RAJ.kasmir_readiness = 5 }
+				clamp_variable = { var = RAJ.kasmir_readiness min = 0 max = 100 }
+			}
+			random = {
+				chance = 20
+				subtract_from_variable = { RAJ.kasmir_tension = 5 }
+				clamp_variable = { var = RAJ.kasmir_tension min = 0 max = 100 }
+			}
+
+			random = {
+				chance = 20
+				subtract_from_variable = { RAJ.kasmir_china_readiness = 5 }
+				clamp_variable = { var = RAJ.kasmir_china_readiness min = 0 max = 100 }
+			}
+			random = {
+				chance = 20
+				subtract_from_variable = { GLOBAL.kasmir_tension_china = 5 }
+				clamp_variable = { var = GLOBAL.kasmir_tension_china min = 0 max = 100 }
+			}
+
+			random = {
+				chance = 20
+				subtract_from_variable = { RAJ.CHI_arunachal_readiness = 5 }
+				clamp_variable = { var = RAJ.CHI_arunachal_readiness min = 0 max = 100 }
+			}
+
+			# Naxal-Free Milestone (fires when last naxalite state is cleared)
+			if = { limit = { NOT = { RAJ_country_has_any_naxalite_states = yes } }
+				country_event = RAJ_naxal.16
+			}
+		}
+	}
+}

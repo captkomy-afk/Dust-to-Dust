@@ -1,0 +1,67 @@
+# CKEdited - new file: status-only decisions for the six development-law tracks.
+# These are permanently unavailable (available = { always = no }) by design -
+# they exist only so their tooltip/desc can show current tier + progress via
+# common/scripted_localisation/dev_laws_status_scripted_localisation.txt
+
+development_laws_status_category = { # CKEdited
+
+	academic_development_status = { # CKEdited
+		icon = GFX_idea_edu_03
+		allowed = { always = yes }
+		visible = { always = yes }
+		available = { always = no }
+		cost = 0
+		complete_effect = { }
+		ai_will_do = { factor = 0 }
+	}
+
+	farming_development_status = { # CKEdited
+		icon = GFX_idea_agricultural_reforms
+		allowed = { always = yes }
+		visible = { always = yes }
+		available = { always = no }
+		cost = 0
+		complete_effect = { }
+		ai_will_do = { factor = 0 }
+	}
+
+	poverty_development_status = { # CKEdited
+		icon = GFX_idea_health_03
+		allowed = { always = yes }
+		visible = { always = yes }
+		available = { always = no }
+		cost = 0
+		complete_effect = { }
+		ai_will_do = { factor = 0 }
+	}
+
+	industrial_development_status = { # CKEdited
+		icon = GFX_idea_industrial_focus
+		allowed = { always = yes }
+		visible = { always = yes }
+		available = { always = no }
+		cost = 0
+		complete_effect = { }
+		ai_will_do = { factor = 0 }
+	}
+
+	military_development_status = { # CKEdited
+		icon = GFX_idea_defence_02
+		allowed = { always = yes }
+		visible = { always = yes }
+		available = { always = no }
+		cost = 0
+		complete_effect = { }
+		ai_will_do = { factor = 0 }
+	}
+
+	society_development_status = { # CKEdited
+		icon = GFX_idea_social_03
+		allowed = { always = yes }
+		visible = { always = yes }
+		available = { always = no }
+		cost = 0
+		complete_effect = { }
+		ai_will_do = { factor = 0 }
+	}
+}

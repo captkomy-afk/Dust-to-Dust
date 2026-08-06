@@ -1,0 +1,423 @@
+on_actions = {
+	on_startup = {
+		effect = {
+			#初始化
+			set_variable = {
+				global.dtd_limit_resource = 0
+			}
+			set_global_flag = dtd_enable_ai_trade_gflag
+			# CKEdited - dtd_initialize_global_market_prices_effect / dtd_market_history_initialize_effect:
+			# not defined anywhere in this mod (likely leftover from an axed trade-system rework);
+			# were logging "Unknown effect-type" every time this ran.
+			#dtd_initialize_global_market_prices_effect = yes
+			#dtd_market_history_initialize_effect = yes
+
+			every_country = {
+				#
+				set_temp_variable = {
+					count = modifier@resource_trade_cost_bonus_per_factory
+				}
+				add_to_temp_variable = {
+					count = 8
+				}
+				set_variable = {
+					dtd_buy_amount_per_civ = count
+				}
+				#
+
+				# CKEdited - dtd_trade_export_dynamic_modifiers / dtd_trade_import_dynamic_modifiers are not
+				# defined in common/dynamic_modifiers/ anywhere in this mod; add_dynamic_modifier was
+				# logging "Invalid dynamic modifier" every time this ran.
+				#add_dynamic_modifier = {
+				#	modifier = dtd_trade_export_dynamic_modifiers
+				#}
+				#add_dynamic_modifier = {
+				#	modifier = dtd_trade_import_dynamic_modifiers
+				#}
+				# CKEdited - the following four effects aren't defined anywhere in this mod either
+				#dtd_update_produced_resources_effect = yes
+				#dtd_update_exported_resources_effect = yes
+				#dtd_update_resource_overview_display_effect = yes
+				#dtd_update_trade_opinion_attractiveness_cache_effect = yes
+				set_country_flag = dtd_oil_button_selected_cf
+
+				set_variable = {
+					dtd_auto_buy_oil_trigger_value = 50
+				}
+
+				# Auto purchase is intentionally disabled by default.
+				clr_country_flag = dtd_enable_auto_buy_cflag
+				set_country_flag = dtd_auto_buy_default_initialized_cflag
+				
+
+				# CKEdited - dtd__calculate_maximum_available_funds_for_projects is not defined anywhere in this mod
+				#dtd__calculate_maximum_available_funds_for_projects = yes
+
+				set_variable = {
+					dtd_limit_country_show_gui_resource = 0
+				}
+			}
+
+			# CKEdited - dtd_limit_resource_trigger is not defined anywhere in this mod, so this limit
+			# always failed (logging "Unknown trigger-type" each check) and this block never actually
+			# ran; commenting out the whole block preserves that behavior without the log spam.
+			#every_country = {
+			#	limit = {
+			#		is_ai = yes
+			#		dtd_limit_resource_trigger = yes
+			#	}
+			#	set_country_flag = dtd_enable_trade_system_cflag
+			#}
+		}
+	}
+
+	on_daily = {
+		effect = {
+			# Keep existing custom trade contracts legal. This is intentionally separate
+			# from AI auto-buy logic so it cannot affect AI scheduling/seller selection.
+			# CKEdited - dtd_enforce_blocked_trade_contracts_effect is not defined anywhere in this mod
+			#dtd_enforce_blocked_trade_contracts_effect = yes
+
+			if = {
+				limit = {
+					is_ai = no
+				}
+				# CKEdited - dtd_daily_effect is not defined anywhere in this mod
+				#dtd_daily_effect = yes
+
+				if = {
+					limit = {
+						has_country_flag = dtd_enable_auto_buy_cflag
+					}
+					if = {
+						limit = {
+							or = {
+								check_variable = {
+									resource@aluminium < 0
+								}
+								check_variable = {
+									resource@rubber < 0
+								}
+								check_variable = {
+									resource@tungsten < 0
+								}
+								check_variable = {
+									resource@chromium < 0
+								}
+								check_variable = {
+									resource@steel < 0
+								}
+								and = {
+									check_variable = {
+										resource@aluminium > 0
+									}
+									check_variable = {
+										dtd_import_country_resource_cost_aluminium < 0
+									}
+								}
+								and = {
+									check_variable = {
+										resource@rubber > 0
+									}
+									check_variable = {
+										dtd_import_country_resource_cost_rubber < 0
+									}
+								}
+								and = {
+									check_variable = {
+										resource@tungsten > 0
+									}
+									check_variable = {
+										dtd_import_country_resource_cost_tungsten < 0
+									}
+								}
+								and = {
+									check_variable = {
+										resource@chromium > 0
+									}
+									check_variable = {
+										dtd_import_country_resource_cost_chromium < 0
+									}
+								}
+								and = {
+									check_variable = {
+										resource@steel > 0
+									}
+									check_variable = {
+										dtd_import_country_resource_cost_steel < 0
+									}
+								}
+							}
+						}
+						country_event = {
+							id = dtd_game_event.auto_buy_effect
+							days = 2
+						}
+					}
+				}
+
+				add_to_variable = {
+					dtd_dirty_var_dtd_trade_entry_main_window = 0.001
+				}
+				# CKEdited - dtd__calculate_maximum_available_funds_for_projects is not defined anywhere in this mod
+				#dtd__calculate_maximum_available_funds_for_projects = yes
+			}
+		}
+	}
+
+	on_weekly = {
+		effect = {
+			# Keep old saves from preserving disabled AI trade settings.
+			set_variable = {
+				global.dtd_limit_resource = 0
+			}
+			set_variable = {
+				dtd_limit_country_show_gui_resource = 0
+			}
+			set_global_flag = dtd_enable_ai_trade_gflag
+
+			# Global market prices are recalculated once per week, not once per country.
+			if = {
+				limit = {
+					NOT = { has_global_flag = dtd_market_prices_updated_this_week_gflag }
+				}
+				# CKEdited - dtd_update_global_market_prices_effect / dtd_record_market_price_history_weekly_effect
+				# are not defined anywhere in this mod
+				#dtd_update_global_market_prices_effect = yes
+				#dtd_record_market_price_history_weekly_effect = yes
+				set_global_flag = {
+					flag = dtd_market_prices_updated_this_week_gflag
+					days = 6
+					value = 1
+				}
+			}
+
+			# Reprice active contracts that explicitly follow the market.
+			# CKEdited - dtd_update_market_priced_contracts_effect is not defined anywhere in this mod
+			#dtd_update_market_priced_contracts_effect = yes
+
+			# One-time migration for old saves: auto purchase starts disabled, then stays player-controlled.
+			if = {
+				limit = {
+					is_ai = no
+					NOT = { has_country_flag = dtd_auto_buy_default_initialized_cflag }
+				}
+				clr_country_flag = dtd_enable_auto_buy_cflag
+				set_country_flag = dtd_auto_buy_default_initialized_cflag
+			}
+
+			# CKEdited - dtd_daily_effect / dtd_update_trade_opinion_attractiveness_cache_effect are not
+			# defined anywhere in this mod
+			#dtd_daily_effect = yes
+			#dtd_update_trade_opinion_attractiveness_cache_effect = yes
+			# CKEdited - dtd_limit_resource_trigger is not defined anywhere in this mod, so this "if"
+			# always failed and "else" always ran; keeping the else's action unconditional preserves
+			# the actual current behavior without the "Unknown trigger-type" log spam.
+			clr_country_flag = dtd_enable_trade_system_cflag
+
+			set_temp_variable = {
+				count = modifier@resource_trade_cost_bonus_per_factory
+			}
+			add_to_temp_variable = {
+				count = 8
+			}
+			set_variable = {
+				dtd_buy_amount_per_civ = count
+			}
+
+
+			# CKEdited - dtd_avoid_error_effect is not defined anywhere in this mod (was itself causing the error it's named after)
+			#dtd_avoid_error_effect = yes
+		}
+	}
+
+	on_monthly = {
+		effect = {
+			if = {
+				limit = { NOT = { has_global_flag = dtd_market_history_monthly_recorded_gflag } }
+				# CKEdited - dtd_record_market_price_history_monthly_effect is not defined anywhere in this mod
+				#dtd_record_market_price_history_monthly_effect = yes
+				set_global_flag = { flag = dtd_market_history_monthly_recorded_gflag days = 27 value = 1 }
+			}
+			#if = {
+			#	limit = {
+			#		check_variable = {
+			#			dtd_gain_civ_last_30_days > 0
+			#		}
+			#	}
+			#	multiply_variable = {
+			#		dtd_gain_civ_last_30_days = -1
+			#	}
+			#	add_offsite_building = {
+			#		type = industrial_complex
+			#		level = dtd_gain_civ_last_30_days
+			#	}
+			#	clear_variable = dtd_gain_civ_last_30_days
+			#}
+			#if = {
+			#	limit = {
+			#		set_temp_variable = {
+			#			count = modifier@resource_trade_cost_bonus_per_factory
+			#		}
+			#		add_to_temp_variable = {
+			#			count = 8
+			#		}
+			#		multiply_temp_variable = {
+			#			count = 30
+			#		}
+			#		check_variable = {
+			#			dtd_storage_money > count
+			#		}
+			#	}
+			#	set_temp_variable = {
+			#		count1 = dtd_storage_money
+			#	}
+			#	set_temp_variable = {
+			#		count2 = modifier@resource_trade_cost_bonus_per_factory
+			#	}
+			#	add_to_temp_variable = {
+			#		count2 = 8
+			#	}
+			#	multiply_variable = {
+			#		count2 = 30
+			#	}
+			#	modulo_temp_variable = {
+			#		count1 = count2
+			#	}
+			#	set_variable = {
+			#		dtd_need_reduce_storage_money = dtd_storage_money
+			#	}
+			#	subtract_from_variable = {
+			#		dtd_need_reduce_storage_money = count1
+			#	}
+			#
+			#	set_variable = {
+			#		dtd_gain_civ_last_30_days = dtd_need_reduce_storage_money
+			#	}
+			#	divide_variable = {
+			#		dtd_gain_civ_last_30_days = count2
+			#	}
+			#	divide_variable = {
+			#		dtd_gain_civ_last_30_days = 30
+			#	}
+			#
+			#	subtract_from_variable = {
+			#		dtd_storage_money = dtd_need_reduce_storage_money
+			#	}
+			#
+			#	add_offsite_building = {
+			#		type = industrial_complex
+			#		level = dtd_gain_civ_last_30_days
+			#	}
+			#}
+
+			#every_collection_element = {
+			#	input = {
+			#		input = game:all_countries
+			#	}
+			#	if = {
+			#		limit = {
+			#			not = {
+			#				dtd_country_can_import_resource_country_trigger = yes
+			#			}
+			#		}
+			#		clear_variable = ROOT.dtd_import_oil_from_country@THIS
+			#		clear_variable = ROOT.dtd_import_oil_expenditure_from_country@THIS
+			#		clear_variable = ROOT.dtd_import_aluminium_from_country@THIS
+			#		clear_variable = ROOT.dtd_import_aluminium_expenditure_from_country@THIS
+			#		clear_variable = ROOT.dtd_import_rubber_from_country@THIS
+			#		clear_variable = ROOT.dtd_import_rubber_expenditure_from_country@THIS
+			#		clear_variable = ROOT.dtd_import_tungsten_from_country@THIS
+			#		clear_variable = ROOT.dtd_import_tungsten_expenditure_from_country@THIS
+			#		clear_variable = ROOT.dtd_import_steel_from_country@THIS
+			#		clear_variable = ROOT.dtd_import_steel_expenditure_from_country@THIS
+			#		clear_variable = ROOT.dtd_import_chromium_from_country@THIS
+			#		clear_variable = ROOT.dtd_import_chromium_expenditure_from_country@THIS
+			#		clear_variable = ROOT.dtd_import_coal_from_country@THIS
+			#		clear_variable = ROOT.dtd_import_coal_expenditure_from_country@THIS
+			#	}
+			#}
+		}
+	}
+
+	on_yearly = {
+		effect = {
+			if = {
+				limit = { NOT = { has_global_flag = dtd_market_history_yearly_recorded_gflag } }
+				# CKEdited - dtd_record_market_price_history_yearly_effect is not defined anywhere in this mod
+				#dtd_record_market_price_history_yearly_effect = yes
+				set_global_flag = { flag = dtd_market_history_yearly_recorded_gflag days = 360 value = 1 }
+			}
+		}
+	}
+
+	# CKEdited - dtd_new_country_effect is not defined anywhere in this mod
+	on_liberate = {
+		effect = {
+			#dtd_new_country_effect = yes
+		}
+	}
+	on_release_as_free = {
+		effect = {
+			#dtd_new_country_effect = yes
+		}
+	}
+	on_release_as_puppet = {
+		effect = {
+			#dtd_new_country_effect = yes
+		}
+	}
+
+	on_war = {
+		effect = {
+			# CKEdited - dtd_trade_import_dynamic_modifiers is not defined anywhere in this mod, so
+			# has_dynamic_modifier always failed here (logging "Invalid dynamic modifier"); the only
+			# effect inside (dtd_new_country_effect) is also undefined, so the whole block is inert.
+			#if = {
+			#	limit = {
+			#		not = {
+			#			has_dynamic_modifier = dtd_trade_import_dynamic_modifiers
+			#		}
+			#	}
+			#	dtd_new_country_effect = yes
+			#}
+
+			# Rare event-driven market shock. No weekly country scan is used here.
+			# CKEdited - dtd_apply_market_war_risk_shock_effect is not defined anywhere in this mod
+			#dtd_apply_market_war_risk_shock_effect = yes
+			#FROM = {
+			#	dtd_apply_market_war_risk_shock_effect = yes
+			#}
+		}
+	}
+	on_war_relation_added = {
+		effect = {
+			# CKEdited - dtd_reset_trade_between_ROOT_FROM_effect / dtd_apply_market_war_risk_shock_effect
+			# are not defined anywhere in this mod
+			#dtd_reset_trade_between_ROOT_FROM_effect = yes
+
+			# If an important exporter/producer joins an active war, markets price in a temporary risk premium.
+			#dtd_apply_market_war_risk_shock_effect = yes
+			#FROM = {
+			#	dtd_apply_market_war_risk_shock_effect = yes
+			#}
+		}
+	}
+
+	# CKEdited - dtd_reset_trade_between_ROOT_FROM_effect is not defined anywhere in this mod
+	on_subject_annexed = {
+		effect = {
+			#dtd_reset_trade_between_ROOT_FROM_effect = yes
+		}
+	}
+	on_subject_free = {
+		effect = {
+			#dtd_reset_trade_between_ROOT_FROM_effect = yes
+		}
+	}
+	on_subject_autonomy_level_change = {
+		effect = {
+			#dtd_reset_trade_between_ROOT_FROM_effect = yes
+		}
+	}
+}

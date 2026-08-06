@@ -1,0 +1,54 @@
+# CKEdited - new file. Caches whether a country's AI-computed attitude toward
+# a given target is currently "hostile" (or worse, "outraged") as a country
+# flag, so hot-path triggers (like raid show_target) can do a cheap flag check
+# instead of reading the expensive ai_attitude_*_weight dynamic variables live.
+#
+# CKEdited - originally also scanned every_country for an "existing relations"
+# case beyond neighbors, gated by a per-candidate limit check. That limit check
+# (scope-switch + has_opinion) still had to run for every candidate regardless
+# of whether it matched, making the whole thing O(N^2) across ~190 countries
+# each on_monthly tick (~36,000 evaluations) - this was the source of the
+# end-of-month lag. Scoped down to neighbors only, which is O(N x neighbor
+# count) instead, and still covers the motivating case (Egypt/Israel share a
+# real border and should already be coded as map neighbors).
+
+# CKEdited - was two effects: every_neighbor_country's ROOT = { evaluate_hostile_attitude_toward_prev = yes }
+# called a separately-named scripted effect across the ROOT scope switch. That combination threw
+# "Invalid Scope, provided: None" 860+ times a session - calling a named effect this way doesn't reliably
+# inherit the ROOT/PREV pair the same way an inline check does. Fixed by inlining the check directly inside
+# the ROOT = {...} block instead, matching the proven-working pattern in 00_cyber_ai_effects.txt (e.g.
+# look_and_add), which always reads ai_attitude_*_weight@PREV directly inside the switched scope rather than
+# delegating to another named effect.
+#
+# Called in ROOT = country scope. Updates the cached hostility flag toward every neighbor only - the
+# broader "existing relations" scan was removed earlier (see history) since it was O(N^2) across ~190
+# countries each on_monthly tick.
+update_hostile_attitude_flags = { # CKEdited
+	every_neighbor_country = {
+		limit = { NOT = { tag = ROOT } }
+		ROOT = {
+			set_temp_variable = { hostile_w = ai_attitude_hostile_weight@PREV }
+			set_temp_variable = { outraged_w = ai_attitude_outraged_weight@PREV }
+			set_temp_variable = { friendly_w = ai_attitude_friendly_weight@PREV }
+			set_temp_variable = { neutral_w = ai_attitude_neutral_weight@PREV }
+
+			if = {
+				limit = {
+					OR = {
+						check_variable = { outraged_w > hostile_w }
+						AND = {
+							# CKEdited - fixed invalid ">=" comparator (not supported by check_variable); rewritten as NOT < which is equivalent
+							NOT = { check_variable = { hostile_w < friendly_w } }
+							NOT = { check_variable = { hostile_w < neutral_w } }
+							check_variable = { hostile_w > 0 }
+						}
+					}
+				}
+				set_country_flag = computed_hostile_attitude@PREV
+			}
+			else = {
+				clr_country_flag = computed_hostile_attitude@PREV
+			}
+		}
+	}
+}

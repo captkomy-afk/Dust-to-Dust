@@ -1,0 +1,62 @@
+# CKEdited - new file: dynamic tier-status text for the six development-law
+# decisions in common/decisions/dev_laws_status_decisions.txt
+
+defined_text = { # CKEdited
+	name = dev_status_academic
+	text = { trigger = { has_idea = lower_academic }  localization_key = dev_status_academic_01 }
+	text = { trigger = { has_idea = low_academic }    localization_key = dev_status_academic_02 }
+	text = { trigger = { has_idea = medium_academic } localization_key = dev_status_academic_03 }
+	text = { trigger = { has_idea = high_academic }   localization_key = dev_status_academic_04 }
+	text = { trigger = { has_idea = higher_academic } localization_key = dev_status_academic_05 }
+	text = { trigger = { has_idea = highest_academic }localization_key = dev_status_academic_06 }
+}
+
+defined_text = { # CKEdited
+	name = dev_status_farming
+	text = { trigger = { has_idea = lower_farming }  localization_key = dev_status_farming_01 }
+	text = { trigger = { has_idea = low_farming }    localization_key = dev_status_farming_02 }
+	text = { trigger = { has_idea = medium_farming } localization_key = dev_status_farming_03 }
+	text = { trigger = { has_idea = high_farming }   localization_key = dev_status_farming_04 }
+	text = { trigger = { has_idea = higher_farming } localization_key = dev_status_farming_05 }
+	text = { trigger = { has_idea = highest_farming }localization_key = dev_status_farming_06 }
+}
+
+defined_text = { # CKEdited
+	name = dev_status_poverty
+	text = { trigger = { has_idea = lower_poverty }  localization_key = dev_status_poverty_01 }
+	text = { trigger = { has_idea = low_poverty }    localization_key = dev_status_poverty_02 }
+	text = { trigger = { has_idea = medium_poverty } localization_key = dev_status_poverty_03 }
+	text = { trigger = { has_idea = high_poverty }   localization_key = dev_status_poverty_04 }
+	text = { trigger = { has_idea = higher_poverty } localization_key = dev_status_poverty_05 }
+	text = { trigger = { has_idea = highest_poverty }localization_key = dev_status_poverty_06 }
+}
+
+defined_text = { # CKEdited
+	name = dev_status_industry
+	text = { trigger = { has_idea = lower_industry }  localization_key = dev_status_industry_01 }
+	text = { trigger = { has_idea = low_industry }    localization_key = dev_status_industry_02 }
+	text = { trigger = { has_idea = medium_industry } localization_key = dev_status_industry_03 }
+	text = { trigger = { has_idea = high_industry }   localization_key = dev_status_industry_04 }
+	text = { trigger = { has_idea = higher_industry } localization_key = dev_status_industry_05 }
+	text = { trigger = { has_idea = highest_industry }localization_key = dev_status_industry_06 }
+}
+
+defined_text = { # CKEdited
+	name = dev_status_military
+	text = { trigger = { has_idea = lower_military }  localization_key = dev_status_military_01 }
+	text = { trigger = { has_idea = low_military }    localization_key = dev_status_military_02 }
+	text = { trigger = { has_idea = medium_military } localization_key = dev_status_military_03 }
+	text = { trigger = { has_idea = high_military }   localization_key = dev_status_military_04 }
+	text = { trigger = { has_idea = higher_military } localization_key = dev_status_military_05 }
+	text = { trigger = { has_idea = highest_military }localization_key = dev_status_military_06 }
+}
+
+defined_text = { # CKEdited
+	name = dev_status_society
+	text = { trigger = { has_idea = lower_society }     localization_key = dev_status_society_01 }
+	text = { trigger = { has_idea = low_society }       localization_key = dev_status_society_02 }
+	text = { trigger = { has_idea = medium_society }    localization_key = dev_status_society_03 }
+	text = { trigger = { has_idea = law_high_society }  localization_key = dev_status_society_04 }
+	text = { trigger = { has_idea = higher_society }    localization_key = dev_status_society_05 }
+	text = { trigger = { has_idea = highest_society }   localization_key = dev_status_society_06 }
+}

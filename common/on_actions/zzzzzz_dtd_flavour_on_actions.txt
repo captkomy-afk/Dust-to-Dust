@@ -1,0 +1,89 @@
+on_actions = {
+    on_startup = {
+        effect = {
+            USA = {
+                news_event = {
+                    id = dtd_flavour.1
+                    days = 2
+                }                
+				news_event = {
+                    id = dtd_flavour.2
+                    days = 14
+					
+                }
+                news_event = {
+                    id = dtd_flavour.3
+                    days = 70
+                }                
+				news_event = {
+                    id = dtd_flavour.4
+                    days = 125
+					
+                }
+                news_event = {
+                    id = dtd_flavour.5
+                    days = 5
+                }                
+				news_event = {
+                    id = dtd_flavour.6
+                    days = 10
+					
+                }
+                news_event = {
+                    id = dtd_flavour.7
+                    days = 5
+                }                
+				news_event = {
+                    id = dtd_flavour.8
+                    days = 10
+					
+                }
+                news_event = {
+                    id = dtd_flavour.9
+                    days = 5
+                }                
+				news_event = {
+                    id = dtd_flavour.10
+                    days = 10
+					
+                }
+                news_event = {
+                    id = dtd_flavour.11
+                    days = 5
+                }                
+				news_event = {
+                    id = dtd_flavour.12
+                    days = 10
+					
+                }
+                news_event = {
+                    id = dtd_flavour.13
+                    days = 5
+                }                
+				news_event = {
+                    id = dtd_flavour.14
+                    days = 10
+					
+                }
+                news_event = {
+                    id = dtd_flavour.15
+                    days = 5
+                }                
+				news_event = {
+                    id = dtd_flavour.16
+                    days = 10
+					
+                }
+                news_event = {
+                    id = dtd_flavour.17
+                    days = 5
+                }                
+				news_event = {
+                    id = dtd_flavour.18
+                    days = 10
+					
+                }
+            }
+        }
+    }
+}

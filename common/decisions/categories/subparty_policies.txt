@@ -1,0 +1,7 @@
+subparty_policies_category = {
+	allowed = { NOT = { MD_special_countries = yes }  }
+
+	icon = political_actions
+	priority = 25
+
+}

@@ -1,0 +1,10 @@
+# CKEdited - new file: decisions tab grouping the six development-law tracks
+# (academic/farming/poverty/industry/military/society), status-only display
+
+development_laws_status_category = { # CKEdited
+	allowed = { always = yes } # CKEdited
+
+	icon = GFX_decision_category_generic_economy # CKEdited
+	priority = 96 # CKEdited
+	visible_when_empty = yes # CKEdited
+}

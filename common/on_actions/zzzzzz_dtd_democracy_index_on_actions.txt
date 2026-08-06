@@ -1,0 +1,19 @@
+
+on_actions = {
+    
+	## Startup
+    on_startup = {
+        effect = {
+            every_country = { 
+                dtd_democracy_index_tick = yes
+            }
+        }
+    }
+
+    ## DI Tick!
+    on_weekly = {
+        effect = {
+            dtd_democracy_index_tick = yes
+        }
+    }
+}

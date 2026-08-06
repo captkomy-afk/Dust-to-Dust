@@ -1,0 +1,196 @@
+dtd_democracy_index_tick = { 
+    # First decide the equilibrium point.
+	
+    set_variable = { democracy_index_value_eq = modifier@democracy_index_equilibrium }
+	
+	if = {
+		limit = { has_elections = yes }
+		add_to_variable = { democracy_index_value_eq = 15 }
+	}
+	
+	if = {
+		limit = { 
+			OR = {
+				emerging_communist_state_are_in_power = yes
+				neutrality_neutral_communism_are_in_power = yes
+				salafist_caliphate_are_in_power = yes
+				emerging_hardline_shiite_are_in_power = yes
+				emerging_anarchist_communism_are_in_power = yes
+			} 
+		}
+		add_to_variable = { democracy_index_value_eq = 25 }
+	}
+	else_if = {
+		limit = { 
+			OR = {
+				neutrality_neutral_green_are_in_power = yes
+				neutrality_neutral_conservatism_are_in_power = yes
+			} 
+		}
+		add_to_variable = { democracy_index_value_eq = 45 }
+	}
+	else_if = {
+		limit = { 
+			OR = {
+				neutrality_neutral_social_are_in_power = yes
+				emerging_reactionaries_are_in_power = yes
+			} 
+		}
+		add_to_variable = { democracy_index_value_eq = 30 }
+	}
+	else_if = {
+		limit = { 
+			OR = {
+				western_social_democrats_are_in_power = yes
+			} 
+		}
+		add_to_variable = { democracy_index_value_eq = 50 }
+	}
+	else_if = {
+		limit = { 
+			OR = {
+				nationalist_right_wing_populists_are_in_power = yes
+			} 
+		}
+		add_to_variable = { democracy_index_value_eq = 20 }
+	}
+	else_if = {
+		limit = { 
+			OR = {
+				western_liberals_are_in_power = yes
+				neutrality_neutral_libertarians_are_in_power = yes
+			} 
+		}
+		add_to_variable = { democracy_index_value_eq = 55 }
+	}
+	else_if = {
+		limit = { 
+			OR = {
+				western_autocrats_are_in_power = yes
+				emerging_autocracy_are_in_power = yes
+				neutrality_neutral_autocracy_are_in_power = yes
+				neutrality_neutral_oligarch_are_in_power = yes
+				nationalist_fascist_are_in_power = yes
+				nationalist_military_junta_are_in_power = yes
+			} 
+		}
+		add_to_variable = { democracy_index_value_eq = 5 }
+	}
+	else_if = {
+		limit = { 
+			OR = {
+				nationalist_monarchists_are_in_power = yes
+				salafist_kingdom_are_in_power = yes
+				emerging_moderate_shiite_are_in_power = yes
+				neutrality_neutral_muslim_brotherhood_are_in_power = yes
+			} 
+		}
+		add_to_variable = { democracy_index_value_eq = 15 }
+	}
+	else_if = {
+		limit = { 
+			OR = {
+				western_conservatism_are_in_power = yes
+			} 
+		}
+		add_to_variable = { democracy_index_value_eq = 10 }
+	}
+	
+    clamp_variable = { var = democracy_index_value_eq min = 0 max = 100 }
+
+    # Then decide how much it changes
+    set_temp_variable = { democracy_index_rate_multiplier = 1 }
+    set_variable = { democracy_index_value_rate = 0.4 }
+    multiply_variable = { democracy_index_value_rate = democracy_index_rate_multiplier }
+
+    set_temp_variable = { democracy_index_rvr_t = democracy_index_value_rate }
+
+    # Then change it.
+    if =  {
+        limit = { 
+            check_variable = { democracy_index_value > democracy_index_value_eq }
+        }
+        set_temp_variable = { democracy_diff = democracy_index_value }
+        subtract_from_temp_variable = { democracy_diff = democracy_index_value_eq }
+        clamp_temp_variable = { var = democracy_index_rvr_t min = 0 max = democracy_diff }
+        subtract_from_variable = { democracy_index_value = democracy_index_rvr_t }
+    }
+    else_if = {
+        limit = { 
+            check_variable = { democracy_index_value < democracy_index_value_eq }
+        }
+        set_temp_variable = { democracy_diff = democracy_index_value_eq }
+        subtract_from_temp_variable = { democracy_diff = democracy_index_value }
+        clamp_temp_variable = { var = democracy_index_rvr_t min = 0 max = democracy_diff }
+        add_to_variable = { democracy_index_value = democracy_index_rvr_t }
+    }
+
+    dtd_democracy_index_modifier = yes
+}
+
+dtd_democracy_index_modifier = {
+    if = { 
+        limit = { 
+            NOT = {
+                has_dynamic_modifier = { modifier = dtd_democracy_index_dynamic_modifier }
+            }
+        }
+        add_dynamic_modifier = { modifier = dtd_democracy_index_dynamic_modifier }
+        set_variable = { democracy_index_value = democracy_index_value_eq }
+    }
+
+    set_temp_variable = { democracy_scaled = democracy_index_value }
+    divide_temp_variable = { democracy_scaled = 100 }
+
+    
+	
+	## Political power gain = -1 at 100%. +2 at 0.
+
+    set_variable = { dtd_democracy_index_political_power = 0.5 }
+    set_temp_variable = { dtd_di_temp_pp = -0.5 }
+    multiply_temp_variable = { dtd_di_temp_pp = democracy_scaled }
+    add_to_variable = { dtd_democracy_index_political_power = dtd_di_temp_pp }
+    clamp_variable = { var = dtd_democracy_index_political_power min = -1 max = 2 }
+
+	## Stability = -10 at 100%. +20 at 0.
+
+    set_variable = { dtd_democracy_index_stability = 0.02 }
+    set_temp_variable = { dtd_di_temp_stab = -0.03 }
+    multiply_temp_variable = { dtd_di_temp_stab = democracy_scaled }
+    add_to_variable = { dtd_democracy_index_stability = dtd_di_temp_stab }
+    clamp_variable = { var = dtd_democracy_index_stability min = -0.01 max = 0.02 }
+	
+	## War Support = -5 at 100%. +10 at 0.
+
+    set_variable = { dtd_democracy_index_war_support = 0.01 }
+    set_temp_variable = { dtd_di_temp_ws = -0.015 }
+    multiply_temp_variable = { dtd_di_temp_ws = democracy_scaled }
+    add_to_variable = { dtd_democracy_index_war_support = dtd_di_temp_ws }
+    clamp_variable = { var = dtd_democracy_index_war_support min = -0.005 max = 0.01 }
+
+	## Drife Defence Factor = -10 at 100%. +10 at 0.
+
+    set_variable = { dtd_democracy_index_drift_defence = 0.1 }
+    set_temp_variable = { dtd_di_temp_dd = -0.2 }
+    multiply_temp_variable = { dtd_di_temp_dd = democracy_scaled }
+    add_to_variable = { dtd_democracy_index_drift_defence = dtd_di_temp_dd }
+    clamp_variable = { var = dtd_democracy_index_drift_defence min = -0.1 max = 0.1 }	
+	
+	
+	## Improve Relations = +10 at 100%. -10 at 0.
+
+    set_variable = { dtd_democracy_index_relations_cost = -0.1 }
+    set_temp_variable = { dtd_di_temp_rc = 0.2 }
+    multiply_temp_variable = { dtd_di_temp_rc = democracy_scaled }
+    add_to_variable = { dtd_democracy_index_relations_cost = dtd_di_temp_rc }
+    clamp_variable = { var = dtd_democracy_index_relations_cost min = -0.1 max = 0.1 }	
+	
+	## Change Corruption Cost = -25 at 100%. +25 at 0.
+
+    set_variable = { dtd_democracy_index_corruption_cost = 0.25 }
+    set_temp_variable = { dtd_di_temp_cc = -0.5 }
+    multiply_temp_variable = { dtd_di_temp_cc = democracy_scaled }
+    add_to_variable = { dtd_democracy_index_corruption_cost = dtd_di_temp_cc }
+    clamp_variable = { var = dtd_democracy_index_corruption_cost min = -0.25 max = 0.25 }
+
+}

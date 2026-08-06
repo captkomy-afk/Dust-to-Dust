@@ -1,0 +1,9 @@
+academic_development_monthly
+farming_development_monthly
+poverty_development_monthly
+industrial_development_monthly
+military_development_monthly
+society_development_monthly
+business_value_factor
+minimum_radicalization_modifier
+minimum_terror_threat_modifier

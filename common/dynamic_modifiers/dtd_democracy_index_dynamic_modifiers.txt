@@ -1,0 +1,13 @@
+dtd_democracy_index_dynamic_modifier = {
+	enable = { always = yes }
+	political_power_gain = dtd_democracy_index_political_power
+	stability_factor = dtd_democracy_index_stability
+	war_support_factor = dtd_democracy_index_war_support
+	research_speed_factor = dtd_democracy_index_research_speed
+	drift_defence_factor = dtd_democracy_index_drift_defence
+	democratic_drift = dtd_democracy_index_democratic_drift
+	communism_drift = dtd_democracy_index_communism_drift
+	nationalist_drift = dtd_democracy_index_nationalist_drift
+	improve_relations_maintain_cost_factor = dtd_democracy_index_relations_cost
+	corruption_cost_factor = dtd_democracy_index_corruption_cost
+}

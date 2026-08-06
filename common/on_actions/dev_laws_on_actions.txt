@@ -1,0 +1,58 @@
+# CKEdited - new file: moved from common/ideas/00_development.txt.
+# on_actions are only loaded by the game from common/on_actions/*.txt - a file
+# under common/ideas/ is parsed by the ideas loader (which only reads
+# "ideas = { ... }" blocks), so this on_actions block was never being read at
+# all. That meant on_startup's initial update_development call, and the
+# monthly update_development tick that drives all six development-law
+# trackers, never ran on any save - explaining the "momentum static at zero"
+# report for all six tracks, not just industry/military (bug #3).
+
+on_actions = { # CKEdited
+	on_startup = {
+		effect = {
+			every_country = {
+				limit = {
+					capital_scope = { is_on_continent = africa } # CKEdited - is_on_continent is state-scope only; was bare at country scope and always evaluated false (see this mod's own is_in_africa trigger in common/scripted_triggers/00_continent_triggers.txt for the same pattern)
+					NOT = {
+						original_tag = SOM
+						original_tag = LBA
+					}
+				}
+				add_ideas = {
+					low_academic
+					low_farming
+					lower_poverty
+					medium_military
+					low_society
+				}
+			}
+			SOM = {
+				add_ideas = {
+					lower_academic
+					lower_farming
+					lower_poverty
+					medium_military
+					lower_society
+				}
+			}
+			LBA = {
+				add_ideas = {
+					high_academic
+					medium_farming
+					high_poverty
+					medium_military
+					law_high_society
+					medium_industry
+				}
+			}
+			every_country = {
+				update_development = yes
+			}
+		}
+	}
+	on_monthly = {
+		effect = {
+			update_development = yes
+		}
+	}
+}

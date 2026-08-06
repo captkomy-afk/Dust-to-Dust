@@ -1,0 +1,25 @@
+# CKEdited - new file: drives update_hostile_attitude_flags (see
+# common/scripted_effects/computed_attitude_effects.txt). Runs monthly rather
+# than weekly to keep the recurring cost down - raid targeting doesn't need
+# this any fresher than that.
+
+on_actions = { # CKEdited
+	on_startup = {
+		effect = {
+			every_country = {
+				update_hostile_attitude_flags = yes
+			}
+		}
+	}
+	on_monthly = {
+		effect = {
+			# CKEdited - on_monthly already runs once per country automatically (ROOT = that
+			# country); the every_country wrapper here was redundant and caused a nested
+			# double-loop (every country's monthly tick re-iterating every other country), which
+			# is what caused both the O(N^2) cost and the "Invalid Scope, provided: None" errors -
+			# ROOT still pointed at the outer per-country context while every_neighbor_country
+			# inside update_hostile_attitude_flags was operating relative to the wrong scope.
+			update_hostile_attitude_flags = yes
+		}
+	}
+}

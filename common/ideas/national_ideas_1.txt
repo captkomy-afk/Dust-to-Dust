@@ -1,0 +1,531 @@
+ideas = {
+	national_ideas_1 = {
+		law = yes
+		use_list_view = yes
+
+		# have sex, yes that means you 
+		ni_3 = {
+			cost = 150
+			removal_cost = 150
+			picture = ni_3
+			visible = {
+
+			}
+			available = { 
+				NOT = { 
+					has_idea = ni_19
+				}
+			}
+			cancel = { 
+
+			}
+			on_remove = {
+
+			}
+			modifier = {
+				monthly_population = 0.25
+				population_tax_income_multiplier_modifier = -0.07
+				social_cost_multiplier_modifier = 0.15
+				total_workforce_modifier = -0.02
+				poverty_development_monthly = -0.003
+				political_power_factor = -0.05
+			}
+			research_bonus = {	
+
+			}
+			equipment_bonus = {
+
+			}
+			ai_will_do = { 
+				factor = -10
+			}
+			cancel_if_invalid = yes
+		}
+
+		# one child policy
+		ni_19 = {
+			cost = 150
+			removal_cost = 150
+			picture = ni_19
+			visible = {
+				
+			}
+			available = { # CKEdited - closing brace was misplaced, nesting allowed_to_remove inside available (invalid trigger)
+				NOT = {
+					has_idea = ni_3
+				}
+			}
+			allowed_to_remove = {
+				custom_trigger_tooltip = {
+					tooltip = flag_ni_tt
+					NOT = { has_country_flag = flag_ni_19 }
+				}
+			}
+			cancel = { 
+
+			}
+			on_remove = {
+
+			}
+			modifier = {
+				monthly_population = -0.50
+				migration_rate_value_factor = -0.75
+				total_workforce_modifier = 0.02
+				stability_factor = -0.02
+				democracy_index_equilibrium = -15
+				bureaucracy_cost_multiplier_modifier = 0.20
+				poverty_development_monthly = 0.001
+				political_power_factor = -0.05
+			}
+			research_bonus = {	
+
+			}
+			equipment_bonus = {
+
+			}
+			ai_will_do = { 
+				factor = -10
+			}
+			cancel_if_invalid = yes
+		}
+
+		# racism
+		ni_20 = {
+			cost = 150
+			removal_cost = 150
+			picture = ni_20
+			visible = { 
+				
+			}
+			available = { 
+				OR = { 
+					has_idea = closed_borders
+				}
+			}
+			allowed_to_remove = { 
+				custom_trigger_tooltip = { 
+					tooltip = flag_ni_tt
+				}
+			}
+			on_add = {
+				set_country_flag = { flag = flag_ni_20 days = 1440 value = 1 }
+			}
+			cancel = { 
+
+			}
+			on_remove = {
+
+			}
+			modifier = {
+				migration_rate_value_factor = -0.35
+				stability_factor = -0.05
+				social_cost_multiplier_modifier = -0.1
+				health_cost_multiplier_modifier = -0.1
+				education_cost_multiplier_modifier = -0.1
+				bureaucracy_cost_factor = 0.25
+				nationalist_drift = 0.07
+				democracy_index_equilibrium = -25
+				society_development_monthly = -0.03
+				political_power_factor = -0.05
+			}
+			research_bonus = {	
+
+			}
+			equipment_bonus = {
+
+			}
+			ai_will_do = { 
+				factor = -10
+			}
+			cancel_if_invalid = yes
+		}
+
+		# literally 1984
+		ni_5 = {
+			cost = 150
+			removal_cost = 150
+			picture = ni_20
+			visible = {
+				date < 2020.01.01
+				has_idea = super_power # CKEdited - fixed typo (was "superpower", missing underscore; real idea is defined in common/ideas/zz_power_ranking.txt); this alone was 98% of error.log
+
+			}
+			available = { 
+				OR = { 
+					has_elections = no
+				}
+			}
+			allowed_to_remove = { 
+				custom_trigger_tooltip = { 
+					tooltip = flag_ni_tt
+				}
+			}
+			on_add = {
+				set_country_flag = { flag = flag_ni_20 days = 1440 value = 1 }
+			}
+			cancel = { 
+
+			}
+			on_remove = {
+
+			}
+			modifier = {
+				stability_factor = -0.50
+				expected_healthcare_modifier = -4
+				expected_welfare_modifier = -4
+				political_power_factor = 1.75
+				country_productivity_growth_modifier = -0.75
+				democracy_index_equilibrium = -60
+			}
+			research_bonus = {	
+
+			}
+			equipment_bonus = {
+
+			}
+			ai_will_do = { 
+				factor = -10
+			}
+			cancel_if_invalid = yes
+		}
+		# Cognoscenti
+		ni_4 = {
+			cost = 150
+			removal_cost = 150
+			picture = gfx_cognoscenti
+			visible = { 
+				has_idea = highest_society
+			}
+			available = { 
+				OR = { 
+					has_elections = yes
+				}
+			}
+			allowed_to_remove = { 
+				custom_trigger_tooltip = { 
+					tooltip = flag_ni_tt
+				}
+			}
+			on_add = {
+				set_country_flag = { flag = flag_ni_20 days = 1440 value = 1 }
+			}
+			cancel = { 
+
+			}
+			on_remove = {
+				
+
+			}
+			modifier = {
+				stability_factor = 0.15
+				education_cost_multiplier_modifier = 0.25
+				bureaucracy_cost_multiplier_modifier = 0.45
+				police_cost_multiplier_modifier = 0.25
+				political_power_factor = 0.25
+			}
+			research_bonus = {	
+
+			}
+			equipment_bonus = {
+
+			}
+			ai_will_do = { 
+				factor = -10
+			}
+			cancel_if_invalid = yes
+		}
+		# Great Firewall
+		ni_6 = {
+			cost = 150
+			removal_cost = 150
+			picture = ni_20
+			visible = { 
+				
+			}
+			available = { 
+
+			}
+			allowed_to_remove = { 
+				custom_trigger_tooltip = { 
+					tooltip = flag_ni_tt
+				}
+			}
+			on_add = {
+				set_country_flag = { flag = flag_ni_20 days = 1440 value = 1 }
+			}
+			cancel = { 
+
+			}
+			on_remove = {
+
+			}
+			modifier = {
+				stability_factor = 0.15
+				bureaucracy_cost_multiplier_modifier = 0.15
+				police_cost_multiplier_modifier = 0.15
+				production_speed_internet_station_factor = 0.15
+				research_speed_factor = -0.07
+				foreign_influence_defense_modifier = 0.40
+				drift_defence_factor = 0.40
+				democracy_index_equilibrium = -15
+				political_power_factor = -0.05
+			}
+			research_bonus = {	
+
+			}
+			equipment_bonus = {
+
+			}
+			ai_will_do = { 
+				factor = -10
+			}
+			cancel_if_invalid = yes
+		}
+		# surveillance
+		ni_7 = {
+			cost = 150
+			removal_cost = 150
+			picture = ni_20
+			visible = { 
+
+			}
+			available = { 
+				OR = { 
+					has_idea = police_04
+					has_idea = police_05
+				}
+			}
+			allowed_to_remove = { 
+				custom_trigger_tooltip = { 
+					tooltip = flag_ni_tt
+				}
+			}
+			on_add = {
+				set_country_flag = { flag = flag_ni_20 days = 1440 value = 1 }
+			}
+			cancel = { 
+
+			}
+			on_remove = {
+
+			}
+			modifier = {
+				stability_factor = -0.05
+				intelligence_agency_defense = 45
+				police_cost_multiplier_modifier = 0.15
+				bureaucracy_cost_multiplier_modifier = 0.05
+				corruption_cost_factor = -0.25
+				political_power_factor = -0.05
+			}
+			research_bonus = {	
+
+			}
+			equipment_bonus = {
+
+			}
+			ai_will_do = { 
+				factor = -10
+			}
+			cancel_if_invalid = yes
+		}
+		# poverty reduction
+		ni_8 = {
+			cost = 150
+			removal_cost = 150
+			picture = ni_20
+			visible = { 
+				
+			}
+			available = {
+
+			}
+			allowed_to_remove = { 
+				custom_trigger_tooltip = { 
+					tooltip = flag_ni_tt
+				}
+			}
+			on_add = {
+				set_country_flag = { flag = flag_ni_20 days = 1440 value = 1 }
+			}
+			cancel = { 
+
+			}
+			on_remove = {
+
+			}
+			modifier = {
+				stability_factor = 0.08
+				tax_gain_multiplier_modifier = -0.05
+				poverty_development_monthly = 0.005
+				monthly_population = 0.07
+				social_cost_multiplier_modifier = 0.10
+				political_power_factor = -0.05
+			}
+			research_bonus = {	
+
+			}
+			equipment_bonus = {
+
+			}
+			ai_will_do = { 
+				factor = -10
+			}
+			cancel_if_invalid = yes
+		}
+		# Education - read a book 
+		ni_9 = {
+			cost = 150
+			removal_cost = 150
+			picture = ni_20
+			visible = { 
+				
+			}
+			available = {
+
+			}
+			allowed_to_remove = { 
+				custom_trigger_tooltip = { 
+					tooltip = flag_ni_tt
+				}
+			}
+			on_add = {
+				set_country_flag = { flag = flag_ni_20 days = 1440 value = 1 }
+			}
+			cancel = { 
+
+			}
+			on_remove = {
+
+			}
+			modifier = {
+				tax_gain_multiplier_modifier = -0.02
+				poverty_development_monthly = 0.001
+				academic_development_monthly = 0.005
+				monthly_population = -0.08
+				literacy_rate_education_modifier = 0.30
+				research_speed_factor = 0.05
+				drift_defence_factor = -0.15
+				education_cost_multiplier_modifier = 0.15
+				political_power_factor = -0.05
+			}
+			research_bonus = {	
+
+			}
+			equipment_bonus = {
+
+			}
+			ai_will_do = { 
+				factor = -10
+			}
+			cancel_if_invalid = yes
+		}
+		# no education... don't read a book...
+		ni_10 = {
+			cost = 150
+			removal_cost = 150
+			picture = ni_20
+			visible = { 
+				
+			}
+			available = {
+				OR = {
+					has_idea = edu_01
+					has_idea = edu_02
+				}
+			}
+			allowed_to_remove = { 
+				custom_trigger_tooltip = { 
+					tooltip = flag_ni_tt
+				}
+			}
+			on_add = {
+				set_country_flag = { flag = flag_ni_20 days = 1440 value = 1 }
+			}
+			cancel = { 
+
+			}
+			on_remove = {
+
+			}
+			modifier = {
+				tax_gain_multiplier_modifier = 0.02
+				poverty_development_monthly = -0.001
+				academic_development_monthly = -0.005
+				monthly_population = 0.08
+				literacy_rate_education_modifier = -0.15
+				research_speed_factor = -0.05
+				education_cost_multiplier_modifier = -0.15
+				drift_defence_factor = 0.15
+				political_power_factor = -0.05
+			}
+			research_bonus = {	
+
+			}
+			equipment_bonus = {
+
+			}
+			ai_will_do = { 
+				factor = -10
+			}
+			cancel_if_invalid = yes
+		}
+		# Patrotistic propoganda
+		ni_11 = {
+			cost = 150
+			removal_cost = 150
+			picture = ni_20
+			visible = { 
+				
+			}
+			available = {
+				OR = {
+					emerging_reactionaries_are_in_power = yes
+					emerging_reactionaries_are_in_power = yes
+					nationalist_monarchists_are_in_power = yes
+					nationalist_right_wing_populists_are_in_power = yes
+					nationalist_fascist_are_in_power = yes
+					emerging_communist_state_are_in_power = yes
+					nationalist_military_junta_are_in_power = yes
+					western_conservatism_are_in_power = yes					
+					emerging_communist_state_are_in_power = yes
+					neutrality_neutral_communism_are_in_power = yes 	
+				}
+			}
+			allowed_to_remove = { 
+				custom_trigger_tooltip = { 
+					tooltip = flag_ni_tt
+				}
+			}
+			on_add = {
+				set_country_flag = { flag = flag_ni_20 days = 1440 value = 1 }
+			}
+			cancel = { 
+
+			}
+			on_remove = {
+
+			}
+			modifier = {
+				tax_gain_multiplier_modifier = 0.02
+				poverty_development_monthly = -0.001
+				academic_development_monthly = -0.005
+				monthly_population = 0.08
+				literacy_rate_education_modifier = -0.15
+				research_speed_factor = -0.05
+				education_cost_multiplier_modifier = -0.15
+				drift_defence_factor = 0.15
+				political_power_factor = -0.05
+			}
+			research_bonus = {	
+
+			}
+			equipment_bonus = {
+
+			}
+			ai_will_do = { 
+				factor = -10
+			}
+			cancel_if_invalid = yes
+		}
+	}
+}

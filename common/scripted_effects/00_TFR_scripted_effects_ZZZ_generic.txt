@@ -1,0 +1,969 @@
+#Development
+increase_industry = {
+	if = {
+		limit = {
+			has_idea = higher_industry
+		}
+		swap_ideas = {
+			remove_idea = higher_industry
+			add_idea = highest_industry
+		}
+	}
+	if = {
+		limit = {
+			has_idea = high_industry
+		}
+		swap_ideas = {
+			remove_idea = high_industry
+			add_idea = higher_industry
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = medium_industry
+		}
+		swap_ideas = {
+			remove_idea = medium_industry
+			add_idea = high_industry
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = low_industry
+		}
+		swap_ideas = {
+			remove_idea = low_industry
+			add_idea = medium_industry
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = lower_industry
+		}
+		swap_ideas = {
+			remove_idea = lower_industry
+			add_idea = low_industry
+		}
+	}
+}
+
+decrease_industry = {
+	if = {
+		limit = {
+			has_idea = low_industry
+		}
+		swap_ideas = {
+			remove_idea = low_industry
+			add_idea = lower_industry
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = medium_industry
+		}
+		swap_ideas = {
+			remove_idea = medium_industry
+			add_idea = low_industry
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = high_industry
+		}
+		swap_ideas = {
+			remove_idea = high_industry
+			add_idea = medium_industry
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = higher_industry
+		}
+		swap_ideas = {
+			remove_idea = higher_industry
+			add_idea = high_industry
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = highest_industry
+		}
+		swap_ideas = {
+			remove_idea = highest_industry
+			add_idea = higher_industry
+		}
+	}
+}
+
+increase_society = {
+	if = {
+		limit = {
+			has_idea = higher_society
+		}
+		swap_ideas = {
+			remove_idea = higher_society
+			add_idea = highest_society
+		}
+	}
+	if = {
+		limit = {
+			has_idea = law_high_society
+		}
+		swap_ideas = {
+			remove_idea = law_high_society
+			add_idea = higher_society
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = medium_society
+		}
+		swap_ideas = {
+			remove_idea = medium_society
+			add_idea = law_high_society
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = low_society
+		}
+		swap_ideas = {
+			remove_idea = low_society
+			add_idea = medium_society
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = lower_society
+		}
+		swap_ideas = {
+			remove_idea = lower_society
+			add_idea = low_society
+		}
+	}
+}
+
+decrease_society = {
+	if = {
+		limit = {
+			has_idea = low_society
+		}
+		swap_ideas = {
+			remove_idea = low_society
+			add_idea = lower_society
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = medium_society
+		}
+		swap_ideas = {
+			remove_idea = medium_society
+			add_idea = low_society
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = law_high_society
+		}
+		swap_ideas = {
+			remove_idea = law_high_society
+			add_idea = medium_society
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = higher_society
+		}
+		swap_ideas = {
+			remove_idea = higher_society
+			add_idea = law_high_society
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = highest_society
+		}
+		swap_ideas = {
+			remove_idea = highest_society
+			add_idea = higher_society
+		}
+	}
+}
+
+increase_academic = {
+	if = {
+		limit = {
+			has_idea = higher_academic
+		}
+		swap_ideas = {
+			remove_idea = higher_academic
+			add_idea = highest_academic
+		}
+	}
+	if = {
+		limit = {
+			has_idea = high_academic
+		}
+		swap_ideas = {
+			remove_idea = high_academic
+			add_idea = higher_academic
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = medium_academic
+		}
+		swap_ideas = {
+			remove_idea = medium_academic
+			add_idea = high_academic
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = low_academic
+		}
+		swap_ideas = {
+			remove_idea = low_academic
+			add_idea = medium_academic
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = lower_academic
+		}
+		swap_ideas = {
+			remove_idea = lower_academic
+			add_idea = low_academic
+		}
+	}
+}
+
+decrease_academic = {
+	if = {
+		limit = {
+			has_idea = low_academic
+		}
+		swap_ideas = {
+			remove_idea = low_academic
+			add_idea = lower_academic
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = medium_academic
+		}
+		swap_ideas = {
+			remove_idea = medium_academic
+			add_idea = low_academic
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = high_academic
+		}
+		swap_ideas = {
+			remove_idea = high_academic
+			add_idea = medium_academic
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = higher_academic
+		}
+		swap_ideas = {
+			remove_idea = higher_academic
+			add_idea = high_academic
+		}
+	}	
+	else_if = {
+		limit = {
+			has_idea = highest_academic
+		}
+		swap_ideas = {
+			remove_idea = highest_academic
+			add_idea = higher_academic
+		}
+	}
+}
+
+increase_poverty = {
+	if = {
+		limit = {
+			has_idea = higher_poverty
+		}
+		swap_ideas = {
+			remove_idea = higher_poverty
+			add_idea = highest_poverty
+		}
+	}
+	if = {
+		limit = {
+			has_idea = high_poverty
+		}
+		swap_ideas = {
+			remove_idea = high_poverty
+			add_idea = higher_poverty
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = medium_poverty
+		}
+		swap_ideas = {
+			remove_idea = medium_poverty
+			add_idea = high_poverty
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = low_poverty
+		}
+		swap_ideas = {
+			remove_idea = low_poverty
+			add_idea = medium_poverty
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = lower_poverty
+		}
+		swap_ideas = {
+			remove_idea = lower_poverty
+			add_idea = low_poverty
+		}
+	}
+}
+
+decrease_poverty = {
+	if = {
+		limit = {
+			has_idea = low_poverty
+		}
+		swap_ideas = {
+			remove_idea = low_poverty
+			add_idea = lower_poverty
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = medium_poverty
+		}
+		swap_ideas = {
+			remove_idea = medium_poverty
+			add_idea = low_poverty
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = high_poverty
+		}
+		swap_ideas = {
+			remove_idea = high_poverty
+			add_idea = medium_poverty
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = higher_poverty
+		}
+		swap_ideas = {
+			remove_idea = higher_poverty
+			add_idea = high_poverty
+		}
+	}	
+	else_if = {
+		limit = {
+			has_idea = highest_poverty
+		}
+		swap_ideas = {
+			remove_idea = highest_poverty
+			add_idea = higher_poverty
+		}
+	}
+}
+
+increase_farming = {
+	if = {
+		limit = {
+			has_idea = higher_farming
+		}
+		swap_ideas = {
+			remove_idea = higher_farming
+			add_idea = highest_farming
+		}
+	}
+	if = {
+		limit = {
+			has_idea = high_farming
+		}
+		swap_ideas = {
+			remove_idea = high_farming
+			add_idea = higher_farming
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = medium_farming
+		}
+		swap_ideas = {
+			remove_idea = medium_farming
+			add_idea = high_farming
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = low_farming
+		}
+		swap_ideas = {
+			remove_idea = low_farming
+			add_idea = medium_farming
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = lower_farming
+		}
+		swap_ideas = {
+			remove_idea = lower_farming
+			add_idea = low_farming
+		}
+	}
+}
+
+decrease_farming = {
+	if = {
+		limit = {
+			has_idea = low_farming
+		}
+		swap_ideas = {
+			remove_idea = low_farming
+			add_idea = lower_farming
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = medium_farming
+		}
+		swap_ideas = {
+			remove_idea = medium_farming
+			add_idea = low_farming
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = high_farming
+		}
+		swap_ideas = {
+			remove_idea = high_farming
+			add_idea = medium_farming
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = higher_farming
+		}
+		swap_ideas = {
+			remove_idea = higher_farming
+			add_idea = high_farming
+		}
+	}	
+	else_if = {
+		limit = {
+			has_idea = highest_farming
+		}
+		swap_ideas = {
+			remove_idea = highest_farming
+			add_idea = higher_farming
+		}
+	}
+}
+
+increase_military = {
+	if = {
+		limit = {
+			has_idea = higher_military
+		}
+		swap_ideas = {
+			remove_idea = higher_military
+			add_idea = highest_military
+		}
+	}
+	if = {
+		limit = {
+			has_idea = high_military
+		}
+		swap_ideas = {
+			remove_idea = high_military
+			add_idea = higher_military
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = medium_military
+		}
+		swap_ideas = {
+			remove_idea = medium_military
+			add_idea = high_military
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = low_military
+		}
+		swap_ideas = {
+			remove_idea = low_military
+			add_idea = medium_military
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = lower_military
+		}
+		swap_ideas = {
+			remove_idea = lower_military
+			add_idea = low_military
+		}
+	}
+}
+
+decrease_military = {
+	if = {
+		limit = {
+			has_idea = low_military
+		}
+		swap_ideas = {
+			remove_idea = low_military
+			add_idea = lower_military
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = medium_military
+		}
+		swap_ideas = {
+			remove_idea = medium_military
+			add_idea = low_military
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = high_military
+		}
+		swap_ideas = {
+			remove_idea = high_military
+			add_idea = medium_military
+		}
+	}
+	else_if = {
+		limit = {
+			has_idea = higher_military
+		}
+		swap_ideas = {
+			remove_idea = higher_military
+			add_idea = high_military
+		}
+	}	
+	else_if = {
+		limit = {
+			has_idea = highest_military
+		}
+		swap_ideas = {
+			remove_idea = highest_military
+			add_idea = higher_military
+		}
+	}
+}
+
+add_academic_development = {
+	custom_effect_tooltip = add_academic_development_tooltip
+	add_to_variable = {
+		var = academic_development_var
+		value = academic_development_var_temp
+	}
+	check_academic_development = yes
+}
+
+check_academic_development = {
+	if = {
+		limit = {
+			check_variable = {
+				var = academic_development_var
+				value = 1
+				compare = greater_than_or_equals
+			}
+		}
+		ROOT = {
+			country_event = {
+				id = dev_laws.1 # CKEdited
+			}
+		}
+		ROOT = {
+			country_event = {
+				id = dev_laws.3 # CKEdited
+			}
+		}
+		increase_academic = yes
+		add_to_variable = {
+			var = academic_development_var
+			value = -1
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				var = academic_development_var
+				value = -1
+				compare = less_than_or_equals
+			}
+		}
+		ROOT = {
+			country_event = {
+				id = dev_laws.2 # CKEdited
+			}
+		}
+		decrease_academic = yes
+		add_to_variable = {
+			var = academic_development_var
+			value = 1
+		}
+	}
+	clamp_variable = {
+		var = academic_development_var
+		min = -1
+		max = 1
+	}
+}
+
+add_farming_development = {
+	custom_effect_tooltip = add_farming_development_tooltip
+	add_to_variable = {
+		var = farming_development_var
+		value = farming_development_var_temp
+	}
+	check_farming_development = yes
+}
+
+check_farming_development = {
+	if = {
+		limit = {
+			check_variable = {
+				var = farming_development_var
+				value = 1
+				compare = greater_than_or_equals
+			}
+		}
+		ROOT = {
+			country_event = {
+				id = dev_laws.4 # CKEdited
+			}
+		}
+		ROOT = {
+			country_event = {
+				id = dev_laws.6 # CKEdited
+			}
+		}
+		increase_farming = yes
+		add_to_variable = {
+			var = farming_development_var
+			value = -1
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				var = farming_development_var
+				value = -1
+				compare = less_than_or_equals
+			}
+		}
+		ROOT = {
+			country_event = {
+				id = dev_laws.5 # CKEdited
+			}
+		}
+		decrease_farming = yes
+		add_to_variable = {
+			var = farming_development_var
+			value = 1
+		}
+	}
+	clamp_variable = {
+		var = farming_development_var
+		min = -1
+		max = 1
+	}
+}
+
+add_poverty_development = {
+	custom_effect_tooltip = add_poverty_development_tooltip
+	add_to_variable = {
+		var = poverty_development_var
+		value = poverty_development_var_temp
+	}
+	check_poverty_development = yes
+}
+
+check_poverty_development = {
+	if = {
+		limit = {
+			check_variable = {
+				var = poverty_development_var
+				value = 1
+				compare = greater_than_or_equals
+			}
+		}
+		ROOT = {
+			country_event = {
+				id = dev_laws.7 # CKEdited
+			}
+		}
+		ROOT = {
+			country_event = {
+				id = dev_laws.9 # CKEdited
+			}
+		}
+		increase_poverty = yes
+		add_to_variable = {
+			var = poverty_development_var
+			value = -1
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				var = poverty_development_var
+				value = -1
+				compare = less_than_or_equals
+			}
+		}
+		ROOT = {
+			country_event = {
+				id = dev_laws.8 # CKEdited
+			}
+		}
+		decrease_poverty = yes
+		add_to_variable = {
+			var = poverty_development_var
+			value = 1
+		}
+	}
+	clamp_variable = {
+		var = poverty_development_var
+		min = -1
+		max = 1
+	}
+}
+
+add_industrial_development = {
+	custom_effect_tooltip = add_industrial_development_tooltip
+	add_to_variable = {
+		var = industrial_development_var
+		value = industrial_development_var_temp
+	}
+	check_industrial_development = yes
+}
+
+check_industrial_development = {
+	if = {
+		limit = {
+			check_variable = {
+				var = industrial_development_var
+				value = 1
+				compare = greater_than_or_equals
+			}
+		}
+		ROOT = {
+			country_event = {
+				id = dev_laws.10 # CKEdited
+			}
+		}
+		ROOT = {
+			country_event = {
+				id = dev_laws.12 # CKEdited
+			}
+		}
+		increase_industry = yes
+		add_to_variable = {
+			var = industrial_development_var
+			value = -1
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				var = industrial_development_var
+				value = -1
+				compare = less_than_or_equals
+			}
+		}
+		ROOT = {
+			country_event = {
+				id = dev_laws.11 # CKEdited
+			}
+		}
+		decrease_industry = yes
+		add_to_variable = {
+			var = industrial_development_var
+			value = 1
+		}
+	}
+	clamp_variable = {
+		var = industrial_development_var
+		min = -1
+		max = 1
+	}
+}
+
+add_military_development = {
+	custom_effect_tooltip = add_military_development_tooltip
+	add_to_variable = {
+		var = military_development_var
+		value = military_development_var_temp
+	}
+	check_military_development = yes
+}
+
+check_military_development = {
+	if = {
+		limit = {
+			check_variable = {
+				var = military_development_var
+				value = 1
+				compare = greater_than_or_equals
+			}
+		}
+		ROOT = {
+			country_event = {
+				id = dev_laws.13 # CKEdited
+			}
+		}
+		ROOT = {
+			country_event = {
+				id = dev_laws.15 # CKEdited
+			}
+		}
+		increase_military = yes
+		add_to_variable = {
+			var = military_development_var
+			value = -1
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				var = military_development_var
+				value = -1
+				compare = less_than_or_equals
+			}
+		}
+		ROOT = {
+			country_event = {
+				id = dev_laws.14 # CKEdited
+			}
+		}
+		decrease_military = yes
+		add_to_variable = {
+			var = military_development_var
+			value = 1
+		}
+	}
+	clamp_variable = {
+		var = military_development_var
+		min = -1
+		max = 1
+	}
+}
+
+add_society_development = {
+	custom_effect_tooltip = add_society_development_tooltip
+	add_to_variable = {
+		var = society_development_var
+		value = society_development_var_temp
+	}
+	check_society_development = yes
+}
+
+check_society_development = {
+	if = {
+		limit = {
+			check_variable = {
+				var = society_development_var
+				value = 1
+				compare = greater_than_or_equals
+			}
+		}
+		ROOT = {
+			country_event = {
+				id = dev_laws.16 # CKEdited
+			}
+		}
+		ROOT = {
+			country_event = {
+				id = dev_laws.18 # CKEdited
+			}
+		}
+		increase_society = yes
+		add_to_variable = {
+			var = society_development_var
+			value = -1
+		}
+	}
+	else_if = {
+		limit = {
+			check_variable = {
+				var = society_development_var
+				value = -1
+				compare = less_than_or_equals
+			}
+		}
+		ROOT = {
+			country_event = {
+				id = dev_laws.17 # CKEdited
+			}
+		}
+		decrease_society = yes
+		add_to_variable = {
+			var = society_development_var
+			value = 1
+		}
+	}
+	clamp_variable = {
+		var = society_development_var
+		min = -1
+		max = 1
+	}
+}
+
+update_development = {
+	add_to_variable = {
+		var = academic_development_var
+		value = modifier@academic_development_monthly
+	}
+	check_academic_development = yes
+	add_to_variable = {
+		var = farming_development_var
+		value = modifier@farming_development_monthly
+	}
+	check_farming_development = yes
+	add_to_variable = {
+		var = poverty_development_var
+		value = modifier@poverty_development_monthly
+	}
+	check_poverty_development = yes
+	add_to_variable = {
+		var = industrial_development_var
+		value = modifier@industrial_development_monthly
+	}
+	check_industrial_development = yes
+	add_to_variable = {
+		var = military_development_var
+		value = modifier@military_development_monthly
+	}
+	check_military_development = yes
+	add_to_variable = {
+		var = society_development_var
+		value = modifier@society_development_monthly
+	}
+	check_society_development = yes
+}
