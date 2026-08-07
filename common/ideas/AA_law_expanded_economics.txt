@@ -716,6 +716,10 @@ ideas = {
 
 			modifier = {
 				custom_modifier_tooltip = usd_reserve_users_tt
+				trade_opinion_factor = 0.15
+				trade_cost_for_target_factor = -0.1
+				stability_factor = -0.1
+				international_market_income_modifier = 0.05
 			}
 
 			on_add = {
@@ -1144,6 +1148,11 @@ ideas = {
 
 			modifier = {
 				custom_modifier_tooltip = rub_reserve_users_tt
+				resource_export_multiplier_modifier = 0.05
+				fuel_gain_factor = 0.15
+				fuel_gain_factor_from_states = 0.15
+				interest_rate_multiplier_modifier = 1
+				foreign_influence_defense_modifier = 0.10
 			}
 
 			available = {
@@ -1202,6 +1211,10 @@ ideas = {
 
 			modifier = {
 				custom_modifier_tooltip = gbp_reserve_users_tt
+				return_on_investment_modifier = 0.02
+				econ_cycle_upg_cost_multiplier_modifier = 0.25
+				economic_cycles_cost_factor = 0.25
+				trade_opinion_factor = 0.05
 			}
 
 			available = {

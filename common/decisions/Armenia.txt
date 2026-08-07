@@ -947,19 +947,30 @@ ARM_army_category = {
 			set_temp_variable = { tag_index = SOV }
 			set_temp_variable = { influence_target = ARM }
 			change_influence_percentage = yes
+			# CKEdited - guarded each removal; not every one of these states necessarily has the modifier
+			# applied, so unconditional removal logged "modifier does not exist" for whichever didn't.
 			709 = {
-				remove_dynamic_modifier = {
-					modifier = ARM_fsb_borderguards
+				if = {
+					limit = { has_dynamic_modifier = { modifier = ARM_fsb_borderguards } }
+					remove_dynamic_modifier = {
+						modifier = ARM_fsb_borderguards
+					}
 				}
 			}
 			1034 = {
-				remove_dynamic_modifier = {
-					modifier = ARM_fsb_borderguards
+				if = {
+					limit = { has_dynamic_modifier = { modifier = ARM_fsb_borderguards } }
+					remove_dynamic_modifier = {
+						modifier = ARM_fsb_borderguards
+					}
 				}
 			}
 			1035 = {
-				remove_dynamic_modifier = {
-					modifier = ARM_fsb_borderguards
+				if = {
+					limit = { has_dynamic_modifier = { modifier = ARM_fsb_borderguards } }
+					remove_dynamic_modifier = {
+						modifier = ARM_fsb_borderguards
+					}
 				}
 			}
 		}

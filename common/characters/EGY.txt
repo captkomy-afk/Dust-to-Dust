@@ -615,6 +615,26 @@ characters = {
 			}
 		}
 	}
+	# CKEdited - Khaled Dawoud, real-life successor to ElBaradei as chairman of the Dostour Party.
+	# Journalist and NSF spokesman, jailed in 2019 for opposing the constitutional amendments extending Sisi's rule.
+	EGY_khaled_dawoud = {
+		name = "Khaled Dawoud"
+		portraits = { # CKEdited - generated from a user-supplied photo, uncompressed DDS
+			army = {
+				small = "gfx/leaders/EGY/small/Khaled_Dawoud_small.dds"
+				large = "gfx/leaders/EGY/Khaled_Dawoud.dds"
+			}
+		}
+		country_leader = {
+			ideology = liberalism
+			traits = {
+				western_liberalism
+				journalist
+				political_prisoner
+				democratic_reformer
+			}
+		}
+	}
 	EGY_omar_suleiman = {
 		name = "Omar Suleiman"
 		portraits = {
