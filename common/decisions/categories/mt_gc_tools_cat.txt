@@ -1,0 +1,11 @@
+# Game Master tools decision category. Only visible to whichever country holds the mt_gc_nation
+# marker idea (assigned manually by the server admin via history file or console for the RP's
+# designated GM nation).
+mt_gc_tools_decisions = {
+	priority = 2600
+	visible_when_empty = yes
+
+	visible = {
+		has_idea = mt_gc_nation
+	}
+}

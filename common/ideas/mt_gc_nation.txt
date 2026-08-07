@@ -1,0 +1,12 @@
+ideas = {
+	country = {
+		# Marker idea only - assign manually (history file or console `ai add_ideas` on the
+		# designated GM's country) to grant that nation access to the GM tools decision category
+		# (common/decisions/categories/mt_gc_tools_cat.txt). No mechanical effect of its own.
+		mt_gc_nation = {
+			picture = mt_gc_nation
+			allowed = { always = yes }
+			allowed_civil_war = { always = yes }
+		}
+	}
+}

@@ -1621,6 +1621,17 @@ on_actions = {
 			set_variable = { global.nlg_reserve_adoption_count = 0 }
 			set_variable = { global.general_operating_budget_contribute_percent = 0.0001 }
 
+			# Money-transfer/subsidies/bonds aggregates - these are only ever set for countries
+			# that actually use the mt_ money-tool diplomatic actions, so every country needs a
+			# zeroed starting value before calculate_additional_income_rate/
+			# calculate_additional_expense_rate read them for the first time each week.
+			every_country = {
+				set_variable = { total_subsidies_in = 0 }
+				set_variable = { total_subsidies_out = 0 }
+				set_variable = { mt_total_bonds_held = 0 }
+				set_variable = { mt_total_bonds_owed = 0 }
+			}
+
 			ABK = {
 				set_buy_core_state_arrays = yes
 				set_all_prod_arrays = yes

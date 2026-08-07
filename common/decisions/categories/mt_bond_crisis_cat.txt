@@ -1,0 +1,9 @@
+# Player-facing decisions shown to a country while the mt_bond_crisis idea is active.
+mt_bond_crisis_decisions = {
+	priority = 2500
+	visible_when_empty = yes
+
+	visible = {
+		has_idea = mt_bond_crisis
+	}
+}

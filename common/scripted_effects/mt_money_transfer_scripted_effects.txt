@@ -1,0 +1,53 @@
+# Shared calculation effects for the fund transfer / weekly subsidies / bond trading
+# diplomatic actions defined in common/scripted_diplomatic_actions/mt_money_transfer_diplomatic_actions.txt.
+
+# calculate_subsidies_in
+# Purpose: sums every other country's active_subsidies@<us> into our total_subsidies_in.
+# Called on the recipient side whenever a subsidy relationship involving them changes.
+calculate_subsidies_in = {
+	set_variable = { total_subsidies_in = 0 }
+	every_other_country = {
+		add_to_variable = { PREV.total_subsidies_in = active_subsidies@PREV }
+	}
+}
+
+# calculate_subsidies_out
+# Purpose: sums what we've committed to pay every other country into our total_subsidies_out.
+# This is subtracted from our own income in calculate_additional_expense_rate (00_money_system.txt)
+# so a subsidy debits the payer by exactly what it credits the recipient.
+calculate_subsidies_out = {
+	set_variable = { total_subsidies_out = 0 }
+	every_other_country = {
+		add_to_variable = { PREV.total_subsidies_out = PREV.active_subsidies@THIS }
+	}
+}
+
+# calculate_bond_size
+# Purpose: derives the face value (bond_total) owed on a bond from its principal (bond_size)
+# and interest rate (bond_interest), rounded to the nearest whole unit.
+calculate_bond_size = {
+	set_variable = { bond_total = bond_size }
+	set_temp_variable = { bond_interest_t = bond_interest }
+	divide_temp_variable = { bond_interest_t = 100 }
+	add_to_temp_variable = { bond_interest_t = 1 }
+	multiply_variable = { bond_total = bond_interest_t }
+	round_variable = bond_total
+}
+
+# calculate_new_bonds_held
+# Purpose: totals the face value of bonds we hold as a creditor across every debtor, for UI display.
+calculate_new_bonds_held = {
+	set_variable = { mt_total_bonds_held = 0 }
+	every_country = {
+		add_to_variable = { PREV.mt_total_bonds_held = PREV.given_bonds@THIS }
+	}
+}
+
+# calculate_new_bonds_owed
+# Purpose: totals the face value of bonds we owe as a debtor across every creditor, for UI display.
+calculate_new_bonds_owed = {
+	set_variable = { mt_total_bonds_owed = 0 }
+	every_country = {
+		add_to_variable = { PREV.mt_total_bonds_owed = given_bonds@PREV }
+	}
+}

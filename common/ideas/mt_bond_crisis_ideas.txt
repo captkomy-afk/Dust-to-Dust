@@ -1,0 +1,107 @@
+ideas = {
+	country = {
+		# 3-year crisis timer. Expiring (or being removed early) strips every sub-idea the chain
+		# applied and fires the recovery event (mt_bond_crisis.5).
+		mt_bond_crisis = {
+			picture = mt_bond_crisis
+			allowed_civil_war = { always = yes }
+			modifier = {
+				interest_rate_multiplier_modifier = 5
+				return_on_investment_modifier = -0.01
+				country_productivity_growth_modifier = -0.2
+				econ_cycle_upg_cost_multiplier_modifier = 1
+				political_power_factor = -0.05
+			}
+
+			on_remove = {
+				remove_ideas = {
+					mt_currency_devaluation
+					mt_currency_devaluation_min
+					mt_global_recession_bonds
+					mt_global_recession_bonds_min
+					mt_global_recession_bonds_minmin
+					mt_reduced_oil_demand
+				}
+				country_event = mt_bond_crisis.5
+			}
+		}
+
+		mt_currency_devaluation = {
+			picture = mt_currency_bad
+			allowed_civil_war = { always = yes }
+			modifier = {
+				stability_factor = -0.05
+				return_on_investment_modifier = -0.01
+				tax_gain_multiplier_modifier = -0.05
+				resource_export_multiplier_modifier = -0.3
+				tax_rate_change_multiplier_modifier = 1
+				political_power_factor = -0.05
+			}
+		}
+
+		mt_currency_devaluation_min = {
+			picture = mt_currency_bad
+			allowed_civil_war = { always = yes }
+			modifier = {
+				return_on_investment_modifier = -0.01
+				tax_gain_multiplier_modifier = -0.025
+				resource_export_multiplier_modifier = -0.15
+			}
+		}
+
+		mt_global_recession_bonds = {
+			picture = mt_recession_bonds
+			allowed_civil_war = { always = yes }
+			modifier = {
+				investment_duration_modifier = 0.5
+				receiving_investment_duration_modifier = 0.5
+				research_speed_factor = -0.5
+				production_speed_buildings_factor = -0.5
+				industrial_capacity_dockyard = -0.5
+				industrial_capacity_factory = -0.5
+				country_productivity_growth_modifier = -0.2
+				political_power_factor = -0.05
+				econ_cycle_upg_cost_multiplier_modifier = 1
+			}
+		}
+
+		mt_global_recession_bonds_min = {
+			picture = mt_recession_bonds
+			allowed_civil_war = { always = yes }
+			modifier = {
+				investment_duration_modifier = 0.25
+				receiving_investment_duration_modifier = 0.25
+				research_speed_factor = -0.25
+				production_speed_buildings_factor = -0.25
+				industrial_capacity_dockyard = -0.25
+				industrial_capacity_factory = -0.25
+				country_productivity_growth_modifier = -0.1
+				econ_cycle_upg_cost_multiplier_modifier = 1
+			}
+		}
+
+		mt_global_recession_bonds_minmin = {
+			picture = mt_recession_bonds
+			allowed_civil_war = { always = yes }
+			modifier = {
+				investment_duration_modifier = 0.5
+				receiving_investment_duration_modifier = 0.5
+				research_speed_factor = -0.1
+				production_speed_buildings_factor = -0.1
+				industrial_capacity_dockyard = -0.1
+				industrial_capacity_factory = -0.1
+				country_productivity_growth_modifier = -0.05
+				econ_cycle_upg_cost_multiplier_modifier = 1
+			}
+		}
+
+		# Reinterpreted as reduced demand for the affected country's own oil exports during the crisis.
+		mt_reduced_oil_demand = {
+			picture = mt_no_oil_wanted
+			allowed_civil_war = { always = yes }
+			modifier = {
+				resource_export_multiplier_modifier = -0.1
+			}
+		}
+	}
+}

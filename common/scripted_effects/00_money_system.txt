@@ -2311,6 +2311,9 @@ calculate_additional_income_rate = {
 	if = { limit = { has_idea = CPD_war_reparations_receiver }
 		add_to_variable = { additional_income_rate = CPD_reparations_weekly }
 	}
+
+	# Weekly Subsidies received from other countries (mt_subsidies diplomatic action)
+	add_to_variable = { additional_income_rate = total_subsidies_in }
 }
 # Effect: calculate_interest_rate
 # Purpose: Computes daily interest rate on debt based on debt-to-GDP ratio, monetary policy, and world threat
@@ -4149,6 +4152,12 @@ calculate_additional_expense_rate = {
 	if = { limit = { has_idea = CPD_war_reparations_payer }
 		add_to_variable = { additional_expenses_rate = CPD_reparations_weekly }
 	}
+
+	# Weekly Subsidies committed to other countries (mt_subsidies diplomatic action).
+	# Added after inflation multiplier for the same reason as reparations above: the payer
+	# picked a flat weekly amount, not a fraction of GDP that should compound with inflation.
+	# This debits the payer by exactly what total_subsidies_in credits the recipient.
+	add_to_variable = { additional_expenses_rate = total_subsidies_out }
 }
 
 # Effect: calculate_int_investments_rate

@@ -1,0 +1,412 @@
+# Fund transfer, weekly subsidies, and sovereign bond trading between countries.
+# Loosely inspired by a similar system seen in another HOI4 roleplay mod, rebuilt here against
+# this mod's own treasury/debt system - notably, subsidies are symmetric: the payer's income is
+# debited by exactly what the recipient's income gains (see calculate_subsidies_out and
+# common/scripted_effects/00_money_system.txt).
+#
+# Scope convention throughout: ROOT = the sender/initiator of the diplomatic action,
+# the unprefixed/current scope inside on_sent_effect/complete_effect/reject_effect = the recipient.
+# All seven actions share one 35-day cooldown flag (mt_moneytool_cd) so a country can only have
+# one money-tool action in flight at a time.
+scripted_diplomatic_actions = {
+
+	# One-shot transfer of treasury from ROOT to the recipient.
+	mt_money_transfer = {
+		cost = 0
+		icon = 20
+
+		visible = { always = yes }
+
+		selectable = {
+			if = {
+				limit = { ROOT = { has_country_flag = mt_moneytool_cd } }
+				custom_trigger_tooltip = { tooltip = MT_MONEYTOOL_COOLDOWN always = no }
+			}
+			else = {
+				custom_trigger_tooltip = { tooltip = MT_MONEYTOOL_READY always = yes }
+			}
+		}
+
+		can_be_sent = {
+			check_variable = { ROOT.gift_size > 0 }
+		}
+
+		send_description = MT_MONEY_TRANSFER_SEND_DESC
+
+		on_sent_effect = {
+			ROOT = { set_country_flag = { flag = mt_moneytool_cd days = 35 } }
+		}
+
+		complete_effect = {
+			subtract_from_variable = { ROOT.treasury = ROOT.gift_size }
+			add_to_variable = { treasury = ROOT.gift_size }
+
+			set_variable = { ROOT.gift_size = 0 }
+			ROOT = { clr_country_flag = mt_moneytool_cd }
+
+			ROOT = { ingame_update_setup = yes }
+			ingame_update_setup = yes
+		}
+
+		reject_effect = {
+			set_variable = { ROOT.gift_size = 0 }
+			ROOT = { clr_country_flag = mt_moneytool_cd }
+		}
+
+		send_scripted_gui = mt_money_transfer_scripted_gui
+		requires_acceptance = yes
+		can_be_accepted = { always = yes }
+
+		accept_title = MT_MONEY_TRANSFER_ACCEPT_TITLE
+		accept_description = MT_MONEY_TRANSFER_ACCEPT_DESC
+		reject_title = MT_MONEY_TRANSFER_REJECT_TITLE
+		reject_description = MT_MONEY_TRANSFER_REJECT_DESC
+
+		ai_desire = { base = -10 }
+		ai_acceptance = { base_desire = { base = 10 } }
+	}
+
+	# Standing weekly payment from ROOT to the recipient, sized as active_subsidies@<recipient>.
+	mt_subsidies = {
+		cost = 0
+		icon = 23
+
+		visible = {
+			NOT = {
+				check_variable = { active_subsidies@ROOT > 0 }
+				check_variable = { ROOT.active_subsidies@THIS > 0 }
+			}
+		}
+
+		selectable = {
+			if = {
+				limit = { ROOT = { has_country_flag = mt_moneytool_cd } }
+				custom_trigger_tooltip = { tooltip = MT_MONEYTOOL_COOLDOWN always = no }
+			}
+			else = {
+				custom_trigger_tooltip = { tooltip = MT_MONEYTOOL_READY always = yes }
+			}
+		}
+
+		can_be_sent = {
+			check_variable = { ROOT.subsidies_size > 0 }
+		}
+
+		send_description = MT_SUBSIDIES_SEND_DESC
+
+		on_sent_effect = {
+			ROOT = { set_country_flag = { flag = mt_moneytool_cd days = 35 } }
+		}
+
+		complete_effect = {
+			set_variable = { ROOT.active_subsidies@THIS = ROOT.subsidies_size }
+			calculate_subsidies_in = yes
+			ROOT = { calculate_subsidies_out = yes }
+
+			set_variable = { ROOT.subsidies_size = 0 }
+			ROOT = { clr_country_flag = mt_moneytool_cd }
+
+			ROOT = { ingame_update_setup = yes }
+			ingame_update_setup = yes
+		}
+
+		reject_effect = {
+			set_variable = { ROOT.subsidies_size = 0 }
+			ROOT = { clr_country_flag = mt_moneytool_cd }
+		}
+
+		send_scripted_gui = mt_subsidies_scripted_gui
+		requires_acceptance = yes
+		can_be_accepted = { always = yes }
+
+		accept_title = MT_SUBSIDIES_ACCEPT_TITLE
+		accept_description = MT_SUBSIDIES_ACCEPT_DESC
+		reject_title = MT_SUBSIDIES_REJECT_TITLE
+		reject_description = MT_SUBSIDIES_REJECT_DESC
+
+		ai_desire = { base = -10 }
+		ai_acceptance = { base_desire = { base = 10 } }
+	}
+
+	# Payer (ROOT) already subsidizes the recipient - renegotiate the weekly amount instead of
+	# cancelling outright (outright cancellation now lives in the Subsidies decisions tab,
+	# common/decisions/mt_subsidies_management_decisions.txt).
+	mt_subsidies_adjust = {
+		cost = 0
+		icon = 23
+
+		visible = { check_variable = { ROOT.active_subsidies@THIS > 0 } }
+
+		selectable = {
+			if = {
+				limit = { ROOT = { has_country_flag = mt_moneytool_cd } }
+				custom_trigger_tooltip = { tooltip = MT_MONEYTOOL_COOLDOWN always = no }
+			}
+			else = {
+				custom_trigger_tooltip = { tooltip = MT_MONEYTOOL_READY always = yes }
+			}
+		}
+
+		can_be_sent = {
+			check_variable = { ROOT.subsidies_size > 0 }
+		}
+
+		send_description = MT_SUBSIDIES_ADJUST_SEND_DESC
+
+		on_sent_effect = {
+			ROOT = { set_country_flag = { flag = mt_moneytool_cd days = 35 } }
+		}
+
+		complete_effect = {
+			set_variable = { ROOT.active_subsidies@THIS = ROOT.subsidies_size }
+			calculate_subsidies_in = yes
+			ROOT = { calculate_subsidies_out = yes }
+
+			set_variable = { ROOT.subsidies_size = 0 }
+			ROOT = { clr_country_flag = mt_moneytool_cd }
+
+			ROOT = { ingame_update_setup = yes }
+			ingame_update_setup = yes
+		}
+
+		reject_effect = {
+			set_variable = { ROOT.subsidies_size = 0 }
+			ROOT = { clr_country_flag = mt_moneytool_cd }
+		}
+
+		send_scripted_gui = mt_subsidies_scripted_gui
+		requires_acceptance = yes
+		can_be_accepted = { always = yes }
+
+		accept_title = MT_SUBSIDIES_ADJUST_ACCEPT_TITLE
+		accept_description = MT_SUBSIDIES_ADJUST_ACCEPT_DESC
+		reject_title = MT_SUBSIDIES_ADJUST_REJECT_TITLE
+		reject_description = MT_SUBSIDIES_ADJUST_REJECT_DESC
+
+		ai_desire = { base = -10 }
+		ai_acceptance = { base_desire = { base = 10 } }
+	}
+
+	# Recipient unilaterally cancels a subsidy sent by ROOT to them. No acceptance needed.
+	mt_subsidies_cancel_incoming = {
+		cost = 0
+		icon = 17
+
+		visible = { check_variable = { active_subsidies@ROOT > 0 } }
+		selectable = { always = yes }
+		can_be_sent = { always = yes }
+
+		send_description = MT_SUBSIDIES_CANCEL_INCOMING_SEND_DESC
+
+		complete_effect = {
+			clear_variable = active_subsidies@ROOT
+			ROOT = { calculate_subsidies_in = yes }
+			calculate_subsidies_out = yes
+			ROOT = { clr_country_flag = mt_moneytool_cd }
+
+			ROOT = { ingame_update_setup = yes }
+			ingame_update_setup = yes
+		}
+
+		requires_acceptance = no
+		show_acceptance_on_action_button = no
+
+		ai_desire = { base = 1 }
+	}
+
+	# ROOT (buyer/creditor) lends bond_size treasury to the recipient (seller/debtor), who owes
+	# back bond_total = bond_size * (1 + bond_interest / 100) at buyback/sell time.
+	mt_bond_purchase = {
+		cost = 0
+		icon = 20
+
+		visible = { always = yes }
+
+		selectable = {
+			if = {
+				limit = { ROOT = { has_country_flag = mt_moneytool_cd } }
+				custom_trigger_tooltip = { tooltip = MT_MONEYTOOL_COOLDOWN always = no }
+			}
+			else = {
+				custom_trigger_tooltip = { tooltip = MT_MONEYTOOL_READY always = yes }
+			}
+		}
+
+		can_be_sent = {
+			check_variable = { ROOT.bond_size > 0 }
+		}
+
+		send_description = MT_BOND_PURCHASE_SEND_DESC
+
+		on_sent_effect = {
+			ROOT = { set_country_flag = { flag = mt_moneytool_cd days = 35 } }
+		}
+
+		complete_effect = {
+			subtract_from_variable = { ROOT.treasury = ROOT.bond_size }
+			add_to_variable = { treasury = ROOT.bond_size }
+
+			# Remember the money owed: given_bonds@<debtor> is tracked on the creditor (ROOT).
+			add_to_variable = { ROOT.given_bonds@THIS = ROOT.bond_total }
+
+			set_variable = { ROOT.bond_total = 0 }
+			set_variable = { ROOT.bond_size = 0 }
+			set_variable = { ROOT.bond_interest = 0 }
+			ROOT = { clr_country_flag = mt_moneytool_cd }
+
+			ROOT = { calculate_new_bonds_held = yes }
+			calculate_new_bonds_owed = yes
+
+			ROOT = { ingame_update_setup = yes }
+			ingame_update_setup = yes
+		}
+
+		reject_effect = {
+			set_variable = { ROOT.bond_total = 0 }
+			set_variable = { ROOT.bond_size = 0 }
+			set_variable = { ROOT.bond_interest = 0 }
+			ROOT = { clr_country_flag = mt_moneytool_cd }
+		}
+
+		send_scripted_gui = mt_bond_purchase_scripted_gui
+		requires_acceptance = yes
+		can_be_accepted = { always = yes }
+
+		accept_title = MT_BOND_PURCHASE_ACCEPT_TITLE
+		accept_description = MT_BOND_PURCHASE_ACCEPT_DESC
+		reject_title = MT_BOND_PURCHASE_REJECT_TITLE
+		reject_description = MT_BOND_PURCHASE_REJECT_DESC
+
+		ai_desire = { base = -10 }
+		ai_acceptance = { base_desire = { base = -10 } }
+	}
+
+	# ROOT (debtor) repurchases its own debt from the recipient (creditor) at face value.
+	mt_bond_buyback = {
+		cost = 0
+		icon = 21
+
+		visible = { check_variable = { given_bonds@ROOT > 0 } }
+
+		selectable = {
+			if = {
+				limit = { ROOT = { has_country_flag = mt_moneytool_cd } }
+				custom_trigger_tooltip = { tooltip = MT_MONEYTOOL_COOLDOWN always = no }
+			}
+			else = {
+				custom_trigger_tooltip = { tooltip = MT_MONEYTOOL_READY always = yes }
+			}
+		}
+
+		can_be_sent = {
+			check_variable = { ROOT.bond_buyback_size > 0 }
+		}
+
+		send_description = MT_BOND_BUYBACK_SEND_DESC
+
+		on_sent_effect = {
+			ROOT = { set_country_flag = { flag = mt_moneytool_cd days = 35 } }
+		}
+
+		complete_effect = {
+			subtract_from_variable = { ROOT.treasury = ROOT.bond_buyback_size }
+			add_to_variable = { treasury = ROOT.bond_buyback_size }
+			subtract_from_variable = { given_bonds@ROOT = ROOT.bond_buyback_size }
+
+			set_variable = { ROOT.bond_buyback_size = 0 }
+			ROOT = { clr_country_flag = mt_moneytool_cd }
+
+			calculate_new_bonds_held = yes
+			ROOT = { calculate_new_bonds_owed = yes }
+
+			ROOT = { ingame_update_setup = yes }
+			ingame_update_setup = yes
+		}
+
+		reject_effect = {
+			set_variable = { ROOT.bond_buyback_size = 0 }
+			ROOT = { clr_country_flag = mt_moneytool_cd }
+		}
+
+		send_scripted_gui = mt_bond_buyback_scripted_gui
+		requires_acceptance = yes
+		can_be_accepted = { always = yes }
+
+		accept_title = MT_BOND_BUYBACK_ACCEPT_TITLE
+		accept_description = MT_BOND_BUYBACK_ACCEPT_DESC
+		reject_title = MT_BOND_BUYBACK_REJECT_TITLE
+		reject_description = MT_BOND_BUYBACK_REJECT_DESC
+
+		ai_desire = { base = -10 }
+		ai_acceptance = { base_desire = { base = -10 } }
+	}
+
+	# ROOT (creditor) sells its claim against the recipient (debtor) to "the market": ROOT gets
+	# half the face value in cash immediately, and the full face value is added to the debtor's
+	# official debt (no acceptance needed - the debtor has no say in a secondary-market sale).
+	mt_bond_sell = {
+		cost = 0
+		icon = 21
+
+		visible = { check_variable = { ROOT.given_bonds@THIS > 0 } }
+		selectable = {
+			if = {
+				limit = { ROOT = { has_country_flag = mt_moneytool_cd } }
+				custom_trigger_tooltip = { tooltip = MT_MONEYTOOL_COOLDOWN always = no }
+			}
+			else = {
+				custom_trigger_tooltip = { tooltip = MT_MONEYTOOL_READY always = yes }
+			}
+		}
+
+		can_be_sent = {
+			check_variable = { ROOT.bond_sell_size > 0 }
+		}
+
+		send_description = MT_BOND_SELL_SEND_DESC
+
+		on_sent_effect = {
+			ROOT = { set_country_flag = { flag = mt_moneytool_cd days = 35 } }
+		}
+
+		complete_effect = {
+			# Half the face value in cash, at a discount for immediate liquidity.
+			set_temp_variable = { bond_sale_t = ROOT.bond_sell_size }
+			divide_temp_variable = { bond_sale_t = 2 }
+			add_to_variable = { ROOT.treasury = bond_sale_t }
+
+			# Is the sell-off big enough to matter? Flag it for narrative/AI hooks.
+			set_temp_variable = { selloff_p = ROOT.bond_sell_size }
+			divide_temp_variable = { selloff_p = debt }
+			if = {
+				limit = { check_variable = { selloff_p > 0.25 } }
+				set_country_flag = { flag = mt_recent_major_bond_selloff days = 45 value = 1 }
+			}
+			else_if = {
+				limit = { check_variable = { selloff_p > 0.10 } }
+				set_country_flag = { flag = mt_recent_minor_bond_selloff days = 45 value = 1 }
+			}
+
+			# The face value becomes real, official debt for the debtor.
+			set_temp_variable = { debt_change = ROOT.bond_sell_size }
+			modify_debt_effect = yes
+
+			subtract_from_variable = { ROOT.given_bonds@THIS = ROOT.bond_sell_size }
+
+			set_variable = { ROOT.bond_sell_size = 0 }
+			ROOT = { clr_country_flag = mt_moneytool_cd }
+
+			ROOT = { calculate_new_bonds_held = yes }
+			calculate_new_bonds_owed = yes
+
+			ROOT = { ingame_update_setup = yes }
+			ingame_update_setup = yes
+		}
+
+		send_scripted_gui = mt_bond_sell_scripted_gui
+		requires_acceptance = no
+		show_acceptance_on_action_button = no
+
+		ai_desire = { base = 1 }
+	}
+}

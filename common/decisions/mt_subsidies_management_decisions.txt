@@ -1,0 +1,143 @@
+# Subsidies management tab. active_subsidies@<recipient> is stored on the payer (see
+# common/scripted_diplomatic_actions/mt_money_transfer_diplomatic_actions.txt); these decisions
+# let a player cancel one relationship at a time (picking a country from the decision's own
+# target list, which shows every currently qualifying country) or clear all of one direction
+# in a single click.
+mt_subsidies_decisions = {
+
+	# Pick one country we currently subsidize and stop paying them.
+	d_mt_cancel_outgoing_subsidy = {
+		icon = GFX_decision_economy
+
+		target_array = global.countries
+
+		target_root_trigger = {
+			check_variable = { total_subsidies_out > 0 }
+		}
+
+		target_trigger = {
+			check_variable = { active_subsidies@FROM > 0 }
+		}
+
+		visible = {
+			check_variable = { total_subsidies_out > 0 }
+		}
+
+		available = { always = yes }
+
+		cost = 0
+		days_remove = 1
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision d_mt_cancel_outgoing_subsidy targeting [From.GetName]"
+			clear_variable = active_subsidies@FROM
+			calculate_subsidies_out = yes
+			FROM = { calculate_subsidies_in = yes }
+
+			ingame_update_setup = yes
+			FROM = { ingame_update_setup = yes }
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	# Pick one country currently subsidizing us and reject it.
+	d_mt_cancel_incoming_subsidy = {
+		icon = GFX_decision_economy
+
+		target_array = global.countries
+
+		target_root_trigger = {
+			check_variable = { total_subsidies_in > 0 }
+		}
+
+		target_trigger = {
+			FROM = { check_variable = { active_subsidies@ROOT > 0 } }
+		}
+
+		visible = {
+			check_variable = { total_subsidies_in > 0 }
+		}
+
+		available = { always = yes }
+
+		cost = 0
+		days_remove = 1
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision d_mt_cancel_incoming_subsidy targeting [From.GetName]"
+			FROM = { clear_variable = active_subsidies@ROOT }
+			calculate_subsidies_in = yes
+			FROM = { calculate_subsidies_out = yes }
+
+			ingame_update_setup = yes
+			FROM = { ingame_update_setup = yes }
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	# Stop every subsidy we currently pay out, all at once.
+	d_mt_cancel_all_outgoing_subsidies = {
+		icon = GFX_decision_economy
+
+		visible = {
+			check_variable = { total_subsidies_out > 0 }
+		}
+
+		available = { always = yes }
+
+		cost = 0
+		days_remove = 1
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision d_mt_cancel_all_outgoing_subsidies"
+			every_other_country = {
+				if = {
+					limit = { check_variable = { ROOT.active_subsidies@THIS > 0 } }
+					clear_variable = ROOT.active_subsidies@THIS
+					calculate_subsidies_in = yes
+					ingame_update_setup = yes
+				}
+			}
+			calculate_subsidies_out = yes
+			ingame_update_setup = yes
+		}
+
+		ai_will_do = { base = 0 }
+	}
+
+	# Reject every subsidy we currently receive, all at once.
+	d_mt_cancel_all_incoming_subsidies = {
+		icon = GFX_decision_economy
+
+		visible = {
+			check_variable = { total_subsidies_in > 0 }
+		}
+
+		available = { always = yes }
+
+		cost = 0
+		days_remove = 1
+		fire_only_once = no
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision d_mt_cancel_all_incoming_subsidies"
+			every_other_country = {
+				if = {
+					limit = { check_variable = { THIS.active_subsidies@ROOT > 0 } }
+					clear_variable = active_subsidies@ROOT
+					calculate_subsidies_out = yes
+					ingame_update_setup = yes
+				}
+			}
+			calculate_subsidies_in = yes
+			ingame_update_setup = yes
+		}
+
+		ai_will_do = { base = 0 }
+	}
+}

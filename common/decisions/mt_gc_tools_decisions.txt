@@ -1,0 +1,39 @@
+mt_gc_tools_decisions = {
+
+	# GM picks any existing country on the map; five days later a sovereign-debt crisis (the
+	# mt_bond_crisis idea chain, see common/ideas/mt_bond_crisis_ideas.txt and
+	# events/mt_bond_crisis_events.txt) begins for that country. One-shot per game.
+	d_mt_gm_bond_crisis = {
+		icon = GFX_decision_economy
+
+		target_array = global.countries
+
+		target_root_trigger = {
+			NOT = { has_global_flag = mt_bond_crisis_done }
+		}
+
+		target_trigger = {
+			FROM = { exists = yes }
+		}
+
+		available = {
+			NOT = { has_global_flag = mt_bond_crisis_done }
+		}
+
+		cost = 0
+		days_remove = 5
+		fire_only_once = yes
+
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision d_mt_gm_bond_crisis targeting [From.GetName]"
+			set_global_flag = mt_bond_crisis_done
+			set_variable = { global.bond_crisis_starter = FROM }
+		}
+
+		remove_effect = {
+			FROM = { country_event = mt_bond_crisis.1 }
+		}
+
+		ai_will_do = { base = 0 }
+	}
+}

@@ -1,0 +1,42 @@
+spriteTypes = {
+	spriteType = {
+		name = "GFX_idea_mt_bond_crisis"
+		texturefile = "gfx/interface/ideas/bond_crisis/bond_crisis.dds"
+	}
+	spriteType = {
+		name = "GFX_idea_mt_currency_bad"
+		texturefile = "gfx/interface/ideas/bond_crisis/currency_bad.dds"
+	}
+	spriteType = {
+		name = "GFX_idea_mt_recession_bonds"
+		texturefile = "gfx/interface/ideas/bond_crisis/recession_bonds.dds"
+	}
+	spriteType = {
+		name = "GFX_idea_mt_no_oil_wanted"
+		texturefile = "gfx/interface/ideas/bond_crisis/reduced_oil_demand.dds"
+	}
+	spriteType = {
+		name = "GFX_idea_mt_gc_nation"
+		texturefile = "gfx/interface/ideas/gc_nation.dds"
+	}
+	spriteType = {
+		name = "GFX_news_event_bond_crisis_1"
+		texturefile = "gfx/event_pictures/bond_crisis/bond_crisis_1.dds"
+	}
+	spriteType = {
+		name = "GFX_news_event_bond_crisis_2"
+		texturefile = "gfx/event_pictures/bond_crisis/bond_crisis_2.dds"
+	}
+	spriteType = {
+		name = "GFX_news_event_bond_crisis_3"
+		texturefile = "gfx/event_pictures/bond_crisis/bond_crisis_3.dds"
+	}
+	spriteType = {
+		name = "GFX_news_event_bond_crisis_4"
+		texturefile = "gfx/event_pictures/bond_crisis/bond_crisis_4.dds"
+	}
+	spriteType = {
+		name = "GFX_news_event_bond_crisis_5"
+		texturefile = "gfx/event_pictures/bond_crisis/bond_crisis_5.dds"
+	}
+}

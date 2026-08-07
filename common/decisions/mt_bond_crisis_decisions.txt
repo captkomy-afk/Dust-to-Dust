@@ -1,0 +1,131 @@
+mt_bond_crisis_decisions = {
+
+	# "Emergency measures" - 30 days after taking this, the government quietly skims part of
+	# the crisis response: political power and treasury both go up, at the cost of corruption.
+	d_mt_bond_crisis_1 = {
+		icon = GFX_decision_economy
+
+		days_remove = 30
+		fire_only_once = yes
+
+		visible = {
+			has_idea = mt_bond_crisis
+		}
+
+		available = {
+			NOT = { has_idea = corruption_level_10 }
+		}
+
+		remove_effect = {
+			increase_corruption = yes
+			add_political_power = 200
+
+			set_temp_variable = { treasury_change = gdp_total }
+			multiply_temp_variable = { treasury_change = 0.025 }
+			modify_treasury_effect = yes
+		}
+	}
+
+	# Cut interest rates to ease the crisis, at the cost of political power output.
+	d_mt_bond_crisis_2 = {
+		icon = GFX_decision_economy
+
+		cost = 250
+		days_remove = 120
+		fire_only_once = yes
+
+		visible = {
+			has_idea = mt_bond_crisis
+		}
+
+		modifier = {
+			interest_rate_multiplier_modifier = -1
+			political_power_factor = -0.2
+		}
+
+		remove_effect = {
+			modify_timed_idea = {
+				idea = mt_bond_crisis
+				days = -125
+			}
+		}
+	}
+
+	# Emergency bailout package: shortens the crisis at the cost of a 3.5%-of-GDP treasury hit.
+	d_mt_bond_crisis_3 = {
+		icon = GFX_decision_economy
+
+		cost = 250
+		days_remove = 120
+		fire_only_once = yes
+
+		visible = {
+			has_idea = mt_bond_crisis
+		}
+
+		complete_effect = {
+			set_temp_variable = { treasury_change = gdp_total }
+			multiply_temp_variable = { treasury_change = -0.035 }
+			modify_treasury_effect = yes
+		}
+
+		remove_effect = {
+			modify_timed_idea = {
+				idea = mt_bond_crisis
+				days = -125
+			}
+		}
+	}
+
+	# Industrial support package: props up production at the cost of construction speed.
+	d_mt_bond_crisis_4 = {
+		icon = GFX_decision_economy
+
+		cost = 250
+		days_remove = 120
+		fire_only_once = yes
+
+		visible = {
+			has_idea = mt_bond_crisis
+		}
+
+		modifier = {
+			production_speed_buildings_factor = -0.5
+			industrial_capacity_dockyard = -0.25
+			industrial_capacity_factory = -0.25
+		}
+
+		remove_effect = {
+			modify_timed_idea = {
+				idea = mt_bond_crisis
+				days = -125
+			}
+		}
+	}
+
+	# Capital controls: slows investment flows both ways and dampens returns while active.
+	d_mt_bond_crisis_5 = {
+		icon = GFX_decision_economy
+
+		cost = 250
+		days_remove = 120
+		fire_only_once = yes
+
+		visible = {
+			has_idea = mt_bond_crisis
+		}
+
+		modifier = {
+			investment_duration_modifier = 0.5
+			receiving_investment_duration_modifier = 0.5
+			return_on_investment_modifier = -0.01
+		}
+
+		remove_effect = {
+			modify_timed_idea = {
+				idea = mt_bond_crisis
+				days = -125
+			}
+		}
+	}
+}

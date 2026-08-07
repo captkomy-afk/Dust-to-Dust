@@ -1,0 +1,191 @@
+add_namespace = mt_bond_crisis
+
+# Sovereign debt crisis chain, triggered by a GM targeting a country with the
+# d_mt_gm_bond_crisis decision (common/decisions/mt_gc_tools_decisions.txt).
+#
+# Severity is gated on debt_ratio (debt/GDP, already computed weekly in calculate_interest_rate,
+# 00_money_system.txt): a country already deep in debt takes the worse outcome.
+
+news_event = {
+	id = mt_bond_crisis.1
+	picture = GFX_news_event_bond_crisis_1
+
+	title = mt_bond_crisis.1.t
+	desc = mt_bond_crisis.1.d
+	major = yes
+	is_triggered_only = yes
+
+	option = {
+		name = mt_bond_crisis.1.o1
+
+		add_timed_idea = { idea = mt_bond_crisis days = 1080 }
+		decrease_economic_growth = yes
+
+		hidden_effect = {
+			country_event = {
+				id = mt_bond_crisis.2
+				days = 7
+			}
+		}
+	}
+}
+
+news_event = {
+	id = mt_bond_crisis.2
+	picture = GFX_news_event_bond_crisis_2
+
+	title = mt_bond_crisis.2.t
+	desc = mt_bond_crisis.2.d
+	is_triggered_only = yes
+
+	option = {
+		name = mt_bond_crisis.2.o1
+
+		trigger = {
+			check_variable = { var = debt_ratio value = 1.0 compare = greater_than_or_equals }
+		}
+
+		add_ideas = mt_currency_devaluation
+		decrease_economic_growth = yes
+
+		hidden_effect = {
+			country_event = {
+				id = mt_bond_crisis.3
+				days = 7
+			}
+		}
+	}
+
+	option = {
+		name = mt_bond_crisis.2.o1
+
+		trigger = {
+			check_variable = { debt_ratio < 1.0 }
+		}
+
+		add_ideas = mt_currency_devaluation_min
+		decrease_economic_growth = yes
+
+		hidden_effect = {
+			country_event = {
+				id = mt_bond_crisis.3
+				days = 7
+			}
+		}
+	}
+}
+
+news_event = {
+	id = mt_bond_crisis.3
+	picture = GFX_news_event_bond_crisis_3
+
+	title = mt_bond_crisis.3.t
+	desc = mt_bond_crisis.3.d
+	is_triggered_only = yes
+
+	option = {
+		name = mt_bond_crisis.3.o1
+
+		trigger = {
+			check_variable = { var = debt_ratio value = 1.0 compare = greater_than_or_equals }
+		}
+
+		add_ideas = mt_global_recession_bonds
+		decrease_economic_growth = yes
+
+		hidden_effect = {
+			country_event = {
+				id = mt_bond_crisis.4
+				days = 7
+			}
+		}
+
+		custom_effect_tooltip = mt_bond_crisis_tt
+	}
+
+	option = {
+		name = mt_bond_crisis.3.o2
+
+		trigger = {
+			check_variable = { debt_ratio < 1.0 }
+			check_variable = { var = debt_ratio value = 0.5 compare = greater_than_or_equals }
+		}
+
+		add_ideas = mt_global_recession_bonds_min
+		decrease_economic_growth = yes
+
+		hidden_effect = {
+			country_event = {
+				id = mt_bond_crisis.4
+				days = 7
+			}
+		}
+
+		custom_effect_tooltip = mt_bond_crisis_tt
+	}
+
+	option = {
+		name = mt_bond_crisis.3.o3
+
+		trigger = {
+			check_variable = { debt_ratio < 0.5 }
+		}
+
+		add_ideas = mt_global_recession_bonds_minmin
+		decrease_economic_growth = yes
+
+		hidden_effect = {
+			country_event = {
+				id = mt_bond_crisis.4
+				days = 7
+			}
+		}
+
+		custom_effect_tooltip = mt_bond_crisis_tt
+	}
+}
+
+news_event = {
+	id = mt_bond_crisis.4
+	picture = GFX_news_event_bond_crisis_4
+
+	title = mt_bond_crisis.4.t
+	desc = mt_bond_crisis.4.d
+	is_triggered_only = yes
+
+	option = {
+		name = mt_bond_crisis.4.o1
+
+		trigger = {
+			NOT = { check_variable = { oil_exports > 1 } }
+		}
+
+		add_ideas = mt_reduced_oil_demand
+	}
+
+	option = {
+		name = mt_bond_crisis.4.o2
+
+		trigger = {
+			check_variable = { oil_exports > 1 }
+		}
+
+		add_ideas = mt_reduced_oil_demand
+		decrease_economic_growth = yes
+	}
+}
+
+news_event = {
+	id = mt_bond_crisis.5
+	picture = GFX_news_event_bond_crisis_5
+
+	title = mt_bond_crisis.5.t
+	desc = mt_bond_crisis.5.d
+	is_triggered_only = yes
+
+	option = {
+		name = mt_bond_crisis.5.o1
+
+		increase_economic_growth = yes
+	}
+}

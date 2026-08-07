@@ -1,0 +1,9 @@
+# Always-available tab for managing weekly subsidy relationships set up via the mt_subsidies
+# diplomatic action (common/scripted_diplomatic_actions/mt_money_transfer_diplomatic_actions.txt).
+mt_subsidies_decisions = {
+	icon = GFX_decisions_category_dept
+	priority = 2400
+	visible_when_empty = yes
+
+	visible = { always = yes }
+}
