@@ -1,0 +1,63 @@
+# Applied/removed per category by common/scripted_effects/mt_sanctions_effects.txt based on
+# whether the mt_<cat>_sanc_on_us / mt_<cat>_sanc_by_us arrays are non-empty.
+mt_sanctions_bb_dynamic_modifier = {
+	icon = GFX_idea_generic_economic_crisis
+	enable = { always = yes }
+
+	political_power_factor = mt_bb_pp
+	stability_factor = mt_bb_pp
+	consumer_goods_factor = mt_bb_tax
+	productivity_growth_modifier = mt_bb_prod
+	corporate_tax_income_multiplier_modifier = mt_bb_gdp
+}
+
+mt_sanctions_dip_dynamic_modifier = {
+	icon = GFX_idea_generic_economic_crisis
+	enable = { always = yes }
+
+	trade_opinion_factor = mt_dipsanc_trade
+	opinion_gain_monthly_factor = mt_dipsanc_opin
+	political_power_factor = mt_dipsanc_opin
+	intel_network_gain_factor = mt_dipsanc_opin
+	own_operative_capture_chance_factor = mt_dipsanc_spy
+}
+
+mt_sanctions_fin_dynamic_modifier = {
+	icon = GFX_idea_generic_economic_crisis
+	enable = { always = yes }
+
+	interest_rate_multiplier_modifier = mt_finsanc_int
+	economic_cycles_cost_factor = mt_finsanc_eco
+	investment_duration_modifier = mt_finsanc_inv
+	receiving_investment_duration_modifier = mt_finsanc_inv
+	return_on_investment_modifier = mt_finsanc_cash
+}
+
+mt_sanctions_eco_dynamic_modifier = {
+	icon = GFX_idea_generic_economic_crisis
+	enable = { always = yes }
+
+	corporate_tax_income_multiplier_modifier = mt_ecosanc_tax
+	population_tax_income_multiplier_modifier = mt_ecosanc_tax
+	resource_export_multiplier_modifier = mt_ecosanc_exp
+	production_speed_buildings_factor = mt_ecosanc_build
+	productivity_growth_modifier = mt_ecosanc_prod
+	consumer_goods_factor = mt_ecosanc_tax2
+	stability_factor = mt_ecosanc_stab
+}
+
+# research_speed_factor must read mt_milsanc_research to match what mt_sanctions_calculate sets -
+# a mismatched variable name here silently drops the research-speed penalty.
+mt_sanctions_mil_dynamic_modifier = {
+	icon = GFX_idea_generic_economic_crisis
+	enable = { always = yes }
+
+	research_speed_factor = mt_milsanc_research
+	production_factory_max_efficiency_factor = mt_milsanc_prod
+	production_factory_start_efficiency_factor = mt_milsanc_prod
+	production_factory_efficiency_gain_factor = mt_milsanc_prod
+
+	industrial_capacity_factory = mt_milsanc_prod
+	industrial_capacity_dockyard = mt_milsanc_prod
+	personnel_cost_multiplier_modifier = mt_milsanc_cost
+}

@@ -1,0 +1,403 @@
+# Bilateral sanctions calculation pipeline. Three passes run every_country each month
+# (common/on_actions/mt_sanctions_on_actions.txt): mt_sanctions_extra_calculations builds the
+# global denominators used to normalize each country's share of world GDP/offices/factories;
+# mt_sanctions_strength_calculate computes how strong THIS country's sanctions are as a sender;
+# mt_sanctions_calculate aggregates incoming sanctions/blowback and drives the dynamic modifiers
+# in common/dynamic_modifiers/mt_sanctions_dynamic_modifiers.txt.
+#
+# Sender/receiver strength scaling is driven by debt_ratio (debt/GDP): a country with a weak
+# fiscal position (high debt_ratio) imposes weaker sanctions and resists incoming sanctions less
+# well. strength_mod_t ranges 0.7-1.5, resistance_mod_t ranges 0.2-1.0.
+#
+# Notes on the math below: the economic sanction strength must be clamped to its own minimum
+# (not the diplomatic variable's), the diplomatic/financial "resistance-only" trade-penalty
+# variables must reference their own category's percentage (not the economic one), and financial
+# blowback must use the 40%-strength temp variable rather than the full, un-multiplied strength.
+
+mt_sanctions_extra_calculations = {
+	add_to_variable = { global.mt_global_num_offices = office_park_total }
+	add_to_variable = { global.mt_global_num_mils = military_factory_total }
+	add_to_variable = { global.mt_global_num_mils = naval_factory_total }
+	add_to_variable = { global.mt_world_gdp_total = gdp_total }
+}
+
+mt_sanctions_strength_calculate = {
+	## Sender-side strength modifier: weak fiscal position -> weaker sanctions.
+	set_temp_variable = { mt_sanction_strength_mod_t = debt_ratio }
+	clamp_temp_variable = { var = mt_sanction_strength_mod_t min = 0 max = 0.8 }
+	multiply_temp_variable = { mt_sanction_strength_mod_t = -1 }
+	add_to_temp_variable = { mt_sanction_strength_mod_t = 1.5 }
+
+	# Calculate our share of world GDP
+	set_variable = { mt_gdp_percentage = gdp_total }
+	divide_variable = { mt_gdp_percentage = global.mt_world_gdp_total }
+	multiply_variable = { mt_gdp_percentage = 100 }
+
+	### Productivity influence factor. Half of factor of under/over avg global productivity is added.
+	set_temp_variable = { mt_productivity_factor = overall_productivity }
+	divide_temp_variable = { mt_productivity_factor = global.average_world_productivity }
+	subtract_from_temp_variable = { mt_productivity_factor = 1 }
+	divide_temp_variable = { mt_productivity_factor = 2 }
+
+	### Base Sanction Strength Modifier
+	set_variable = { mt_base_sanction_modifier = 1 }
+	add_to_variable = { mt_base_sanction_modifier = mt_productivity_factor }
+
+	### Diplomatic Sanction Strength: Base Strength * Base Modifier
+	set_variable = { mt_dip_sanction_strength = mt_gdp_percentage }
+	multiply_variable = { mt_dip_sanction_strength = mt_base_sanction_modifier }
+	clamp_variable = { var = mt_dip_sanction_strength min = 3 } # Minimum sanctions
+	multiply_variable = { mt_dip_sanction_strength = mt_sanction_strength_mod_t }
+
+	### Financial Sanction Strength: Base Office Strength * Adjusted Modifier
+	set_variable = { mt_fin_sanction_strength = office_park_total }
+	divide_variable = { mt_fin_sanction_strength = global.mt_global_num_offices }
+	multiply_variable = { mt_fin_sanction_strength = 100 }
+	set_temp_variable = { mt_fin_sanction_mod = mt_base_sanction_modifier }
+	if = {
+		limit = {
+			OR = {
+				has_idea = international_bankers
+				has_idea = wall_street
+			}
+		}
+		add_to_temp_variable = { mt_fin_sanction_mod = 0.20 }
+	}
+	multiply_variable = { mt_fin_sanction_strength = mt_fin_sanction_mod }
+	clamp_variable = { var = mt_fin_sanction_strength min = 3 } # Minimum sanctions
+	multiply_variable = { mt_fin_sanction_strength = mt_sanction_strength_mod_t }
+
+	## Military Sanction Strength: Base Mil+Ship strength * Adjusted Modifier
+	set_variable = { mt_mil_sanction_strength = military_factory_total }
+	add_to_variable = { mt_mil_sanction_strength = naval_factory_total }
+	divide_variable = { mt_mil_sanction_strength = global.mt_global_num_mils }
+	multiply_variable = { mt_mil_sanction_strength = 100 }
+	set_temp_variable = { mt_mil_sanction_mod = mt_base_sanction_modifier }
+	if = {
+		limit = { has_idea = defense_industry }
+		add_to_temp_variable = { mt_mil_sanction_mod = 0.20 }
+	}
+	if = {
+		limit = { has_idea = maritime_industry }
+		add_to_temp_variable = { mt_mil_sanction_mod = 0.20 }
+	}
+	if = {
+		limit = { has_idea = no_military }
+		set_temp_variable = { mt_mil_sanction_mod = 0 }
+	}
+	multiply_variable = { mt_mil_sanction_strength = mt_mil_sanction_mod }
+	clamp_variable = { var = mt_mil_sanction_strength min = 3 } # Minimum sanctions
+	multiply_variable = { mt_mil_sanction_strength = mt_sanction_strength_mod_t }
+
+	### Economic Sanction Strength: Base Strength * Base Modifier (neighbour bonus applied on receipt)
+	set_variable = { mt_eco_sanction_strength = mt_gdp_percentage }
+	multiply_variable = { mt_eco_sanction_strength = mt_base_sanction_modifier }
+	clamp_variable = { var = mt_eco_sanction_strength min = 3 } # Minimum sanctions
+	multiply_variable = { mt_eco_sanction_strength = mt_sanction_strength_mod_t }
+}
+
+mt_sanctions_calculate = {
+	### Increase the weight of sanctions if our domestic sovereignty/independence is low.
+	set_variable = { mt_domestic_influence_factor = 100 }
+	subtract_from_variable = { mt_domestic_influence_factor = domestic_influence_amount }
+	divide_variable = { mt_domestic_influence_factor = 100 }
+	add_to_variable = { mt_domestic_influence_factor = 1 }
+
+	### RESET THE PERCENTAGES
+	set_variable = { mt_dip_sanctions_p = 0 }
+	set_variable = { mt_fin_sanctions_p = 0 }
+	set_variable = { mt_eco_sanctions_p = 0 }
+	set_variable = { mt_mil_sanctions_p = 0 }
+	set_variable = { mt_sanctions_blowback_p = 0 }
+
+	## Receiver-side resistance modifier: weak fiscal position -> less able to resist sanctions.
+	set_temp_variable = { mt_sanction_resistance_mod_t = debt_ratio }
+	clamp_temp_variable = { var = mt_sanction_resistance_mod_t min = 0 max = 0.8 }
+	add_to_temp_variable = { mt_sanction_resistance_mod_t = 0.2 }
+
+	### DIPLOMATIC SANCTIONS ### Diplomatic sanctions have no blowback mechanism.
+	for_each_scope_loop = {
+		array = mt_dip_sanc_on_us
+		add_to_variable = { prev.mt_dip_sanctions_p = mt_dip_sanction_strength }
+	}
+	multiply_variable = { mt_dip_sanctions_p = mt_domestic_influence_factor }
+	divide_variable = { mt_dip_sanctions_p = 100 }
+
+	set_variable = { mt_dip_sanctions_res_only = mt_dip_sanctions_p }
+	clamp_variable = { var = mt_dip_sanctions_res_only min = 0 max = 1 }
+
+	multiply_variable = { mt_dip_sanctions_p = mt_sanction_resistance_mod_t }
+	clamp_variable = { var = mt_dip_sanctions_p min = 0 max = 1 }
+
+	if = {
+		limit = {
+			has_dynamic_modifier = { modifier = mt_sanctions_dip_dynamic_modifier }
+			NOT = { has_variable = mt_dip_sanc_on_us^0 }
+		}
+		remove_dynamic_modifier = { modifier = mt_sanctions_dip_dynamic_modifier }
+	}
+	else_if = {
+		limit = { has_variable = mt_dip_sanc_on_us^0 }
+
+		if = {
+			limit = { NOT = { has_dynamic_modifier = { modifier = mt_sanctions_dip_dynamic_modifier } } }
+			add_dynamic_modifier = { modifier = mt_sanctions_dip_dynamic_modifier }
+		}
+
+		set_variable = { mt_dipsanc_trade = -1 }
+		multiply_variable = { mt_dipsanc_trade = mt_dip_sanctions_res_only }
+		set_variable = { mt_dipsanc_opin = -1 }
+		multiply_variable = { mt_dipsanc_opin = mt_dip_sanctions_p }
+		set_variable = { mt_dipsanc_spy = 1 }
+		multiply_variable = { mt_dipsanc_spy = mt_dip_sanctions_p }
+	}
+
+	### FINANCIAL SANCTIONS ### Financial sanctions have blowback effects
+	for_each_scope_loop = {
+		array = mt_fin_sanc_on_us
+		add_to_variable = { prev.mt_fin_sanctions_p = mt_fin_sanction_strength }
+	}
+	multiply_variable = { mt_fin_sanctions_p = mt_domestic_influence_factor }
+	divide_variable = { mt_fin_sanctions_p = 100 }
+
+	set_variable = { mt_fin_sanctions_res_only = mt_fin_sanctions_p }
+	clamp_variable = { var = mt_fin_sanctions_res_only min = 0 max = 1 }
+
+	multiply_variable = { mt_fin_sanctions_p = mt_sanction_resistance_mod_t }
+	clamp_variable = { var = mt_fin_sanctions_p min = 0 max = 1 }
+
+	if = {
+		limit = {
+			has_dynamic_modifier = { modifier = mt_sanctions_fin_dynamic_modifier }
+			NOT = { has_variable = mt_fin_sanc_on_us^0 }
+		}
+		remove_dynamic_modifier = { modifier = mt_sanctions_fin_dynamic_modifier }
+	}
+	else_if = {
+		limit = { has_variable = mt_fin_sanc_on_us^0 }
+
+		if = {
+			limit = { NOT = { has_dynamic_modifier = { modifier = mt_sanctions_fin_dynamic_modifier } } }
+			add_dynamic_modifier = { modifier = mt_sanctions_fin_dynamic_modifier }
+		}
+
+		set_variable = { mt_finsanc_int = 6 }
+		multiply_variable = { mt_finsanc_int = mt_fin_sanctions_res_only }
+		set_variable = { mt_finsanc_eco = 1.2 }
+		multiply_variable = { mt_finsanc_eco = mt_fin_sanctions_p }
+		set_variable = { mt_finsanc_inv = 1.2 }
+		multiply_variable = { mt_finsanc_inv = mt_fin_sanctions_p }
+		set_variable = { mt_finsanc_cash = -0.15 }
+		multiply_variable = { mt_finsanc_cash = mt_fin_sanctions_p }
+	}
+
+	### ECONOMIC SANCTIONS ### Economic sanctions have severe blowback effects
+	# Economic sanctions depend on the size of your economy, multiplied further if the sender
+	# is a neighbour of ours.
+	for_each_scope_loop = {
+		array = mt_eco_sanc_on_us
+		set_temp_variable = { mt_base_eco_sanction_strength = mt_eco_sanction_strength }
+		if = {
+			limit = { is_neighbor_of = ROOT }
+			multiply_temp_variable = { mt_base_eco_sanction_strength = 1.25 }
+		}
+		add_to_variable = { prev.mt_eco_sanctions_p = mt_base_eco_sanction_strength }
+	}
+	multiply_variable = { mt_eco_sanctions_p = mt_domestic_influence_factor }
+	divide_variable = { mt_eco_sanctions_p = 100 }
+
+	## Resource export penalty must never flip positive.
+	set_variable = { mt_eco_sanctions_res_only = mt_eco_sanctions_p }
+	clamp_variable = { var = mt_eco_sanctions_res_only min = 0 max = 1 }
+
+	multiply_variable = { mt_eco_sanctions_p = mt_sanction_resistance_mod_t }
+	clamp_variable = { var = mt_eco_sanctions_p min = 0 max = 1 }
+
+	if = {
+		limit = {
+			has_dynamic_modifier = { modifier = mt_sanctions_eco_dynamic_modifier }
+			NOT = { has_variable = mt_eco_sanc_on_us^0 }
+		}
+		remove_dynamic_modifier = { modifier = mt_sanctions_eco_dynamic_modifier }
+	}
+	else_if = {
+		limit = { has_variable = mt_eco_sanc_on_us^0 }
+
+		if = {
+			limit = { NOT = { has_dynamic_modifier = { modifier = mt_sanctions_eco_dynamic_modifier } } }
+			add_dynamic_modifier = { modifier = mt_sanctions_eco_dynamic_modifier }
+		}
+
+		set_variable = { mt_ecosanc_tax = -0.4 }
+		multiply_variable = { mt_ecosanc_tax = mt_eco_sanctions_p }
+		set_variable = { mt_ecosanc_exp = -1.2 }
+		multiply_variable = { mt_ecosanc_exp = mt_eco_sanctions_res_only }
+		set_variable = { mt_ecosanc_prod = -1.2 }
+		multiply_variable = { mt_ecosanc_prod = mt_eco_sanctions_p }
+		set_variable = { mt_ecosanc_build = -1 }
+		multiply_variable = { mt_ecosanc_build = mt_eco_sanctions_p }
+		set_variable = { mt_ecosanc_tax2 = 0.5 }
+		multiply_variable = { mt_ecosanc_tax2 = mt_eco_sanctions_p }
+		set_variable = { mt_ecosanc_stab = -0.4 }
+		multiply_variable = { mt_ecosanc_stab = mt_eco_sanctions_p }
+	}
+
+	### MILITARY SANCTIONS ### Military sanctions have minor blowback effects
+	for_each_scope_loop = {
+		array = mt_mil_sanc_on_us
+		add_to_variable = { prev.mt_mil_sanctions_p = mt_mil_sanction_strength }
+	}
+	multiply_variable = { mt_mil_sanctions_p = mt_domestic_influence_factor }
+	divide_variable = { mt_mil_sanctions_p = 100 }
+	multiply_variable = { mt_mil_sanctions_p = mt_sanction_resistance_mod_t }
+	clamp_variable = { var = mt_mil_sanctions_p min = 0 max = 1 }
+
+	if = {
+		limit = {
+			has_dynamic_modifier = { modifier = mt_sanctions_mil_dynamic_modifier }
+			NOT = { has_variable = mt_mil_sanc_on_us^0 }
+		}
+		remove_dynamic_modifier = { modifier = mt_sanctions_mil_dynamic_modifier }
+	}
+	else_if = {
+		limit = { has_variable = mt_mil_sanc_on_us^0 }
+
+		if = {
+			limit = { NOT = { has_dynamic_modifier = { modifier = mt_sanctions_mil_dynamic_modifier } } }
+			add_dynamic_modifier = { modifier = mt_sanctions_mil_dynamic_modifier }
+		}
+
+		set_variable = { mt_milsanc_research = -0.6 }
+		multiply_variable = { mt_milsanc_research = mt_mil_sanctions_p }
+		set_variable = { mt_milsanc_prod = -0.3 }
+		multiply_variable = { mt_milsanc_prod = mt_mil_sanctions_p }
+		set_variable = { mt_milsanc_cost = 0.5 }
+		multiply_variable = { mt_milsanc_cost = mt_mil_sanctions_p }
+	}
+
+	### BLOWBACK EFFECTS - sanctioning others hurts us too.
+	# Military sanctions we send count for 30% of their strength.
+	for_each_scope_loop = {
+		array = mt_mil_sanc_by_us
+		set_temp_variable = { mt_temp_mil_sanc = mt_mil_sanction_strength }
+		multiply_variable = { mt_temp_mil_sanc = 0.3 }
+		add_to_variable = { prev.mt_sanctions_blowback_p = mt_temp_mil_sanc }
+	}
+
+	# Financial sanctions we send count for 40% of their strength.
+	for_each_scope_loop = {
+		array = mt_fin_sanc_by_us
+		set_temp_variable = { mt_temp_fin_sanc = mt_fin_sanction_strength }
+		multiply_variable = { mt_temp_fin_sanc = 0.4 }
+		add_to_variable = { prev.mt_sanctions_blowback_p = mt_temp_fin_sanc }
+	}
+
+	# Economic sanctions we send count for 50% of their strength, more if the target is an oil exporter.
+	for_each_scope_loop = {
+		array = mt_eco_sanc_by_us
+		set_temp_variable = { mt_temp_eco_sanc = mt_eco_sanction_strength }
+		multiply_variable = { mt_temp_eco_sanc = 0.5 }
+		add_to_variable = { prev.mt_sanctions_blowback_p = mt_temp_eco_sanc }
+	}
+	multiply_variable = { mt_sanctions_blowback_p = mt_domestic_influence_factor }
+	divide_variable = { mt_sanctions_blowback_p = 100 }
+	multiply_variable = { mt_sanctions_blowback_p = mt_sanction_resistance_mod_t }
+	clamp_variable = { var = mt_sanctions_blowback_p min = 0 max = 1 }
+
+	if = {
+		limit = {
+			check_variable = { mt_sanctions_blowback_p = 0 }
+			has_dynamic_modifier = { modifier = mt_sanctions_bb_dynamic_modifier }
+		}
+		remove_dynamic_modifier = { modifier = mt_sanctions_bb_dynamic_modifier }
+	}
+	else_if = {
+		limit = { check_variable = { mt_sanctions_blowback_p > 0 } }
+
+		if = {
+			limit = { NOT = { has_dynamic_modifier = { modifier = mt_sanctions_bb_dynamic_modifier } } }
+			add_dynamic_modifier = { modifier = mt_sanctions_bb_dynamic_modifier }
+		}
+
+		set_variable = { mt_bb_pp = -0.35 }
+		multiply_variable = { mt_bb_pp = mt_sanctions_blowback_p }
+		set_variable = { mt_bb_tax = 0.6 }
+		multiply_variable = { mt_bb_tax = mt_sanctions_blowback_p }
+		set_variable = { mt_bb_prod = -2 }
+		multiply_variable = { mt_bb_prod = mt_sanctions_blowback_p }
+		set_variable = { mt_bb_gdp = -0.35 }
+		multiply_variable = { mt_bb_gdp = mt_sanctions_blowback_p }
+	}
+}
+
+# Threshold-triggered flavor event dispatchers, called from common/on_actions/mt_sanctions_on_actions.txt
+# when a category's sanction percentage crosses 25%.
+mt_bb_event = {
+	if = {
+		limit = {
+			NOT = {
+				has_idea = CUB_old_command_economy
+				has_idea = NKO_Planned_Economy
+			}
+		}
+		random_list = {
+			50 = { country_event = { id = mt_sanctions.3 random_days = 30 } }
+			50 = { country_event = { id = mt_sanctions.4 random_days = 30 } }
+		}
+	}
+}
+
+mt_dip_event = {
+	random_list = {
+		50 = { country_event = { id = mt_sanctions.5 random_days = 30 } }
+		50 = { country_event = { id = mt_sanctions.6 random_days = 30 } }
+		25 = { country_event = { id = mt_sanctions.7 random_days = 30 } }
+	}
+}
+
+mt_fin_event = {
+	if = {
+		limit = {
+			NOT = {
+				has_idea = CUB_old_command_economy
+				has_idea = NKO_Planned_Economy
+			}
+		}
+		random_list = {
+			50 = { country_event = { id = mt_sanctions.8 random_days = 30 } }
+			50 = { country_event = { id = mt_sanctions.9 random_days = 30 } }
+		}
+	}
+	else = {
+		random_list = {
+			50 = { country_event = { id = mt_sanctions.8 random_days = 30 } }
+		}
+	}
+}
+
+mt_eco_event = {
+	if = {
+		limit = {
+			NOT = {
+				has_idea = CUB_old_command_economy
+				has_idea = NKO_Planned_Economy
+			}
+		}
+		random_list = {
+			50 = { country_event = { id = mt_sanctions.10 random_days = 30 } }
+			50 = { country_event = { id = mt_sanctions.11 random_days = 30 } }
+			50 = { country_event = { id = mt_sanctions.12 random_days = 30 } }
+		}
+	}
+	else = {
+		random_list = {
+			50 = { country_event = { id = mt_sanctions.10 random_days = 30 } }
+		}
+	}
+}
+
+mt_mil_event = {
+	random_list = {
+		50 = { country_event = { id = mt_sanctions.14 random_days = 30 } }
+	}
+}

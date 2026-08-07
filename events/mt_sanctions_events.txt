@@ -1,0 +1,324 @@
+# Sanctions flavor/blowback events, dispatched from common/scripted_effects/mt_sanctions_effects.txt
+# (mt_dip_event/mt_fin_event/mt_eco_event/mt_mil_event/mt_bb_event) when a category's sanction
+# percentage crosses 25%, and from the two checker decisions in mt_sanctions_decisions.txt.
+# No custom event pictures - these fall back to the game's default event image.
+add_namespace = mt_sanctions
+
+# Who do we have sanctions on?
+country_event = {
+	id = mt_sanctions.1
+	title = mt_sanctions.1.t
+	desc = mt_sanctions.1.d
+	is_triggered_only = yes
+
+	option = {
+		name = mt_sanctions.1.o1
+	}
+}
+
+# Who are we sanctioned by?
+country_event = {
+	id = mt_sanctions.2
+	title = mt_sanctions.2.t
+	desc = mt_sanctions.2.d
+	is_triggered_only = yes
+
+	option = {
+		name = mt_sanctions.2.o1
+	}
+}
+
+country_event = {
+	id = mt_sanctions.3
+	title = mt_sanctions.3.t
+	desc = mt_sanctions.3.d
+	is_triggered_only = yes
+
+	option = {
+		name = mt_sanctions.3.o1
+
+		set_party_index_to_ruling_party = yes
+		set_temp_variable = { party_popularity_increase = -0.02 }
+		set_temp_variable = { temp_outlook_increase = -0.02 }
+		add_relative_party_popularity = yes
+
+		set_temp_variable = { treasury_change = 0 }
+		subtract_from_temp_variable = { treasury_change = gdp_total }
+		multiply_temp_variable = { treasury_change = 0.02 }
+		modify_treasury_effect = yes
+	}
+	option = {
+		name = mt_sanctions.3.o2
+
+		set_party_index_to_ruling_party = yes
+		set_temp_variable = { party_popularity_increase = -0.02 }
+		set_temp_variable = { temp_outlook_increase = -0.02 }
+		add_relative_party_popularity = yes
+
+		set_temp_variable = { temp_productivity_change = -5 }
+		flat_productivity_change_effect = yes
+	}
+}
+
+country_event = {
+	id = mt_sanctions.4
+	title = mt_sanctions.4.t
+	desc = mt_sanctions.4.d
+	is_triggered_only = yes
+
+	option = {
+		name = mt_sanctions.4.o1
+
+		set_party_index_to_ruling_party = yes
+		set_temp_variable = { party_popularity_increase = -0.02 }
+		set_temp_variable = { temp_outlook_increase = -0.02 }
+		add_relative_party_popularity = yes
+
+		set_temp_variable = { temp_productivity_change = -5 }
+		flat_productivity_change_effect = yes
+	}
+	option = {
+		name = mt_sanctions.4.o2
+
+		set_party_index_to_ruling_party = yes
+		set_temp_variable = { party_popularity_increase = -0.02 }
+		set_temp_variable = { temp_outlook_increase = -0.02 }
+		add_relative_party_popularity = yes
+
+		increase_corruption = yes
+	}
+}
+
+country_event = {
+	id = mt_sanctions.5
+	title = mt_sanctions.5.t
+	desc = mt_sanctions.5.d
+	is_triggered_only = yes
+
+	option = {
+		name = mt_sanctions.5.o1
+
+		add_political_power = -25
+		set_party_index_to_ruling_party = yes
+		set_temp_variable = { party_popularity_increase = 0.02 }
+		set_temp_variable = { temp_outlook_increase = 0.02 }
+		add_relative_party_popularity = yes
+	}
+	option = {
+		name = mt_sanctions.5.o2
+
+		set_party_index_to_ruling_party = yes
+		set_temp_variable = { party_popularity_increase = -0.01 }
+		set_temp_variable = { temp_outlook_increase = -0.01 }
+		add_relative_party_popularity = yes
+
+		add_stability = -0.01
+	}
+}
+
+country_event = {
+	id = mt_sanctions.6
+	title = mt_sanctions.6.t
+	desc = mt_sanctions.6.d
+	is_triggered_only = yes
+
+	option = {
+		name = mt_sanctions.6.o1
+
+		set_temp_variable = { treasury_change = -5 }
+		modify_treasury_effect = yes
+
+		set_party_index_to_ruling_party = yes
+		set_temp_variable = { party_popularity_increase = 0.02 }
+		set_temp_variable = { temp_outlook_increase = 0.02 }
+		add_relative_party_popularity = yes
+	}
+	option = {
+		name = mt_sanctions.6.o2
+
+		set_party_index_to_ruling_party = yes
+		set_temp_variable = { party_popularity_increase = -0.01 }
+		set_temp_variable = { temp_outlook_increase = -0.01 }
+		add_relative_party_popularity = yes
+
+		add_stability = -0.01
+	}
+}
+
+country_event = {
+	id = mt_sanctions.7
+	title = mt_sanctions.7.t
+	desc = mt_sanctions.7.d
+	is_triggered_only = yes
+
+	option = {
+		name = mt_sanctions.7.o1
+
+		random_operative = {
+			kill_operative = {
+				operative = PREV
+			}
+		}
+	}
+}
+
+country_event = {
+	id = mt_sanctions.8
+	title = mt_sanctions.8.t
+	desc = mt_sanctions.8.d
+	is_triggered_only = yes
+
+	option = {
+		name = mt_sanctions.8.o1
+
+		set_temp_variable = { treasury_change = -5 }
+		modify_treasury_effect = yes
+	}
+
+	option = {
+		name = mt_sanctions.8.o2
+
+		add_political_power = -25
+	}
+}
+
+country_event = {
+	id = mt_sanctions.9
+	title = mt_sanctions.9.t
+	desc = mt_sanctions.9.d
+	is_triggered_only = yes
+
+	option = {
+		name = mt_sanctions.9.o1
+
+		set_temp_variable = { treasury_change = -2 }
+		modify_treasury_effect = yes
+
+		set_temp_variable = { temp_productivity_change = 20 }
+		flat_productivity_change_effect = yes
+
+		increase_corruption = yes
+	}
+
+	option = {
+		name = mt_sanctions.9.o2
+
+		add_stability = -0.01
+	}
+}
+
+country_event = {
+	id = mt_sanctions.10
+	title = mt_sanctions.10.t
+	desc = mt_sanctions.10.d
+	is_triggered_only = yes
+
+	option = {
+		name = mt_sanctions.10.o1
+
+		set_party_index_to_ruling_party = yes
+		set_temp_variable = { party_popularity_increase = -0.01 }
+		set_temp_variable = { temp_outlook_increase = -0.01 }
+		add_relative_party_popularity = yes
+
+		add_stability = -0.02
+	}
+
+	option = {
+		name = mt_sanctions.10.o2
+
+		set_temp_variable = { treasury_change = 0 }
+		subtract_from_temp_variable = { treasury_change = gdp_total }
+		multiply_temp_variable = { treasury_change = 0.03 }
+		modify_treasury_effect = yes
+
+		add_stability = 0.02
+	}
+}
+
+country_event = {
+	id = mt_sanctions.11
+	title = mt_sanctions.11.t
+	desc = mt_sanctions.11.d
+	is_triggered_only = yes
+
+	option = {
+		name = mt_sanctions.11.o1
+
+		set_party_index_to_ruling_party = yes
+		set_temp_variable = { party_popularity_increase = 0.02 }
+		set_temp_variable = { temp_outlook_increase = 0.02 }
+		add_relative_party_popularity = yes
+
+		set_temp_variable = { treasury_change = 0 }
+		subtract_from_temp_variable = { treasury_change = gdp_total }
+		multiply_temp_variable = { treasury_change = 0.02 }
+		modify_treasury_effect = yes
+	}
+
+	option = {
+		name = mt_sanctions.11.o2
+
+		set_party_index_to_ruling_party = yes
+		set_temp_variable = { party_popularity_increase = -0.02 }
+		set_temp_variable = { temp_outlook_increase = -0.02 }
+		add_relative_party_popularity = yes
+
+		set_temp_variable = { temp_productivity_change = -5 }
+		flat_productivity_change_effect = yes
+	}
+}
+
+country_event = {
+	id = mt_sanctions.12
+	title = mt_sanctions.12.t
+	desc = mt_sanctions.12.d
+	is_triggered_only = yes
+
+	option = {
+		name = mt_sanctions.12.o1
+
+		add_stability = -0.02
+
+		set_party_index_to_ruling_party = yes
+		set_temp_variable = { party_popularity_increase = -0.02 }
+		set_temp_variable = { temp_outlook_increase = -0.02 }
+		add_relative_party_popularity = yes
+	}
+
+	option = {
+		name = mt_sanctions.12.o2
+
+		add_political_power = -50
+	}
+}
+
+country_event = {
+	id = mt_sanctions.14
+	title = mt_sanctions.14.t
+	desc = mt_sanctions.14.d
+	is_triggered_only = yes
+
+	option = {
+		name = mt_sanctions.14.o1
+
+		trigger = {
+			has_equipment = {
+				Inf_equipment > 2000
+			}
+		}
+		add_equipment_to_stockpile = {
+			type = Inf_equipment
+			amount = -1500
+		}
+	}
+
+	option = {
+		name = mt_sanctions.14.o2
+
+		army_experience = -12
+		random_core_state = {
+			add_manpower = -12
+		}
+	}
+}

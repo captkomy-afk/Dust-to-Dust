@@ -57,22 +57,26 @@
 @population_tax_adjuster = 0.008
 
 # GDP per-building contribution coefficients: output = total * (base_factor + prod_factor * productivity) * manpower_fulfillment
-@gdp_civ_base_factor = 17.5
-@gdp_civ_prod_factor = 20
-@gdp_mil_base_factor = 1.5
-@gdp_mil_prod_factor = 1
-@gdp_dockyard_base_factor = 1.5
-@gdp_dockyard_prod_factor = 1
-@gdp_office_base_factor = 50
-@gdp_office_prod_factor = 50
-@gdp_agriculture_district_base_factor = 25
-@gdp_agriculture_district_prod_factor = 25
-@gdp_microchip_base_factor = 32
-@gdp_microchip_prod_factor = 35
-@gdp_composite_base_factor = 28
-@gdp_composite_prod_factor = 30
-@gdp_synthetic_base_factor = 10
-@gdp_synthetic_prod_factor = 10
+# Retuned sector weights: each sector's base:prod_factor ratio (i.e. how much of its output swings
+# on productivity tech) is kept exactly as before, but the combined base+prod ceiling is rescaled
+# to a lower flat per-sector target so a fully-teched sector reaches that ceiling. Original
+# (pre-retune) values in comments.
+@gdp_civ_base_factor = 4.667 # was 17.5
+@gdp_civ_prod_factor = 5.333 # was 20
+@gdp_mil_base_factor = 0.6 # was 1.5
+@gdp_mil_prod_factor = 0.4 # was 1
+@gdp_dockyard_base_factor = 0.6 # was 1.5
+@gdp_dockyard_prod_factor = 0.4 # was 1
+@gdp_office_base_factor = 17.5 # was 50
+@gdp_office_prod_factor = 17.5 # was 50
+@gdp_agriculture_district_base_factor = 7.5 # was 25
+@gdp_agriculture_district_prod_factor = 7.5 # was 25
+@gdp_microchip_base_factor = 15.284 # was 32
+@gdp_microchip_prod_factor = 16.716 # was 35
+@gdp_composite_base_factor = 13.517 # was 28
+@gdp_composite_prod_factor = 14.483 # was 30
+@gdp_synthetic_base_factor = 5 # was 10
+@gdp_synthetic_prod_factor = 5 # was 10
 
 # Spending-law base cost per capita (billion $ per 10 000 000 people)
 @bureau_base_cost_per_capita = 0.0007
@@ -6007,6 +6011,100 @@ calculate_gdp = {
 			value = overall_productivity
 			divide = global.productivity_center
 		}
+	}
+
+	## Second pass: below-average-productivity countries get another shaft, combined with
+	## removing a lot of the game's native gdp/c penalties.
+	if = {
+		limit = { check_variable = { overall_productivity < global.productivity_center } }
+		set_temp_variable = { mt_gdp_extra_p = overall_productivity }
+		divide_temp_variable = { mt_gdp_extra_p = global.productivity_center }
+		multiply_variable = { gdp_total = mt_gdp_extra_p }
+	}
+
+	## Manual per-nation adjustments (purely balance levers, not meant to represent real economics).
+	if = {
+		limit = { tag = USA }
+		multiply_variable = { gdp_total = 1.0 }
+	}
+	else_if = {
+		# Time-decaying bonus, phased out by 2030.
+		limit = {
+			tag = JAP
+			date < 2030.01.01
+		}
+		set_temp_variable = { mt_jap_t_y = global.year }
+		subtract_from_temp_variable = { mt_jap_t_y = 2000 }
+		multiply_temp_variable = { mt_jap_t_y = 0.03 }
+
+		set_temp_variable = { mt_jap_t = 1.20 }
+		subtract_from_temp_variable = { mt_jap_t = mt_jap_t_y }
+
+		multiply_variable = { gdp_total = mt_jap_t }
+	}
+	else_if = {
+		limit = {
+			NOT = { tag = CHI }
+		}
+		multiply_variable = { gdp_total = 0.80 }
+	}
+
+	if = {
+		# Iran & Argentina don't have the manpower for a realistic GDP under this formula, so a
+		# decaying flat subsidy props them up until 2020.
+		limit = {
+			OR = {
+				tag = PER
+				tag = ARG
+			}
+			date < 2020.01.01
+		}
+		set_temp_variable = { mt_per_t_y = global.year }
+		subtract_from_temp_variable = { mt_per_t_y = 2000 }
+		multiply_temp_variable = { mt_per_t_y = 10 }
+
+		set_temp_variable = { mt_per_t = 200 }
+		subtract_from_temp_variable = { mt_per_t = mt_per_t_y }
+
+		add_to_variable = { gdp_total = mt_per_t }
+	}
+	else_if = {
+		# These countries aren't doing great in 2000, ramping up to a cap by 2010.
+		limit = {
+			OR = {
+				tag = SOV
+				tag = UKR
+			}
+		}
+		set_temp_variable = { mt_sov_t_y = global.year }
+		subtract_from_temp_variable = { mt_sov_t_y = 2000 }
+		multiply_temp_variable = { mt_sov_t_y = 0.05 }
+
+		set_temp_variable = { mt_sov_t = 0.25 }
+		add_to_temp_variable = { mt_sov_t = mt_sov_t_y }
+
+		if = {
+			limit = { check_variable = { mt_sov_t > 0.75 } }
+			set_temp_variable = { mt_sov_t = 0.75 }
+		}
+
+		multiply_variable = { gdp_total = mt_sov_t }
+	}
+
+	## Artificially lower the GDP of sub-$1T nations further - purely a balance lever (keeps them
+	## playable, just lowers debt ceilings), not meant to represent real economics.
+	if = {
+		limit = { check_variable = { gdp_total < 1000 } }
+		set_temp_variable = { mt_gdp_red_t = gdp_total }
+		divide_temp_variable = { mt_gdp_red_t = 1000 }
+
+		set_temp_variable = { mt_gdp_corr_t = 1 }
+		subtract_from_temp_variable = { mt_gdp_corr_t = mt_gdp_red_t }
+		multiply_temp_variable = { mt_gdp_corr_t = 0.75 }
+
+		add_to_temp_variable = { mt_gdp_red_t = mt_gdp_corr_t }
+
+		multiply_variable = { gdp_total = mt_gdp_red_t }
 	}
 
 	clamp_variable = { var = gdp_total min = 0.1 }

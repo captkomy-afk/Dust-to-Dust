@@ -1,0 +1,212 @@
+# Bilateral sanctions across 4 categories (Diplomatic, Financial, Economic, Military).
+# Each category tracks who sanctions us (<cat>_sanc_on_us) and who we sanction (<cat>_sanc_by_us)
+# as global country arrays, kept in sync on both sides via ROOT/PREV like the money-transfer
+# family. No acceptance needed - sanctioning is a unilateral act. Actual economic effects are
+# computed monthly in common/scripted_effects/mt_sanctions_effects.txt and applied via the
+# dynamic modifiers in common/dynamic_modifiers/mt_sanctions_dynamic_modifiers.txt.
+scripted_diplomatic_actions = {
+
+	# DIPLOMATIC SANCTIONS
+	mt_diplo_sanctions_impose = {
+		icon = 19
+		cost = 35
+
+		visible = {
+			NOT = {
+				is_in_array = { array = mt_dip_sanc_on_us value = ROOT }
+			}
+		}
+
+		send_description = MT_DIPLO_SANCTIONS_IMPOSE_SEND
+		accept_title = MT_DIPLO_SANCTIONS_IMPOSE_ACCEPT
+		accept_description = MT_DIPLO_SANCTIONS_IMPOSE_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			add_to_array = { array = mt_dip_sanc_on_us value = ROOT }
+			add_opinion_modifier = { target = ROOT modifier = opinion_dip_sanctioned_us }
+			ROOT = {
+				add_to_array = { array = mt_dip_sanc_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 1 }
+	}
+
+	mt_diplo_sanctions_lift = {
+		icon = 19
+		cost = 35
+
+		visible = {
+			is_in_array = { array = mt_dip_sanc_on_us value = ROOT }
+		}
+
+		send_description = MT_DIPLO_SANCTIONS_LIFT_SEND
+		accept_title = MT_DIPLO_SANCTIONS_LIFT_ACCEPT
+		accept_description = MT_DIPLO_SANCTIONS_LIFT_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			remove_from_array = { array = mt_dip_sanc_on_us value = ROOT }
+			remove_opinion_modifier = { target = ROOT modifier = opinion_dip_sanctioned_us }
+			ROOT = {
+				remove_from_array = { array = mt_dip_sanc_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 1 }
+	}
+
+	# FINANCIAL SANCTIONS
+	mt_fin_sanctions_impose = {
+		icon = 19
+		cost = 35
+
+		visible = {
+			NOT = {
+				is_in_array = { array = mt_fin_sanc_on_us value = ROOT }
+			}
+		}
+
+		send_description = MT_FIN_SANCTIONS_IMPOSE_SEND
+		accept_title = MT_FIN_SANCTIONS_IMPOSE_ACCEPT
+		accept_description = MT_FIN_SANCTIONS_IMPOSE_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			add_to_array = { array = mt_fin_sanc_on_us value = ROOT }
+			add_opinion_modifier = { target = ROOT modifier = opinion_fin_sanctioned_us }
+			ROOT = {
+				add_to_array = { array = mt_fin_sanc_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 1 }
+	}
+
+	mt_fin_sanctions_lift = {
+		icon = 19
+		cost = 35
+
+		visible = {
+			is_in_array = { array = mt_fin_sanc_on_us value = ROOT }
+		}
+
+		send_description = MT_FIN_SANCTIONS_LIFT_SEND
+		accept_title = MT_FIN_SANCTIONS_LIFT_ACCEPT
+		accept_description = MT_FIN_SANCTIONS_LIFT_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			remove_from_array = { array = mt_fin_sanc_on_us value = ROOT }
+			remove_opinion_modifier = { target = ROOT modifier = opinion_fin_sanctioned_us }
+			ROOT = {
+				remove_from_array = { array = mt_fin_sanc_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 1 }
+	}
+
+	# ECONOMIC SANCTIONS
+	mt_eco_sanctions_impose = {
+		icon = 19
+		cost = 35
+
+		visible = {
+			NOT = {
+				is_in_array = { array = mt_eco_sanc_on_us value = ROOT }
+			}
+		}
+
+		send_description = MT_ECO_SANCTIONS_IMPOSE_SEND
+		accept_title = MT_ECO_SANCTIONS_IMPOSE_ACCEPT
+		accept_description = MT_ECO_SANCTIONS_IMPOSE_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			add_to_array = { array = mt_eco_sanc_on_us value = ROOT }
+			add_opinion_modifier = { target = ROOT modifier = opinion_eco_sanctioned_us }
+			ROOT = {
+				add_to_array = { array = mt_eco_sanc_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 1 }
+	}
+
+	mt_eco_sanctions_lift = {
+		icon = 19
+		cost = 35
+
+		visible = {
+			is_in_array = { array = mt_eco_sanc_on_us value = ROOT }
+		}
+
+		send_description = MT_ECO_SANCTIONS_LIFT_SEND
+		accept_title = MT_ECO_SANCTIONS_LIFT_ACCEPT
+		accept_description = MT_ECO_SANCTIONS_LIFT_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			remove_from_array = { array = mt_eco_sanc_on_us value = ROOT }
+			remove_opinion_modifier = { target = ROOT modifier = opinion_eco_sanctioned_us }
+			ROOT = {
+				remove_from_array = { array = mt_eco_sanc_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 1 }
+	}
+
+	# MILITARY SANCTIONS
+	mt_mil_sanctions_impose = {
+		icon = 19
+		cost = 35
+
+		visible = {
+			NOT = {
+				is_in_array = { array = mt_mil_sanc_on_us value = ROOT }
+			}
+		}
+
+		send_description = MT_MIL_SANCTIONS_IMPOSE_SEND
+		accept_title = MT_MIL_SANCTIONS_IMPOSE_ACCEPT
+		accept_description = MT_MIL_SANCTIONS_IMPOSE_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			add_to_array = { array = mt_mil_sanc_on_us value = ROOT }
+			add_opinion_modifier = { target = ROOT modifier = opinion_mil_sanctioned_us }
+			ROOT = {
+				add_to_array = { array = mt_mil_sanc_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 1 }
+	}
+
+	mt_mil_sanctions_lift = {
+		icon = 19
+		cost = 35
+
+		visible = {
+			is_in_array = { array = mt_mil_sanc_on_us value = ROOT }
+		}
+
+		send_description = MT_MIL_SANCTIONS_LIFT_SEND
+		accept_title = MT_MIL_SANCTIONS_LIFT_ACCEPT
+		accept_description = MT_MIL_SANCTIONS_LIFT_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			remove_from_array = { array = mt_mil_sanc_on_us value = ROOT }
+			remove_opinion_modifier = { target = ROOT modifier = opinion_mil_sanctioned_us }
+			ROOT = {
+				remove_from_array = { array = mt_mil_sanc_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 1 }
+	}
+}

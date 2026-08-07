@@ -1,0 +1,4 @@
+mt_sanctions_decisions = {
+	priority = 1500
+	visible_when_empty = yes
+}
