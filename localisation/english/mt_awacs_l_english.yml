@@ -1,0 +1,3 @@
+﻿l_english:
+ mt_awacs_coordination_modifier: "Airborne Early Warning Coverage"
+ mt_awacs_coordination_modifier_desc: "This nation's [?mt_awacs_deployed_count] deployed AWACS aircraft are feeding real-time tracking data across every branch of the military: air superiority detection +[?mt_awacs_detect_bonus|%], interception detection +[?mt_awacs_intercept_bonus|%], escort coordination +[?mt_awacs_escort_bonus|%], naval detection +[?mt_awacs_naval_detect_bonus|%], submarine detection +[?mt_awacs_sub_detect_bonus|%], and ground attack coordination +[?mt_awacs_ground_attack_bonus|%]."

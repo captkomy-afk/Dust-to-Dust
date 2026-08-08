@@ -289,13 +289,13 @@ energy_calc_generation = {
 		}
 
 		# Strip out raw reactor output from the country modifier (will be re-added with per-state modifiers applied) and keep flat idea bonuses
-		# nuclear_energy_generation = (modifier@nuclear_energy_gain - nuclear_reactors*4 + state_nuclear_energy_var) * (1 + generation_modifier) * gain_m * manpower_fulfillment
+		# nuclear_energy_generation = (modifier@nuclear_energy_gain - nuclear_reactors*8 + state_nuclear_energy_var) * (1 + generation_modifier) * gain_m * manpower_fulfillment
 		set_variable = {
 			nuclear_energy_generation = {
 				value = modifier@nuclear_energy_gain
 				subtract = {
 					value = nuclear_reactors
-					multiply = 4
+					multiply = 8
 				}
 				add = state_nuclear_energy_var
 				multiply = {
@@ -324,7 +324,7 @@ energy_calc_generation = {
 		# Generation of Power per Nuclear Reactor
 		set_variable = {
 			nuclear_energy_per_reactor_display = {
-				value = 4
+				value = 8
 				multiply = {
 					value = 1
 					add = modifier@nuclear_energy_generation_modifier

@@ -1113,6 +1113,10 @@ technologies = {
 			cv_awacs_plane2
 		}
 
+		path = {
+			leads_to_tech = awacs_plane3
+			research_cost_coeff = 1
+		}
 		research_cost = 2
 		start_year = 2015
 		folder = {
@@ -1150,6 +1154,152 @@ technologies = {
 
 		research_cost = 2
 		start_year = 2015
+
+		categories = {
+			CAT_h_air
+			CAT_awacs
+			CAT_fixed_wing
+			CAT_air_eqp
+			CAT_large_plane
+			CAT_Military
+		}
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				is_major = yes
+				factor = 2
+			}
+			modifier = {
+				has_war = yes
+				factor = 1.5
+			}
+		}
+	}
+
+	awacs_plane3 = {
+		is_special_project_tech = yes
+
+		enable_equipments = {
+			awacs_equipment_3
+		}
+
+		sub_technologies = {
+			cv_awacs_plane3
+		}
+
+		path = {
+			leads_to_tech = awacs_plane4
+			research_cost_coeff = 1
+		}
+		research_cost = 3
+		start_year = 2025
+		folder = {
+			name = bomber_folder
+			position = { x = @row4 y = @2025 }
+		}
+
+		categories = {
+			CAT_h_air
+			CAT_awacs
+			CAT_fixed_wing
+			CAT_air_eqp
+			CAT_large_plane
+			CAT_Military
+		}
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				is_major = yes
+				factor = 2
+			}
+			modifier = {
+				has_war = yes
+				factor = 1.5
+			}
+		}
+	}
+
+	cv_awacs_plane3 = {
+
+		enable_equipments = {
+			cv_awacs_equipment_3
+		}
+
+		research_cost = 3
+		start_year = 2025
+
+		categories = {
+			CAT_h_air
+			CAT_awacs
+			CAT_fixed_wing
+			CAT_air_eqp
+			CAT_large_plane
+			CAT_Military
+		}
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				is_major = yes
+				factor = 2
+			}
+			modifier = {
+				has_war = yes
+				factor = 1.5
+			}
+		}
+	}
+
+	awacs_plane4 = {
+		is_special_project_tech = yes
+
+		enable_equipments = {
+			awacs_equipment_4
+		}
+
+		sub_technologies = {
+			cv_awacs_plane4
+		}
+
+		research_cost = 3.5
+		start_year = 2035
+		folder = {
+			name = bomber_folder
+			position = { x = @row4 y = @2035 }
+		}
+
+		categories = {
+			CAT_h_air
+			CAT_awacs
+			CAT_fixed_wing
+			CAT_air_eqp
+			CAT_large_plane
+			CAT_Military
+		}
+
+		ai_will_do = {
+			factor = 1
+			modifier = {
+				is_major = yes
+				factor = 2
+			}
+			modifier = {
+				has_war = yes
+				factor = 1.5
+			}
+		}
+	}
+
+	cv_awacs_plane4 = {
+
+		enable_equipments = {
+			cv_awacs_equipment_4
+		}
+
+		research_cost = 3.5
+		start_year = 2035
 
 		categories = {
 			CAT_h_air

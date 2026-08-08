@@ -2669,6 +2669,72 @@ equipments = {
 		naval_strike_attack = 0
 		naval_strike_targetting = 0
 	}
+	#2025
+	awacs_equipment_3 = {
+		year = 2025
+
+		archetype = large_plane_awacs_airframe
+		parent = awacs_equipment_2
+		priority = 100
+
+		allow_mission_type = {
+			recon
+		}
+
+		air_range = 2400
+		maximum_speed = 650
+		air_agility = 50
+		air_attack = 0
+		air_defence = 40
+
+		build_cost_ic = 430
+		resources = {
+			aluminium = 4
+			rubber = 1
+			microchips = 1
+		}
+
+		upgrades = {
+			plane_range_upgrade
+			plane_engine_upgrade
+			plane_reliability_upgrade
+		}
+		naval_strike_attack = 0
+		naval_strike_targetting = 0
+	}
+	#2035
+	awacs_equipment_4 = {
+		year = 2035
+
+		archetype = large_plane_awacs_airframe
+		parent = awacs_equipment_3
+		priority = 100
+
+		allow_mission_type = {
+			recon
+		}
+
+		air_range = 2700
+		maximum_speed = 750
+		air_agility = 65
+		air_attack = 0
+		air_defence = 60
+
+		build_cost_ic = 460
+		resources = {
+			aluminium = 5
+			rubber = 1
+			microchips = 2
+		}
+
+		upgrades = {
+			plane_range_upgrade
+			plane_engine_upgrade
+			plane_reliability_upgrade
+		}
+		naval_strike_attack = 0
+		naval_strike_targetting = 0
+	}
 	#1985
 	cv_awacs_equipment_1 = {
 		year = 1985
@@ -2725,6 +2791,74 @@ equipments = {
 		resources = {
 			aluminium = 3
 			rubber = 1
+		}
+		naval_strike_attack = 0
+		naval_strike_targetting = 0
+	}
+	#2025
+	cv_awacs_equipment_3 = {
+		year = 2025
+
+		archetype = cv_medium_plane_scout_airframe
+		parent = cv_awacs_equipment_2
+		priority = 100
+
+		allow_mission_type = {
+			recon
+			naval_patrol
+		}
+
+		air_range = 2000
+		maximum_speed = 650
+		air_agility = 50
+		air_attack = 0
+		air_defence = 40
+
+		upgrades = {
+			plane_range_upgrade
+			plane_engine_upgrade
+			plane_reliability_upgrade
+		}
+
+		build_cost_ic = 455
+		resources = {
+			aluminium = 4
+			rubber = 1
+			microchips = 1
+		}
+		naval_strike_attack = 0
+		naval_strike_targetting = 0
+	}
+	#2035
+	cv_awacs_equipment_4 = {
+		year = 2035
+
+		archetype = cv_medium_plane_scout_airframe
+		parent = cv_awacs_equipment_3
+		priority = 100
+
+		allow_mission_type = {
+			recon
+			naval_patrol
+		}
+
+		air_range = 2300
+		maximum_speed = 750
+		air_agility = 65
+		air_attack = 0
+		air_defence = 60
+
+		upgrades = {
+			plane_range_upgrade
+			plane_engine_upgrade
+			plane_reliability_upgrade
+		}
+
+		build_cost_ic = 485
+		resources = {
+			aluminium = 5
+			rubber = 1
+			microchips = 2
 		}
 		naval_strike_attack = 0
 		naval_strike_targetting = 0

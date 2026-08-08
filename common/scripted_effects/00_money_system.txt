@@ -4814,7 +4814,7 @@ update_state_variables = {
 						limit = { value = building_level@nuclear_reactor greater_than = 0 }
 						add = {
 							value = building_level@nuclear_reactor
-							multiply = 4
+							multiply = 8
 							multiply = {
 								value = 1
 								add = THIS.modifier@state_nuclear_energy_generation_modifier

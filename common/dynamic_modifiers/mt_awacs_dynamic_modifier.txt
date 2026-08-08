@@ -1,0 +1,14 @@
+# Values fed weekly by mt_awacs_coordination_calculate (common/scripted_effects/mt_awacs_effects.txt)
+# from how many AWACS aircraft this country actually has deployed. Always present; reads as 0
+# with no deployed AWACS, so it's harmless to leave added permanently.
+mt_awacs_coordination_modifier = {
+	icon = GFX_idea_generic_air_research
+	enable = { always = yes }
+
+	air_superiority_detect_factor = mt_awacs_detect_bonus
+	air_escort_efficiency = mt_awacs_escort_bonus
+	air_interception_detect_factor = mt_awacs_intercept_bonus
+	naval_detection = mt_awacs_naval_detect_bonus
+	navy_submarine_detection_factor = mt_awacs_sub_detect_bonus
+	ground_attack_factor = mt_awacs_ground_attack_bonus
+}

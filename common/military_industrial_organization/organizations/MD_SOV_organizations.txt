@@ -8117,7 +8117,7 @@ SOV_united_aircraft_corporation_aircraft_manufacturer = {
 	trait = {
 		token = SOV_united_aircraft_corporation_aircraft_manufacturer_a50u_awacs
 		name = SOV_united_aircraft_corporation_aircraft_manufacturer_a50u_awacs
-		icon = GFX_generic_mio_trait_icon_surface_detection
+		icon = GFX_generic_mio_trait_icon_detection
 
 		all_parents = { SOV_united_aircraft_corporation_aircraft_manufacturer_il76md90a }
 
@@ -8129,7 +8129,10 @@ SOV_united_aircraft_corporation_aircraft_manufacturer = {
 			large_plane_maritime_patrol_airframe
 		}
 
-		equipment_bonus = { surface_detection = 0.05 }
+		# Was surface_detection, a ship/naval-sensor stat planes don't have (dead bonus); AWACS
+		# equipment's own detection contribution is represented by air_superiority, matching the
+		# convention used by the radar module tiers and the flying_radars doctrine reward.
+		equipment_bonus = { air_superiority = 0.05 }
 
 		organization_modifier = { military_industrial_organization_funds_gain = 0.04 }
 

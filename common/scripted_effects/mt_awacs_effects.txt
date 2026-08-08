@@ -1,0 +1,45 @@
+# Ties a real, scaling nation-wide bonus to how many AWACS aircraft (large_plane_awacs_airframe)
+# a country actually has deployed, instead of the doctrine/focus bonuses that reference AWACS by
+# name but fire regardless of whether any are built. Called weekly from
+# common/on_actions/mt_awacs_on_actions.txt. Scales linearly per deployed AWACS, clamped so a
+# small squadron gives a strong edge and a dedicated fleet caps out at a deliberately powerful
+# (not just "meaningful") bonus - AWACS is meant to be a top-tier force multiplier here.
+mt_awacs_coordination_calculate = {
+	set_variable = { mt_awacs_deployed_count = num_deployed_planes_with_type@large_plane_awacs_airframe }
+
+	# +1.5% per plane, capped at +30% (reached at 20 deployed AWACS)
+	set_variable = { mt_awacs_detect_bonus = mt_awacs_deployed_count }
+	multiply_variable = { mt_awacs_detect_bonus = 0.015 }
+	clamp_variable = { var = mt_awacs_detect_bonus min = 0 max = 0.30 }
+
+	# +1.2% per plane, capped at +24% (reached at 20 deployed AWACS)
+	set_variable = { mt_awacs_escort_bonus = mt_awacs_deployed_count }
+	multiply_variable = { mt_awacs_escort_bonus = 0.012 }
+	clamp_variable = { var = mt_awacs_escort_bonus min = 0 max = 0.24 }
+
+	set_variable = { mt_awacs_intercept_bonus = mt_awacs_deployed_count }
+	multiply_variable = { mt_awacs_intercept_bonus = 0.012 }
+	clamp_variable = { var = mt_awacs_intercept_bonus min = 0 max = 0.24 }
+
+	# Naval surveillance synergy: over-horizon tracking helps surface search and ASW alike.
+	# +1.0% per plane, capped at +20% (reached at 20 deployed AWACS)
+	set_variable = { mt_awacs_naval_detect_bonus = mt_awacs_deployed_count }
+	multiply_variable = { mt_awacs_naval_detect_bonus = 0.010 }
+	clamp_variable = { var = mt_awacs_naval_detect_bonus min = 0 max = 0.20 }
+
+	set_variable = { mt_awacs_sub_detect_bonus = mt_awacs_deployed_count }
+	multiply_variable = { mt_awacs_sub_detect_bonus = 0.010 }
+	clamp_variable = { var = mt_awacs_sub_detect_bonus min = 0 max = 0.20 }
+
+	# Battle-management/ground-coordination synergy, mirroring the vanilla "Ground Surveillance
+	# Integration" doctrine reward's theme but actually gated on owning the planes.
+	# +0.8% per plane, capped at +16% (reached at 20 deployed AWACS)
+	set_variable = { mt_awacs_ground_attack_bonus = mt_awacs_deployed_count }
+	multiply_variable = { mt_awacs_ground_attack_bonus = 0.008 }
+	clamp_variable = { var = mt_awacs_ground_attack_bonus min = 0 max = 0.16 }
+
+	if = {
+		limit = { NOT = { has_dynamic_modifier = { modifier = mt_awacs_coordination_modifier } } }
+		add_dynamic_modifier = { modifier = mt_awacs_coordination_modifier }
+	}
+}

@@ -1,0 +1,9 @@
+on_actions = {
+	on_weekly = {
+		effect = {
+			every_country = {
+				mt_awacs_coordination_calculate = yes
+			}
+		}
+	}
+}
