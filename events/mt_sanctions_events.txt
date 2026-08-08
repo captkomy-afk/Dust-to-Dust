@@ -40,7 +40,7 @@ country_event = {
 		set_party_index_to_ruling_party = yes
 		set_temp_variable = { party_popularity_increase = -0.02 }
 		set_temp_variable = { temp_outlook_increase = -0.02 }
-		add_relative_party_popularity = yes
+		change_relative_party_popularity = yes
 
 		set_temp_variable = { treasury_change = 0 }
 		subtract_from_temp_variable = { treasury_change = gdp_total }
@@ -53,7 +53,7 @@ country_event = {
 		set_party_index_to_ruling_party = yes
 		set_temp_variable = { party_popularity_increase = -0.02 }
 		set_temp_variable = { temp_outlook_increase = -0.02 }
-		add_relative_party_popularity = yes
+		change_relative_party_popularity = yes
 
 		set_temp_variable = { temp_productivity_change = -5 }
 		flat_productivity_change_effect = yes
@@ -72,7 +72,7 @@ country_event = {
 		set_party_index_to_ruling_party = yes
 		set_temp_variable = { party_popularity_increase = -0.02 }
 		set_temp_variable = { temp_outlook_increase = -0.02 }
-		add_relative_party_popularity = yes
+		change_relative_party_popularity = yes
 
 		set_temp_variable = { temp_productivity_change = -5 }
 		flat_productivity_change_effect = yes
@@ -83,7 +83,7 @@ country_event = {
 		set_party_index_to_ruling_party = yes
 		set_temp_variable = { party_popularity_increase = -0.02 }
 		set_temp_variable = { temp_outlook_increase = -0.02 }
-		add_relative_party_popularity = yes
+		change_relative_party_popularity = yes
 
 		increase_corruption = yes
 	}
@@ -102,7 +102,7 @@ country_event = {
 		set_party_index_to_ruling_party = yes
 		set_temp_variable = { party_popularity_increase = 0.02 }
 		set_temp_variable = { temp_outlook_increase = 0.02 }
-		add_relative_party_popularity = yes
+		change_relative_party_popularity = yes
 	}
 	option = {
 		name = mt_sanctions.5.o2
@@ -110,7 +110,7 @@ country_event = {
 		set_party_index_to_ruling_party = yes
 		set_temp_variable = { party_popularity_increase = -0.01 }
 		set_temp_variable = { temp_outlook_increase = -0.01 }
-		add_relative_party_popularity = yes
+		change_relative_party_popularity = yes
 
 		add_stability = -0.01
 	}
@@ -131,7 +131,7 @@ country_event = {
 		set_party_index_to_ruling_party = yes
 		set_temp_variable = { party_popularity_increase = 0.02 }
 		set_temp_variable = { temp_outlook_increase = 0.02 }
-		add_relative_party_popularity = yes
+		change_relative_party_popularity = yes
 	}
 	option = {
 		name = mt_sanctions.6.o2
@@ -139,7 +139,7 @@ country_event = {
 		set_party_index_to_ruling_party = yes
 		set_temp_variable = { party_popularity_increase = -0.01 }
 		set_temp_variable = { temp_outlook_increase = -0.01 }
-		add_relative_party_popularity = yes
+		change_relative_party_popularity = yes
 
 		add_stability = -0.01
 	}
@@ -219,7 +219,7 @@ country_event = {
 		set_party_index_to_ruling_party = yes
 		set_temp_variable = { party_popularity_increase = -0.01 }
 		set_temp_variable = { temp_outlook_increase = -0.01 }
-		add_relative_party_popularity = yes
+		change_relative_party_popularity = yes
 
 		add_stability = -0.02
 	}
@@ -248,7 +248,7 @@ country_event = {
 		set_party_index_to_ruling_party = yes
 		set_temp_variable = { party_popularity_increase = 0.02 }
 		set_temp_variable = { temp_outlook_increase = 0.02 }
-		add_relative_party_popularity = yes
+		change_relative_party_popularity = yes
 
 		set_temp_variable = { treasury_change = 0 }
 		subtract_from_temp_variable = { treasury_change = gdp_total }
@@ -262,7 +262,7 @@ country_event = {
 		set_party_index_to_ruling_party = yes
 		set_temp_variable = { party_popularity_increase = -0.02 }
 		set_temp_variable = { temp_outlook_increase = -0.02 }
-		add_relative_party_popularity = yes
+		change_relative_party_popularity = yes
 
 		set_temp_variable = { temp_productivity_change = -5 }
 		flat_productivity_change_effect = yes
@@ -283,7 +283,7 @@ country_event = {
 		set_party_index_to_ruling_party = yes
 		set_temp_variable = { party_popularity_increase = -0.02 }
 		set_temp_variable = { temp_outlook_increase = -0.02 }
-		add_relative_party_popularity = yes
+		change_relative_party_popularity = yes
 	}
 
 	option = {
@@ -304,11 +304,11 @@ country_event = {
 
 		trigger = {
 			has_equipment = {
-				Inf_equipment > 2000
+				infantry_weapons_1 > 2000
 			}
 		}
 		add_equipment_to_stockpile = {
-			type = Inf_equipment
+			type = infantry_weapons_1
 			amount = -1500
 		}
 	}
