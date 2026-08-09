@@ -6760,7 +6760,7 @@ equipment_modules = {
 
 		add_stats = {
 			air_superiority = 32
-			build_cost_ic = 45
+			build_cost_ic = 67.5
 			weight = 16
 		}
 
@@ -6801,7 +6801,7 @@ equipment_modules = {
 
 		add_stats = {
 			air_superiority = 41.6
-			build_cost_ic = 63
+			build_cost_ic = 94.5
 			weight = 19
 		}
 
@@ -6846,7 +6846,7 @@ equipment_modules = {
 
 		add_stats = {
 			air_superiority = 54
-			build_cost_ic = 88
+			build_cost_ic = 132.5
 			weight = 23
 		}
 
@@ -6892,7 +6892,7 @@ equipment_modules = {
 
 		add_stats = {
 			air_superiority = 66.4
-			build_cost_ic = 113
+			build_cost_ic = 170.5
 			weight = 27
 		}
 
@@ -6938,7 +6938,7 @@ equipment_modules = {
 
 		add_stats = {
 			air_superiority = 78.8
-			build_cost_ic = 138
+			build_cost_ic = 208.5
 			weight = 31
 		}
 
