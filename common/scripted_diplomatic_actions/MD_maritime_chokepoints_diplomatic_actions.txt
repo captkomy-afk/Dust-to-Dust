@@ -1,0 +1,1034 @@
+# Maritime chokepoint per-country blockade actions.
+# Sent from the controlling country (ROOT) to a specific target country, mirroring the
+# mt_sanctions_diplomatic_actions.txt ROOT/PREV bookkeeping pattern. complete_effect runs
+# in the target's own scope, so setting a country_flag there directly feeds the matching
+# is_disabled check in map/adjacency_rules.txt (evaluated for the transiting country).
+# ROOT is always required to be human (is_ai = no) - AI cannot initiate these.
+scripted_diplomatic_actions = {
+
+	### SUEZ CANAL (EGY) ###
+
+	MD_suez_block_impose = {
+		icon = 19
+		cost = 25
+
+		visible = {
+			ROOT = {
+				is_ai = no
+				OR = { controls_state = 213 controls_state = 214 }
+			}
+			NOT = { is_in_array = { array = MD_suez_block_on_us value = ROOT } }
+		}
+
+		send_description = MD_SUEZ_BLOCK_IMPOSE_SEND
+		accept_title = MD_SUEZ_BLOCK_IMPOSE_ACCEPT
+		accept_description = MD_SUEZ_BLOCK_IMPOSE_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			set_country_flag = SUEZ_CANAL_BLOCKED_FOR_COUNTRY
+			add_ideas = MD_suez_denied_idea
+			add_to_array = { array = MD_suez_block_on_us value = ROOT }
+			add_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade }
+			add_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade_Trade }
+			# Wargoal isn't granted immediately - see MD_maritime_chokepoints.1
+			# (events/MD_maritime_chokepoints.txt), which fires 10 days from now and grants it
+			# (to us and to any other current Suez controller besides the blocker) only if we're
+			# still blocked and not exempted by then, giving the blocker time to walk it back.
+			country_event = { id = MD_maritime_chokepoints.1 days = 10 }
+			ROOT = {
+				add_to_array = { array = MD_suez_block_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 0 }
+	}
+
+	MD_suez_block_lift = {
+		icon = 19
+		cost = 10
+
+		visible = {
+			is_in_array = { array = MD_suez_block_on_us value = ROOT }
+		}
+
+		send_description = MD_SUEZ_BLOCK_LIFT_SEND
+		accept_title = MD_SUEZ_BLOCK_LIFT_ACCEPT
+		accept_description = MD_SUEZ_BLOCK_LIFT_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			clr_country_flag = SUEZ_CANAL_BLOCKED_FOR_COUNTRY
+			remove_ideas = MD_suez_denied_idea
+			remove_from_array = { array = MD_suez_block_on_us value = ROOT }
+			remove_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade }
+			remove_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade_Trade }
+			ROOT = {
+				remove_from_array = { array = MD_suez_block_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 1 }
+	}
+
+	### PANAMA CANAL (PAN) ###
+
+	MD_panama_block_impose = {
+		icon = 19
+		cost = 25
+
+		visible = {
+			ROOT = {
+				is_ai = no
+				controls_state = 853
+			}
+			NOT = { is_in_array = { array = MD_panama_block_on_us value = ROOT } }
+		}
+
+		send_description = MD_PANAMA_BLOCK_IMPOSE_SEND
+		accept_title = MD_PANAMA_BLOCK_IMPOSE_ACCEPT
+		accept_description = MD_PANAMA_BLOCK_IMPOSE_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			set_country_flag = PANAMA_CANAL_BLOCKED_FOR_COUNTRY
+			add_ideas = MD_panama_denied_idea
+			add_to_array = { array = MD_panama_block_on_us value = ROOT }
+			add_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade }
+			add_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade_Trade }
+			# Wargoal isn't granted immediately - see MD_maritime_chokepoints.1
+			# (events/MD_maritime_chokepoints.txt), which fires 10 days from now and grants it
+			# only if we're still blocked and not exempted by then, giving the blocker time to
+			# walk it back.
+			country_event = { id = MD_maritime_chokepoints.1 days = 10 }
+			ROOT = {
+				add_to_array = { array = MD_panama_block_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 0 }
+	}
+
+	MD_panama_block_lift = {
+		icon = 19
+		cost = 10
+
+		visible = {
+			is_in_array = { array = MD_panama_block_on_us value = ROOT }
+		}
+
+		send_description = MD_PANAMA_BLOCK_LIFT_SEND
+		accept_title = MD_PANAMA_BLOCK_LIFT_ACCEPT
+		accept_description = MD_PANAMA_BLOCK_LIFT_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			clr_country_flag = PANAMA_CANAL_BLOCKED_FOR_COUNTRY
+			remove_ideas = MD_panama_denied_idea
+			remove_from_array = { array = MD_panama_block_on_us value = ROOT }
+			remove_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade }
+			remove_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade_Trade }
+			ROOT = {
+				remove_from_array = { array = MD_panama_block_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 1 }
+	}
+
+	### STRAIT OF HORMUZ (PER / OMA) ###
+
+	MD_hormuz_block_impose = {
+		icon = 19
+		cost = 25
+
+		visible = {
+			ROOT = {
+				is_ai = no
+				OR = { controls_state = 425 controls_state = 978 controls_state = 1119 }
+			}
+			NOT = { is_in_array = { array = MD_hormuz_block_on_us value = ROOT } }
+		}
+
+		send_description = MD_HORMUZ_BLOCK_IMPOSE_SEND
+		accept_title = MD_HORMUZ_BLOCK_IMPOSE_ACCEPT
+		accept_description = MD_HORMUZ_BLOCK_IMPOSE_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			set_country_flag = HORMUZ_BLOCKED_FOR_COUNTRY
+			add_ideas = MD_hormuz_denied_idea
+			add_to_array = { array = MD_hormuz_block_on_us value = ROOT }
+			add_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade }
+			add_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade_Trade }
+			# Wargoal isn't granted immediately - see MD_maritime_chokepoints.1
+			# (events/MD_maritime_chokepoints.txt), which fires 10 days from now and grants it
+			# (to us and to any other current Hormuz controller besides the blocker) only if
+			# we're still blocked and not exempted by then, giving the blocker time to walk it back.
+			country_event = { id = MD_maritime_chokepoints.1 days = 10 }
+			ROOT = {
+				add_to_array = { array = MD_hormuz_block_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 0 }
+	}
+
+	MD_hormuz_block_lift = {
+		icon = 19
+		cost = 10
+
+		visible = {
+			is_in_array = { array = MD_hormuz_block_on_us value = ROOT }
+		}
+
+		send_description = MD_HORMUZ_BLOCK_LIFT_SEND
+		accept_title = MD_HORMUZ_BLOCK_LIFT_ACCEPT
+		accept_description = MD_HORMUZ_BLOCK_LIFT_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			clr_country_flag = HORMUZ_BLOCKED_FOR_COUNTRY
+			remove_ideas = MD_hormuz_denied_idea
+			remove_from_array = { array = MD_hormuz_block_on_us value = ROOT }
+			remove_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade }
+			remove_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade_Trade }
+			ROOT = {
+				remove_from_array = { array = MD_hormuz_block_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 1 }
+	}
+
+	### STRAIT OF GIBRALTAR (ENG) ###
+
+	MD_gibraltar_block_impose = {
+		icon = 19
+		cost = 25
+
+		visible = {
+			ROOT = {
+				is_ai = no
+				OR = { controls_state = 19 controls_state = 93 controls_state = 495 controls_state = 374 }
+			}
+			NOT = { is_in_array = { array = MD_gibraltar_block_on_us value = ROOT } }
+		}
+
+		send_description = MD_GIBRALTAR_BLOCK_IMPOSE_SEND
+		accept_title = MD_GIBRALTAR_BLOCK_IMPOSE_ACCEPT
+		accept_description = MD_GIBRALTAR_BLOCK_IMPOSE_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			set_country_flag = GIBRALTAR_STRAIT_BLOCKED_FOR_COUNTRY
+			add_ideas = MD_gibraltar_denied_idea
+			add_to_array = { array = MD_gibraltar_block_on_us value = ROOT }
+			add_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade }
+			add_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade_Trade }
+			# Wargoal isn't granted immediately - see MD_maritime_chokepoints.1
+			# (events/MD_maritime_chokepoints.txt), which fires 10 days from now and grants it
+			# (to us and to any other current Gibraltar controller besides the blocker) only if
+			# we're still blocked and not exempted by then, giving the blocker time to walk it back.
+			country_event = { id = MD_maritime_chokepoints.1 days = 10 }
+			ROOT = {
+				add_to_array = { array = MD_gibraltar_block_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 0 }
+	}
+
+	MD_gibraltar_block_lift = {
+		icon = 19
+		cost = 10
+
+		visible = {
+			is_in_array = { array = MD_gibraltar_block_on_us value = ROOT }
+		}
+
+		send_description = MD_GIBRALTAR_BLOCK_LIFT_SEND
+		accept_title = MD_GIBRALTAR_BLOCK_LIFT_ACCEPT
+		accept_description = MD_GIBRALTAR_BLOCK_LIFT_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			clr_country_flag = GIBRALTAR_STRAIT_BLOCKED_FOR_COUNTRY
+			remove_ideas = MD_gibraltar_denied_idea
+			remove_from_array = { array = MD_gibraltar_block_on_us value = ROOT }
+			remove_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade }
+			remove_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade_Trade }
+			ROOT = {
+				remove_from_array = { array = MD_gibraltar_block_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 1 }
+	}
+
+	### BAB-EL-MANDEB (DJI / YEM) ###
+
+	MD_mandeb_block_impose = {
+		icon = 19
+		cost = 25
+
+		visible = {
+			ROOT = {
+				is_ai = no
+				OR = { controls_state = 1020 controls_state = 197 }
+			}
+			NOT = { is_in_array = { array = MD_mandeb_block_on_us value = ROOT } }
+		}
+
+		send_description = MD_MANDEB_BLOCK_IMPOSE_SEND
+		accept_title = MD_MANDEB_BLOCK_IMPOSE_ACCEPT
+		accept_description = MD_MANDEB_BLOCK_IMPOSE_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			set_country_flag = MANDEB_STRAIT_BLOCKED_FOR_COUNTRY
+			add_ideas = MD_mandeb_denied_idea
+			add_to_array = { array = MD_mandeb_block_on_us value = ROOT }
+			add_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade }
+			add_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade_Trade }
+			# Wargoal isn't granted immediately - see MD_maritime_chokepoints.1
+			# (events/MD_maritime_chokepoints.txt), which fires 10 days from now and grants it
+			# (to us and to any other current Mandeb controller besides the blocker) only if
+			# we're still blocked and not exempted by then, giving the blocker time to walk it back.
+			country_event = { id = MD_maritime_chokepoints.1 days = 10 }
+			ROOT = {
+				add_to_array = { array = MD_mandeb_block_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 0 }
+	}
+
+	MD_mandeb_block_lift = {
+		icon = 19
+		cost = 10
+
+		visible = {
+			is_in_array = { array = MD_mandeb_block_on_us value = ROOT }
+		}
+
+		send_description = MD_MANDEB_BLOCK_LIFT_SEND
+		accept_title = MD_MANDEB_BLOCK_LIFT_ACCEPT
+		accept_description = MD_MANDEB_BLOCK_LIFT_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			clr_country_flag = MANDEB_STRAIT_BLOCKED_FOR_COUNTRY
+			remove_ideas = MD_mandeb_denied_idea
+			remove_from_array = { array = MD_mandeb_block_on_us value = ROOT }
+			remove_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade }
+			remove_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade_Trade }
+			ROOT = {
+				remove_from_array = { array = MD_mandeb_block_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 1 }
+	}
+
+	### TURKISH STRAITS / BLACK SEA ACCESS (TUR) ###
+
+	MD_turkish_straits_block_impose = {
+		icon = 19
+		cost = 25
+
+		visible = {
+			ROOT = {
+				is_ai = no
+				OR = { controls_state = 1244 controls_state = 934 controls_state = 1245 }
+			}
+			NOT = { is_in_array = { array = MD_turkish_straits_block_on_us value = ROOT } }
+		}
+
+		send_description = MD_TURKISH_STRAITS_BLOCK_IMPOSE_SEND
+		accept_title = MD_TURKISH_STRAITS_BLOCK_IMPOSE_ACCEPT
+		accept_description = MD_TURKISH_STRAITS_BLOCK_IMPOSE_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			set_country_flag = TURKISH_STRAITS_BLOCKED_FOR_COUNTRY
+			add_ideas = MD_turkish_straits_denied_idea
+			add_to_array = { array = MD_turkish_straits_block_on_us value = ROOT }
+			add_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade }
+			add_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade_Trade }
+			# Wargoal isn't granted immediately - see MD_maritime_chokepoints.1
+			# (events/MD_maritime_chokepoints.txt), which fires 10 days from now and grants it
+			# (to us and to any other current Turkish Straits controller besides the blocker) only
+			# if we're still blocked and not exempted by then, giving the blocker time to walk it
+			# back.
+			country_event = { id = MD_maritime_chokepoints.1 days = 10 }
+			ROOT = {
+				add_to_array = { array = MD_turkish_straits_block_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 0 }
+	}
+
+	MD_turkish_straits_block_lift = {
+		icon = 19
+		cost = 10
+
+		visible = {
+			is_in_array = { array = MD_turkish_straits_block_on_us value = ROOT }
+		}
+
+		send_description = MD_TURKISH_STRAITS_BLOCK_LIFT_SEND
+		accept_title = MD_TURKISH_STRAITS_BLOCK_LIFT_ACCEPT
+		accept_description = MD_TURKISH_STRAITS_BLOCK_LIFT_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			clr_country_flag = TURKISH_STRAITS_BLOCKED_FOR_COUNTRY
+			remove_ideas = MD_turkish_straits_denied_idea
+			remove_from_array = { array = MD_turkish_straits_block_on_us value = ROOT }
+			remove_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade }
+			remove_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade_Trade }
+			ROOT = {
+				remove_from_array = { array = MD_turkish_straits_block_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 1 }
+	}
+
+	### KIEL CANAL (GER) ###
+
+	MD_kiel_block_impose = {
+		icon = 19
+		cost = 25
+
+		visible = {
+			ROOT = {
+				is_ai = no
+				controls_state = 37
+			}
+			NOT = { is_in_array = { array = MD_kiel_block_on_us value = ROOT } }
+		}
+
+		send_description = MD_KIEL_BLOCK_IMPOSE_SEND
+		accept_title = MD_KIEL_BLOCK_IMPOSE_ACCEPT
+		accept_description = MD_KIEL_BLOCK_IMPOSE_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			set_country_flag = KIEL_CANAL_BLOCKED_FOR_COUNTRY
+			add_ideas = MD_kiel_denied_idea
+			add_to_array = { array = MD_kiel_block_on_us value = ROOT }
+			add_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade }
+			add_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade_Trade }
+			# Wargoal isn't granted immediately - see MD_maritime_chokepoints.1
+			# (events/MD_maritime_chokepoints.txt), which fires 10 days from now and grants it
+			# only if we're still blocked and not exempted by then, giving the blocker time to
+			# walk it back.
+			country_event = { id = MD_maritime_chokepoints.1 days = 10 }
+			ROOT = {
+				add_to_array = { array = MD_kiel_block_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 0 }
+	}
+
+	MD_kiel_block_lift = {
+		icon = 19
+		cost = 10
+
+		visible = {
+			is_in_array = { array = MD_kiel_block_on_us value = ROOT }
+		}
+
+		send_description = MD_KIEL_BLOCK_LIFT_SEND
+		accept_title = MD_KIEL_BLOCK_LIFT_ACCEPT
+		accept_description = MD_KIEL_BLOCK_LIFT_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			clr_country_flag = KIEL_CANAL_BLOCKED_FOR_COUNTRY
+			remove_ideas = MD_kiel_denied_idea
+			remove_from_array = { array = MD_kiel_block_on_us value = ROOT }
+			remove_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade }
+			remove_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade_Trade }
+			ROOT = {
+				remove_from_array = { array = MD_kiel_block_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 1 }
+	}
+
+	### DANISH STRAITS / BALTIC ACCESS (DEN / SWE) ###
+
+	MD_danish_straits_block_impose = {
+		icon = 19
+		cost = 25
+
+		visible = {
+			ROOT = {
+				is_ai = no
+				OR = { controls_state = 4 controls_state = 5 controls_state = 6 controls_state = 550 }
+			}
+			NOT = { is_in_array = { array = MD_danish_straits_block_on_us value = ROOT } }
+		}
+
+		send_description = MD_DANISH_STRAITS_BLOCK_IMPOSE_SEND
+		accept_title = MD_DANISH_STRAITS_BLOCK_IMPOSE_ACCEPT
+		accept_description = MD_DANISH_STRAITS_BLOCK_IMPOSE_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			set_country_flag = DANISH_STRAITS_BLOCKED_FOR_COUNTRY
+			add_ideas = MD_danish_straits_denied_idea
+			add_to_array = { array = MD_danish_straits_block_on_us value = ROOT }
+			add_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade }
+			add_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade_Trade }
+			# Wargoal isn't granted immediately - see MD_maritime_chokepoints.1
+			# (events/MD_maritime_chokepoints.txt), which fires 10 days from now and grants it
+			# (to us and to any other current Danish Straits controller besides the blocker) only
+			# if we're still blocked and not exempted by then, giving the blocker time to walk it
+			# back.
+			country_event = { id = MD_maritime_chokepoints.1 days = 10 }
+			ROOT = {
+				add_to_array = { array = MD_danish_straits_block_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 0 }
+	}
+
+	MD_danish_straits_block_lift = {
+		icon = 19
+		cost = 10
+
+		visible = {
+			is_in_array = { array = MD_danish_straits_block_on_us value = ROOT }
+		}
+
+		send_description = MD_DANISH_STRAITS_BLOCK_LIFT_SEND
+		accept_title = MD_DANISH_STRAITS_BLOCK_LIFT_ACCEPT
+		accept_description = MD_DANISH_STRAITS_BLOCK_LIFT_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			clr_country_flag = DANISH_STRAITS_BLOCKED_FOR_COUNTRY
+			remove_ideas = MD_danish_straits_denied_idea
+			remove_from_array = { array = MD_danish_straits_block_on_us value = ROOT }
+			remove_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade }
+			remove_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade_Trade }
+			ROOT = {
+				remove_from_array = { array = MD_danish_straits_block_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 1 }
+	}
+
+	############################################################################
+	# EXEMPTIONS - only meaningful while a chokepoint is globally closed
+	# (MD_<canal>_close_canal / MD_<canal>_close_strait / PER_block_hormuz). Lets
+	# the controller carve out passage for one specific country without lifting
+	# the closure for everyone else. Revoke is tied to whoever granted it, same
+	# as the block_lift actions above.
+	############################################################################
+
+	### SUEZ CANAL - EXEMPTIONS ###
+
+	MD_suez_exempt_grant = {
+		icon = 19
+		cost = 25
+
+		visible = {
+			ROOT = {
+				is_ai = no
+				OR = { controls_state = 213 controls_state = 214 }
+				has_global_flag = SUEZ_CANAL_BLOCKED
+			}
+			NOT = { has_country_flag = SUEZ_CANAL_EXEMPT_FOR_COUNTRY }
+		}
+
+		send_description = MD_SUEZ_EXEMPT_GRANT_SEND
+		accept_title = MD_SUEZ_EXEMPT_GRANT_ACCEPT
+		accept_description = MD_SUEZ_EXEMPT_GRANT_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			set_country_flag = SUEZ_CANAL_EXEMPT_FOR_COUNTRY
+			remove_ideas = MD_suez_denied_idea
+			add_to_array = { array = MD_suez_exempt_by_them value = ROOT }
+			ROOT = {
+				add_to_array = { array = MD_suez_exempt_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 0 }
+	}
+
+	MD_suez_exempt_revoke = {
+		icon = 19
+		cost = 10
+
+		visible = {
+			is_in_array = { array = MD_suez_exempt_by_them value = ROOT }
+		}
+
+		send_description = MD_SUEZ_EXEMPT_REVOKE_SEND
+		accept_title = MD_SUEZ_EXEMPT_REVOKE_ACCEPT
+		accept_description = MD_SUEZ_EXEMPT_REVOKE_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			clr_country_flag = SUEZ_CANAL_EXEMPT_FOR_COUNTRY
+			if = {
+				limit = { has_global_flag = SUEZ_CANAL_BLOCKED }
+				add_ideas = MD_suez_denied_idea
+			}
+			remove_from_array = { array = MD_suez_exempt_by_them value = ROOT }
+			ROOT = {
+				remove_from_array = { array = MD_suez_exempt_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 1 }
+	}
+
+	### PANAMA CANAL - EXEMPTIONS ###
+
+	MD_panama_exempt_grant = {
+		icon = 19
+		cost = 25
+
+		visible = {
+			ROOT = {
+				is_ai = no
+				controls_state = 853
+				has_global_flag = PANAMA_CANAL_BLOCKED
+			}
+			NOT = { has_country_flag = PANAMA_CANAL_EXEMPT_FOR_COUNTRY }
+		}
+
+		send_description = MD_PANAMA_EXEMPT_GRANT_SEND
+		accept_title = MD_PANAMA_EXEMPT_GRANT_ACCEPT
+		accept_description = MD_PANAMA_EXEMPT_GRANT_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			set_country_flag = PANAMA_CANAL_EXEMPT_FOR_COUNTRY
+			remove_ideas = MD_panama_denied_idea
+			add_to_array = { array = MD_panama_exempt_by_them value = ROOT }
+			ROOT = {
+				add_to_array = { array = MD_panama_exempt_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 0 }
+	}
+
+	MD_panama_exempt_revoke = {
+		icon = 19
+		cost = 10
+
+		visible = {
+			is_in_array = { array = MD_panama_exempt_by_them value = ROOT }
+		}
+
+		send_description = MD_PANAMA_EXEMPT_REVOKE_SEND
+		accept_title = MD_PANAMA_EXEMPT_REVOKE_ACCEPT
+		accept_description = MD_PANAMA_EXEMPT_REVOKE_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			clr_country_flag = PANAMA_CANAL_EXEMPT_FOR_COUNTRY
+			if = {
+				limit = { has_global_flag = PANAMA_CANAL_BLOCKED }
+				add_ideas = MD_panama_denied_idea
+			}
+			remove_from_array = { array = MD_panama_exempt_by_them value = ROOT }
+			ROOT = {
+				remove_from_array = { array = MD_panama_exempt_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 1 }
+	}
+
+	### STRAIT OF HORMUZ - EXEMPTIONS ###
+	# Hormuz's global closure grants PER_hormuz_blocked_gang (common/ideas/Iranian.txt),
+	# not MD_hormuz_denied_idea, and only to the Gulf/Iraq exporters iranian_events.910
+	# lists - mirror that same gate here instead of MD_hormuz_denied_idea.
+
+	MD_hormuz_exempt_grant = {
+		icon = 19
+		cost = 25
+
+		visible = {
+			ROOT = {
+				is_ai = no
+				OR = { controls_state = 425 controls_state = 978 controls_state = 1119 }
+				has_global_flag = HORMUZ_BLOCKED
+			}
+			NOT = { has_country_flag = HORMUZ_EXEMPT_FOR_COUNTRY }
+		}
+
+		send_description = MD_HORMUZ_EXEMPT_GRANT_SEND
+		accept_title = MD_HORMUZ_EXEMPT_GRANT_ACCEPT
+		accept_description = MD_HORMUZ_EXEMPT_GRANT_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			set_country_flag = HORMUZ_EXEMPT_FOR_COUNTRY
+			remove_ideas = PER_hormuz_blocked_gang
+			add_to_array = { array = MD_hormuz_exempt_by_them value = ROOT }
+			ROOT = {
+				add_to_array = { array = MD_hormuz_exempt_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 0 }
+	}
+
+	MD_hormuz_exempt_revoke = {
+		icon = 19
+		cost = 10
+
+		visible = {
+			is_in_array = { array = MD_hormuz_exempt_by_them value = ROOT }
+		}
+
+		send_description = MD_HORMUZ_EXEMPT_REVOKE_SEND
+		accept_title = MD_HORMUZ_EXEMPT_REVOKE_ACCEPT
+		accept_description = MD_HORMUZ_EXEMPT_REVOKE_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			clr_country_flag = HORMUZ_EXEMPT_FOR_COUNTRY
+			if = {
+				limit = {
+					has_global_flag = HORMUZ_BLOCKED
+					NOT = { has_country_flag = HORMUZ_BLOCKADE_INITIATOR }
+					OR = {
+						original_tag = SAU
+						original_tag = IRQ
+						original_tag = UAE
+						original_tag = KUW
+						original_tag = QAT
+						original_tag = BHR
+						original_tag = OMA
+						original_tag = PER
+					}
+				}
+				add_ideas = PER_hormuz_blocked_gang
+			}
+			remove_from_array = { array = MD_hormuz_exempt_by_them value = ROOT }
+			ROOT = {
+				remove_from_array = { array = MD_hormuz_exempt_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 1 }
+	}
+
+	### STRAIT OF GIBRALTAR - EXEMPTIONS ###
+
+	MD_gibraltar_exempt_grant = {
+		icon = 19
+		cost = 25
+
+		visible = {
+			ROOT = {
+				is_ai = no
+				OR = { controls_state = 19 controls_state = 93 controls_state = 495 controls_state = 374 }
+				has_global_flag = GIBRALTAR_STRAIT_BLOCKED
+			}
+			NOT = { has_country_flag = GIBRALTAR_STRAIT_EXEMPT_FOR_COUNTRY }
+		}
+
+		send_description = MD_GIBRALTAR_EXEMPT_GRANT_SEND
+		accept_title = MD_GIBRALTAR_EXEMPT_GRANT_ACCEPT
+		accept_description = MD_GIBRALTAR_EXEMPT_GRANT_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			set_country_flag = GIBRALTAR_STRAIT_EXEMPT_FOR_COUNTRY
+			remove_ideas = MD_gibraltar_denied_idea
+			add_to_array = { array = MD_gibraltar_exempt_by_them value = ROOT }
+			ROOT = {
+				add_to_array = { array = MD_gibraltar_exempt_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 0 }
+	}
+
+	MD_gibraltar_exempt_revoke = {
+		icon = 19
+		cost = 10
+
+		visible = {
+			is_in_array = { array = MD_gibraltar_exempt_by_them value = ROOT }
+		}
+
+		send_description = MD_GIBRALTAR_EXEMPT_REVOKE_SEND
+		accept_title = MD_GIBRALTAR_EXEMPT_REVOKE_ACCEPT
+		accept_description = MD_GIBRALTAR_EXEMPT_REVOKE_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			clr_country_flag = GIBRALTAR_STRAIT_EXEMPT_FOR_COUNTRY
+			if = {
+				limit = { has_global_flag = GIBRALTAR_STRAIT_BLOCKED }
+				add_ideas = MD_gibraltar_denied_idea
+			}
+			remove_from_array = { array = MD_gibraltar_exempt_by_them value = ROOT }
+			ROOT = {
+				remove_from_array = { array = MD_gibraltar_exempt_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 1 }
+	}
+
+	### BAB-EL-MANDEB - EXEMPTIONS ###
+
+	MD_mandeb_exempt_grant = {
+		icon = 19
+		cost = 25
+
+		visible = {
+			ROOT = {
+				is_ai = no
+				OR = { controls_state = 1020 controls_state = 197 }
+				has_global_flag = MANDEB_STRAIT_BLOCKED
+			}
+			NOT = { has_country_flag = MANDEB_STRAIT_EXEMPT_FOR_COUNTRY }
+		}
+
+		send_description = MD_MANDEB_EXEMPT_GRANT_SEND
+		accept_title = MD_MANDEB_EXEMPT_GRANT_ACCEPT
+		accept_description = MD_MANDEB_EXEMPT_GRANT_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			set_country_flag = MANDEB_STRAIT_EXEMPT_FOR_COUNTRY
+			remove_ideas = MD_mandeb_denied_idea
+			add_to_array = { array = MD_mandeb_exempt_by_them value = ROOT }
+			ROOT = {
+				add_to_array = { array = MD_mandeb_exempt_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 0 }
+	}
+
+	MD_mandeb_exempt_revoke = {
+		icon = 19
+		cost = 10
+
+		visible = {
+			is_in_array = { array = MD_mandeb_exempt_by_them value = ROOT }
+		}
+
+		send_description = MD_MANDEB_EXEMPT_REVOKE_SEND
+		accept_title = MD_MANDEB_EXEMPT_REVOKE_ACCEPT
+		accept_description = MD_MANDEB_EXEMPT_REVOKE_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			clr_country_flag = MANDEB_STRAIT_EXEMPT_FOR_COUNTRY
+			if = {
+				limit = { has_global_flag = MANDEB_STRAIT_BLOCKED }
+				add_ideas = MD_mandeb_denied_idea
+			}
+			remove_from_array = { array = MD_mandeb_exempt_by_them value = ROOT }
+			ROOT = {
+				remove_from_array = { array = MD_mandeb_exempt_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 1 }
+	}
+
+	### TURKISH STRAITS - EXEMPTIONS ###
+
+	MD_turkish_straits_exempt_grant = {
+		icon = 19
+		cost = 25
+
+		visible = {
+			ROOT = {
+				is_ai = no
+				OR = { controls_state = 1244 controls_state = 934 controls_state = 1245 }
+				has_global_flag = TURKISH_STRAITS_BLOCKED
+			}
+			NOT = { has_country_flag = TURKISH_STRAITS_EXEMPT_FOR_COUNTRY }
+		}
+
+		send_description = MD_TURKISH_STRAITS_EXEMPT_GRANT_SEND
+		accept_title = MD_TURKISH_STRAITS_EXEMPT_GRANT_ACCEPT
+		accept_description = MD_TURKISH_STRAITS_EXEMPT_GRANT_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			set_country_flag = TURKISH_STRAITS_EXEMPT_FOR_COUNTRY
+			remove_ideas = MD_turkish_straits_denied_idea
+			add_to_array = { array = MD_turkish_straits_exempt_by_them value = ROOT }
+			ROOT = {
+				add_to_array = { array = MD_turkish_straits_exempt_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 0 }
+	}
+
+	MD_turkish_straits_exempt_revoke = {
+		icon = 19
+		cost = 10
+
+		visible = {
+			is_in_array = { array = MD_turkish_straits_exempt_by_them value = ROOT }
+		}
+
+		send_description = MD_TURKISH_STRAITS_EXEMPT_REVOKE_SEND
+		accept_title = MD_TURKISH_STRAITS_EXEMPT_REVOKE_ACCEPT
+		accept_description = MD_TURKISH_STRAITS_EXEMPT_REVOKE_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			clr_country_flag = TURKISH_STRAITS_EXEMPT_FOR_COUNTRY
+			if = {
+				limit = { has_global_flag = TURKISH_STRAITS_BLOCKED }
+				add_ideas = MD_turkish_straits_denied_idea
+			}
+			remove_from_array = { array = MD_turkish_straits_exempt_by_them value = ROOT }
+			ROOT = {
+				remove_from_array = { array = MD_turkish_straits_exempt_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 1 }
+	}
+
+	### KIEL CANAL - EXEMPTIONS ###
+
+	MD_kiel_exempt_grant = {
+		icon = 19
+		cost = 25
+
+		visible = {
+			ROOT = {
+				is_ai = no
+				controls_state = 37
+				has_global_flag = KIEL_CANAL_BLOCKED
+			}
+			NOT = { has_country_flag = KIEL_CANAL_EXEMPT_FOR_COUNTRY }
+		}
+
+		send_description = MD_KIEL_EXEMPT_GRANT_SEND
+		accept_title = MD_KIEL_EXEMPT_GRANT_ACCEPT
+		accept_description = MD_KIEL_EXEMPT_GRANT_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			set_country_flag = KIEL_CANAL_EXEMPT_FOR_COUNTRY
+			remove_ideas = MD_kiel_denied_idea
+			add_to_array = { array = MD_kiel_exempt_by_them value = ROOT }
+			ROOT = {
+				add_to_array = { array = MD_kiel_exempt_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 0 }
+	}
+
+	MD_kiel_exempt_revoke = {
+		icon = 19
+		cost = 10
+
+		visible = {
+			is_in_array = { array = MD_kiel_exempt_by_them value = ROOT }
+		}
+
+		send_description = MD_KIEL_EXEMPT_REVOKE_SEND
+		accept_title = MD_KIEL_EXEMPT_REVOKE_ACCEPT
+		accept_description = MD_KIEL_EXEMPT_REVOKE_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			clr_country_flag = KIEL_CANAL_EXEMPT_FOR_COUNTRY
+			if = {
+				limit = { has_global_flag = KIEL_CANAL_BLOCKED }
+				add_ideas = MD_kiel_denied_idea
+			}
+			remove_from_array = { array = MD_kiel_exempt_by_them value = ROOT }
+			ROOT = {
+				remove_from_array = { array = MD_kiel_exempt_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 1 }
+	}
+
+	### DANISH STRAITS - EXEMPTIONS ###
+
+	MD_danish_straits_exempt_grant = {
+		icon = 19
+		cost = 25
+
+		visible = {
+			ROOT = {
+				is_ai = no
+				OR = { controls_state = 4 controls_state = 5 controls_state = 6 controls_state = 550 }
+				has_global_flag = DANISH_STRAITS_BLOCKED
+			}
+			NOT = { has_country_flag = DANISH_STRAITS_EXEMPT_FOR_COUNTRY }
+		}
+
+		send_description = MD_DANISH_STRAITS_EXEMPT_GRANT_SEND
+		accept_title = MD_DANISH_STRAITS_EXEMPT_GRANT_ACCEPT
+		accept_description = MD_DANISH_STRAITS_EXEMPT_GRANT_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			set_country_flag = DANISH_STRAITS_EXEMPT_FOR_COUNTRY
+			remove_ideas = MD_danish_straits_denied_idea
+			add_to_array = { array = MD_danish_straits_exempt_by_them value = ROOT }
+			ROOT = {
+				add_to_array = { array = MD_danish_straits_exempt_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 0 }
+	}
+
+	MD_danish_straits_exempt_revoke = {
+		icon = 19
+		cost = 10
+
+		visible = {
+			is_in_array = { array = MD_danish_straits_exempt_by_them value = ROOT }
+		}
+
+		send_description = MD_DANISH_STRAITS_EXEMPT_REVOKE_SEND
+		accept_title = MD_DANISH_STRAITS_EXEMPT_REVOKE_ACCEPT
+		accept_description = MD_DANISH_STRAITS_EXEMPT_REVOKE_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			clr_country_flag = DANISH_STRAITS_EXEMPT_FOR_COUNTRY
+			if = {
+				limit = { has_global_flag = DANISH_STRAITS_BLOCKED }
+				add_ideas = MD_danish_straits_denied_idea
+			}
+			remove_from_array = { array = MD_danish_straits_exempt_by_them value = ROOT }
+			ROOT = {
+				remove_from_array = { array = MD_danish_straits_exempt_by_us value = PREV }
+			}
+		}
+
+		ai_desire = { base = 1 }
+	}
+}

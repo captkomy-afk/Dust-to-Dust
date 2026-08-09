@@ -21028,6 +21028,7 @@ news_event = {
 					original_tag = QAT
 					original_tag = BHR
 					original_tag = OMA
+					original_tag = PER
 				}
 			}
 			add_ideas = PER_hormuz_blocked_gang

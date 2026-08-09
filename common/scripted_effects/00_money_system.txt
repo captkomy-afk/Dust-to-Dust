@@ -881,6 +881,24 @@ calculate_additional_income_rate = {
 		set_variable = { additional_income_panama = 0.05 }
 		add_to_variable = { additional_income_rate = additional_income_panama }
 	}
+	# Toll rate decisions (common/decisions/MD_maritime_chokepoints_decisions.txt): a stackable
+	# delta on top of whatever the base control income above already grants.
+	if = { limit = { has_idea = MD_suez_toll_high }
+		set_variable = { additional_income_suez_toll = 0.05 }
+		add_to_variable = { additional_income_rate = additional_income_suez_toll }
+	}
+	if = { limit = { has_idea = MD_suez_toll_low }
+		set_variable = { additional_income_suez_toll = -0.05 }
+		add_to_variable = { additional_income_rate = additional_income_suez_toll }
+	}
+	if = { limit = { has_idea = MD_panama_toll_high }
+		set_variable = { additional_income_panama_toll = 0.025 }
+		add_to_variable = { additional_income_rate = additional_income_panama_toll }
+	}
+	if = { limit = { has_idea = MD_panama_toll_low }
+		set_variable = { additional_income_panama_toll = -0.025 }
+		add_to_variable = { additional_income_rate = additional_income_panama_toll }
+	}
 	if = { limit = { has_idea = gateway_to_asia }
 		set_variable = { gateway_to_asia_income = 0.1 }
 		add_to_variable = { additional_income_rate = gateway_to_asia_income }

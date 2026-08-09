@@ -1,0 +1,16 @@
+# Opinion modifiers for the maritime chokepoint deny-list blockades
+# (common/scripted_diplomatic_actions/MD_maritime_chokepoints_diplomatic_actions.txt).
+# Mirrors Blockade / Blockade_Trade in "Middle East Relations.txt".
+opinion_modifiers = {
+
+	MD_Chokepoint_Blockade = {
+		value = -50
+		decay = 1
+	}
+
+	MD_Chokepoint_Blockade_Trade = {
+		value = -999
+		trade = yes
+	}
+
+}

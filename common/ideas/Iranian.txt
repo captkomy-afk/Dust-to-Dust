@@ -1185,7 +1185,8 @@ ideas = {
 			cancel = {
 				OR = {
 					NOT = { has_global_flag = HORMUZ_BLOCKED }
-					original_tag = PER
+					has_country_flag = HORMUZ_BLOCKADE_INITIATOR
+					has_country_flag = HORMUZ_EXEMPT_FOR_COUNTRY
 				}
 			}
 

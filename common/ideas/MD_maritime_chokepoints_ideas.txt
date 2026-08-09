@@ -1,0 +1,391 @@
+# Ideas granted to countries currently denied passage through a maritime chokepoint,
+# either globally (the controller closed it to everyone) or specifically (a targeted
+# blockade via the MD_<canal>_block_impose diplomatic action). Mirrors the existing
+# self-managing allowed/cancel pattern used by suez_canal_blocked (common/ideas/Egyptian.txt)
+# and PER_hormuz_blocked_gang (common/ideas/Iranian.txt): something else calls add_ideas
+# once, and cancel auto-removes the idea once the underlying flag clears - no explicit
+# remove_ideas needed (see iranian_events.911, which reopens Hormuz without one).
+ideas = {
+	country = {
+
+		MD_suez_denied_idea = {
+			picture = fire
+			cancel = {
+				OR = {
+					NOT = {
+						OR = {
+							has_country_flag = SUEZ_CANAL_BLOCKED_FOR_COUNTRY
+							has_global_flag = SUEZ_CANAL_BLOCKED
+						}
+					}
+					has_country_flag = SUEZ_CANAL_EXEMPT_FOR_COUNTRY
+				}
+			}
+			modifier = {
+				consumer_goods_factor = 0.02
+				production_speed_buildings_factor = -0.05
+				stability_factor = -0.01
+				custom_modifier_tooltip = MD_chokepoint_denied_idea_TT
+			}
+		}
+
+		MD_panama_denied_idea = {
+			picture = fire
+			cancel = {
+				OR = {
+					NOT = {
+						OR = {
+							has_country_flag = PANAMA_CANAL_BLOCKED_FOR_COUNTRY
+							has_global_flag = PANAMA_CANAL_BLOCKED
+						}
+					}
+					has_country_flag = PANAMA_CANAL_EXEMPT_FOR_COUNTRY
+				}
+			}
+			modifier = {
+				consumer_goods_factor = 0.02
+				production_speed_buildings_factor = -0.05
+				stability_factor = -0.01
+				custom_modifier_tooltip = MD_chokepoint_denied_idea_TT
+			}
+		}
+
+		MD_gibraltar_denied_idea = {
+			picture = fire
+			cancel = {
+				OR = {
+					NOT = {
+						OR = {
+							has_country_flag = GIBRALTAR_STRAIT_BLOCKED_FOR_COUNTRY
+							has_global_flag = GIBRALTAR_STRAIT_BLOCKED
+						}
+					}
+					has_country_flag = GIBRALTAR_STRAIT_EXEMPT_FOR_COUNTRY
+				}
+			}
+			modifier = {
+				consumer_goods_factor = 0.02
+				production_speed_buildings_factor = -0.05
+				stability_factor = -0.01
+				custom_modifier_tooltip = MD_chokepoint_denied_idea_TT
+			}
+		}
+
+		MD_mandeb_denied_idea = {
+			picture = fire
+			cancel = {
+				OR = {
+					NOT = {
+						OR = {
+							has_country_flag = MANDEB_STRAIT_BLOCKED_FOR_COUNTRY
+							has_global_flag = MANDEB_STRAIT_BLOCKED
+						}
+					}
+					has_country_flag = MANDEB_STRAIT_EXEMPT_FOR_COUNTRY
+				}
+			}
+			modifier = {
+				consumer_goods_factor = 0.02
+				production_speed_buildings_factor = -0.05
+				stability_factor = -0.01
+				custom_modifier_tooltip = MD_chokepoint_denied_idea_TT
+			}
+		}
+
+		# Hormuz is a commodity chokepoint (Gulf oil producers sit on it), so a targeted
+		# block also costs the target their own oil-export multiplier and some fuel
+		# supply, on top of the generic production penalty. The global-closure case
+		# already has its own surgical, Gulf-only version of this via
+		# PER_hormuz_blocked_gang (common/ideas/Iranian.txt) + iranian_events.910 - this
+		# idea only covers the per-country MD_hormuz_block_impose targeting path.
+		MD_hormuz_denied_idea = {
+			picture = fire
+			cancel = {
+				NOT = { has_country_flag = HORMUZ_BLOCKED_FOR_COUNTRY }
+			}
+			modifier = {
+				consumer_goods_factor = 0.02
+				production_speed_buildings_factor = -0.05
+				stability_factor = -0.01
+				max_fuel_factor = -0.15
+				base_fuel_gain_factor = -0.10
+				oil_export_multiplier_modifier = -0.25
+				custom_modifier_tooltip = MD_hormuz_denied_idea_TT
+			}
+		}
+
+		MD_turkish_straits_denied_idea = {
+			picture = fire
+			cancel = {
+				OR = {
+					NOT = {
+						OR = {
+							has_country_flag = TURKISH_STRAITS_BLOCKED_FOR_COUNTRY
+							has_global_flag = TURKISH_STRAITS_BLOCKED
+						}
+					}
+					has_country_flag = TURKISH_STRAITS_EXEMPT_FOR_COUNTRY
+				}
+			}
+			modifier = {
+				consumer_goods_factor = 0.02
+				production_speed_buildings_factor = -0.05
+				stability_factor = -0.01
+				custom_modifier_tooltip = MD_chokepoint_denied_idea_TT
+			}
+		}
+
+		MD_kiel_denied_idea = {
+			picture = fire
+			cancel = {
+				OR = {
+					NOT = {
+						OR = {
+							has_country_flag = KIEL_CANAL_BLOCKED_FOR_COUNTRY
+							has_global_flag = KIEL_CANAL_BLOCKED
+						}
+					}
+					has_country_flag = KIEL_CANAL_EXEMPT_FOR_COUNTRY
+				}
+			}
+			modifier = {
+				consumer_goods_factor = 0.02
+				production_speed_buildings_factor = -0.05
+				stability_factor = -0.01
+				custom_modifier_tooltip = MD_chokepoint_denied_idea_TT
+			}
+		}
+
+		MD_danish_straits_denied_idea = {
+			picture = fire
+			cancel = {
+				OR = {
+					NOT = {
+						OR = {
+							has_country_flag = DANISH_STRAITS_BLOCKED_FOR_COUNTRY
+							has_global_flag = DANISH_STRAITS_BLOCKED
+						}
+					}
+					has_country_flag = DANISH_STRAITS_EXEMPT_FOR_COUNTRY
+				}
+			}
+			modifier = {
+				consumer_goods_factor = 0.02
+				production_speed_buildings_factor = -0.05
+				stability_factor = -0.01
+				custom_modifier_tooltip = MD_chokepoint_denied_idea_TT
+			}
+		}
+
+		# Penalty on the country that imposed a FULL closure, granted to self (not
+		# every_other_country) when the close decision fires, and self-cancelling once the
+		# closure ends - the diplomatic/economic cost of unilaterally shutting an
+		# internationally important waterway to the rest of the world.
+		MD_suez_closure_backlash_idea = {
+			picture = fire
+			cancel = { NOT = { has_global_flag = SUEZ_CANAL_BLOCKED } }
+			modifier = {
+				stability_factor = -0.03
+				political_power_factor = -0.10
+				trade_opinion_factor = -0.05
+				custom_modifier_tooltip = MD_chokepoint_closure_backlash_idea_TT
+			}
+		}
+
+		MD_panama_closure_backlash_idea = {
+			picture = fire
+			cancel = { NOT = { has_global_flag = PANAMA_CANAL_BLOCKED } }
+			modifier = {
+				stability_factor = -0.03
+				political_power_factor = -0.10
+				trade_opinion_factor = -0.05
+				custom_modifier_tooltip = MD_chokepoint_closure_backlash_idea_TT
+			}
+		}
+
+		MD_hormuz_closure_backlash_idea = {
+			picture = fire
+			cancel = { NOT = { has_global_flag = HORMUZ_BLOCKED } }
+			modifier = {
+				stability_factor = -0.03
+				political_power_factor = -0.10
+				trade_opinion_factor = -0.05
+				custom_modifier_tooltip = MD_chokepoint_closure_backlash_idea_TT
+			}
+		}
+
+		MD_gibraltar_closure_backlash_idea = {
+			picture = fire
+			cancel = { NOT = { has_global_flag = GIBRALTAR_STRAIT_BLOCKED } }
+			modifier = {
+				stability_factor = -0.03
+				political_power_factor = -0.10
+				trade_opinion_factor = -0.05
+				custom_modifier_tooltip = MD_chokepoint_closure_backlash_idea_TT
+			}
+		}
+
+		MD_mandeb_closure_backlash_idea = {
+			picture = fire
+			cancel = { NOT = { has_global_flag = MANDEB_STRAIT_BLOCKED } }
+			modifier = {
+				stability_factor = -0.03
+				political_power_factor = -0.10
+				trade_opinion_factor = -0.05
+				custom_modifier_tooltip = MD_chokepoint_closure_backlash_idea_TT
+			}
+		}
+
+		MD_turkish_straits_closure_backlash_idea = {
+			picture = fire
+			cancel = { NOT = { has_global_flag = TURKISH_STRAITS_BLOCKED } }
+			modifier = {
+				stability_factor = -0.03
+				political_power_factor = -0.10
+				trade_opinion_factor = -0.05
+				custom_modifier_tooltip = MD_chokepoint_closure_backlash_idea_TT
+			}
+		}
+
+		MD_kiel_closure_backlash_idea = {
+			picture = fire
+			cancel = { NOT = { has_global_flag = KIEL_CANAL_BLOCKED } }
+			modifier = {
+				stability_factor = -0.03
+				political_power_factor = -0.10
+				trade_opinion_factor = -0.05
+				custom_modifier_tooltip = MD_chokepoint_closure_backlash_idea_TT
+			}
+		}
+
+		MD_danish_straits_closure_backlash_idea = {
+			picture = fire
+			cancel = { NOT = { has_global_flag = DANISH_STRAITS_BLOCKED } }
+			modifier = {
+				stability_factor = -0.03
+				political_power_factor = -0.10
+				trade_opinion_factor = -0.05
+				custom_modifier_tooltip = MD_chokepoint_closure_backlash_idea_TT
+			}
+		}
+
+		# Toll rate ideas (Suez/Panama only - the two chokepoints with a real toll income
+		# mechanic, see additional_income_suez/panama in common/scripted_effects/00_money_system.txt).
+		# Persist as a standing policy choice rather than self-cancelling on a flag - only
+		# removed by taking a different toll decision, or automatically if control of the canal
+		# is lost (you can't charge tolls on a canal you don't hold).
+		MD_suez_toll_high = {
+			picture = fire
+			cancel = {
+				NOT = {
+					OR = {
+						controls_state = 213
+						controls_state = 214
+					}
+				}
+			}
+			modifier = {
+				trade_opinion_factor = -0.10
+				stability_factor = -0.01
+				custom_modifier_tooltip = MD_toll_high_idea_TT
+			}
+		}
+
+		MD_suez_toll_low = {
+			picture = fire
+			cancel = {
+				NOT = {
+					OR = {
+						controls_state = 213
+						controls_state = 214
+					}
+				}
+			}
+			modifier = {
+				trade_opinion_factor = 0.10
+				stability_factor = 0.01
+				custom_modifier_tooltip = MD_toll_low_idea_TT
+			}
+		}
+
+		MD_panama_toll_high = {
+			picture = fire
+			cancel = { NOT = { controls_state = 853 } }
+			modifier = {
+				trade_opinion_factor = -0.10
+				stability_factor = -0.01
+				custom_modifier_tooltip = MD_toll_high_idea_TT
+			}
+		}
+
+		MD_panama_toll_low = {
+			picture = fire
+			cancel = { NOT = { controls_state = 853 } }
+			modifier = {
+				trade_opinion_factor = 0.10
+				stability_factor = 0.01
+				custom_modifier_tooltip = MD_toll_low_idea_TT
+			}
+		}
+
+		# World-facing consumer goods effect of the toll rate, granted once to every_other_country
+		# when the corresponding controller-facing idea above is granted. Deliberately has no flag
+		# of its own to track - cancel checks whether whichever state's CURRENT controller still
+		# holds the matching MD_<canal>_toll_high/low idea, so this self-corrects automatically
+		# whether tolls get restored to standard, switched to the other tier, or the canal simply
+		# changes hands to a controller with a different policy (or none).
+		MD_suez_toll_high_world_idea = {
+			picture = fire
+			cancel = {
+				NOT = {
+					OR = {
+						213 = { controller = { has_idea = MD_suez_toll_high } }
+						214 = { controller = { has_idea = MD_suez_toll_high } }
+					}
+				}
+			}
+			modifier = {
+				consumer_goods_factor = 0.01
+				custom_modifier_tooltip = MD_toll_high_world_idea_TT
+			}
+		}
+
+		MD_suez_toll_low_world_idea = {
+			picture = fire
+			cancel = {
+				NOT = {
+					OR = {
+						213 = { controller = { has_idea = MD_suez_toll_low } }
+						214 = { controller = { has_idea = MD_suez_toll_low } }
+					}
+				}
+			}
+			modifier = {
+				consumer_goods_factor = -0.01
+				custom_modifier_tooltip = MD_toll_low_world_idea_TT
+			}
+		}
+
+		MD_panama_toll_high_world_idea = {
+			picture = fire
+			cancel = {
+				NOT = { 853 = { controller = { has_idea = MD_panama_toll_high } } }
+			}
+			modifier = {
+				consumer_goods_factor = 0.01
+				custom_modifier_tooltip = MD_toll_high_world_idea_TT
+			}
+		}
+
+		MD_panama_toll_low_world_idea = {
+			picture = fire
+			cancel = {
+				NOT = { 853 = { controller = { has_idea = MD_panama_toll_low } } }
+			}
+			modifier = {
+				consumer_goods_factor = -0.01
+				custom_modifier_tooltip = MD_toll_low_world_idea_TT
+			}
+		}
+	}
+}

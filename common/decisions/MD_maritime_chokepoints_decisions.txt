@@ -1,0 +1,947 @@
+MD_maritime_chokepoints_category = {
+
+	### SUEZ CANAL (EGY) ###
+
+	MD_suez_close_canal = {
+		icon = GFX_decision_israel_blockade
+		on_map_mode = map_and_decisions_view
+		highlight_states = {
+			highlight_state_targets = {
+				state = 213
+				state = 214
+			}
+		}
+		visible = {
+			OR = {
+				controls_state = 213
+				controls_state = 214
+			}
+			NOT = { has_global_flag = SUEZ_CANAL_BLOCKED }
+		}
+		available = { is_ai = no }
+		cost = 150
+		complete_effect = {
+			set_global_flag = SUEZ_CANAL_BLOCKED
+			add_ideas = MD_suez_closure_backlash_idea
+			add_threat = 10
+			every_other_country = {
+				limit = { NOT = { is_in_faction_with = ROOT } }
+				add_ideas = MD_suez_denied_idea
+			}
+			# Faction members are automatically exempted (tracked the same way a manual
+			# MD_suez_exempt_grant would be, so MD_suez_exempt_revoke can still individually
+			# strip it from one of them later if wanted).
+			if = {
+				limit = { is_in_faction = yes }
+				every_faction_member = {
+					limit = { NOT = { tag = ROOT } }
+					set_country_flag = SUEZ_CANAL_EXEMPT_FOR_COUNTRY
+					add_to_array = { array = MD_suez_exempt_by_them value = ROOT }
+					ROOT = {
+						add_to_array = { array = MD_suez_exempt_by_us value = PREV }
+					}
+				}
+			}
+			# See MD_maritime_chokepoints.2 (events/MD_maritime_chokepoints.txt): fires in 10
+			# days and grants a wargoal to any co-controller, superpower, or regional power still
+			# affected and not exempted by then.
+			country_event = { id = MD_maritime_chokepoints.2 days = 10 }
+			custom_effect_tooltip = MD_suez_closed_tt
+		}
+		ai_will_do = { base = 0 }
+	}
+
+	MD_suez_reopen_canal = {
+		icon = GFX_decision_generic_naval
+		on_map_mode = map_and_decisions_view
+		highlight_states = {
+			highlight_state_targets = {
+				state = 213
+				state = 214
+			}
+		}
+		visible = {
+			OR = {
+				controls_state = 213
+				controls_state = 214
+			}
+			has_global_flag = SUEZ_CANAL_BLOCKED
+		}
+		available = { is_ai = no }
+		cost = 50
+		complete_effect = {
+			clr_global_flag = SUEZ_CANAL_BLOCKED
+			# Whoever reopens it may not be who closed it, so clear the backlash idea off
+			# whichever country actually still holds it rather than assuming it's self.
+			every_country = {
+				limit = { has_idea = MD_suez_closure_backlash_idea }
+				remove_ideas = MD_suez_closure_backlash_idea
+			}
+			every_other_country = { remove_ideas = MD_suez_denied_idea }
+			every_other_country = {
+				limit = { has_country_flag = SUEZ_CANAL_BLOCKED_FOR_COUNTRY }
+				clr_country_flag = SUEZ_CANAL_BLOCKED_FOR_COUNTRY
+				remove_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade }
+				remove_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade_Trade }
+			}
+			every_other_country = {
+				limit = { has_country_flag = SUEZ_CANAL_EXEMPT_FOR_COUNTRY }
+				clr_country_flag = SUEZ_CANAL_EXEMPT_FOR_COUNTRY
+			}
+			custom_effect_tooltip = MD_suez_reopened_tt
+		}
+		ai_will_do = { base = 0 }
+	}
+
+	### PANAMA CANAL (PAN) ###
+
+	MD_panama_close_canal = {
+		icon = GFX_decision_israel_blockade
+		on_map_mode = map_and_decisions_view
+		highlight_states = {
+			highlight_state_targets = {
+				state = 853
+			}
+		}
+		visible = {
+			controls_state = 853
+			NOT = { has_global_flag = PANAMA_CANAL_BLOCKED }
+		}
+		available = { is_ai = no }
+		cost = 150
+		complete_effect = {
+			set_global_flag = PANAMA_CANAL_BLOCKED
+			add_ideas = MD_panama_closure_backlash_idea
+			add_threat = 10
+			every_other_country = {
+				limit = { NOT = { is_in_faction_with = ROOT } }
+				add_ideas = MD_panama_denied_idea
+			}
+			# Faction members are automatically exempted (tracked the same way a manual
+			# MD_panama_exempt_grant would be, so MD_panama_exempt_revoke can still individually
+			# strip it from one of them later if wanted).
+			if = {
+				limit = { is_in_faction = yes }
+				every_faction_member = {
+					limit = { NOT = { tag = ROOT } }
+					set_country_flag = PANAMA_CANAL_EXEMPT_FOR_COUNTRY
+					add_to_array = { array = MD_panama_exempt_by_them value = ROOT }
+					ROOT = {
+						add_to_array = { array = MD_panama_exempt_by_us value = PREV }
+					}
+				}
+			}
+			# See MD_maritime_chokepoints.2 (events/MD_maritime_chokepoints.txt): fires in 10
+			# days and grants a wargoal to any co-controller, superpower, or regional power still
+			# affected and not exempted by then.
+			country_event = { id = MD_maritime_chokepoints.2 days = 10 }
+			custom_effect_tooltip = MD_panama_closed_tt
+		}
+		ai_will_do = { base = 0 }
+	}
+
+	MD_panama_reopen_canal = {
+		icon = GFX_decision_generic_naval
+		on_map_mode = map_and_decisions_view
+		highlight_states = {
+			highlight_state_targets = {
+				state = 853
+			}
+		}
+		visible = {
+			controls_state = 853
+			has_global_flag = PANAMA_CANAL_BLOCKED
+		}
+		available = { is_ai = no }
+		cost = 50
+		complete_effect = {
+			clr_global_flag = PANAMA_CANAL_BLOCKED
+			# Whoever reopens it may not be who closed it, so clear the backlash idea off
+			# whichever country actually still holds it rather than assuming it's self.
+			every_country = {
+				limit = { has_idea = MD_panama_closure_backlash_idea }
+				remove_ideas = MD_panama_closure_backlash_idea
+			}
+			every_other_country = { remove_ideas = MD_panama_denied_idea }
+			every_other_country = {
+				limit = { has_country_flag = PANAMA_CANAL_BLOCKED_FOR_COUNTRY }
+				clr_country_flag = PANAMA_CANAL_BLOCKED_FOR_COUNTRY
+				remove_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade }
+				remove_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade_Trade }
+			}
+			every_other_country = {
+				limit = { has_country_flag = PANAMA_CANAL_EXEMPT_FOR_COUNTRY }
+				clr_country_flag = PANAMA_CANAL_EXEMPT_FOR_COUNTRY
+			}
+			custom_effect_tooltip = MD_panama_reopened_tt
+		}
+		ai_will_do = { base = 0 }
+	}
+
+	### STRAIT OF HORMUZ (PER / OMA) ###
+	# Relocated from common/decisions/Iran.txt (was filed under the "Iranian Domestic
+	# Affairs" category, PER_domestic_politics) so all five chokepoints live in one tab.
+	# Converted from a 12-day delayed decision (remove_effect/days_remove) to an instant
+	# one (complete_effect/cost) to match every other chokepoint closure, and given the
+	# cost = 150 it was missing - both fixed after being reported as inconsistent.
+
+	PER_block_hormuz = {
+		icon = GFX_decision_israel_blockade
+		on_map_mode = map_and_decisions_view
+		highlight_states = {
+			highlight_state_targets = {
+				state = 978
+				state = 425
+				state = 1119
+			}
+		}
+		available = {
+			is_ai = no
+		}
+		visible = {
+			OR = {
+				controls_state = 978
+				controls_state = 425
+				controls_state = 1119
+			}
+			NOT = {
+				has_global_flag = HORMUZ_BLOCKED
+			}
+		}
+		cost = 150
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PER_block_hormuz"
+			set_global_flag = HORMUZ_BLOCKED
+			add_ideas = MD_hormuz_closure_backlash_idea
+			# Tracks who specifically closed it, since PER_hormuz_blocked_gang's cancel needs to
+			# exempt the initiator, not just "anyone who controls a Hormuz state" - Iran and Oman
+			# each control a different state, so mere control no longer implies "did the blocking"
+			# now that either can invoke this decision.
+			set_country_flag = HORMUZ_BLOCKADE_INITIATOR
+			# Faction members are automatically exempted (tracked the same way a manual
+			# MD_hormuz_exempt_grant would be, so MD_hormuz_exempt_revoke can still individually
+			# strip it from one of them later if wanted). PER_hormuz_blocked_gang's own cancel
+			# condition already respects HORMUZ_EXEMPT_FOR_COUNTRY, so this alone is enough to
+			# keep the idea off exempted faction members regardless of the Gulf-state gate below.
+			if = {
+				limit = { is_in_faction = yes }
+				every_faction_member = {
+					limit = { NOT = { tag = ROOT } }
+					set_country_flag = HORMUZ_EXEMPT_FOR_COUNTRY
+					add_to_array = { array = MD_hormuz_exempt_by_them value = ROOT }
+					ROOT = {
+						add_to_array = { array = MD_hormuz_exempt_by_us value = PREV }
+					}
+				}
+			}
+			# See MD_maritime_chokepoints.2 (events/MD_maritime_chokepoints.txt): fires in 10
+			# days and grants a wargoal to any co-controller, Gulf state, superpower, or regional
+			# power still affected and not exempted by then.
+			country_event = { id = MD_maritime_chokepoints.2 days = 10 }
+			news_event = iranian_events.910
+			add_threat = 10
+			newline = yes
+			#An immediate spike only: recalculate_resources_price rebuilds oil_price from supply/demand at the
+			#next monthly tick. The lasting rise comes from PER_hormuz_blocked_gang's export penalty.
+			set_temp_variable = {
+				new_price = {
+					value = global.oil_price
+					multiply = 1.15
+				}
+				tooltip = oil_new_price_tt
+			}
+			set_variable = { global.oil_price = new_price }
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_war_with = USA
+				add = 10
+			}
+		}
+	}
+
+	PER_reopen_hormuz = {
+		icon = GFX_decision_generic_naval
+		on_map_mode = map_and_decisions_view
+		highlight_states = {
+			highlight_state_targets = {
+				state = 978
+				state = 425
+				state = 1119
+			}
+		}
+		visible = {
+			OR = {
+				controls_state = 978
+				controls_state = 425
+				controls_state = 1119
+			}
+			has_global_flag = HORMUZ_BLOCKED
+		}
+		available = { is_ai = no }
+		cost = 50
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision PER_reopen_hormuz"
+			clr_global_flag = HORMUZ_BLOCKED
+			#No manual price correction here: the monthly recalculate_resources_price rebuilds oil_price from scratch each month, so once PER_hormuz_blocked_gang's export penalty lapses supply/demand alone renormalizes it
+			# Whoever reopens it may not be who closed it (Iran/Oman/Abu Musa's controller can
+			# each take either decision), so clear the initiator flag off whichever country
+			# actually still has it rather than assuming it's self.
+			every_country = {
+				limit = { has_country_flag = HORMUZ_BLOCKADE_INITIATOR }
+				clr_country_flag = HORMUZ_BLOCKADE_INITIATOR
+			}
+			every_country = {
+				limit = { has_idea = MD_hormuz_closure_backlash_idea }
+				remove_ideas = MD_hormuz_closure_backlash_idea
+			}
+			every_other_country = {
+				limit = { has_country_flag = HORMUZ_BLOCKED_FOR_COUNTRY }
+				clr_country_flag = HORMUZ_BLOCKED_FOR_COUNTRY
+				remove_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade }
+				remove_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade_Trade }
+			}
+			every_other_country = {
+				limit = { has_country_flag = HORMUZ_EXEMPT_FOR_COUNTRY }
+				clr_country_flag = HORMUZ_EXEMPT_FOR_COUNTRY
+			}
+		}
+
+		ai_will_do = {
+			base = 0
+			modifier = {
+				has_war = no
+				add = 10
+			}
+		}
+	}
+
+	### STRAIT OF GIBRALTAR (ENG) ###
+
+	MD_gibraltar_close_strait = {
+		icon = GFX_decision_israel_blockade
+		on_map_mode = map_and_decisions_view
+		highlight_states = {
+			highlight_state_targets = {
+				state = 19
+				state = 93
+				state = 495
+				state = 374
+			}
+		}
+		visible = {
+			OR = {
+				controls_state = 19
+				controls_state = 93
+				controls_state = 495
+				controls_state = 374
+			}
+			NOT = { has_global_flag = GIBRALTAR_STRAIT_BLOCKED }
+		}
+		available = { is_ai = no }
+		cost = 150
+		complete_effect = {
+			set_global_flag = GIBRALTAR_STRAIT_BLOCKED
+			add_ideas = MD_gibraltar_closure_backlash_idea
+			add_threat = 10
+			every_other_country = {
+				limit = { NOT = { is_in_faction_with = ROOT } }
+				add_ideas = MD_gibraltar_denied_idea
+			}
+			# Faction members are automatically exempted (tracked the same way a manual
+			# MD_gibraltar_exempt_grant would be, so MD_gibraltar_exempt_revoke can still
+			# individually strip it from one of them later if wanted).
+			if = {
+				limit = { is_in_faction = yes }
+				every_faction_member = {
+					limit = { NOT = { tag = ROOT } }
+					set_country_flag = GIBRALTAR_STRAIT_EXEMPT_FOR_COUNTRY
+					add_to_array = { array = MD_gibraltar_exempt_by_them value = ROOT }
+					ROOT = {
+						add_to_array = { array = MD_gibraltar_exempt_by_us value = PREV }
+					}
+				}
+			}
+			# See MD_maritime_chokepoints.2 (events/MD_maritime_chokepoints.txt): fires in 10
+			# days and grants a wargoal to any co-controller, Mediterranean nation, superpower, or
+			# regional power still affected and not exempted by then.
+			country_event = { id = MD_maritime_chokepoints.2 days = 10 }
+			custom_effect_tooltip = MD_gibraltar_closed_tt
+		}
+		ai_will_do = { base = 0 }
+	}
+
+	MD_gibraltar_reopen_strait = {
+		icon = GFX_decision_generic_naval
+		on_map_mode = map_and_decisions_view
+		highlight_states = {
+			highlight_state_targets = {
+				state = 19
+				state = 93
+				state = 495
+				state = 374
+			}
+		}
+		visible = {
+			OR = {
+				controls_state = 19
+				controls_state = 93
+				controls_state = 495
+				controls_state = 374
+			}
+			has_global_flag = GIBRALTAR_STRAIT_BLOCKED
+		}
+		available = { is_ai = no }
+		cost = 50
+		complete_effect = {
+			clr_global_flag = GIBRALTAR_STRAIT_BLOCKED
+			every_country = {
+				limit = { has_idea = MD_gibraltar_closure_backlash_idea }
+				remove_ideas = MD_gibraltar_closure_backlash_idea
+			}
+			every_other_country = { remove_ideas = MD_gibraltar_denied_idea }
+			every_other_country = {
+				limit = { has_country_flag = GIBRALTAR_STRAIT_BLOCKED_FOR_COUNTRY }
+				clr_country_flag = GIBRALTAR_STRAIT_BLOCKED_FOR_COUNTRY
+				remove_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade }
+				remove_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade_Trade }
+			}
+			every_other_country = {
+				limit = { has_country_flag = GIBRALTAR_STRAIT_EXEMPT_FOR_COUNTRY }
+				clr_country_flag = GIBRALTAR_STRAIT_EXEMPT_FOR_COUNTRY
+			}
+			custom_effect_tooltip = MD_gibraltar_reopened_tt
+		}
+		ai_will_do = { base = 0 }
+	}
+
+	### BAB-EL-MANDEB (DJI / YEM) ###
+
+	MD_mandeb_close_strait = {
+		icon = GFX_decision_israel_blockade
+		on_map_mode = map_and_decisions_view
+		highlight_states = {
+			highlight_state_targets = {
+				state = 1020
+				state = 197
+			}
+		}
+		visible = {
+			OR = {
+				controls_state = 1020
+				controls_state = 197
+			}
+			NOT = { has_global_flag = MANDEB_STRAIT_BLOCKED }
+		}
+		available = { is_ai = no }
+		cost = 150
+		complete_effect = {
+			set_global_flag = MANDEB_STRAIT_BLOCKED
+			add_ideas = MD_mandeb_closure_backlash_idea
+			add_threat = 10
+			every_other_country = {
+				limit = { NOT = { is_in_faction_with = ROOT } }
+				add_ideas = MD_mandeb_denied_idea
+			}
+			# Faction members are automatically exempted (tracked the same way a manual
+			# MD_mandeb_exempt_grant would be, so MD_mandeb_exempt_revoke can still individually
+			# strip it from one of them later if wanted).
+			if = {
+				limit = { is_in_faction = yes }
+				every_faction_member = {
+					limit = { NOT = { tag = ROOT } }
+					set_country_flag = MANDEB_STRAIT_EXEMPT_FOR_COUNTRY
+					add_to_array = { array = MD_mandeb_exempt_by_them value = ROOT }
+					ROOT = {
+						add_to_array = { array = MD_mandeb_exempt_by_us value = PREV }
+					}
+				}
+			}
+			# See MD_maritime_chokepoints.2 (events/MD_maritime_chokepoints.txt): fires in 10
+			# days and grants a wargoal to any co-controller, Red Sea/Horn nation, superpower, or
+			# regional power still affected and not exempted by then.
+			country_event = { id = MD_maritime_chokepoints.2 days = 10 }
+			custom_effect_tooltip = MD_mandeb_closed_tt
+		}
+		ai_will_do = { base = 0 }
+	}
+
+	MD_mandeb_reopen_strait = {
+		icon = GFX_decision_generic_naval
+		on_map_mode = map_and_decisions_view
+		highlight_states = {
+			highlight_state_targets = {
+				state = 1020
+				state = 197
+			}
+		}
+		visible = {
+			OR = {
+				controls_state = 1020
+				controls_state = 197
+			}
+			has_global_flag = MANDEB_STRAIT_BLOCKED
+		}
+		available = { is_ai = no }
+		cost = 50
+		complete_effect = {
+			clr_global_flag = MANDEB_STRAIT_BLOCKED
+			every_country = {
+				limit = { has_idea = MD_mandeb_closure_backlash_idea }
+				remove_ideas = MD_mandeb_closure_backlash_idea
+			}
+			every_other_country = { remove_ideas = MD_mandeb_denied_idea }
+			every_other_country = {
+				limit = { has_country_flag = MANDEB_STRAIT_BLOCKED_FOR_COUNTRY }
+				clr_country_flag = MANDEB_STRAIT_BLOCKED_FOR_COUNTRY
+				remove_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade }
+				remove_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade_Trade }
+			}
+			every_other_country = {
+				limit = { has_country_flag = MANDEB_STRAIT_EXEMPT_FOR_COUNTRY }
+				clr_country_flag = MANDEB_STRAIT_EXEMPT_FOR_COUNTRY
+			}
+			custom_effect_tooltip = MD_mandeb_reopened_tt
+		}
+		ai_will_do = { base = 0 }
+	}
+
+	### TURKISH STRAITS / BLACK SEA ACCESS (TUR) ###
+	# Bosphorus and Dardanelles are two separate adjacency_rule entries (map/adjacency_rules.txt)
+	# but a ship needs both open to reach the Black Sea from the Mediterranean, so they're treated
+	# as one combined chokepoint here, gated by a single shared flag pair checked by both rules.
+
+	MD_turkish_straits_close = {
+		icon = GFX_decision_israel_blockade
+		on_map_mode = map_and_decisions_view
+		highlight_states = {
+			highlight_state_targets = {
+				state = 1244
+				state = 934
+				state = 1245
+			}
+		}
+		visible = {
+			OR = {
+				controls_state = 1244
+				controls_state = 934
+				controls_state = 1245
+			}
+			NOT = { has_global_flag = TURKISH_STRAITS_BLOCKED }
+		}
+		available = { is_ai = no }
+		cost = 150
+		complete_effect = {
+			set_global_flag = TURKISH_STRAITS_BLOCKED
+			add_ideas = MD_turkish_straits_closure_backlash_idea
+			add_threat = 10
+			every_other_country = {
+				limit = { NOT = { is_in_faction_with = ROOT } }
+				add_ideas = MD_turkish_straits_denied_idea
+			}
+			# Faction members are automatically exempted (tracked the same way a manual
+			# MD_turkish_straits_exempt_grant would be, so MD_turkish_straits_exempt_revoke can
+			# still individually strip it from one of them later if wanted).
+			if = {
+				limit = { is_in_faction = yes }
+				every_faction_member = {
+					limit = { NOT = { tag = ROOT } }
+					set_country_flag = TURKISH_STRAITS_EXEMPT_FOR_COUNTRY
+					add_to_array = { array = MD_turkish_straits_exempt_by_them value = ROOT }
+					ROOT = {
+						add_to_array = { array = MD_turkish_straits_exempt_by_us value = PREV }
+					}
+				}
+			}
+			# See MD_maritime_chokepoints.2 (events/MD_maritime_chokepoints.txt): fires in 10
+			# days and grants a wargoal to any co-controller, Black Sea nation, superpower, or
+			# regional power still affected and not exempted by then.
+			country_event = { id = MD_maritime_chokepoints.2 days = 10 }
+			custom_effect_tooltip = MD_turkish_straits_closed_tt
+		}
+		ai_will_do = { base = 0 }
+	}
+
+	MD_turkish_straits_reopen = {
+		icon = GFX_decision_generic_naval
+		on_map_mode = map_and_decisions_view
+		highlight_states = {
+			highlight_state_targets = {
+				state = 1244
+				state = 934
+				state = 1245
+			}
+		}
+		visible = {
+			OR = {
+				controls_state = 1244
+				controls_state = 934
+				controls_state = 1245
+			}
+			has_global_flag = TURKISH_STRAITS_BLOCKED
+		}
+		available = { is_ai = no }
+		cost = 50
+		complete_effect = {
+			clr_global_flag = TURKISH_STRAITS_BLOCKED
+			every_country = {
+				limit = { has_idea = MD_turkish_straits_closure_backlash_idea }
+				remove_ideas = MD_turkish_straits_closure_backlash_idea
+			}
+			every_other_country = { remove_ideas = MD_turkish_straits_denied_idea }
+			every_other_country = {
+				limit = { has_country_flag = TURKISH_STRAITS_BLOCKED_FOR_COUNTRY }
+				clr_country_flag = TURKISH_STRAITS_BLOCKED_FOR_COUNTRY
+				remove_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade }
+				remove_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade_Trade }
+			}
+			every_other_country = {
+				limit = { has_country_flag = TURKISH_STRAITS_EXEMPT_FOR_COUNTRY }
+				clr_country_flag = TURKISH_STRAITS_EXEMPT_FOR_COUNTRY
+			}
+			custom_effect_tooltip = MD_turkish_straits_reopened_tt
+		}
+		ai_will_do = { base = 0 }
+	}
+
+	### KIEL CANAL (GER) ###
+
+	MD_kiel_close_canal = {
+		icon = GFX_decision_israel_blockade
+		on_map_mode = map_and_decisions_view
+		highlight_states = {
+			highlight_state_targets = {
+				state = 37
+			}
+		}
+		visible = {
+			controls_state = 37
+			NOT = { has_global_flag = KIEL_CANAL_BLOCKED }
+		}
+		available = { is_ai = no }
+		cost = 150
+		complete_effect = {
+			set_global_flag = KIEL_CANAL_BLOCKED
+			add_ideas = MD_kiel_closure_backlash_idea
+			add_threat = 10
+			every_other_country = {
+				limit = { NOT = { is_in_faction_with = ROOT } }
+				add_ideas = MD_kiel_denied_idea
+			}
+			# Faction members are automatically exempted (tracked the same way a manual
+			# MD_kiel_exempt_grant would be, so MD_kiel_exempt_revoke can still individually
+			# strip it from one of them later if wanted).
+			if = {
+				limit = { is_in_faction = yes }
+				every_faction_member = {
+					limit = { NOT = { tag = ROOT } }
+					set_country_flag = KIEL_CANAL_EXEMPT_FOR_COUNTRY
+					add_to_array = { array = MD_kiel_exempt_by_them value = ROOT }
+					ROOT = {
+						add_to_array = { array = MD_kiel_exempt_by_us value = PREV }
+					}
+				}
+			}
+			# See MD_maritime_chokepoints.2 (events/MD_maritime_chokepoints.txt): fires in 10
+			# days and grants a wargoal to any co-controller, Baltic Sea nation, superpower, or
+			# regional power still affected and not exempted by then.
+			country_event = { id = MD_maritime_chokepoints.2 days = 10 }
+			custom_effect_tooltip = MD_kiel_closed_tt
+		}
+		ai_will_do = { base = 0 }
+	}
+
+	MD_kiel_reopen_canal = {
+		icon = GFX_decision_generic_naval
+		on_map_mode = map_and_decisions_view
+		highlight_states = {
+			highlight_state_targets = {
+				state = 37
+			}
+		}
+		visible = {
+			controls_state = 37
+			has_global_flag = KIEL_CANAL_BLOCKED
+		}
+		available = { is_ai = no }
+		cost = 50
+		complete_effect = {
+			clr_global_flag = KIEL_CANAL_BLOCKED
+			every_country = {
+				limit = { has_idea = MD_kiel_closure_backlash_idea }
+				remove_ideas = MD_kiel_closure_backlash_idea
+			}
+			every_other_country = { remove_ideas = MD_kiel_denied_idea }
+			every_other_country = {
+				limit = { has_country_flag = KIEL_CANAL_BLOCKED_FOR_COUNTRY }
+				clr_country_flag = KIEL_CANAL_BLOCKED_FOR_COUNTRY
+				remove_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade }
+				remove_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade_Trade }
+			}
+			every_other_country = {
+				limit = { has_country_flag = KIEL_CANAL_EXEMPT_FOR_COUNTRY }
+				clr_country_flag = KIEL_CANAL_EXEMPT_FOR_COUNTRY
+			}
+			custom_effect_tooltip = MD_kiel_reopened_tt
+		}
+		ai_will_do = { base = 0 }
+	}
+
+	### DANISH STRAITS / BALTIC ACCESS (DEN / SWE) ###
+
+	MD_danish_straits_close = {
+		icon = GFX_decision_israel_blockade
+		on_map_mode = map_and_decisions_view
+		highlight_states = {
+			highlight_state_targets = {
+				state = 4
+				state = 5
+				state = 6
+				state = 550
+			}
+		}
+		visible = {
+			OR = {
+				controls_state = 4
+				controls_state = 5
+				controls_state = 6
+				controls_state = 550
+			}
+			NOT = { has_global_flag = DANISH_STRAITS_BLOCKED }
+		}
+		available = { is_ai = no }
+		cost = 150
+		complete_effect = {
+			set_global_flag = DANISH_STRAITS_BLOCKED
+			add_ideas = MD_danish_straits_closure_backlash_idea
+			add_threat = 10
+			every_other_country = {
+				limit = { NOT = { is_in_faction_with = ROOT } }
+				add_ideas = MD_danish_straits_denied_idea
+			}
+			# Faction members are automatically exempted (tracked the same way a manual
+			# MD_danish_straits_exempt_grant would be, so MD_danish_straits_exempt_revoke can
+			# still individually strip it from one of them later if wanted).
+			if = {
+				limit = { is_in_faction = yes }
+				every_faction_member = {
+					limit = { NOT = { tag = ROOT } }
+					set_country_flag = DANISH_STRAITS_EXEMPT_FOR_COUNTRY
+					add_to_array = { array = MD_danish_straits_exempt_by_them value = ROOT }
+					ROOT = {
+						add_to_array = { array = MD_danish_straits_exempt_by_us value = PREV }
+					}
+				}
+			}
+			# See MD_maritime_chokepoints.2 (events/MD_maritime_chokepoints.txt): fires in 10
+			# days and grants a wargoal to any co-controller, Baltic Sea nation, superpower, or
+			# regional power still affected and not exempted by then.
+			country_event = { id = MD_maritime_chokepoints.2 days = 10 }
+			custom_effect_tooltip = MD_danish_straits_closed_tt
+		}
+		ai_will_do = { base = 0 }
+	}
+
+	MD_danish_straits_reopen = {
+		icon = GFX_decision_generic_naval
+		on_map_mode = map_and_decisions_view
+		highlight_states = {
+			highlight_state_targets = {
+				state = 4
+				state = 5
+				state = 6
+				state = 550
+			}
+		}
+		visible = {
+			OR = {
+				controls_state = 4
+				controls_state = 5
+				controls_state = 6
+				controls_state = 550
+			}
+			has_global_flag = DANISH_STRAITS_BLOCKED
+		}
+		available = { is_ai = no }
+		cost = 50
+		complete_effect = {
+			clr_global_flag = DANISH_STRAITS_BLOCKED
+			every_country = {
+				limit = { has_idea = MD_danish_straits_closure_backlash_idea }
+				remove_ideas = MD_danish_straits_closure_backlash_idea
+			}
+			every_other_country = { remove_ideas = MD_danish_straits_denied_idea }
+			every_other_country = {
+				limit = { has_country_flag = DANISH_STRAITS_BLOCKED_FOR_COUNTRY }
+				clr_country_flag = DANISH_STRAITS_BLOCKED_FOR_COUNTRY
+				remove_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade }
+				remove_opinion_modifier = { target = ROOT modifier = MD_Chokepoint_Blockade_Trade }
+			}
+			every_other_country = {
+				limit = { has_country_flag = DANISH_STRAITS_EXEMPT_FOR_COUNTRY }
+				clr_country_flag = DANISH_STRAITS_EXEMPT_FOR_COUNTRY
+			}
+			custom_effect_tooltip = MD_danish_straits_reopened_tt
+		}
+		ai_will_do = { base = 0 }
+	}
+
+	### SUEZ CANAL - TOLL RATE (EGY) ###
+	# Suez and Panama are the only two chokepoints with a real toll-income mechanic
+	# (additional_income_suez/panama in common/scripted_effects/00_money_system.txt), so this
+	# is scoped to just those two rather than all 8.
+
+	MD_suez_raise_tolls = {
+		icon = GFX_decisions_tax_up_button
+		on_map_mode = map_and_decisions_view
+		highlight_states = {
+			highlight_state_targets = {
+				state = 213
+				state = 214
+			}
+		}
+		visible = {
+			OR = {
+				controls_state = 213
+				controls_state = 214
+			}
+			NOT = { has_idea = MD_suez_toll_high }
+		}
+		available = { is_ai = no }
+		cost = 50
+		complete_effect = {
+			swap_ideas = { remove_idea = MD_suez_toll_low add_idea = MD_suez_toll_high }
+			every_other_country = { add_ideas = MD_suez_toll_high_world_idea }
+			custom_effect_tooltip = MD_suez_tolls_raised_tt
+		}
+		ai_will_do = { base = 0 }
+	}
+
+	MD_suez_lower_tolls = {
+		icon = GFX_decisions_tax_down_button
+		on_map_mode = map_and_decisions_view
+		highlight_states = {
+			highlight_state_targets = {
+				state = 213
+				state = 214
+			}
+		}
+		visible = {
+			OR = {
+				controls_state = 213
+				controls_state = 214
+			}
+			NOT = { has_idea = MD_suez_toll_low }
+		}
+		available = { is_ai = no }
+		cost = 50
+		complete_effect = {
+			swap_ideas = { remove_idea = MD_suez_toll_high add_idea = MD_suez_toll_low }
+			every_other_country = { add_ideas = MD_suez_toll_low_world_idea }
+			custom_effect_tooltip = MD_suez_tolls_lowered_tt
+		}
+		ai_will_do = { base = 0 }
+	}
+
+	MD_suez_restore_standard_tolls = {
+		icon = GFX_decision_economy
+		on_map_mode = map_and_decisions_view
+		highlight_states = {
+			highlight_state_targets = {
+				state = 213
+				state = 214
+			}
+		}
+		visible = {
+			OR = {
+				controls_state = 213
+				controls_state = 214
+			}
+			OR = {
+				has_idea = MD_suez_toll_high
+				has_idea = MD_suez_toll_low
+			}
+		}
+		available = { is_ai = no }
+		cost = 25
+		complete_effect = {
+			remove_ideas = MD_suez_toll_high
+			remove_ideas = MD_suez_toll_low
+			custom_effect_tooltip = MD_suez_tolls_restored_tt
+		}
+		ai_will_do = { base = 0 }
+	}
+
+	### PANAMA CANAL - TOLL RATE (PAN) ###
+
+	MD_panama_raise_tolls = {
+		icon = GFX_decisions_tax_up_button
+		on_map_mode = map_and_decisions_view
+		highlight_states = {
+			highlight_state_targets = {
+				state = 853
+			}
+		}
+		visible = {
+			controls_state = 853
+			NOT = { has_idea = MD_panama_toll_high }
+		}
+		available = { is_ai = no }
+		cost = 50
+		complete_effect = {
+			swap_ideas = { remove_idea = MD_panama_toll_low add_idea = MD_panama_toll_high }
+			every_other_country = { add_ideas = MD_panama_toll_high_world_idea }
+			custom_effect_tooltip = MD_panama_tolls_raised_tt
+		}
+		ai_will_do = { base = 0 }
+	}
+
+	MD_panama_lower_tolls = {
+		icon = GFX_decisions_tax_down_button
+		on_map_mode = map_and_decisions_view
+		highlight_states = {
+			highlight_state_targets = {
+				state = 853
+			}
+		}
+		visible = {
+			controls_state = 853
+			NOT = { has_idea = MD_panama_toll_low }
+		}
+		available = { is_ai = no }
+		cost = 50
+		complete_effect = {
+			swap_ideas = { remove_idea = MD_panama_toll_high add_idea = MD_panama_toll_low }
+			every_other_country = { add_ideas = MD_panama_toll_low_world_idea }
+			custom_effect_tooltip = MD_panama_tolls_lowered_tt
+		}
+		ai_will_do = { base = 0 }
+	}
+
+	MD_panama_restore_standard_tolls = {
+		icon = GFX_decision_economy
+		on_map_mode = map_and_decisions_view
+		highlight_states = {
+			highlight_state_targets = {
+				state = 853
+			}
+		}
+		visible = {
+			controls_state = 853
+			OR = {
+				has_idea = MD_panama_toll_high
+				has_idea = MD_panama_toll_low
+			}
+		}
+		available = { is_ai = no }
+		cost = 25
+		complete_effect = {
+			remove_ideas = MD_panama_toll_high
+			remove_ideas = MD_panama_toll_low
+			custom_effect_tooltip = MD_panama_tolls_restored_tt
+		}
+		ai_will_do = { base = 0 }
+	}
+}

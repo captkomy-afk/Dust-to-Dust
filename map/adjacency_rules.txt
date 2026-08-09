@@ -44,7 +44,10 @@ adjacency_rule = {
 
 	is_disabled = {
 		OR = {
-			has_global_flag = SUEZ_CANAL_BLOCKED
+			AND = {
+				has_global_flag = SUEZ_CANAL_BLOCKED
+				NOT = { has_country_flag = SUEZ_CANAL_EXEMPT_FOR_COUNTRY }
+			}
 			has_country_flag = SUEZ_CANAL_BLOCKED_FOR_COUNTRY
 			has_country_flag = SUEZ_SANCTIONS_FLAG
 			214 = {
@@ -92,6 +95,17 @@ adjacency_rule = {
 
 	required_provinces = { 4135 9945 13228 279 }
 
+	is_disabled = {
+		OR = {
+			AND = {
+				has_global_flag = GIBRALTAR_STRAIT_BLOCKED
+				NOT = { has_country_flag = GIBRALTAR_STRAIT_EXEMPT_FOR_COUNTRY }
+			}
+			has_country_flag = GIBRALTAR_STRAIT_BLOCKED_FOR_COUNTRY
+		}
+		tooltip = gibraltar_strait_blocked_tt
+	}
+
 	icon = 5407
 	offset = { -31.0 0.0 -2.0 }
 }
@@ -126,6 +140,17 @@ adjacency_rule = {
 	}
 
 	required_provinces = { 6345 9279 6287 6393 3305 3260 14545 14542 3277 }
+
+	is_disabled = {
+		OR = {
+			AND = {
+				has_global_flag = DANISH_STRAITS_BLOCKED
+				NOT = { has_country_flag = DANISH_STRAITS_EXEMPT_FOR_COUNTRY }
+			}
+			has_country_flag = DANISH_STRAITS_BLOCKED_FOR_COUNTRY
+		}
+		tooltip = danish_straits_blocked_tt
+	}
 
 	icon = 2382
 	offset = { -14 0 9 }
@@ -164,7 +189,10 @@ adjacency_rule = {
 
 	is_disabled = {
 		OR = {
-			has_global_flag = PANAMA_CANAL_BLOCKED
+			AND = {
+				has_global_flag = PANAMA_CANAL_BLOCKED
+				NOT = { has_country_flag = PANAMA_CANAL_EXEMPT_FOR_COUNTRY }
+			}
 			has_country_flag = PANAMA_CANAL_BLOCKED_FOR_COUNTRY
 			852 = {
 				has_dynamic_modifier = {
@@ -212,7 +240,13 @@ adjacency_rule = {
 	required_provinces = { 9833 11829 }
 
 	is_disabled = {
-		has_country_flag = BOSPHORUS_STRAIT_BLOCKED_FOR_COUNTRY
+		OR = {
+			AND = {
+				has_global_flag = TURKISH_STRAITS_BLOCKED
+				NOT = { has_country_flag = TURKISH_STRAITS_EXEMPT_FOR_COUNTRY }
+			}
+			has_country_flag = TURKISH_STRAITS_BLOCKED_FOR_COUNTRY
+		}
 		tooltip = bosporus_strait_blocked_tt
 	}
 
@@ -252,7 +286,13 @@ adjacency_rule = {
 	required_provinces = { 849 6864 }
 
 	is_disabled = {
-		has_country_flag = DARDANELLES_STRAIT_BLOCKED_FOR_COUNTRY
+		OR = {
+			AND = {
+				has_global_flag = TURKISH_STRAITS_BLOCKED
+				NOT = { has_country_flag = TURKISH_STRAITS_EXEMPT_FOR_COUNTRY }
+			}
+			has_country_flag = TURKISH_STRAITS_BLOCKED_FOR_COUNTRY
+		}
 		tooltip = dardanelles_strait_blocked_tt
 	}
 
@@ -290,12 +330,20 @@ adjacency_rule = {
 	}
 
 	is_disabled = {
-		37 = {
-			has_dynamic_modifier = {
-				modifier = canal_damaged_modifier
-				scope = THIS
+		OR = {
+			AND = {
+				has_global_flag = KIEL_CANAL_BLOCKED
+				NOT = { has_country_flag = KIEL_CANAL_EXEMPT_FOR_COUNTRY }
+			}
+			has_country_flag = KIEL_CANAL_BLOCKED_FOR_COUNTRY
+			37 = {
+				has_dynamic_modifier = {
+					modifier = canal_damaged_modifier
+					scope = THIS
+				}
 			}
 		}
+		tooltip = kiel_canal_blocked_tt
 	}
 
 	required_provinces = { 6389 6257 317 3231 }
@@ -335,6 +383,17 @@ adjacency_rule = {
 	}
 
 	required_provinces = { 4985 14568 }
+
+	is_disabled = {
+		OR = {
+			AND = {
+				has_global_flag = MANDEB_STRAIT_BLOCKED
+				NOT = { has_country_flag = MANDEB_STRAIT_EXEMPT_FOR_COUNTRY }
+			}
+			has_country_flag = MANDEB_STRAIT_BLOCKED_FOR_COUNTRY
+		}
+		tooltip = mandeb_strait_blocked_tt
+	}
 
 	icon = 2776
 	offset = { -17 0 16 }
@@ -406,7 +465,13 @@ adjacency_rule = {
 	}
 
 	is_disabled = {
-		has_global_flag = HORMUZ_BLOCKED
+		OR = {
+			AND = {
+				has_global_flag = HORMUZ_BLOCKED
+				NOT = { has_country_flag = HORMUZ_EXEMPT_FOR_COUNTRY }
+			}
+			has_country_flag = HORMUZ_BLOCKED_FOR_COUNTRY
+		}
 		tooltip = hormuz_blocked_tt
 	}
 

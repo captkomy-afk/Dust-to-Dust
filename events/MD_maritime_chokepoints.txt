@@ -1,0 +1,602 @@
+add_namespace = MD_maritime_chokepoints
+
+# Delayed wargoal grant for maritime chokepoint restrictions. Scheduled (not fired directly)
+# from each MD_<canal>_block_impose / MD_hormuz_block_impose diplomatic action's
+# complete_effect via `country_event = { id = MD_maritime_chokepoints.1 days = 10 }`, fired on
+# the blocked country's own scope. Waiting 10 days instead of granting the wargoal instantly
+# gives the blocking controller a window to send an exemption (MD_<canal>_exempt_grant) before
+# the target - and any other current co-controller of a contested chokepoint - actually gets
+# the ability to declare war over it. Re-checks the block/exempt flags fresh at fire time, so a
+# lift or exemption granted during the wait correctly cancels the grant; re-checks current
+# controllers fresh too, so a co-controller who took over mid-wait is still covered.
+country_event = {
+	id = MD_maritime_chokepoints.1
+	is_triggered_only = yes
+
+	hidden = yes
+	timeout_days = 1
+
+	immediate = {
+		if = {
+			limit = {
+				has_country_flag = SUEZ_CANAL_BLOCKED_FOR_COUNTRY
+				NOT = { has_country_flag = SUEZ_CANAL_EXEMPT_FOR_COUNTRY }
+			}
+			for_each_loop = {
+				array = MD_suez_block_on_us
+				value = v
+				create_wargoal = { target = v type = take_state }
+				213 = {
+					controller = {
+						if = {
+							limit = { NOT = { tag = v } NOT = { tag = ROOT } }
+							create_wargoal = { target = v type = take_state }
+						}
+					}
+				}
+				214 = {
+					controller = {
+						if = {
+							limit = { NOT = { tag = v } NOT = { tag = ROOT } }
+							create_wargoal = { target = v type = take_state }
+						}
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = PANAMA_CANAL_BLOCKED_FOR_COUNTRY
+				NOT = { has_country_flag = PANAMA_CANAL_EXEMPT_FOR_COUNTRY }
+			}
+			for_each_loop = {
+				array = MD_panama_block_on_us
+				value = v
+				create_wargoal = { target = v type = take_state }
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = HORMUZ_BLOCKED_FOR_COUNTRY
+				NOT = { has_country_flag = HORMUZ_EXEMPT_FOR_COUNTRY }
+			}
+			for_each_loop = {
+				array = MD_hormuz_block_on_us
+				value = v
+				create_wargoal = { target = v type = take_state }
+				978 = {
+					controller = {
+						if = {
+							limit = { NOT = { tag = v } NOT = { tag = ROOT } }
+							create_wargoal = { target = v type = take_state }
+						}
+					}
+				}
+				425 = {
+					controller = {
+						if = {
+							limit = { NOT = { tag = v } NOT = { tag = ROOT } }
+							create_wargoal = { target = v type = take_state }
+						}
+					}
+				}
+				1119 = {
+					controller = {
+						if = {
+							limit = { NOT = { tag = v } NOT = { tag = ROOT } }
+							create_wargoal = { target = v type = take_state }
+						}
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = GIBRALTAR_STRAIT_BLOCKED_FOR_COUNTRY
+				NOT = { has_country_flag = GIBRALTAR_STRAIT_EXEMPT_FOR_COUNTRY }
+			}
+			for_each_loop = {
+				array = MD_gibraltar_block_on_us
+				value = v
+				create_wargoal = { target = v type = take_state }
+				19 = {
+					controller = {
+						if = {
+							limit = { NOT = { tag = v } NOT = { tag = ROOT } }
+							create_wargoal = { target = v type = take_state }
+						}
+					}
+				}
+				93 = {
+					controller = {
+						if = {
+							limit = { NOT = { tag = v } NOT = { tag = ROOT } }
+							create_wargoal = { target = v type = take_state }
+						}
+					}
+				}
+				495 = {
+					controller = {
+						if = {
+							limit = { NOT = { tag = v } NOT = { tag = ROOT } }
+							create_wargoal = { target = v type = take_state }
+						}
+					}
+				}
+				374 = {
+					controller = {
+						if = {
+							limit = { NOT = { tag = v } NOT = { tag = ROOT } }
+							create_wargoal = { target = v type = take_state }
+						}
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = MANDEB_STRAIT_BLOCKED_FOR_COUNTRY
+				NOT = { has_country_flag = MANDEB_STRAIT_EXEMPT_FOR_COUNTRY }
+			}
+			for_each_loop = {
+				array = MD_mandeb_block_on_us
+				value = v
+				create_wargoal = { target = v type = take_state }
+				1020 = {
+					controller = {
+						if = {
+							limit = { NOT = { tag = v } NOT = { tag = ROOT } }
+							create_wargoal = { target = v type = take_state }
+						}
+					}
+				}
+				197 = {
+					controller = {
+						if = {
+							limit = { NOT = { tag = v } NOT = { tag = ROOT } }
+							create_wargoal = { target = v type = take_state }
+						}
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = TURKISH_STRAITS_BLOCKED_FOR_COUNTRY
+				NOT = { has_country_flag = TURKISH_STRAITS_EXEMPT_FOR_COUNTRY }
+			}
+			for_each_loop = {
+				array = MD_turkish_straits_block_on_us
+				value = v
+				create_wargoal = { target = v type = take_state }
+				1244 = {
+					controller = {
+						if = {
+							limit = { NOT = { tag = v } NOT = { tag = ROOT } }
+							create_wargoal = { target = v type = take_state }
+						}
+					}
+				}
+				934 = {
+					controller = {
+						if = {
+							limit = { NOT = { tag = v } NOT = { tag = ROOT } }
+							create_wargoal = { target = v type = take_state }
+						}
+					}
+				}
+				1245 = {
+					controller = {
+						if = {
+							limit = { NOT = { tag = v } NOT = { tag = ROOT } }
+							create_wargoal = { target = v type = take_state }
+						}
+					}
+				}
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = KIEL_CANAL_BLOCKED_FOR_COUNTRY
+				NOT = { has_country_flag = KIEL_CANAL_EXEMPT_FOR_COUNTRY }
+			}
+			for_each_loop = {
+				array = MD_kiel_block_on_us
+				value = v
+				create_wargoal = { target = v type = take_state }
+			}
+		}
+		if = {
+			limit = {
+				has_country_flag = DANISH_STRAITS_BLOCKED_FOR_COUNTRY
+				NOT = { has_country_flag = DANISH_STRAITS_EXEMPT_FOR_COUNTRY }
+			}
+			for_each_loop = {
+				array = MD_danish_straits_block_on_us
+				value = v
+				create_wargoal = { target = v type = take_state }
+				4 = {
+					controller = {
+						if = {
+							limit = { NOT = { tag = v } NOT = { tag = ROOT } }
+							create_wargoal = { target = v type = take_state }
+						}
+					}
+				}
+				5 = {
+					controller = {
+						if = {
+							limit = { NOT = { tag = v } NOT = { tag = ROOT } }
+							create_wargoal = { target = v type = take_state }
+						}
+					}
+				}
+				6 = {
+					controller = {
+						if = {
+							limit = { NOT = { tag = v } NOT = { tag = ROOT } }
+							create_wargoal = { target = v type = take_state }
+						}
+					}
+				}
+				550 = {
+					controller = {
+						if = {
+							limit = { NOT = { tag = v } NOT = { tag = ROOT } }
+							create_wargoal = { target = v type = take_state }
+						}
+					}
+				}
+			}
+		}
+	}
+}
+
+# Delayed wargoal grant for a FULL chokepoint closure (MD_<canal>_close_canal /
+# MD_<canal>_close_strait / PER_block_hormuz). Scheduled from each of those decisions'
+# complete_effect via `country_event = { id = MD_maritime_chokepoints.2 days = 10 }`, fired on
+# the closing country's own scope (so ROOT = the closer throughout). Same 10-day grace period
+# as MD_maritime_chokepoints.1 to allow exemptions first. Three groups can end up with a
+# wargoal against the closer, all re-checked fresh at fire time and all skipped for anyone
+# exempted or for the closer itself:
+#  1. Any other current co-controller of the chokepoint (didn't consent to a unilateral closure
+#     of a strait they also border).
+#  2. Countries in that chokepoint's regional "who actually gets cut off" list. Suez and Panama
+#     don't get one - as pure interoceanic shortcuts (not regional straits) only major powers
+#     are assumed to care enough to react.
+#  3. Any Superpower (has_idea = super_power) or Regional Power (has_idea = regional_power),
+#     everywhere, regardless of geography - closing an international chokepoint draws great
+#     power attention no matter where it is.
+country_event = {
+	id = MD_maritime_chokepoints.2
+	is_triggered_only = yes
+
+	hidden = yes
+	timeout_days = 1
+
+	immediate = {
+		if = {
+			limit = { has_global_flag = SUEZ_CANAL_BLOCKED }
+			213 = {
+				controller = {
+					if = {
+						limit = { NOT = { tag = ROOT } NOT = { has_country_flag = SUEZ_CANAL_EXEMPT_FOR_COUNTRY } }
+						create_wargoal = { target = ROOT type = take_state }
+					}
+				}
+			}
+			214 = {
+				controller = {
+					if = {
+						limit = { NOT = { tag = ROOT } NOT = { has_country_flag = SUEZ_CANAL_EXEMPT_FOR_COUNTRY } }
+						create_wargoal = { target = ROOT type = take_state }
+					}
+				}
+			}
+			every_country = {
+				limit = {
+					NOT = { tag = ROOT }
+					NOT = { has_country_flag = SUEZ_CANAL_EXEMPT_FOR_COUNTRY }
+					OR = {
+						has_idea = super_power
+						has_idea = regional_power
+					}
+				}
+				create_wargoal = { target = ROOT type = take_state }
+			}
+		}
+		if = {
+			limit = { has_global_flag = PANAMA_CANAL_BLOCKED }
+			853 = {
+				controller = {
+					if = {
+						limit = { NOT = { tag = ROOT } NOT = { has_country_flag = PANAMA_CANAL_EXEMPT_FOR_COUNTRY } }
+						create_wargoal = { target = ROOT type = take_state }
+					}
+				}
+			}
+			every_country = {
+				limit = {
+					NOT = { tag = ROOT }
+					NOT = { has_country_flag = PANAMA_CANAL_EXEMPT_FOR_COUNTRY }
+					OR = {
+						has_idea = super_power
+						has_idea = regional_power
+					}
+				}
+				create_wargoal = { target = ROOT type = take_state }
+			}
+		}
+		if = {
+			limit = { has_global_flag = HORMUZ_BLOCKED }
+			978 = {
+				controller = {
+					if = {
+						limit = { NOT = { tag = ROOT } NOT = { has_country_flag = HORMUZ_EXEMPT_FOR_COUNTRY } }
+						create_wargoal = { target = ROOT type = take_state }
+					}
+				}
+			}
+			425 = {
+				controller = {
+					if = {
+						limit = { NOT = { tag = ROOT } NOT = { has_country_flag = HORMUZ_EXEMPT_FOR_COUNTRY } }
+						create_wargoal = { target = ROOT type = take_state }
+					}
+				}
+			}
+			1119 = {
+				controller = {
+					if = {
+						limit = { NOT = { tag = ROOT } NOT = { has_country_flag = HORMUZ_EXEMPT_FOR_COUNTRY } }
+						create_wargoal = { target = ROOT type = take_state }
+					}
+				}
+			}
+			every_country = {
+				limit = {
+					NOT = { tag = ROOT }
+					NOT = { has_country_flag = HORMUZ_EXEMPT_FOR_COUNTRY }
+					OR = {
+						tag = OMA
+						tag = SAU
+						tag = KUW
+						tag = IRQ
+						tag = PER
+						tag = BHR
+						tag = QAT
+						tag = UAE
+						has_idea = super_power
+						has_idea = regional_power
+					}
+				}
+				create_wargoal = { target = ROOT type = take_state }
+			}
+		}
+		if = {
+			limit = { has_global_flag = GIBRALTAR_STRAIT_BLOCKED }
+			19 = {
+				controller = {
+					if = {
+						limit = { NOT = { tag = ROOT } NOT = { has_country_flag = GIBRALTAR_STRAIT_EXEMPT_FOR_COUNTRY } }
+						create_wargoal = { target = ROOT type = take_state }
+					}
+				}
+			}
+			93 = {
+				controller = {
+					if = {
+						limit = { NOT = { tag = ROOT } NOT = { has_country_flag = GIBRALTAR_STRAIT_EXEMPT_FOR_COUNTRY } }
+						create_wargoal = { target = ROOT type = take_state }
+					}
+				}
+			}
+			495 = {
+				controller = {
+					if = {
+						limit = { NOT = { tag = ROOT } NOT = { has_country_flag = GIBRALTAR_STRAIT_EXEMPT_FOR_COUNTRY } }
+						create_wargoal = { target = ROOT type = take_state }
+					}
+				}
+			}
+			374 = {
+				controller = {
+					if = {
+						limit = { NOT = { tag = ROOT } NOT = { has_country_flag = GIBRALTAR_STRAIT_EXEMPT_FOR_COUNTRY } }
+						create_wargoal = { target = ROOT type = take_state }
+					}
+				}
+			}
+			every_country = {
+				limit = {
+					NOT = { tag = ROOT }
+					NOT = { has_country_flag = GIBRALTAR_STRAIT_EXEMPT_FOR_COUNTRY }
+					OR = {
+						tag = SPR
+						tag = MOR
+						tag = ALG
+						tag = TUN
+						tag = LBA
+						tag = EGY
+						tag = ISR
+						tag = LEB
+						tag = SYR
+						tag = TUR
+						tag = GRE
+						tag = ITA
+						tag = FRA
+						tag = MLT
+						tag = CYP
+						tag = ALB
+						tag = MNT
+						tag = CRO
+						tag = BOS
+						tag = SLV
+						has_idea = super_power
+						has_idea = regional_power
+					}
+				}
+				create_wargoal = { target = ROOT type = take_state }
+			}
+		}
+		if = {
+			limit = { has_global_flag = MANDEB_STRAIT_BLOCKED }
+			1020 = {
+				controller = {
+					if = {
+						limit = { NOT = { tag = ROOT } NOT = { has_country_flag = MANDEB_STRAIT_EXEMPT_FOR_COUNTRY } }
+						create_wargoal = { target = ROOT type = take_state }
+					}
+				}
+			}
+			197 = {
+				controller = {
+					if = {
+						limit = { NOT = { tag = ROOT } NOT = { has_country_flag = MANDEB_STRAIT_EXEMPT_FOR_COUNTRY } }
+						create_wargoal = { target = ROOT type = take_state }
+					}
+				}
+			}
+			every_country = {
+				limit = {
+					NOT = { tag = ROOT }
+					NOT = { has_country_flag = MANDEB_STRAIT_EXEMPT_FOR_COUNTRY }
+					OR = {
+						tag = YEM
+						tag = DJI
+						tag = ERI
+						tag = SUD
+						tag = ISR
+						tag = EGY
+						tag = JOR
+						tag = SAU
+						has_idea = super_power
+						has_idea = regional_power
+					}
+				}
+				create_wargoal = { target = ROOT type = take_state }
+			}
+		}
+		if = {
+			limit = { has_global_flag = TURKISH_STRAITS_BLOCKED }
+			1244 = {
+				controller = {
+					if = {
+						limit = { NOT = { tag = ROOT } NOT = { has_country_flag = TURKISH_STRAITS_EXEMPT_FOR_COUNTRY } }
+						create_wargoal = { target = ROOT type = take_state }
+					}
+				}
+			}
+			934 = {
+				controller = {
+					if = {
+						limit = { NOT = { tag = ROOT } NOT = { has_country_flag = TURKISH_STRAITS_EXEMPT_FOR_COUNTRY } }
+						create_wargoal = { target = ROOT type = take_state }
+					}
+				}
+			}
+			1245 = {
+				controller = {
+					if = {
+						limit = { NOT = { tag = ROOT } NOT = { has_country_flag = TURKISH_STRAITS_EXEMPT_FOR_COUNTRY } }
+						create_wargoal = { target = ROOT type = take_state }
+					}
+				}
+			}
+			every_country = {
+				limit = {
+					NOT = { tag = ROOT }
+					NOT = { has_country_flag = TURKISH_STRAITS_EXEMPT_FOR_COUNTRY }
+					OR = {
+						tag = SOV
+						tag = UKR
+						tag = ROM
+						tag = BUL
+						tag = GEO
+						has_idea = super_power
+						has_idea = regional_power
+					}
+				}
+				create_wargoal = { target = ROOT type = take_state }
+			}
+		}
+		if = {
+			limit = { has_global_flag = KIEL_CANAL_BLOCKED }
+			37 = {
+				controller = {
+					if = {
+						limit = { NOT = { tag = ROOT } NOT = { has_country_flag = KIEL_CANAL_EXEMPT_FOR_COUNTRY } }
+						create_wargoal = { target = ROOT type = take_state }
+					}
+				}
+			}
+			every_country = {
+				limit = {
+					NOT = { tag = ROOT }
+					NOT = { has_country_flag = KIEL_CANAL_EXEMPT_FOR_COUNTRY }
+					OR = {
+						tag = SOV
+						tag = EST
+						tag = LAT
+						tag = LIT
+						tag = FIN
+						has_idea = super_power
+						has_idea = regional_power
+					}
+				}
+				create_wargoal = { target = ROOT type = take_state }
+			}
+		}
+		if = {
+			limit = { has_global_flag = DANISH_STRAITS_BLOCKED }
+			4 = {
+				controller = {
+					if = {
+						limit = { NOT = { tag = ROOT } NOT = { has_country_flag = DANISH_STRAITS_EXEMPT_FOR_COUNTRY } }
+						create_wargoal = { target = ROOT type = take_state }
+					}
+				}
+			}
+			5 = {
+				controller = {
+					if = {
+						limit = { NOT = { tag = ROOT } NOT = { has_country_flag = DANISH_STRAITS_EXEMPT_FOR_COUNTRY } }
+						create_wargoal = { target = ROOT type = take_state }
+					}
+				}
+			}
+			6 = {
+				controller = {
+					if = {
+						limit = { NOT = { tag = ROOT } NOT = { has_country_flag = DANISH_STRAITS_EXEMPT_FOR_COUNTRY } }
+						create_wargoal = { target = ROOT type = take_state }
+					}
+				}
+			}
+			550 = {
+				controller = {
+					if = {
+						limit = { NOT = { tag = ROOT } NOT = { has_country_flag = DANISH_STRAITS_EXEMPT_FOR_COUNTRY } }
+						create_wargoal = { target = ROOT type = take_state }
+					}
+				}
+			}
+			every_country = {
+				limit = {
+					NOT = { tag = ROOT }
+					NOT = { has_country_flag = DANISH_STRAITS_EXEMPT_FOR_COUNTRY }
+					OR = {
+						tag = SOV
+						tag = EST
+						tag = LAT
+						tag = LIT
+						tag = FIN
+						has_idea = super_power
+						has_idea = regional_power
+					}
+				}
+				create_wargoal = { target = ROOT type = take_state }
+			}
+		}
+	}
+}

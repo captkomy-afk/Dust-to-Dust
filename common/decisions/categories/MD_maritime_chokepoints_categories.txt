@@ -1,0 +1,56 @@
+MD_maritime_chokepoints_category = {
+	allowed = {
+		is_ai = no
+		OR = {
+			controls_state = 214 #Suez
+			controls_state = 213 #Sinai
+			controls_state = 853 #Panama
+			controls_state = 978 #Hormuzgan
+			controls_state = 425 #Musandam
+			controls_state = 1119 #Abu Musa
+			controls_state = 19 #Gibraltar
+			controls_state = 93 #Andalucia
+			controls_state = 495 #Ceuta
+			controls_state = 374 #Tanger-Tetouan-Al Hoceima
+			controls_state = 1020 #Tadjourah
+			controls_state = 197 #Taiz
+			controls_state = 1244 #Istanbul
+			controls_state = 934 #Edirne
+			controls_state = 1245 #Balikesir
+			controls_state = 37 #Schleswig-Holstein (Kiel)
+			controls_state = 4 #Sjaelland
+			controls_state = 5 #Fyn
+			controls_state = 6 #Jylland
+			controls_state = 550 #Skane
+		}
+	}
+
+	icon = GFX_decisions_category_blockade
+	priority = 500
+	visible_when_empty = no
+	visible = {
+		is_ai = no
+		OR = {
+			controls_state = 214
+			controls_state = 213
+			controls_state = 853
+			controls_state = 978
+			controls_state = 425
+			controls_state = 1119
+			controls_state = 19
+			controls_state = 93
+			controls_state = 495
+			controls_state = 374
+			controls_state = 1020
+			controls_state = 197
+			controls_state = 1244
+			controls_state = 934
+			controls_state = 1245
+			controls_state = 37
+			controls_state = 4
+			controls_state = 5
+			controls_state = 6
+			controls_state = 550
+		}
+	}
+}
