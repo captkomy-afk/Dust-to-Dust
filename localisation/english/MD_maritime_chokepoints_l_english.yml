@@ -200,8 +200,8 @@
  MD_kiel_denied_idea_desc: "We have been denied passage through the Kiel Canal, disrupting our shipping and industry."
  MD_danish_straits_denied_idea: "Denied Passage: Danish Straits"
  MD_danish_straits_denied_idea_desc: "We have been denied passage through the Danish Straits, disrupting our shipping and industry."
- MD_chokepoint_denied_idea_TT: "Denied passage through a maritime chokepoint is disrupting our shipping and industry."
- MD_hormuz_denied_idea_TT: "Denied passage through the Strait of Hormuz is disrupting our oil exports and fuel supply."
+ MD_chokepoint_denied_idea_TT: "Denied passage through a maritime chokepoint is disrupting our shipping and industry. Rerouting our trade the long way around is cutting into our export revenue."
+ MD_hormuz_denied_idea_TT: "Denied passage through the Strait of Hormuz is disrupting our oil exports and fuel supply. Rerouting our trade the long way around is cutting into our export revenue more broadly too."
  MD_chokepoint_closure_backlash_idea_TT: "Unilaterally closing an internationally important waterway is drawing diplomatic and economic backlash from the rest of the world."
 
  ### CLOSURE BACKLASH IDEAS (self-penalty for the country that imposed a full closure) ###

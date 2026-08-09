@@ -25,6 +25,7 @@ ideas = {
 				consumer_goods_factor = 0.02
 				production_speed_buildings_factor = -0.05
 				stability_factor = -0.01
+				resource_export_multiplier_modifier = -0.05
 				custom_modifier_tooltip = MD_chokepoint_denied_idea_TT
 			}
 		}
@@ -46,6 +47,7 @@ ideas = {
 				consumer_goods_factor = 0.02
 				production_speed_buildings_factor = -0.05
 				stability_factor = -0.01
+				resource_export_multiplier_modifier = -0.05
 				custom_modifier_tooltip = MD_chokepoint_denied_idea_TT
 			}
 		}
@@ -67,6 +69,7 @@ ideas = {
 				consumer_goods_factor = 0.02
 				production_speed_buildings_factor = -0.05
 				stability_factor = -0.01
+				resource_export_multiplier_modifier = -0.05
 				custom_modifier_tooltip = MD_chokepoint_denied_idea_TT
 			}
 		}
@@ -88,6 +91,7 @@ ideas = {
 				consumer_goods_factor = 0.02
 				production_speed_buildings_factor = -0.05
 				stability_factor = -0.01
+				resource_export_multiplier_modifier = -0.05
 				custom_modifier_tooltip = MD_chokepoint_denied_idea_TT
 			}
 		}
@@ -110,6 +114,7 @@ ideas = {
 				max_fuel_factor = -0.15
 				base_fuel_gain_factor = -0.10
 				oil_export_multiplier_modifier = -0.25
+				resource_export_multiplier_modifier = -0.05
 				custom_modifier_tooltip = MD_hormuz_denied_idea_TT
 			}
 		}
@@ -131,6 +136,7 @@ ideas = {
 				consumer_goods_factor = 0.02
 				production_speed_buildings_factor = -0.05
 				stability_factor = -0.01
+				resource_export_multiplier_modifier = -0.05
 				custom_modifier_tooltip = MD_chokepoint_denied_idea_TT
 			}
 		}
@@ -152,6 +158,7 @@ ideas = {
 				consumer_goods_factor = 0.02
 				production_speed_buildings_factor = -0.05
 				stability_factor = -0.01
+				resource_export_multiplier_modifier = -0.05
 				custom_modifier_tooltip = MD_chokepoint_denied_idea_TT
 			}
 		}
@@ -173,6 +180,7 @@ ideas = {
 				consumer_goods_factor = 0.02
 				production_speed_buildings_factor = -0.05
 				stability_factor = -0.01
+				resource_export_multiplier_modifier = -0.05
 				custom_modifier_tooltip = MD_chokepoint_denied_idea_TT
 			}
 		}

@@ -1194,6 +1194,7 @@ ideas = {
 				max_fuel_factor = -0.25
 				base_fuel_gain_factor = -0.15
 				oil_export_multiplier_modifier = -0.25
+				resource_export_multiplier_modifier = -0.05
 			}
 		}
 
