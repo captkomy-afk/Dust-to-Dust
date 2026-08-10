@@ -881,23 +881,52 @@ calculate_additional_income_rate = {
 		set_variable = { additional_income_panama = 0.05 }
 		add_to_variable = { additional_income_rate = additional_income_panama }
 	}
-	# Toll rate decisions (common/decisions/MD_maritime_chokepoints_decisions.txt): a stackable
-	# delta on top of whatever the base control income above already grants.
-	if = { limit = { has_idea = MD_suez_toll_high }
-		set_variable = { additional_income_suez_toll = 0.05 }
-		add_to_variable = { additional_income_rate = additional_income_suez_toll }
+	# Toll rate decisions (common/decisions/MD_maritime_chokepoints_decisions.txt): a continuous,
+	# GDP-indexed toll income on top of whatever the base control income above already grants.
+	# MD_suez/panama_toll_gdp_anchor is a snapshot of gdp_total taken the first time the
+	# controller ever touches a toll decision (set in MD_suez/panama_toll_recompute, below) -
+	# medium (level 0, multiplier 1) is calibrated to be exactly 0.1bn/week at that snapshot,
+	# then income is recalculated fresh every week as gdp_total/anchor * 0.1 * multiplier, so it
+	# tracks the controller's current economy automatically rather than freezing at click-time
+	# GDP. Anchor stays unset (0) until the controller's first toll decision - no income before
+	# that, matching how every other idea-gated income stream here requires taking a decision.
+	if = { limit = { OR = { controls_state = 213 controls_state = 214 } }
+		if = { limit = { check_variable = { MD_suez_toll_gdp_anchor > 0 } }
+			set_variable = {
+				additional_income_suez_toll = {
+					value = gdp_total
+					divide = { value = MD_suez_toll_gdp_anchor clamp = { min = 0.001 max = @math_expressions_max } }
+					multiply = 0.1
+					multiply = MD_suez_toll_multiplier
+				}
+			}
+			add_to_variable = { additional_income_rate = additional_income_suez_toll }
+		}
 	}
-	if = { limit = { has_idea = MD_suez_toll_low }
-		set_variable = { additional_income_suez_toll = -0.05 }
-		add_to_variable = { additional_income_rate = additional_income_suez_toll }
+	else = {
+		# Lost control of both Suez states - the toll policy (and its dynamic modifier penalty)
+		# no longer applies to a canal this country doesn't hold, same as the old idea's cancel.
+		if = { limit = { has_dynamic_modifier = { modifier = MD_suez_toll_modifier } }
+			remove_dynamic_modifier = { modifier = MD_suez_toll_modifier }
+		}
 	}
-	if = { limit = { has_idea = MD_panama_toll_high }
-		set_variable = { additional_income_panama_toll = 0.025 }
-		add_to_variable = { additional_income_rate = additional_income_panama_toll }
+	if = { limit = { controls_state = 853 }
+		if = { limit = { check_variable = { MD_panama_toll_gdp_anchor > 0 } }
+			set_variable = {
+				additional_income_panama_toll = {
+					value = gdp_total
+					divide = { value = MD_panama_toll_gdp_anchor clamp = { min = 0.001 max = @math_expressions_max } }
+					multiply = 0.1
+					multiply = MD_panama_toll_multiplier
+				}
+			}
+			add_to_variable = { additional_income_rate = additional_income_panama_toll }
+		}
 	}
-	if = { limit = { has_idea = MD_panama_toll_low }
-		set_variable = { additional_income_panama_toll = -0.025 }
-		add_to_variable = { additional_income_rate = additional_income_panama_toll }
+	else = {
+		if = { limit = { has_dynamic_modifier = { modifier = MD_panama_toll_modifier } }
+			remove_dynamic_modifier = { modifier = MD_panama_toll_modifier }
+		}
 	}
 	if = { limit = { has_idea = gateway_to_asia }
 		set_variable = { gateway_to_asia_income = 0.1 }
@@ -2337,6 +2366,110 @@ calculate_additional_income_rate = {
 	# Weekly Subsidies received from other countries (mt_subsidies diplomatic action)
 	add_to_variable = { additional_income_rate = total_subsidies_in }
 }
+
+# Effect: MD_suez_toll_recompute / MD_panama_toll_recompute
+# Purpose: Called from MD_suez/panama_raise_tolls, _lower_tolls and _restore_standard_tolls
+# (common/decisions/MD_maritime_chokepoints_decisions.txt) whenever MD_suez/panama_toll_level
+# changes. Updates the multiplier only - the income itself is recalculated fresh every week in
+# calculate_additional_income_rate (above) from gdp_total/MD_suez_panama_toll_gdp_anchor * 0.1 *
+# multiplier, so it tracks the controller's current economy automatically between decisions.
+# Medium (level 0, multiplier 1) is a GDP-indexed baseline toll with no owner penalty; each
+# raise compounds the multiplier exponentially (uncapped in formula, soft-capped at level 20 by
+# the decision's available block); each lower ramps it linearly down to a hard floor of zero
+# income at level -8.
+# The owner-side cost/benefit (trade opinion, stability, consumer goods, political power) is
+# MD_suez/panama_toll_modifier (common/dynamic_modifiers/00_MD_dynamic_modifiers.txt), whose
+# fields read the *_penalty_* vars set below - linear in toll level, not the exponential income
+# multiplier, so it keeps growing every additional step instead of capping at the first tier the
+# way a flat idea would. A positive level (raised) yields a negative trade/stability/political
+# power factor and a positive consumer goods factor; a negative level (lowered) flips every
+# sign automatically since the vars are level itself times a constant.
+MD_suez_toll_recompute = {
+	if = { limit = { check_variable = { MD_suez_toll_gdp_anchor = 0 } }
+		set_variable = { MD_suez_toll_gdp_anchor = gdp_total }
+	}
+	set_variable = { MD_suez_toll_multiplier = 1 }
+	if = {
+		limit = { check_variable = { MD_suez_toll_level > 0 } }
+		for_loop_effect = {
+			end = MD_suez_toll_level
+			value = v
+			multiply_variable = { MD_suez_toll_multiplier = 1.15 }
+		}
+	}
+	else_if = {
+		limit = { check_variable = { MD_suez_toll_level < 0 } }
+		set_variable = {
+			MD_suez_toll_multiplier = {
+				value = MD_suez_toll_level
+				divide = 8
+				add = 1
+				clamp = { min = 0 max = 1 }
+			}
+		}
+	}
+
+	set_variable = { MD_suez_toll_penalty_trade = { value = MD_suez_toll_level multiply = -0.02 } }
+	set_variable = { MD_suez_toll_penalty_stability = { value = MD_suez_toll_level multiply = -0.002 } }
+	set_variable = { MD_suez_toll_penalty_consumer_goods = { value = MD_suez_toll_level multiply = 0.005 } }
+	set_variable = { MD_suez_toll_penalty_pp = { value = MD_suez_toll_level multiply = -0.01 } }
+
+	if = {
+		limit = { check_variable = { MD_suez_toll_level = 0 } }
+		if = { limit = { has_dynamic_modifier = { modifier = MD_suez_toll_modifier } }
+			remove_dynamic_modifier = { modifier = MD_suez_toll_modifier }
+		}
+	}
+	else = {
+		if = { limit = { NOT = { has_dynamic_modifier = { modifier = MD_suez_toll_modifier } } }
+			add_dynamic_modifier = { modifier = MD_suez_toll_modifier }
+		}
+	}
+}
+
+MD_panama_toll_recompute = {
+	if = { limit = { check_variable = { MD_panama_toll_gdp_anchor = 0 } }
+		set_variable = { MD_panama_toll_gdp_anchor = gdp_total }
+	}
+	set_variable = { MD_panama_toll_multiplier = 1 }
+	if = {
+		limit = { check_variable = { MD_panama_toll_level > 0 } }
+		for_loop_effect = {
+			end = MD_panama_toll_level
+			value = v
+			multiply_variable = { MD_panama_toll_multiplier = 1.15 }
+		}
+	}
+	else_if = {
+		limit = { check_variable = { MD_panama_toll_level < 0 } }
+		set_variable = {
+			MD_panama_toll_multiplier = {
+				value = MD_panama_toll_level
+				divide = 8
+				add = 1
+				clamp = { min = 0 max = 1 }
+			}
+		}
+	}
+
+	set_variable = { MD_panama_toll_penalty_trade = { value = MD_panama_toll_level multiply = -0.02 } }
+	set_variable = { MD_panama_toll_penalty_stability = { value = MD_panama_toll_level multiply = -0.002 } }
+	set_variable = { MD_panama_toll_penalty_consumer_goods = { value = MD_panama_toll_level multiply = 0.005 } }
+	set_variable = { MD_panama_toll_penalty_pp = { value = MD_panama_toll_level multiply = -0.01 } }
+
+	if = {
+		limit = { check_variable = { MD_panama_toll_level = 0 } }
+		if = { limit = { has_dynamic_modifier = { modifier = MD_panama_toll_modifier } }
+			remove_dynamic_modifier = { modifier = MD_panama_toll_modifier }
+		}
+	}
+	else = {
+		if = { limit = { NOT = { has_dynamic_modifier = { modifier = MD_panama_toll_modifier } } }
+			add_dynamic_modifier = { modifier = MD_panama_toll_modifier }
+		}
+	}
+}
+
 # Effect: calculate_interest_rate
 # Purpose: Computes daily interest rate on debt based on debt-to-GDP ratio, monetary policy, and world threat
 calculate_interest_rate = {

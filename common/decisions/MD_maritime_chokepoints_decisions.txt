@@ -807,13 +807,20 @@ MD_maritime_chokepoints_category = {
 				controls_state = 213
 				controls_state = 214
 			}
-			NOT = { has_idea = MD_suez_toll_high }
 		}
-		available = { is_ai = no }
+		available = {
+			is_ai = no
+			custom_trigger_tooltip = {
+				tooltip = MD_toll_max_level_tt
+				check_variable = { MD_suez_toll_level < 20 }
+			}
+		}
 		cost = 50
+		days_re_enable = 1
 		complete_effect = {
-			swap_ideas = { remove_idea = MD_suez_toll_low add_idea = MD_suez_toll_high }
-			every_other_country = { add_ideas = MD_suez_toll_high_world_idea }
+			log = "[GetDateText]: [Root.GetName]: Decision MD_suez_raise_tolls"
+			add_to_variable = { MD_suez_toll_level = 1 }
+			MD_suez_toll_recompute = yes
 			custom_effect_tooltip = MD_suez_tolls_raised_tt
 		}
 		ai_will_do = { base = 0 }
@@ -833,13 +840,20 @@ MD_maritime_chokepoints_category = {
 				controls_state = 213
 				controls_state = 214
 			}
-			NOT = { has_idea = MD_suez_toll_low }
 		}
-		available = { is_ai = no }
+		available = {
+			is_ai = no
+			custom_trigger_tooltip = {
+				tooltip = MD_toll_min_level_tt
+				check_variable = { MD_suez_toll_level > -8 }
+			}
+		}
 		cost = 50
+		days_re_enable = 1
 		complete_effect = {
-			swap_ideas = { remove_idea = MD_suez_toll_high add_idea = MD_suez_toll_low }
-			every_other_country = { add_ideas = MD_suez_toll_low_world_idea }
+			log = "[GetDateText]: [Root.GetName]: Decision MD_suez_lower_tolls"
+			add_to_variable = { MD_suez_toll_level = -1 }
+			MD_suez_toll_recompute = yes
 			custom_effect_tooltip = MD_suez_tolls_lowered_tt
 		}
 		ai_will_do = { base = 0 }
@@ -860,15 +874,17 @@ MD_maritime_chokepoints_category = {
 				controls_state = 214
 			}
 			OR = {
-				has_idea = MD_suez_toll_high
-				has_idea = MD_suez_toll_low
+				check_variable = { MD_suez_toll_level > 0 }
+				check_variable = { MD_suez_toll_level < 0 }
 			}
 		}
 		available = { is_ai = no }
-		cost = 25
+		cost = 100
+		days_re_enable = 3
 		complete_effect = {
-			remove_ideas = MD_suez_toll_high
-			remove_ideas = MD_suez_toll_low
+			log = "[GetDateText]: [Root.GetName]: Decision MD_suez_restore_standard_tolls"
+			set_variable = { MD_suez_toll_level = 0 }
+			MD_suez_toll_recompute = yes
 			custom_effect_tooltip = MD_suez_tolls_restored_tt
 		}
 		ai_will_do = { base = 0 }
@@ -884,15 +900,20 @@ MD_maritime_chokepoints_category = {
 				state = 853
 			}
 		}
-		visible = {
-			controls_state = 853
-			NOT = { has_idea = MD_panama_toll_high }
+		visible = { controls_state = 853 }
+		available = {
+			is_ai = no
+			custom_trigger_tooltip = {
+				tooltip = MD_toll_max_level_tt
+				check_variable = { MD_panama_toll_level < 20 }
+			}
 		}
-		available = { is_ai = no }
 		cost = 50
+		days_re_enable = 1
 		complete_effect = {
-			swap_ideas = { remove_idea = MD_panama_toll_low add_idea = MD_panama_toll_high }
-			every_other_country = { add_ideas = MD_panama_toll_high_world_idea }
+			log = "[GetDateText]: [Root.GetName]: Decision MD_panama_raise_tolls"
+			add_to_variable = { MD_panama_toll_level = 1 }
+			MD_panama_toll_recompute = yes
 			custom_effect_tooltip = MD_panama_tolls_raised_tt
 		}
 		ai_will_do = { base = 0 }
@@ -906,15 +927,20 @@ MD_maritime_chokepoints_category = {
 				state = 853
 			}
 		}
-		visible = {
-			controls_state = 853
-			NOT = { has_idea = MD_panama_toll_low }
+		visible = { controls_state = 853 }
+		available = {
+			is_ai = no
+			custom_trigger_tooltip = {
+				tooltip = MD_toll_min_level_tt
+				check_variable = { MD_panama_toll_level > -8 }
+			}
 		}
-		available = { is_ai = no }
 		cost = 50
+		days_re_enable = 1
 		complete_effect = {
-			swap_ideas = { remove_idea = MD_panama_toll_high add_idea = MD_panama_toll_low }
-			every_other_country = { add_ideas = MD_panama_toll_low_world_idea }
+			log = "[GetDateText]: [Root.GetName]: Decision MD_panama_lower_tolls"
+			add_to_variable = { MD_panama_toll_level = -1 }
+			MD_panama_toll_recompute = yes
 			custom_effect_tooltip = MD_panama_tolls_lowered_tt
 		}
 		ai_will_do = { base = 0 }
@@ -931,15 +957,17 @@ MD_maritime_chokepoints_category = {
 		visible = {
 			controls_state = 853
 			OR = {
-				has_idea = MD_panama_toll_high
-				has_idea = MD_panama_toll_low
+				check_variable = { MD_panama_toll_level > 0 }
+				check_variable = { MD_panama_toll_level < 0 }
 			}
 		}
 		available = { is_ai = no }
-		cost = 25
+		cost = 100
+		days_re_enable = 3
 		complete_effect = {
-			remove_ideas = MD_panama_toll_high
-			remove_ideas = MD_panama_toll_low
+			log = "[GetDateText]: [Root.GetName]: Decision MD_panama_restore_standard_tolls"
+			set_variable = { MD_panama_toll_level = 0 }
+			MD_panama_toll_recompute = yes
 			custom_effect_tooltip = MD_panama_tolls_restored_tt
 		}
 		ai_will_do = { base = 0 }

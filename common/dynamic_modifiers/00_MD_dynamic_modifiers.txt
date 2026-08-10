@@ -239,3 +239,36 @@ canal_damaged_modifier = {
 
 	custom_modifier_tooltip = canal_damaged_tt
 }
+
+# Suez/Panama toll policy penalty (common/decisions/MD_maritime_chokepoints_decisions.txt,
+# MD_suez/panama_toll_recompute in common/scripted_effects/00_money_system.txt). One modifier
+# per canal covers both directions - the backing vars are set proportional to
+# MD_suez/panama_toll_level itself, so a positive level (raised tolls) yields a negative
+# trade_opinion/stability/political_power_factor and a positive consumer_goods_factor, while a
+# negative level (lowered tolls) flips every sign automatically. Added/removed (not just
+# present-at-zero) so medium (level 0) carries no country modifier at all.
+MD_suez_toll_modifier = {
+	enable = { always = yes }
+
+	icon = GFX_decisions_category_blockade
+
+	trade_opinion_factor = MD_suez_toll_penalty_trade
+	stability_factor = MD_suez_toll_penalty_stability
+	consumer_goods_factor = MD_suez_toll_penalty_consumer_goods
+	political_power_factor = MD_suez_toll_penalty_pp
+
+	custom_modifier_tooltip = MD_toll_penalty_modifier_tt
+}
+
+MD_panama_toll_modifier = {
+	enable = { always = yes }
+
+	icon = GFX_decisions_category_blockade
+
+	trade_opinion_factor = MD_panama_toll_penalty_trade
+	stability_factor = MD_panama_toll_penalty_stability
+	consumer_goods_factor = MD_panama_toll_penalty_consumer_goods
+	political_power_factor = MD_panama_toll_penalty_pp
+
+	custom_modifier_tooltip = MD_toll_penalty_modifier_tt
+}

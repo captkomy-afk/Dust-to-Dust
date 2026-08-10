@@ -410,6 +410,24 @@ defined_text = {
 }
 
 defined_text = {
+	name = additional_income_summary_MD_suez_toll
+	text = {
+		# Gated on the GDP anchor, not an idea - medium (level 0) has no MD_suez_toll_high/low
+		# idea active but still earns toll income, so has_idea would wrongly hide this line.
+		trigger = { check_variable = { MD_suez_toll_gdp_anchor > 0 } }
+		localization_key = "MD_suez_toll_TT"
+	}
+}
+
+defined_text = {
+	name = additional_income_summary_MD_panama_toll
+	text = {
+		trigger = { check_variable = { MD_panama_toll_gdp_anchor > 0 } }
+		localization_key = "MD_panama_toll_TT"
+	}
+}
+
+defined_text = {
 	name = additional_income_summary_saudi_aid
 	text = {
 		trigger = { has_idea = saudi_aid }
