@@ -272,3 +272,47 @@ MD_panama_toll_modifier = {
 
 	custom_modifier_tooltip = MD_toll_penalty_modifier_tt
 }
+
+# Generic naval blockade (common/scripted_diplomatic_actions/99_MD_naval_blockade_diplomatic_actions.txt).
+# Target-side penalty while ROOT's blockade is at partial strength - every field is
+# MD_naval_blockade_denied_idea's full magnitude multiplied by the live control ratio
+# (MD_naval_blockade_controlled_regions / MD_naval_blockade_relevant_regions), recomputed in
+# MD_naval_blockade_recompute_for_target (common/scripted_effects/99_MD_naval_blockade_scripted_effects.txt)
+# every time the blockade is (re)evaluated, so a near-complete blockade bites almost as hard as a
+# full one and a token blockade barely registers, instead of a single fixed half-strength value.
+MD_naval_blockade_denied_modifier_partial = {
+	enable = { always = yes }
+
+	icon = GFX_idea_CUB_eco_blockad
+
+	population_tax_income_multiplier_modifier = MD_naval_blockade_partial_pop_tax
+	agricolture_productivity_modifier = MD_naval_blockade_partial_agri
+	monthly_population = MD_naval_blockade_partial_pop
+	local_resources_oil_factor = MD_naval_blockade_partial_oil
+	local_resources_aluminium_factor = MD_naval_blockade_partial_aluminium
+	local_resources_rubber_factor = MD_naval_blockade_partial_rubber
+	local_resources_tungsten_factor = MD_naval_blockade_partial_tungsten
+	local_resources_steel_factor = MD_naval_blockade_partial_steel
+	local_resources_chromium_factor = MD_naval_blockade_partial_chromium
+	industrial_capacity_factory = MD_naval_blockade_partial_ind_cap
+	production_speed_buildings_factor = MD_naval_blockade_partial_build_speed
+	political_power_factor = MD_naval_blockade_partial_pp
+	corruption_cost_factor = MD_naval_blockade_partial_corruption
+	production_factory_max_efficiency_factor = MD_naval_blockade_partial_max_eff
+
+	custom_modifier_tooltip = MD_naval_blockade_partial_modifier_tt
+}
+
+# Blockader-side cost of running an understrength blockade - scales with how badly ROOT's WORST
+# current blockade falls short of full naval dominance (1 - the lowest control ratio among all of
+# ROOT's active targets), so a near-complete blockade costs little politically and a token one
+# costs close to the old flat -10% political power. Recomputed in MD_naval_blockade_weekly_recompute.
+MD_naval_blockade_understrength_modifier = {
+	enable = { always = yes }
+
+	icon = GFX_idea_embargo
+
+	political_power_factor = MD_naval_blockade_understrength_pp
+
+	custom_modifier_tooltip = MD_naval_blockade_understrength_modifier_tt
+}

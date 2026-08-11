@@ -1,0 +1,78 @@
+# Generic naval blockade - any country (ROOT) can attempt to blockade any other (target),
+# mirroring the MD_suez_block_impose/_lift ROOT/PREV bookkeeping pattern
+# (common/scripted_diplomatic_actions/MD_maritime_chokepoints_diplomatic_actions.txt). Unlike the
+# maritime chokepoints, effectiveness here isn't gated by controlling a fixed chokepoint state -
+# see common/scripted_effects/99_MD_naval_blockade_scripted_effects.txt for the naval-dominance
+# recompute that decides full vs partial strength and swaps MD_naval_blockade_denied_idea(_partial)
+# on the target accordingly. ROOT is always required to be human (is_ai = no) - AI cannot initiate
+# these, matching the chokepoints convention.
+scripted_diplomatic_actions = {
+
+	MD_naval_blockade_impose = {
+		icon = 19
+		cost = 50
+
+		visible = {
+			ROOT = { is_ai = no }
+			NOT = { is_in_faction_with = ROOT }
+			NOT = { is_in_array = { array = MD_naval_blockade_blockaders value = ROOT } }
+			# Mutual exclusion with USA_impose_cuba_blockade (common/decisions/USA.txt) - don't let
+			# both apply to Cuba at once and double up the economic penalty.
+			NOT = { AND = { tag = CUB ROOT = { has_country_flag = blockade_cuba_yes } } }
+		}
+
+		send_description = MD_NAVAL_BLOCKADE_IMPOSE_SEND
+		accept_title = MD_NAVAL_BLOCKADE_IMPOSE_ACCEPT
+		accept_description = MD_NAVAL_BLOCKADE_IMPOSE_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			log = "[GetDateText]: [This.GetName]: MD_naval_blockade_impose - blockaded by [Root.GetName]"
+			add_to_array = { array = MD_naval_blockade_blockaders value = ROOT }
+			add_opinion_modifier = { target = ROOT modifier = MD_Naval_Blockade }
+			add_opinion_modifier = { target = ROOT modifier = MD_Naval_Blockade_Trade }
+			ROOT = {
+				add_to_array = { array = MD_naval_blockade_targets value = PREV }
+				MD_naval_blockade_weekly_recompute = yes
+			}
+		}
+
+		ai_desire = { base = 0 }
+	}
+
+	MD_naval_blockade_lift = {
+		icon = 19
+		cost = 10
+
+		visible = {
+			is_in_array = { array = MD_naval_blockade_blockaders value = ROOT }
+		}
+
+		send_description = MD_NAVAL_BLOCKADE_LIFT_SEND
+		accept_title = MD_NAVAL_BLOCKADE_LIFT_ACCEPT
+		accept_description = MD_NAVAL_BLOCKADE_LIFT_ACCEPT_DESC
+
+		requires_acceptance = no
+		complete_effect = {
+			log = "[GetDateText]: [This.GetName]: MD_naval_blockade_lift - blockade by [Root.GetName] lifted"
+			remove_from_array = { array = MD_naval_blockade_blockaders value = ROOT }
+			remove_opinion_modifier = { target = ROOT modifier = MD_Naval_Blockade }
+			remove_opinion_modifier = { target = ROOT modifier = MD_Naval_Blockade_Trade }
+			# Only clear the target's denial effects once every blockader is gone - if another
+			# country is still blockading the same target, their status (last recomputed) stands.
+			if = {
+				limit = { check_variable = { MD_naval_blockade_blockaders^num = 0 } }
+				if = { limit = { has_idea = MD_naval_blockade_denied_idea } remove_ideas = MD_naval_blockade_denied_idea }
+				if = { limit = { has_dynamic_modifier = { modifier = MD_naval_blockade_denied_modifier_partial } }
+					remove_dynamic_modifier = { modifier = MD_naval_blockade_denied_modifier_partial }
+				}
+			}
+			ROOT = {
+				remove_from_array = { array = MD_naval_blockade_targets value = PREV }
+				MD_naval_blockade_weekly_recompute = yes
+			}
+		}
+
+		ai_desire = { base = 1 }
+	}
+}

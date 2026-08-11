@@ -7,6 +7,10 @@ on_actions = {
 			150 = wot.22
 		}
 		effect = {
+			# Re-evaluate the Cuba blockade's naval dominance every week (common/decisions/USA.txt,
+			# USA_impose_cuba_blockade) so it reclassifies between full/partial strength as naval
+			# control shifts, not just at the moment it was declared. Cheap no-op while inactive.
+			USA_cuba_blockade_recompute = yes
 			# The shelterer can be annexed with bin Laden still at large; without this the manhunt stalls forever
 			if = {
 				limit = {

@@ -3809,6 +3809,84 @@ USA_foreign_policy = {
 			}
 		}
 	}
+	# Cuba naval blockade - effectiveness depends on USA_has_cuba_naval_dominance
+	# (common/scripted_triggers/99_USA_CUB_scripted_triggers.txt: naval control of Cuba's own sea
+	# zone plus every approach region). Reactivates the pre-existing CUB_idea_blockade1 /
+	# CUB_blockade_fight_category branch (common/ideas/Cuban.txt, common/decisions/Cuba.txt),
+	# previously dead code with no live trigger. See USA_cuba_blockade_recompute
+	# (common/scripted_effects/99_USA_main_scripted_effects.txt) for the full/partial logic,
+	# called here and weekly from on_weekly_USA (common/on_actions/99_USA_on_actions.txt) so the
+	# blockade's strength tracks naval control continuously, not just at the moment it was declared.
+	USA_impose_cuba_blockade = {
+		icon = GFX_decisions_category_blockade
+		on_map_mode = map_and_decisions_view
+		highlight_states = {
+			highlight_state_targets = {
+				state = 854
+				state = 424
+			}
+		}
+		visible = {
+			country_exists = CUB
+			NOT = { has_country_flag = blockade_cuba_yes }
+			# Mutual exclusion with the generic naval blockade (common/scripted_diplomatic_actions/
+			# 99_MD_naval_blockade_diplomatic_actions.txt) - don't let both apply to Cuba at once and
+			# double up the economic penalty.
+			NOT = { CUB = { is_in_array = { array = MD_naval_blockade_blockaders value = ROOT } } }
+		}
+		available = {
+			NOT = { is_in_faction_with = CUB }
+		}
+		cost = 150
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision USA_impose_cuba_blockade"
+			set_country_flag = blockade_cuba_yes
+			USA_cuba_blockade_recompute = yes
+			custom_effect_tooltip = USA_cuba_blockade_imposed_tt
+		}
+		ai_will_do = {
+			base = 5
+			modifier = {
+				USA_has_cuba_naval_dominance = yes
+				add = 15
+			}
+			modifier = {
+				CUB = { has_government = communism }
+				add = 10
+			}
+		}
+	}
+
+	USA_lift_cuba_blockade = {
+		icon = GFX_decision_generic_naval
+		on_map_mode = map_and_decisions_view
+		highlight_states = {
+			highlight_state_targets = {
+				state = 854
+				state = 424
+			}
+		}
+		visible = { has_country_flag = blockade_cuba_yes }
+		cost = 50
+		complete_effect = {
+			log = "[GetDateText]: [Root.GetName]: Decision USA_lift_cuba_blockade"
+			clr_country_flag = blockade_cuba_yes
+			if = { limit = { has_idea = USA_cuba_blockade_pp_penalty_idea } remove_ideas = USA_cuba_blockade_pp_penalty_idea }
+			CUB = {
+				if = { limit = { has_idea = CUB_idea_blockade1 } remove_ideas = CUB_idea_blockade1 }
+				if = { limit = { has_idea = CUB_idea_blockade1_partial } remove_ideas = CUB_idea_blockade1_partial }
+			}
+			custom_effect_tooltip = USA_cuba_blockade_lifted_tt
+		}
+		ai_will_do = {
+			base = 5
+			modifier = {
+				NOT = { USA_has_cuba_naval_dominance = yes }
+				add = 10
+			}
+		}
+	}
+
 	# FP Decisions
 	# 2000 - 2004
 	USA_chinese_environmentalist_cooperation = {

@@ -277,6 +277,34 @@ ideas = {
 				production_factory_max_efficiency_factor = -0.30
 			}
 		}
+		# Half-strength version of CUB_idea_blockade1, applied instead of it whenever the USA has
+		# declared the blockade (USA_impose_cuba_blockade, common/decisions/USA.txt) but doesn't
+		# hold USA_has_cuba_naval_dominance - a blockade attempted without the navy to actually
+		# seal every approach route lets a meaningful share of trade through.
+		CUB_idea_blockade1_partial = {
+
+			picture = CUB_eco_blockad
+			available = {
+				country_exists = USA
+			}
+
+			modifier = {
+				population_tax_income_multiplier_modifier = -0.075
+				agricolture_productivity_modifier = -0.125
+				monthly_population = -0.01
+				local_resources_oil_factor = -0.05
+				local_resources_aluminium_factor = -0.05
+				local_resources_rubber_factor = -0.05
+				local_resources_tungsten_factor = -0.05
+				local_resources_steel_factor = -0.05
+				local_resources_chromium_factor = -0.05
+				industrial_capacity_factory = -0.1
+				production_speed_buildings_factor = -0.1
+				political_power_factor = -0.015
+				corruption_cost_factor = 0.05
+				production_factory_max_efficiency_factor = -0.15
+			}
+		}
 		#Infrastructure development
 		CUB_infrastructure_dev_idea = {
 

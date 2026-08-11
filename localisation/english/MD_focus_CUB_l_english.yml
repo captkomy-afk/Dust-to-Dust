@@ -300,6 +300,8 @@
  CUB_land_of_freedom_idea_desc: "[CUB.GetNamewithFlag] has fought for its freedom for centuries, and now that we are a truly free country, we will not let anyone take away our independence!"
  CUB_idea_blockade1: "The Blockade (El Bloqueo) Against Cuba"
  CUB_idea_blockade1_desc: "In 1962, the United States imposed an embargo on Cuba which was never lifted. The effects became particularly devastating once the USSR collapsed in the early 1990s, leaving Cuba with few trading partners."
+ CUB_idea_blockade1_partial: "The Blockade (El Bloqueo) Against Cuba - Contested"
+ CUB_idea_blockade1_partial_desc: "The United States has declared a blockade against Cuba, but lacks the naval strength to seal every approach to the island. Enough trade slips through that the embargo's bite is far less than advertised."
  CUB_cpc_idea1: "Strong Distrust of the Communist Party"
  CUB_cpc_idea1_desc: "Our communist ideology has reached a dead end. People do not trust us, they change their political views in favor of our enemies, and anti-communist slogans are heard more and more often in our country"
  CUB_cpc_bad: "Distrust of the Communist Party"

@@ -7,6 +7,13 @@ on_actions = {
 			}
 			worker_requirements_variable_gdpc_converging = yes
 
+			# Re-evaluate every active generic naval blockade's full/partial status
+			# (common/scripted_diplomatic_actions/99_MD_naval_blockade_diplomatic_actions.txt).
+			# Cheap no-op for the countries not currently blockading anyone.
+			if = { limit = { check_variable = { MD_naval_blockade_targets^num > 0 } }
+				MD_naval_blockade_weekly_recompute = yes
+			}
+
 			if = { limit = { NOT = { has_global_flag = on_weekly_global_done } }
 				set_global_flag = { flag = on_weekly_global_done value = 1 days = 7 }
 				international_systems_update = yes

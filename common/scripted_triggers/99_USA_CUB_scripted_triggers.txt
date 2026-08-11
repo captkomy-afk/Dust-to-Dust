@@ -1,0 +1,15 @@
+# Whether the USA holds enough naval dominance over Cuba's approaches to actually seal them off -
+# used by common/decisions/USA.txt (USA_impose_cuba_blockade / USA_cuba_blockade_recompute in
+# common/scripted_effects/99_USA_main_scripted_effects.txt) to decide between a full and a
+# partial-strength blockade. Requires control of every sea region a ship could use to go around
+# Cuba (Gulf of Mexico, wider Caribbean, Florida Strait). Deliberately does NOT check
+# has_naval_control = 212 (strategic region "Cuba" itself) - verified every one of its provinces is
+# `land` type in map/definition.csv, zero `sea` provinces, so it has no naval battlespace of its
+# own; checking it made this permanently unsatisfiable regardless of actual naval dominance (same
+# root cause as the Levant/generic-blockade bug - see common/scripted_effects/
+# 99_MD_naval_blockade_scripted_effects.txt's header for the full writeup).
+USA_has_cuba_naval_dominance = {
+	has_naval_control = 52
+	has_naval_control = 53
+	has_naval_control = 170
+}

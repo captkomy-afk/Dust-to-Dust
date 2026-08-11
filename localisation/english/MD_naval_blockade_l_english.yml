@@ -1,0 +1,28 @@
+﻿l_english:
+
+ ### GENERIC NAVAL BLOCKADE DIPLOMATIC ACTION ###
+ MD_NAVAL_BLOCKADE_IMPOSE_TITLE: "Impose Naval Blockade"
+ MD_NAVAL_BLOCKADE_IMPOSE_ACTION_DESC: "We can impose a naval blockade against this nation."
+ MD_NAVAL_BLOCKADE_IMPOSE_SEND: "We will impose a naval blockade against this nation. If our navy holds enough control over the sea zones around their coastline, the blockade will bite hard - without that control, it will be a blockade in name only, and cost us politically for the trouble."
+ MD_NAVAL_BLOCKADE_IMPOSE_ACCEPT: "Naval Blockade Imposed!"
+ MD_NAVAL_BLOCKADE_IMPOSE_ACCEPT_DESC: "A naval blockade has been declared against us!"
+
+ MD_NAVAL_BLOCKADE_LIFT_TITLE: "Lift Naval Blockade"
+ MD_NAVAL_BLOCKADE_LIFT_ACTION_DESC: "We can lift our naval blockade against this nation."
+ MD_NAVAL_BLOCKADE_LIFT_SEND: "We will lift our naval blockade against this nation."
+ MD_NAVAL_BLOCKADE_LIFT_ACCEPT: "Naval Blockade Lifted!"
+ MD_NAVAL_BLOCKADE_LIFT_ACCEPT_DESC: "The naval blockade against us has been lifted."
+
+ ### GENERIC NAVAL BLOCKADE IDEA (FULL STRENGTH) ###
+ MD_naval_blockade_denied_idea: "Under Naval Blockade"
+ MD_naval_blockade_denied_idea_desc: "A foreign navy holds enough control over the sea zones around our coastline to enforce a full naval blockade against us. Our trade and economy are suffering badly for it."
+
+ ### GENERIC NAVAL BLOCKADE MODIFIERS (PARTIAL STRENGTH / UNDERSTRENGTH COST) ###
+ MD_naval_blockade_denied_modifier_partial: "Under Naval Blockade - Contested"
+ MD_naval_blockade_partial_modifier_tt: "A foreign power has declared a naval blockade against us, but doesn't hold naval control of every approach to our coastline. The less of our coast they actually control, the less of our trade they manage to stop."
+ MD_naval_blockade_understrength_modifier: "Under-Resourced Naval Blockade"
+ MD_naval_blockade_understrength_modifier_tt: "At least one of our naval blockades doesn't hold naval control over the target's entire coastline. The worse our weakest blockade's coverage, the more defending the policy at home and abroad costs us in political capital."
+
+ ### GENERIC NAVAL BLOCKADE OPINION MODIFIERS ###
+ MD_Naval_Blockade: "Blockaded Our Shipping"
+ MD_Naval_Blockade_Trade: "Blockaded Our Trade"

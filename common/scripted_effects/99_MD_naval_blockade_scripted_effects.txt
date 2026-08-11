@@ -1,0 +1,595 @@
+# Generic naval blockade system - common/scripted_diplomatic_actions/99_MD_naval_blockade_diplomatic_actions.txt.
+# Any country (ROOT) can attempt to blockade any other (target). Effectiveness depends on whether
+# ROOT holds naval dominance over every SEA strategic region touching the target's own coastline -
+# full strength if ROOT controls all of them, partial (reduced target penalty, a political-power
+# cost to ROOT) otherwise.
+#
+# A state's own `region` trigger returns its LAND strategic region (e.g. Israel's coast is all in
+# region 174 "Levant"), never the adjacent sea region - HOI4 has no scripted way to discover
+# province-level sea adjacency (no coordinate data, no adjacency table beyond the handful of
+# explicit canal/strait rows in map/adjacencies.csv). Checking has_naval_control against a state's
+# own land region is meaningless if that region has no water of its own: verified every one of
+# Levant's provinces is `land`/`lake` type in map/definition.csv (zero `sea`), same for strategic
+# region 212 "Cuba" (see common/scripted_triggers/99_USA_CUB_scripted_triggers.txt, which had the
+# identical bug - has_naval_control = 212 was permanently unsatisfiable and is now removed there).
+#
+# The fix is a hand-curated LAND region -> SEA region(s) map, built once from the 108 land and 112
+# sea strategic regions' names/geography (same manual-curation approach as the existing
+# common/decisions/netherlands.txt VOC content, which hardcodes region IDs per-country - just done
+# once per region instead of once per country, so it covers every country automatically and keeps
+# working as borders change). Every one of the 112 sea regions also includes ITSELF as a candidate
+# alongside its mapped land neighbors, since some strategic regions are mixed (e.g. 170 "Florida
+# Coast" contains both Florida's land provinces and the sea province between Florida and the
+# Bahamas in one ID) - a country whose own state sits directly inside a sea-flagged region needs
+# that same ID checked, not just the land regions curated as bordering it.
+#
+# MD_naval_blockade_count_target_regions below is keyed by SEA region: for each of the 112 sea
+# regions, it checks whether the target owns a state in that region OR any of its mapped land
+# neighbors (relevant), and if so whether ROOT holds has_naval_control of that SEA region
+# specifically (controlled) - never a land region. A land region bordering multiple seas (Levant ->
+# Eastern Mediterranean AND Red Sea, via Tel Aviv and Eilat respectively) contributes to each; a
+# sea bordered by multiple land regions (e.g. Eastern Mediterranean -> Greece, Syria, Egypt, Turkey,
+# Levant) is only counted once per target regardless of how many of those land regions they own,
+# since the OR collapses it to one relevant/controlled pair. This hand-built map is not guaranteed
+# exhaustive or pixel-perfect - it's geography-name-based curation, not derived from province data,
+# so a country whose coastline turns out to sit in an unmapped corner will read as having zero
+# relevant regions (safe fallback: blockade has no effect on them rather than a bogus full/partial
+# result). Flag any misses for a map fix the same way the Levant and Florida Coast gaps were found -
+# trace the state's provinces to their strategic_region file, then check whether that region (or,
+# for a mixed region, the region's own ID) ever appears in this file's OR blocks.
+#
+# Effect: MD_naval_blockade_count_target_regions
+# Purpose: Call with current scope = the blockade TARGET's country and ROOT = the would-be
+# blockader (this is the default scope inside a scripted_diplomatic_action's complete_effect, and
+# what for_each_scope_loop provides automatically when iterating MD_naval_blockade_targets). Sets
+# two temp variables: MD_naval_blockade_relevant_regions (how many of the 112 sea regions the
+# target either sits inside directly or borders via a mapped land region) and
+# MD_naval_blockade_controlled_regions (how many of those ROOT currently holds naval control of).
+MD_naval_blockade_count_target_regions = {
+	set_temp_variable = { MD_naval_blockade_relevant_regions = 0 }
+	set_temp_variable = { MD_naval_blockade_controlled_regions = 0 }
+	if = { limit = { OR = { any_owned_state = { region = 100 } any_owned_state = { region = 128 } any_owned_state = { region = 133 } any_owned_state = { region = 174 } any_owned_state = { region = 183 } any_owned_state = { region = 185 } any_owned_state = { region = 186 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 100 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 31 } any_owned_state = { region = 101 } any_owned_state = { region = 141 } any_owned_state = { region = 145 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 101 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 102 } any_owned_state = { region = 132 } any_owned_state = { region = 133 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 102 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 103 } any_owned_state = { region = 134 } any_owned_state = { region = 135 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 103 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 31 } any_owned_state = { region = 104 } any_owned_state = { region = 161 } any_owned_state = { region = 185 } any_owned_state = { region = 186 } any_owned_state = { region = 187 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 104 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 34 } any_owned_state = { region = 105 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 105 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 106 } any_owned_state = { region = 123 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 106 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 34 } any_owned_state = { region = 107 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 107 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 35 } any_owned_state = { region = 108 } any_owned_state = { region = 124 } any_owned_state = { region = 125 } any_owned_state = { region = 190 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 108 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 35 } any_owned_state = { region = 109 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 109 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 35 } any_owned_state = { region = 110 } any_owned_state = { region = 195 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 110 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 35 } any_owned_state = { region = 111 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 111 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 112 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 112 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 113 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 113 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 114 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 114 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 115 } any_owned_state = { region = 122 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 115 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 1 } any_owned_state = { region = 2 } any_owned_state = { region = 4 } any_owned_state = { region = 6 } any_owned_state = { region = 16 } any_owned_state = { region = 199 } any_owned_state = { region = 215 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 16 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 121 } any_owned_state = { region = 166 } any_owned_state = { region = 182 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 166 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 23 } any_owned_state = { region = 24 } any_owned_state = { region = 168 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 168 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 23 } any_owned_state = { region = 169 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 169 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 170 } any_owned_state = { region = 181 } any_owned_state = { region = 212 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 170 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 33 } any_owned_state = { region = 122 } any_owned_state = { region = 171 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 171 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 172 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 172 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 175 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 175 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 176 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 176 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 177 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 177 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 178 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 178 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 179 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 179 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 1 } any_owned_state = { region = 18 } any_owned_state = { region = 19 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 18 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 180 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 180 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 165 } any_owned_state = { region = 193 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 193 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 116 } any_owned_state = { region = 184 } any_owned_state = { region = 185 } any_owned_state = { region = 194 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 194 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 6 } any_owned_state = { region = 196 } any_owned_state = { region = 215 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 196 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 198 } any_owned_state = { region = 199 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 198 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 200 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 200 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 142 } any_owned_state = { region = 201 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 201 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 145 } any_owned_state = { region = 202 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 202 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 31 } any_owned_state = { region = 203 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 203 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 133 } any_owned_state = { region = 186 } any_owned_state = { region = 204 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 204 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 116 } any_owned_state = { region = 187 } any_owned_state = { region = 205 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 205 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 139 } any_owned_state = { region = 206 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 206 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 125 } any_owned_state = { region = 191 } any_owned_state = { region = 192 } any_owned_state = { region = 207 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 207 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 191 } any_owned_state = { region = 208 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 208 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 197 } any_owned_state = { region = 209 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 209 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 158 } any_owned_state = { region = 210 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 210 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 158 } any_owned_state = { region = 211 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 211 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 25 } any_owned_state = { region = 129 } any_owned_state = { region = 214 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 214 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 11 } any_owned_state = { region = 38 } any_owned_state = { region = 216 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 216 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 156 } any_owned_state = { region = 167 } any_owned_state = { region = 217 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 217 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 159 } any_owned_state = { region = 160 } any_owned_state = { region = 218 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 218 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 5 } any_owned_state = { region = 215 } any_owned_state = { region = 219 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 219 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 7 } any_owned_state = { region = 8 } any_owned_state = { region = 220 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 220 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 23 } any_owned_state = { region = 25 } any_owned_state = { region = 29 } any_owned_state = { region = 126 } any_owned_state = { region = 150 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 29 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 14 } any_owned_state = { region = 15 } any_owned_state = { region = 26 } any_owned_state = { region = 30 } any_owned_state = { region = 40 } any_owned_state = { region = 129 } any_owned_state = { region = 130 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 30 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 32 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 32 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 19 } any_owned_state = { region = 41 } any_owned_state = { region = 42 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 42 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 1 } any_owned_state = { region = 2 } any_owned_state = { region = 3 } any_owned_state = { region = 43 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 43 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 36 } any_owned_state = { region = 44 } any_owned_state = { region = 197 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 44 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 2 } any_owned_state = { region = 7 } any_owned_state = { region = 45 } any_owned_state = { region = 197 } any_owned_state = { region = 199 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 45 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 7 } any_owned_state = { region = 10 } any_owned_state = { region = 46 } any_owned_state = { region = 199 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 46 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 41 } any_owned_state = { region = 47 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 47 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 48 } any_owned_state = { region = 80 } any_owned_state = { region = 126 } any_owned_state = { region = 127 } any_owned_state = { region = 131 } any_owned_state = { region = 148 } any_owned_state = { region = 149 } any_owned_state = { region = 150 } any_owned_state = { region = 151 } any_owned_state = { region = 173 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 48 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 49 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 49 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 36 } any_owned_state = { region = 50 } any_owned_state = { region = 121 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 50 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 51 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 51 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 52 } any_owned_state = { region = 123 } any_owned_state = { region = 181 } any_owned_state = { region = 212 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 52 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 34 } any_owned_state = { region = 53 } any_owned_state = { region = 123 } any_owned_state = { region = 124 } any_owned_state = { region = 195 } any_owned_state = { region = 212 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 53 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 54 } any_owned_state = { region = 117 } any_owned_state = { region = 181 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 54 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 55 } any_owned_state = { region = 121 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 55 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 56 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 56 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 57 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 57 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 58 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 58 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 59 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 59 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 60 } any_owned_state = { region = 132 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 60 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 61 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 61 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 62 } any_owned_state = { region = 139 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 62 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 63 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 63 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 64 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 64 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 65 } any_owned_state = { region = 139 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 65 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 66 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 66 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 67 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 67 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 19 } any_owned_state = { region = 23 } any_owned_state = { region = 41 } any_owned_state = { region = 68 } any_owned_state = { region = 151 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 68 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 25 } any_owned_state = { region = 28 } any_owned_state = { region = 69 } any_owned_state = { region = 128 } any_owned_state = { region = 129 } any_owned_state = { region = 174 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 69 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 13 } any_owned_state = { region = 14 } any_owned_state = { region = 15 } any_owned_state = { region = 40 } any_owned_state = { region = 70 } any_owned_state = { region = 116 } any_owned_state = { region = 136 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 70 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 71 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 71 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 72 } any_owned_state = { region = 147 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 72 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 73 } any_owned_state = { region = 142 } any_owned_state = { region = 147 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 73 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 74 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 74 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 75 } any_owned_state = { region = 142 } any_owned_state = { region = 147 } any_owned_state = { region = 159 } any_owned_state = { region = 160 } any_owned_state = { region = 165 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 75 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 76 } any_owned_state = { region = 154 } any_owned_state = { region = 155 } any_owned_state = { region = 164 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 76 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 77 } any_owned_state = { region = 155 } any_owned_state = { region = 164 } any_owned_state = { region = 189 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 77 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 78 } any_owned_state = { region = 154 } any_owned_state = { region = 160 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 78 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 79 } any_owned_state = { region = 154 } any_owned_state = { region = 189 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 79 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 81 } any_owned_state = { region = 156 } any_owned_state = { region = 167 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 81 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 82 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 82 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 83 } any_owned_state = { region = 167 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 83 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 84 } any_owned_state = { region = 167 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 84 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 85 } any_owned_state = { region = 134 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 85 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 86 } any_owned_state = { region = 156 } any_owned_state = { region = 157 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 86 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 37 } any_owned_state = { region = 87 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 87 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 33 } any_owned_state = { region = 37 } any_owned_state = { region = 39 } any_owned_state = { region = 88 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 88 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 89 } any_owned_state = { region = 118 } any_owned_state = { region = 122 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 89 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 5 } any_owned_state = { region = 6 } any_owned_state = { region = 8 } any_owned_state = { region = 9 } any_owned_state = { region = 11 } any_owned_state = { region = 38 } any_owned_state = { region = 215 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 9 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 90 } any_owned_state = { region = 154 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 90 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 92 } any_owned_state = { region = 156 } any_owned_state = { region = 158 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 92 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 93 } any_owned_state = { region = 158 } any_owned_state = { region = 159 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 93 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 94 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 94 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 95 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 95 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 96 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 96 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 97 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 97 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 98 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 98 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+	if = { limit = { OR = { any_owned_state = { region = 99 } } }
+		add_to_temp_variable = { MD_naval_blockade_relevant_regions = 1 }
+		if = { limit = { ROOT = { has_naval_control = 99 } } add_to_temp_variable = { MD_naval_blockade_controlled_regions = 1 } }
+	}
+}
+
+# Effect: MD_naval_blockade_recompute_for_target
+# Purpose: Wraps MD_naval_blockade_count_target_regions (same calling convention) with the
+# full/partial decision. Full requires ROOT to hold naval control of every one of the target's
+# relevant regions (100%, not a majority) - a target with zero relevant regions (landlocked, or an
+# authoring gap) degrades safely to partial rather than a bogus "full" blockade. Below 100%, every
+# field of MD_naval_blockade_denied_modifier_partial is set to MD_naval_blockade_denied_idea's full
+# magnitude times the live control ratio (MD_naval_blockade_this_ratio), so a near-complete
+# blockade bites almost as hard as a full one instead of a single fixed half-strength value. Also
+# feeds this target's ratio into ROOT.MD_naval_blockade_worst_ratio (the caller,
+# MD_naval_blockade_weekly_recompute, resets it to 1 before the loop and uses the post-loop minimum
+# to scale ROOT's own understrength political-power penalty).
+MD_naval_blockade_recompute_for_target = {
+	MD_naval_blockade_count_target_regions = yes
+	if = {
+		limit = {
+			check_variable = { MD_naval_blockade_controlled_regions > 0 }
+			NOT = { check_variable = { MD_naval_blockade_controlled_regions < MD_naval_blockade_relevant_regions } }
+		}
+		set_variable = { MD_naval_blockade_this_ratio = 1 }
+		if = { limit = { has_dynamic_modifier = { modifier = MD_naval_blockade_denied_modifier_partial } }
+			remove_dynamic_modifier = { modifier = MD_naval_blockade_denied_modifier_partial }
+		}
+		if = { limit = { NOT = { has_idea = MD_naval_blockade_denied_idea } } add_ideas = MD_naval_blockade_denied_idea }
+	}
+	else = {
+		set_variable = {
+			MD_naval_blockade_this_ratio = {
+				value = MD_naval_blockade_controlled_regions
+				divide = { value = MD_naval_blockade_relevant_regions clamp = { min = 0.001 max = 1000000 } }
+				clamp = { min = 0 max = 1 }
+			}
+		}
+		if = { limit = { has_idea = MD_naval_blockade_denied_idea } remove_ideas = MD_naval_blockade_denied_idea }
+		set_variable = { MD_naval_blockade_partial_pop_tax = { value = MD_naval_blockade_this_ratio multiply = -0.15 } }
+		set_variable = { MD_naval_blockade_partial_agri = { value = MD_naval_blockade_this_ratio multiply = -0.25 } }
+		set_variable = { MD_naval_blockade_partial_pop = { value = MD_naval_blockade_this_ratio multiply = -0.02 } }
+		set_variable = { MD_naval_blockade_partial_oil = { value = MD_naval_blockade_this_ratio multiply = -0.10 } }
+		set_variable = { MD_naval_blockade_partial_aluminium = { value = MD_naval_blockade_this_ratio multiply = -0.10 } }
+		set_variable = { MD_naval_blockade_partial_rubber = { value = MD_naval_blockade_this_ratio multiply = -0.10 } }
+		set_variable = { MD_naval_blockade_partial_tungsten = { value = MD_naval_blockade_this_ratio multiply = -0.10 } }
+		set_variable = { MD_naval_blockade_partial_steel = { value = MD_naval_blockade_this_ratio multiply = -0.10 } }
+		set_variable = { MD_naval_blockade_partial_chromium = { value = MD_naval_blockade_this_ratio multiply = -0.10 } }
+		set_variable = { MD_naval_blockade_partial_ind_cap = { value = MD_naval_blockade_this_ratio multiply = -0.2 } }
+		set_variable = { MD_naval_blockade_partial_build_speed = { value = MD_naval_blockade_this_ratio multiply = -0.2 } }
+		set_variable = { MD_naval_blockade_partial_pp = { value = MD_naval_blockade_this_ratio multiply = -0.03 } }
+		set_variable = { MD_naval_blockade_partial_corruption = { value = MD_naval_blockade_this_ratio multiply = 0.1 } }
+		set_variable = { MD_naval_blockade_partial_max_eff = { value = MD_naval_blockade_this_ratio multiply = -0.30 } }
+		if = { limit = { NOT = { has_dynamic_modifier = { modifier = MD_naval_blockade_denied_modifier_partial } } }
+			add_dynamic_modifier = { modifier = MD_naval_blockade_denied_modifier_partial }
+		}
+	}
+	ROOT = {
+		set_variable = { MD_naval_blockade_worst_ratio = { value = MD_naval_blockade_worst_ratio min = PREV.MD_naval_blockade_this_ratio } }
+	}
+}
+
+# Effect: MD_naval_blockade_weekly_recompute
+# Purpose: Called from ROOT's own complete_effect on impose/lift (immediate feedback) and every
+# week from the global on_weekly (common/on_actions/MD_on_actions.txt, gated behind
+# MD_naval_blockade_targets^num > 0 so it's a cheap no-op for the countries not currently
+# blockading anyone) while ROOT is blockading at least one target. Walks every one of ROOT's
+# active blockades, recomputing full/partial and the target's modifier fresh each time rather than
+# caching a per-pair mode - simplest way to also find ROOT's WORST current control ratio (the
+# floor across every target) for ROOT's own understrength-blockade political power penalty, which
+# scales as -10% * (1 - worst ratio): a near-complete worst blockade costs little, a token one
+# costs close to the full -10%. At the cost of a fresh 112-region tally per target per week
+# (bounded and rare - only active blockaders pay it). If two different countries are simultaneously
+# blockading the SAME target, the target's modifier reflects whichever blockader's recompute ran
+# most recently that week (last write wins) - an accepted simplification for what should be a rare
+# multi-blockader edge case.
+MD_naval_blockade_weekly_recompute = {
+	set_variable = { MD_naval_blockade_worst_ratio = 1 }
+	for_each_scope_loop = {
+		array = MD_naval_blockade_targets
+		MD_naval_blockade_recompute_for_target = yes
+	}
+	set_variable = {
+		MD_naval_blockade_understrength_pp = {
+			value = MD_naval_blockade_worst_ratio
+			subtract = 1
+			multiply = 0.10
+		}
+	}
+	if = {
+		limit = { check_variable = { MD_naval_blockade_worst_ratio < 1 } }
+		if = { limit = { NOT = { has_dynamic_modifier = { modifier = MD_naval_blockade_understrength_modifier } } }
+			add_dynamic_modifier = { modifier = MD_naval_blockade_understrength_modifier }
+		}
+	}
+	else = {
+		if = { limit = { has_dynamic_modifier = { modifier = MD_naval_blockade_understrength_modifier } }
+			remove_dynamic_modifier = { modifier = MD_naval_blockade_understrength_modifier }
+		}
+	}
+}

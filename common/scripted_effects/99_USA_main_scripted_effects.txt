@@ -757,3 +757,30 @@ USA_bae_absorb_united_defense = {
 		mio:USA_bae_systems_platforms = { complete_mio_trait = { trait = USA_bae_legacy_fcs_mgv show_modifiers = no } }
 	}
 }
+
+# Effect: USA_cuba_blockade_recompute
+# Purpose: Called from USA_impose_cuba_blockade's complete_effect (common/decisions/USA.txt) and
+# every week from on_weekly_USA (common/on_actions/99_USA_on_actions.txt) while blockade_cuba_yes
+# is set, so the blockade's effectiveness tracks naval control continuously rather than only at
+# the moment it was declared - losing the navy to hold every approach route (or winning it back)
+# reclassifies the blockade between full and partial without needing a new decision.
+USA_cuba_blockade_recompute = {
+	if = {
+		limit = { has_country_flag = blockade_cuba_yes }
+		if = {
+			limit = { USA_has_cuba_naval_dominance = yes }
+			if = { limit = { has_idea = USA_cuba_blockade_pp_penalty_idea } remove_ideas = USA_cuba_blockade_pp_penalty_idea }
+			CUB = {
+				if = { limit = { has_idea = CUB_idea_blockade1_partial } remove_ideas = CUB_idea_blockade1_partial }
+				if = { limit = { NOT = { has_idea = CUB_idea_blockade1 } } add_ideas = CUB_idea_blockade1 }
+			}
+		}
+		else = {
+			if = { limit = { NOT = { has_idea = USA_cuba_blockade_pp_penalty_idea } } add_ideas = USA_cuba_blockade_pp_penalty_idea }
+			CUB = {
+				if = { limit = { has_idea = CUB_idea_blockade1 } remove_ideas = CUB_idea_blockade1 }
+				if = { limit = { NOT = { has_idea = CUB_idea_blockade1_partial } } add_ideas = CUB_idea_blockade1_partial }
+			}
+		}
+	}
+}

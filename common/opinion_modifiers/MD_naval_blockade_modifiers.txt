@@ -1,0 +1,17 @@
+# Opinion modifiers for the generic naval blockade diplomatic action
+# (common/scripted_diplomatic_actions/99_MD_naval_blockade_diplomatic_actions.txt).
+# Mirrors MD_Chokepoint_Blockade / MD_Chokepoint_Blockade_Trade
+# (common/opinion_modifiers/MD_maritime_chokepoints_modifiers.txt).
+opinion_modifiers = {
+
+	MD_Naval_Blockade = {
+		value = -50
+		decay = 1
+	}
+
+	MD_Naval_Blockade_Trade = {
+		value = -999
+		trade = yes
+	}
+
+}

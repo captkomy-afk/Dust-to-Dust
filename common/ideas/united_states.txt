@@ -2545,6 +2545,19 @@ ideas = {
 			}
 		}
 
+		# Cost of running the Cuba blockade (common/decisions/USA.txt, USA_impose_cuba_blockade)
+		# without USA_has_cuba_naval_dominance - added/removed by USA_cuba_blockade_recompute
+		# (common/scripted_effects/99_USA_main_scripted_effects.txt) whenever the blockade is
+		# active but the navy isn't actually holding every approach route closed. Removed the
+		# moment naval dominance is achieved (full-strength blockade instead) or the blockade is
+		# lifted entirely.
+		USA_cuba_blockade_pp_penalty_idea = {
+			picture = embargo
+			modifier = {
+				political_power_factor = -0.10
+			}
+		}
+
 		USA_CHI_trade_war = {
 			picture = embargo
 			allowed_civil_war = { always = yes }
