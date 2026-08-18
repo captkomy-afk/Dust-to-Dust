@@ -19,9 +19,9 @@
  dtd_flavour.5.d: "From at least 2002 up until the summer of 2008, Chris hung out at the GAMe PLACe on a regular basis, going there every Friday without fail to play the Pokémon and Yu-Gi-Oh! TCGs. The shop hosted the Pokémon TCG League, where Chris served as a self-proclaimed volunteer gym leader (though he was not endorsed in any way, and was largely simply tolerated by the store).\n\n The other two best-known patrons of the shop, aside from Chris himself, are Mimms and Lucas. The two friends are the primary source of most of what is known about Chris's behavior at The GAMe PLACe, and are now famous for having taken and uploaded the first photograph of Chris to reach the Internet."
  dtd_flavour.5.a: "Uh oh?"
 
- dtd_flavour.6.t: "Chris First Photograph"
- dtd_flavour.6.d: "From at least 2002 up until the summer of 2008, Chris hung out at the GAMe PLACe on a regular basis, going there every Friday without fail to play the Pokémon and Yu-Gi-Oh! TCGs. The shop hosted the Pokémon TCG League, where Chris served as a self-proclaimed volunteer gym leader (though he was not endorsed in any way, and was largely simply tolerated by the store).\n\n The other two best-known patrons of the shop, aside from Chris himself, are Mimms and Lucas. The two friends are the primary source of most of what is known about Chris's behavior at The GAMe PLACe, and are now famous for having taken and uploaded the first photograph of Chris to reach the Internet."
- dtd_flavour.6.a: "Uh oh?"
+ dtd_flavour.6.t: "Invader Zim Premiers"
+ dtd_flavour.6.d: "Produced in the United States, the series centers on the titular character, Zim from the planet 'Irk', plotting to invade the planet we currently reside in, Earth - yet finds himself thrwarted by Dib Membrane, a twelve year old paranomal investigator.\n\nThe show recieved popular reviews from critics who praise it for its edgy humour and dark comedy and is rapidly growing as a cult classic, overshadowing other shows on the platform such as SpongeBob, which fails to reach its target democraphics according to the executives."
+ dtd_flavour.6.a: "I love this show..."
 
   # CPRF REWORK
  cprf.1.t: "CPRF Wins Elections"
@@ -36,3 +36,8 @@
  cprf.3.d: "do we rejoin the ussr or are we cringe?"
  cprf.3.a: "No"
  cprf.3.b: "Yes"
+
+ # Custom ideas
+
+ DTD_GM: "United Nations Commission"
+ DTD_GM_desc: "\n\n\n\n\n\n£UN\n\n\n\n\n\n\n\nAfter the end of the Second World War, the world powers entrusted this country to command the affairs of global diplomacy."

@@ -1,0 +1,20 @@
+toolpack_category = {
+
+	icon = generic_formable_nations
+
+	allowed = {
+		has_idea = DTD_GM
+	}
+
+	visible = {
+		is_ai = no
+	}
+	priority = {
+		base = 1000
+		modifier = {
+			factor = 0.001
+			has_country_flag = tp_lower_decisions
+		}
+	}
+	scripted_gui = toolpack_action_log_main_container
+}

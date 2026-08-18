@@ -1,0 +1,13 @@
+	dtd_ = {
+		icon = GFX_decision_generic_research
+
+		visible = 
+		{
+			is_ai = no
+			has_idea = DTD_GM
+		}
+
+		remove_effect = {
+			
+		}
+	}

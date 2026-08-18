@@ -73,7 +73,7 @@ capital = 317
 		standard_maintenance
 		us_dollar
 		light_regulations
-
+		DTD_GM
 		corruption_level_08
 		christian
 		rentier_state

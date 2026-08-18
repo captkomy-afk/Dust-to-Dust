@@ -128,6 +128,7 @@ EH_start_scenario_cheat_category = {
 	allowed = {
 		NOT = { original_tag = ZOM }
 		NOT = { original_tag = ALN }
+		has_idea = DTD_GM
 	}
 
 	icon = GFX_decision_generic_arms_trade
@@ -135,5 +136,6 @@ EH_start_scenario_cheat_category = {
 
 	visible = {
 		NOT = { has_game_rule = { rule = rule_event_horizon_scenario option = DEFAULT } }
+		has_idea = DTD_GM
 	}
 }

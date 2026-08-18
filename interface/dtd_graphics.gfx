@@ -1,0 +1,18 @@
+spriteTypes = {
+	spriteType ={
+		name = "GFX_idea_UN"
+		texturefile = "gfx/interface/ideas/berlin_accords_1_icon.dds"
+	}
+	spriteType ={
+		name = "GFX_idea_dtd_collapsing_berlin_accords_idea"
+		texturefile = "gfx/interface/ideas/berlin_accords_2_icon.dds"
+	}
+	spriteType ={
+		name = "GFX_idea_dtd_collapsing_berlin_accords_idea"
+		texturefile = "gfx/interface/ideas/berlin_accords_2_icon.dds"
+	}
+	spriteType ={
+		name = "GFX_idea_ai_total_closed_economy"
+		texturefile = "gfx/interface/ideas/laws/md_closed_economy.dds"
+	}
+}

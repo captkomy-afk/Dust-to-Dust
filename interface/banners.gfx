@@ -1,0 +1,54 @@
+spriteTypes = {
+	spriteType = {
+		name = "GFX_misato_test"
+		texturefile = "gfx/banners/misato.png"
+		legacy_lazy_load = no
+	}
+	spriteType = {
+		name = "GFX_weeb"
+		texturefile = "gfx/banners/weeb.dds"
+		legacy_lazy_load = no
+		}
+		
+	spriteType = {
+		name = "GFX_postsov"
+		texturefile = "gfx/banners/privatization.png"
+		legacy_lazy_load = no
+	}
+
+	spriteType = {
+		name = "GFX_ussr_legacy"
+		texturefile = "gfx/banners/ussr_history.dds"
+		legacy_lazy_load = no
+	}
+	spriteType = {
+		name = "GFX_cccp"
+		texturefile = "gfx/banners/cccp.dds"
+		legacy_lazy_load = no
+	}
+	spriteType = {
+		name = "GFX_poor"
+		texturefile = "gfx/banners/poor.dds"
+		legacy_lazy_load = no
+	}
+	spriteType = {
+		name = "GFX_mid"
+		texturefile = "gfx/banners/developing.dds"
+		legacy_lazy_load = no
+	}
+	spriteType = {
+		name = "GFX_rich"
+		texturefile = "gfx/banners/developed.png"
+		legacy_lazy_load = no
+	}
+	spriteType = {
+		name = "waht"
+		texturefile = "gfx/banners/waht.dds"
+		legacy_lazy_load = no
+	}
+	spriteType = {
+		name = "GFX_cost_of_war"
+		texturefile = "gfx/banners/war.dds"
+		legacy_lazy_load = no
+	}
+}

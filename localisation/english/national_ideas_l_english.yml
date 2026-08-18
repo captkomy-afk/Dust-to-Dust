@@ -45,7 +45,7 @@
  ni_26: "Tourist Sector"
  ni_26_desc: "A strong tourist sector brings in foreign international currencies with minimal soft power at no industrial cost."
  ni_27: "Illicit Businesses"
- ni_27_desc: "Illicit Businesses centers around bringing less than legitimate - or even legal - foreign capital. Often in the form scamming, blackmail, or other criminal enterpise, collaborating with these under-the-table wire transactions can provide some very much needed capital for our budget, but at a severe cost to government efforts to curb corruption...\n\n§RDO NOT REDEÆÆM"
+ ni_27_desc: "Illicit Businesses centers around bringing less than legitimate - or even legal - foreign capital.\nCartels, mobs, and other organized crime syndicates are everywhere and often engage in scamming, blackmail, drug manufacturing, or other criminal enterpise.\n\nCollaborating with these under-the-table wire transactions may turn the stomach, but can provide some very much needed capital for our budget, but at a severe cost to government efforts to curb corruption...\n\n§R"Capitalists believe they can take everything at the table as belonging to them. Capitalism is the legitimate racket of the ruling class."§!\n§R-Al Capone§!"
  ni_28: "Songun"
  ni_28_desc: "Our policy of 'military first', or 'Songun' ensures that our army gets all the munitions needed. This economic policy, more often than not adopted as a necessity for self defense, helps safeguard our nation from imperalist aggression at a massive civilian cost."
  ni_29: "Industrial Innovation"
@@ -71,6 +71,8 @@
  ni_46: "Aircraft Investment"
  ni_46_desc: "I'm out of fucking ideas on what to add as locialization. I cramped my hand writing this shit. pretend there's some witty loc here or something."
 
+
+# DEVELOPMENT
  academic_development: "Academic Development"
  academic_development_modifier_tooltip: "------------\nAcademic Development: [?academic_development_var|+1%]\nMonthly Academic Development: [?modifier@academic_development_monthly|=+1%]" # CKEdited - removed broken £development texticon reference (no GFX_development sprite exists anywhere in this mod or base game; was logging "Couldnt find texticon: development" on every tooltip render)
  lower_academic: "Cognitive Struggle"

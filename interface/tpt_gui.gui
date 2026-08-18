@@ -1,0 +1,2229 @@
+guiTypes = {
+
+
+	containerWindowType = {
+		name = "tpt_main_container"
+		position = {x = -250 y = 0 }
+		size = { width = 494 height = 395 }
+		orientation = CENTER_RIGHT
+		origo = center_right
+		moveable = yes
+		
+		background = {
+			name = "Background"
+			spriteType = "GFX_dst_bg"
+		}
+		iconType ={
+			name ="tpt_actor_bg"
+			spriteType = "GFX_generic_text_bg_154"
+			position = { x = 15 y = 15 }
+			Orientation = "UPPER_LEFT"
+			allwaystransparent = yes
+		}
+		instantTextboxType = {
+			name = "tpt_actor_name"
+			position = { x = 26 y = 20 }
+			font = "hoi_18mbs"
+			text = "TPT_ACTOR_NAME"
+			maxWidth = 200
+			maxHeight = 23
+			format = left
+		}
+		buttonType = {
+			name = "tpt_marker"
+			position = { x = 29 y = 52 }
+			shortcut = "shift+r"
+			frame = 1
+			spriteType = "GFX_cont_focus_check_icon"
+			pdx_tooltip = "CAT_MARKER"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_unmarker"
+			position = { x = 29 y = 52 }
+			shortcut = "shift+r"		
+			frame = 2
+			spriteType = "GFX_cont_focus_check_icon"
+			pdx_tooltip = "CAT_UNMARKER"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_mark_ideology"
+			position = { x = 72 y = 52 }
+			shortcut = "shift+ctrl+e"			
+			spriteType = "GFX_tpt_mark_ideology_button_0.9"
+			pdx_tooltip = "TPT_MARK_IDEOLOGY_TT"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_unmark_all"
+			position = { x = 121 y = 53 }
+			shortcut = "shift+ctrl+r"			
+			spriteType = "GFX_close_button_small"
+			pdx_tooltip = "CAT_UNMARK_ALL"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_tab_button_frame_1a"
+			position = { x = 6 y = 245 }
+			spriteType = "GFX_tpt_tab_frame_2"
+			scale = 1
+			pdx_tooltip = "TPT_TAB_SWITCHER_TT"
+		}
+		buttonType = {
+			name = "tpt_tab_button_frame_2a"
+			position = { x = 5 y = 245 }
+			spriteType = "GFX_tpt_tab_frame_1"
+			scale = 1
+			pdx_tooltip = "TPT_TAB_SWITCHER_TT"
+		}
+		instantTextboxType = {
+			name = "tpt_ideology_tab"
+			position = { x = -79 y = 252 }
+			font = "hoi_20b"
+			text = "TPT_IDEOLOGY_TEXT"
+			maxWidth = 281
+			maxHeight = 1
+			format = center
+			orientation = left
+		}
+		buttonType = {
+			name = "tpt_tab_button_frame_1b"
+			position = { x = 114 y = 245 }
+			spriteType = "GFX_tpt_tab_frame_2"
+			scale = 1
+			pdx_tooltip = "TPT_TAB_SWITCHER_TT"
+		}
+		buttonType = {
+			name = "tpt_tab_button_frame_2b"
+			position = { x = 112 y = 245 }
+			spriteType = "GFX_tpt_tab_frame_1"
+			scale = 1
+			pdx_tooltip = "TPT_TAB_SWITCHER_TT"
+		}
+		instantTextboxType = {
+			name = "tpt_diplomacy_tab"
+			position = { x = 30 y = 252 }
+			font = "hoi_20b"
+			text = "TPT_DIPLOMACY_TEXT"
+			maxWidth = 281
+			maxHeight = 1
+			format = center
+			orientation = left
+		}
+		buttonType = {
+			name = "tpt_tab_button_frame_1c"
+			position = { x = 222 y = 245 }
+			spriteType = "GFX_tpt_tab_frame_2"
+			scale = 1
+			pdx_tooltip = "TPT_TAB_SWITCHER_TT"
+		}
+		buttonType = {
+			name = "tpt_tab_button_frame_2c"
+			position = { x = 220 y = 245 }
+			spriteType = "GFX_tpt_tab_frame_1"
+			scale = 1
+			pdx_tooltip = "TPT_TAB_SWITCHER_TT"
+		}
+		instantTextboxType = {
+			name = "tpt_stance_tab"
+			position = { x = 138 y = 252 }
+			font = "hoi_20b"
+			text = "TPT_STANCE_TEXT"
+			maxWidth = 281
+			maxHeight = 1
+			format = center
+			orientation = left
+		}
+		buttonType = {
+			name = "tpt_tab_button_frame_1d"
+			position = { x = 330 y = 245 }
+			spriteType = "GFX_tpt_tab_frame_2"
+			scale = 1
+			pdx_tooltip = "TPT_TAB_SWITCHER_TT"
+		}
+		buttonType = {
+			name = "tpt_tab_button_frame_2d"
+			position = { x = 328 y = 245 }
+			spriteType = "GFX_tpt_tab_frame_1"
+			scale = 1
+			pdx_tooltip = "TPT_TAB_SWITCHER_TT"
+		}
+		instantTextboxType = {
+			name = "tpt_country_tab"
+			position = { x = 246 y = 252 }
+			font = "hoi_20b"
+			text = "TPT_COUNTRY_TEXT"
+			maxWidth = 281
+			maxHeight = 1
+			format = center
+			orientation = left
+		}
+		buttonType = {
+			name = "tpt_tab_button_frame_1e"
+			position = { x = 441 y = 251 }
+			spriteType = "GFX_tpt_tab_frame_2_short"
+			scale = 1
+			pdx_tooltip = "TPT_TAB_SWITCHER_TT"
+		}
+		buttonType = {
+			name = "tpt_tab_button_frame_2e"
+			position = { x = 441 y = 251 }
+			spriteType = "GFX_tpt_tab_frame_1_short"
+			scale = 1
+			pdx_tooltip = "TPT_TAB_SWITCHER_TT"
+		}
+		iconType ={
+			name ="tpt_research_tab_icon"
+			spriteType = "GFX_tpt_research_tab_icon"
+			position = { x = 455 y = 254 }
+			Orientation = "UPPER_LEFT"
+			allwaystransparent = yes
+			scale = 0.6
+		}
+		buttonType = {
+			name = "tpt_tab_button_frame_1f"
+			position = { x = 5 y = 271 }
+			spriteType = "GFX_tpt_tab_frame_2"
+			scale = 1
+			pdx_tooltip = "TPT_TAB_SWITCHER_TT"
+		}
+		buttonType = {
+			name = "tpt_tab_button_frame_2f"
+			position = { x = 5 y = 271 }
+			spriteType = "GFX_tpt_tab_frame_1"
+			scale = 1
+			pdx_tooltip = "TPT_TAB_SWITCHER_TT"
+		}
+		instantTextboxType = {
+			name = "tpt_economic_tab"
+			position = { x = -80 y = 278 }
+			font = "hoi_20b"
+			text = "TPT_ECONOMIC_TEXT"
+			maxWidth = 281
+			maxHeight = 1
+			format = center
+			orientation = left
+		}
+		buttonType = {
+			name = "tpt_tab_switch_button"
+			position = { x = 10000 y = 24500 }
+			shortcut = "shift+x"
+			spriteType = "GFX_tpt_tab_frame_2"
+			scale = 1
+		}
+### IDEOLOGY ###
+		buttonType = {
+			name = "tpt_add_fascism"
+			position = { x = 392 y = 22 }	
+			spriteType = "GFX_tpt_fascism_idea"
+			pdx_tooltip = "TPT_ADD_FASCIST_IDEA_TT"
+		}
+		buttonType = {
+			name = "tpt_ban_fascism"
+			position = { x = 437 y = 22 }	
+			spriteType = "GFX_tpt_fascism_banned"
+			pdx_tooltip = "TPT_BAN_FASCIST_IDEA_TT"
+		}
+		buttonType = {
+			name = "tpt_add_communism"
+			position = { x = 392 y = 66 }	
+			spriteType = "GFX_tpt_communism_idea"
+			pdx_tooltip = "TPT_ADD_COMMUNIST_IDEA_TT"
+		}
+		buttonType = {
+			name = "tpt_ban_communism"
+			position = { x = 437 y = 66 }	
+			spriteType = "GFX_tpt_communism_banned"
+			pdx_tooltip = "TPT_BAN_COMMUNIST_IDEA_TT"
+		}
+		buttonType = {
+			name = "tpt_add_democratic"
+			position = { x = 392 y = 111 }
+			spriteType = "GFX_tpt_democratic_idea"
+			pdx_tooltip = "TPT_ADD_DEMOCRATIC_IDEA_TT"
+		}
+		buttonType = {
+			name = "tpt_ban_democratic"
+			position = { x = 437 y = 111 }	
+			spriteType = "GFX_tpt_democratic_banned"
+			pdx_tooltip = "TPT_BAN_DEMOCRATIC_IDEA_TT"
+		}
+		buttonType = {
+			name = "tpt_add_neutrality"
+			position = { x = 392 y = 155 }	
+			spriteType = "GFX_tpt_neutrality_idea"
+			pdx_tooltip = "TPT_ADD_NEUTRAL_IDEA_TT"
+		}
+		buttonType = {
+			name = "tpt_ban_neutrality"
+			position = { x = 437 y = 155 }	
+			spriteType = "GFX_tpt_neutrality_banned"
+			pdx_tooltip = "TPT_BAN_NEUTRAL_IDEA_TT"
+		}
+		buttonType = {
+			name = "tpt_add_nationalism"
+			position = { x = 392 y = 195 }	
+			spriteType = "GFX_tpt_nationalism_idea"
+			pdx_tooltip = "TPT_ADD_NATIONALIST_IDEA_TT"
+		}
+		buttonType = {
+			name = "tpt_ban_nationalism"
+			position = { x = 437 y = 195 }	
+			spriteType = "GFX_tpt_nationalism_banned"
+			pdx_tooltip = "TPT_BAN_NATIONALIST_IDEA_TT"
+		}
+		buttonType = {
+			name = "tpt_fascist_on"
+			position = { x = 225 y = 30 }
+			spriteType = "GFX_cat_button_off"
+			pdx_tooltip = "TPT_EN_FASCIST"
+			scale = 0.7
+		}
+		buttonType = {
+			name = "tpt_fascist_off" 
+			position = { x = 225 y = 30 }
+			spriteType = "GFX_cat_button_on"
+			pdx_tooltip = "TPT_DE_FASCIST"
+			scale = 0.7
+		}
+		instantTextboxType = {
+			name = "tpt_fascist_text"
+			position = { x = 255 y = 31 }
+			font = "hoi_16mbs"
+			text = "TPT_FASCIST"
+			maxWidth = 140
+			maxHeight = 23
+			format = left
+			alwaystransparent = yes
+		}
+		instantTextboxType = {
+			name = "tpt_fascist_number"
+			position = { x = 340 y = 29 }
+			font = "hoi_18mbs"
+			text = "[TPT_POP_FASCIST]%"
+			maxWidth = 200
+			maxHeight = 23
+			format = left
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "tpt_communist_on"
+			position = { x = 225 y = 75 }
+			spriteType = "GFX_cat_button_off"
+			pdx_tooltip = "TPT_EN_COMMUNIST"
+			scale = 0.7
+		}
+		buttonType = {
+			name = "tpt_communist_off" 
+			position = { x = 225 y = 75 }
+			spriteType = "GFX_cat_button_on"
+			pdx_tooltip = "TPT_DE_COMMUNIST"
+			scale = 0.7
+		}
+		instantTextboxType = {
+			name = "tpt_communist_text"
+			position = { x = 255 y = 76 }
+			font = "hoi_16mbs"
+			text = "TPT_COMMUNIST"
+			maxWidth = 140
+			maxHeight = 23
+			format = left
+			alwaystransparent = yes
+		}
+		instantTextboxType = {
+			name = "tpt_communist_number"
+			position = { x = 340 y = 74 }
+			font = "hoi_18mbs"
+			text = "[TPT_POP_COMMUNIST]%"
+			maxWidth = 200
+			maxHeight = 23
+			format = left
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "tpt_democratic_on"
+			position = { x = 225 y = 120 }			
+			spriteType = "GFX_cat_button_off"
+			pdx_tooltip = "TPT_EN_DEMOCRATIC"
+			scale = 0.7
+		}
+		buttonType = {
+			name = "tpt_democratic_off" 
+			position = { x = 225 y = 120 }
+			spriteType = "GFX_cat_button_on"
+			pdx_tooltip = "TPT_DE_DEMOCRATIC"
+			scale = 0.7
+		}
+		instantTextboxType = {
+			name = "tpt_democratic_text"
+			position = { x = 255 y = 121 }
+			font = "hoi_16mbs"
+			text = "TPT_DEMOCRATIC"
+			maxWidth = 140
+			maxHeight = 23
+			format = left
+			alwaystransparent = yes
+		}
+		instantTextboxType = {
+			name = "tpt_democratic_number"
+			position = { x = 340 y = 119 }
+			font = "hoi_18mbs"
+			text = "[TPT_POP_DEMOCRATIC]%"
+			maxWidth = 200
+			maxHeight = 23
+			format = left
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "tpt_neutral_on"
+			position = { x = 225 y = 165 }
+			spriteType = "GFX_cat_button_off"
+			pdx_tooltip = "TPT_EN_NEUTRAL"
+			scale = 0.7
+		}
+		buttonType = {
+			name = "tpt_neutral_off" 
+			position = { x = 225 y = 165 }
+			spriteType = "GFX_cat_button_on"
+			pdx_tooltip = "TPT_DE_NEUTRAL"
+			scale = 0.7
+		}
+		instantTextboxType = {
+			name = "tpt_neutral_text"
+			position = { x = 255 y = 166 }
+			font = "hoi_16mbs"
+			text = "TPT_NEUTRAL"
+			maxWidth = 140
+			maxHeight = 23
+			format = left
+			alwaystransparent = yes
+		}
+		instantTextboxType = {
+			name = "tpt_neutral_number"
+			position = { x = 340 y = 164 }
+			font = "hoi_18mbs"
+			text = "[TPT_POP_NEUTRAL]%"
+			maxWidth = 200
+			maxHeight = 23
+			format = left
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "tpt_nationalist_on"
+			position = { x = 225 y = 205 }
+			spriteType = "GFX_cat_button_off"
+			pdx_tooltip = "TPT_EN_NATIONALIST"
+			scale = 0.7
+		}
+		buttonType = {
+			name = "tpt_nationalist_off" 
+			position = { x = 225 y = 205 }
+			spriteType = "GFX_cat_button_on"
+			pdx_tooltip = "TPT_DE_NATIONALIST"
+			scale = 0.7
+		}
+		instantTextboxType = {
+			name = "tpt_nationalist_text"
+			position = { x = 255 y = 206 }
+			font = "hoi_16mbs"
+			text = "TPT_NATIONALIST"
+			maxWidth = 140
+			maxHeight = 23
+			format = left
+			alwaystransparent = yes
+		}
+		instantTextboxType = {
+			name = "tpt_nationalist_number"
+			position = { x = 340 y = 204 }
+			font = "hoi_18mbs"
+			text = "[TPT_POP_NATIONALIST]%"
+			maxWidth = 200
+			maxHeight = 23
+			format = left
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "tpt_add_5"
+			position = { x = 70 y = 95 }
+			spriteType = "GFX_tp_add_5"
+			pdx_tooltip = "TPT_ADD_5"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_subtract_5"
+			position = { x = 115 y = 95 }
+			spriteType = "GFX_tp_sub_5"
+			pdx_tooltip = "TPT_SUBTRACT_5"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_add_10"
+			position = { x = 70 y = 130 }
+			spriteType = "GFX_tp_add_10"
+			pdx_tooltip = "TPT_ADD_10"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_subtract_10"
+			position = { x = 115 y = 130 }
+			spriteType = "GFX_tp_sub_10"
+			pdx_tooltip = "TPT_SUBTRACT_10"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_add_50"
+			position = { x = 70 y = 165 }
+			spriteType = "GFX_tp_add_50"
+			pdx_tooltip = "TPT_ADD_50"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_subtract_50"
+			position = { x = 115 y = 165 }
+			spriteType = "GFX_tp_sub_50"
+			pdx_tooltip = "TPT_SUBTRACT_50"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_change"
+			position = { x = 88 y = 198 }
+			spriteType = "liberalism"
+			pdx_tooltip = "TPT_CHANGE"
+			scale = 0.45
+		}
+		buttonType = {
+			name = "tpt_enable_elections"
+			position = { x = 137 y = 202 }	
+			spriteType = "GFX_decision_category_generic_democracy"
+			pdx_tooltip = "TPT_ENABLE_ELECTIONS"
+			scale = 0.65
+		}
+		buttonType = {
+			name = "tpt_disable_elections"
+			position = { x = 137 y = 202 }	
+			spriteType = "GFX_decision_category_eng_move_to_secure_the_dominions"
+			pdx_tooltip = "TPT_DISABLE_ELECTIONS"
+			scale = 0.65
+		}
+		buttonType = {
+			name = "tpt_kill_country_leader"
+			position = { x = 44 y = 202 }	
+			spriteType = "GFX_decision_politic_kill"
+			pdx_tooltip = "TPT_KILL_LEADER_TT"
+			scale = 0.65
+		}
+		
+		buttonType = {
+			name = "subideologies_open_button"
+			position = { x = 10 y = 220 }
+			spriteType = "GFX_FULL_POLITICS_VIEW_BUTTON"
+			clicksound = click_close
+			oversound = ui_menu_over
+			#buttonText = "Ideologies"
+			#buttonFont = "cg_16b"
+			pdx_tooltip = "FULL_POLITICS_VIEW_BUTTON_TT"
+		}
+		
+		
+### DIPLOMACY ###
+		buttonType = {
+			name = "tpt_guarantee" 
+			position = { x = 30 y = 90 }
+			spriteType = "GFX_tpt_guarantee_green"
+			pdx_tooltip = "TPT_GUARANTEE_TT"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_no_guarantee" 
+			position = { x = 85 y = 90 }
+			spriteType = "GFX_tpt_guarantee_orange"
+			pdx_tooltip = "TPT_UNGUARANTEE_TT"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_remove_all_guarantees" 
+			position = { x = 140 y = 90 }
+			spriteType = "GFX_tpt_guarantee_red"
+			pdx_tooltip = "TPT_REMOVE_ALL_GUARANTEES_TT"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_access" 
+			position = { x = 30 y = 140 }
+			spriteType = "GFX_tpt_access_green"
+			pdx_tooltip = "TPT_ACCESS_TT"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_no_access" 
+			position = { x = 85 y = 140 }
+			spriteType = "GFX_tpt_access_orange"
+			pdx_tooltip = "TPT_UNACCESS_TT"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_remove_all_access" 
+			position = { x = 140 y = 140 }
+			spriteType = "GFX_tpt_access_red"
+			pdx_tooltip = "TPT_REMOVE_ALL_ACCESS_TT"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_nap" 
+			position = { x = 30 y = 190 }
+			spriteType = "GFX_tpt_nap_green"
+			pdx_tooltip = "TPT_NAP_TT"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_no_nap" 
+			position = { x = 85 y = 190 }
+			spriteType = "GFX_tpt_nap_orange"
+			pdx_tooltip = "TPT_UNNAP_TT"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_remove_all_naps" 
+			position = { x = 140 y = 190 }
+			spriteType = "GFX_tpt_nap_red"
+			pdx_tooltip = "TPT_REMOVE_ALL_NAPS_TT"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_decrease_opinion"
+			position = { x = 284 y = 100 }
+			spriteType = "GFX_subtract_one"
+			pdx_tooltip = "TPT_DEC_OP"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_increase_opinion"
+			position = { x = 358 y = 100 }
+			spriteType = "GFX_add_one"
+			pdx_tooltip = "TPT_INC_OP"
+			scale = 1
+		}
+		instantTextboxType = {
+			name = "tpt_opinion_value"
+			position = { x = 313 y = 102 }
+			font = "hoi_18mbs"
+			text = "[?global.tpt_op_value]"
+			maxWidth = 38
+			maxHeight = 23
+			format = center
+		}
+		instantTextboxType = {
+			name = "tpt_opinion_text"
+			position = { x = 405 y = 102 }
+			font = "hoi_18mbs"
+			text = "[tpt_op_or_trade]"
+			maxWidth = 106
+			maxHeight = 23
+			format = left
+		}
+		buttonType = {
+			name = "tpt_op_on"
+			position = { x = 245 y = 102 }
+			spriteType = "GFX_cat_button_off"
+			pdx_tooltip = "TPT_OPINON_ON"
+			scale = 0.7
+		}
+		buttonType = {
+			name = "tpt_op_off" 
+			position = { x = 245 y = 102 }
+			spriteType = "GFX_cat_button_on"
+			pdx_tooltip = "TPT_OPINON_OFF"
+			scale = 0.7
+		}
+		buttonType = {
+			name = "tpt_decrease_trade"
+			position = { x = 284 y = 135 }
+			spriteType = "GFX_subtract_one"
+			pdx_tooltip = "TPT_DEC_OP"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_increase_trade"
+			position = { x = 358 y = 135 }
+			spriteType = "GFX_add_one"
+			pdx_tooltip = "TPT_INC_OP"
+			scale = 1
+		}
+		instantTextboxType = {
+			name = "tpt_trade_value"
+			position = { x = 313 y = 137 }
+			font = "hoi_18mbs"
+			text = "[?global.tpt_trade_value]"
+			maxWidth = 38
+			maxHeight = 23
+			format = center
+		}
+		instantTextboxType = {
+			name = "tpt_trade_text"
+			position = { x = 405 y = 134 }
+			font = "hoi_18mbs"
+			text = "TPT_TRADE_TEXT"
+			maxWidth = 106
+			maxHeight = 23
+			format = left
+		}
+		buttonType = {
+			name = "tpt_trade_on"
+			position = { x = 245 y = 135 }
+			spriteType = "GFX_cat_button_off"
+			pdx_tooltip = "TPT_TRADE_ON"
+			scale = 0.7
+		}
+		buttonType = {
+			name = "tpt_trade_off" 
+			position = { x = 245 y = 135 }
+			spriteType = "GFX_cat_button_on"
+			pdx_tooltip = "TPT_TRADE_OFF"
+			scale = 0.7
+		}
+		buttonType = {
+			name = "tpt_add_opinion_button" 
+			position = { x = 261 y = 177 }
+			spriteType = "GFX_tpt_opinion_green"
+			pdx_tooltip = "TPT_ADD_OPINION_TT"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_remove_opinion_button" 
+			position = { x = 316 y = 177 }
+			spriteType = "GFX_tpt_opinion_orange"
+			pdx_tooltip = "TPT_REMOVE_OPINION_TT"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_remove_all_opinions_button" 
+			position = { x = 371 y = 177 }
+			spriteType = "GFX_tpt_opinion_red"
+			pdx_tooltip = "TPT_REMOVE_ALL_OPINIONS"
+			scale = 1
+		}
+### STANCE ###
+
+		buttonType = {
+			name = "tpt_war_button" 
+			position = { x = 240 y = 110 }
+			spriteType = "GFX_tpt_war_orange"
+			pdx_tooltip = "TPT_WAR_TT"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_peace_button" 
+			position = { x = 295 y = 110 }
+			spriteType = "GFX_tpt_major_green"
+			pdx_tooltip = "TPT_PEACE_TT"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_truce_button" 
+			position = { x = 295 y = 170 }
+			spriteType = "GFX_tpt_major_blue"
+			pdx_tooltip = "TPT_TRUCE_TT"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_cw_button" 
+			position = { x = 240 y = 170 }
+			spriteType = "GFX_tpt_war_red"
+			pdx_tooltip = "TPT_CW_TT"
+			shortcut = "shift+c"
+		}
+		instantTextboxType = {
+			name = "tpt_threat_text"
+			position = { x = 322 y = 75 }
+			font = "hoi_18mbs"
+			text = "TPT_WORLD_TENSION_TEXT"
+			maxWidth = 201
+			maxHeight = 23
+			format = center
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "tpt_add_threat_1" 
+			position = { x = 390 y = 105 }
+			spriteType = "GFX_tp_add_1"
+			pdx_tooltip = "TPT_THREAT_1"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_add_threat_5" 
+			position = { x = 390 y = 140 }
+			spriteType = "GFX_tp_add_5"
+			pdx_tooltip = "TPT_THREAT_5"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_add_threat_20" 
+			position = { x = 390 y = 175 }
+			spriteType = "GFX_tp_add_20"
+			pdx_tooltip = "TPT_THREAT_20"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_sub_threat_1" 
+			position = { x = 430 y = 105 }
+			spriteType = "GFX_tp_sub_1"
+			pdx_tooltip = "TPT_THREAT_SUB_1"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_sub_threat_5" 
+			position = { x = 430 y = 140 }
+			spriteType = "GFX_tp_sub_5"
+			pdx_tooltip = "TPT_THREAT_SUB_5"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_sub_threat_20" 
+			position = { x = 430 y = 175 }
+			spriteType = "GFX_tp_sub_20"
+			pdx_tooltip = "TPT_THREAT_SUB_20"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_create_faction" 
+			position = { x = 40 y = 110 }
+			spriteType = "GFX_tpt_create_faction_green"
+			pdx_tooltip = "TPT_CREATE_FACTION_TT"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_dismantle_faction" 
+			position = { x = 95 y = 110 }
+			spriteType = "GFX_tpt_create_faction_orange"
+			pdx_tooltip = "TPT_DISMANTLE_FACTION_TT"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_add_to_faction" 
+			position = { x = 40 y = 170 }
+			spriteType = "GFX_tpt_join_faction_green"
+			pdx_tooltip = "TPT_ADD_TO_FACTION_TT"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_leave_faction" 
+			position = { x = 95 y = 170 }
+			spriteType = "GFX_tpt_join_faction_orange"
+			pdx_tooltip = "TPT_LEAVE_FACTION_TT"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_dismantle_all_factions" 
+			position = { x = 150 y = 110 }
+			spriteType = "GFX_tpt_create_faction_red"
+			pdx_tooltip = "TPT_DISMANTLE_ALL_FACTIONS_TT"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_make_faction_leader" 
+			position = { x = 150 y = 170 }
+			spriteType = "GFX_tpt_create_faction_green"
+			pdx_tooltip = "TPT_MAKE_FACTION_LEADER_TT"
+			scale = 1
+		}
+### COUNTRY ###
+		instantTextboxType = {
+			name = "tpt_stability_text"
+			position = { x = 238 y = 65 }
+			font = "hoi_18mbs"
+			text = "TPT_STABILITY_TEXT"
+			maxWidth = 103
+			maxHeight = 23
+			format = center
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "tpt_add_stability_1" 
+			position = { x = 255 y = 105 }
+			spriteType = "GFX_tp_add_1"
+			pdx_tooltip = "TPT_ADD_ST_1"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_add_stability_5" 
+			position = { x = 255 y = 140 }
+			spriteType = "GFX_tp_add_5"
+			pdx_tooltip = "TPT_ADD_ST_5"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_add_stability_20" 
+			position = { x = 255 y = 175 }
+			spriteType = "GFX_tp_add_20"
+			pdx_tooltip = "TPT_ADD_ST_20"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_sub_stability_1" 
+			position = { x = 295 y = 105 }
+			spriteType = "GFX_tp_sub_1"
+			pdx_tooltip = "TPT_SUB_ST_1"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_sub_stability_5" 
+			position = { x = 295 y = 140 }
+			spriteType = "GFX_tp_sub_5"
+			pdx_tooltip = "TPT_SUB_ST_5"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_sub_stability_20" 
+			position = { x = 295 y = 175 }
+			spriteType = "GFX_tp_sub_20"
+			pdx_tooltip = "TPT_SUB_ST_20"
+			scale = 1
+		}
+		instantTextboxType = {
+			name = "tpt_war_support_text"
+			position = { x = 324 y = 65 }
+			font = "hoi_18mbs"
+			text = "TPT_WAR_SUPPORT_TEXT"
+			maxWidth = 147
+			maxHeight = 23
+			format = center
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "tpt_add_war_support_1" 
+			position = { x = 360 y = 105 }
+			spriteType = "GFX_tp_add_1"
+			pdx_tooltip = "TPT_ADD_WS_1"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_add_war_support_5" 
+			position = { x = 360 y = 140 }
+			spriteType = "GFX_tp_add_5"
+			pdx_tooltip = "TPT_ADD_WS_5"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_add_war_support_20" 
+			position = { x = 360 y = 175 }
+			spriteType = "GFX_tp_add_20"
+			pdx_tooltip = "TPT_ADD_WS_20"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_sub_war_support_1" 
+			position = { x = 400 y = 105 }
+			spriteType = "GFX_tp_sub_1"
+			pdx_tooltip = "TPT_SUB_WS_1"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_sub_war_support_5" 
+			position = { x = 400 y = 140 }
+			spriteType = "GFX_tp_sub_5"
+			pdx_tooltip = "TPT_SUB_WS_5"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_sub_war_support_20" 
+			position = { x = 400 y = 175 }
+			spriteType = "GFX_tp_sub_20"
+			pdx_tooltip = "TPT_SUB_WS_20"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_set_major_button" 
+			position = { x = 90 y = 140 }
+			spriteType = "GFX_tpt_major_green"
+			pdx_tooltip = "TPT_SET_MAJOR_TT"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_unmajor_button" 
+			position = { x = 145 y = 140 }
+			spriteType = "GFX_tpt_major_orange"
+			pdx_tooltip = "TPT_SET_UNMAJOR_TT"
+			scale = 1
+		}
+		instantTextboxType = {
+			name = "tpt_major_text"
+			position = { x = 38 y = 105 }
+			font = "hoi_18mbs"
+			text = "[tpt_major_text]"
+			maxWidth = 200
+			maxHeight = 23
+			format = center
+		}
+### RESEARCH ###
+		buttonType = {
+			name = "tpt_remove_rs_slot"
+			position = { x = 33 y = 100 }
+			spriteType = "GFX_subtract_one"
+			pdx_tooltip = "TPT_REMOVE_RS_SLOT"
+			scale = 1
+		}
+		buttonType = {
+			name = "tpt_add_rs_slot"
+			position = { x = 107 y = 100 }
+			spriteType = "GFX_add_one"
+			pdx_tooltip = "TPT_ADD_RS_SLOT"
+			scale = 1
+		}
+		instantTextboxType = {
+			name = "tpt_rs_slot_value"
+			position = { x = 62 y = 102 }
+			font = "hoi_18mbs"
+			text = "[?this.amount_research_slots]"
+			maxWidth = 38
+			maxHeight = 23
+			format = center
+		}
+		instantTextboxType = {
+			name = "tpt_rs_slot_text"
+			position = { x = 154 y = 102 }
+			font = "hoi_18mbs"
+			text = "TPT_RS_SLOT"
+			maxWidth = 106
+			maxHeight = 23
+			format = left
+		}
+		buttonType = {
+			name = "tpt_set_0_rs_slots"
+			position = { x = 21 y = 145 }
+			shortcut = "shift+ctrl+r"			
+			spriteType = "GFX_tpt_0_rs_slots_icon"
+			pdx_tooltip = "TPT_SET_0_RS_SLOTS"
+			scale = 0.7
+		}
+		buttonType = {
+			name = "tpt_set_100_rs_slots"
+			position = { x = 73 y = 149 }
+			shortcut = "shift+ctrl+r"			
+			spriteType = "GFX_tpt_100_rs_slots_icon"
+			pdx_tooltip = "TPT_SET_100_RS_SLOTS"
+			scale = 0.7
+		}
+		buttonType = {
+			name = "tpt_reset_rs_slots"
+			position = { x = 109 y = 149 }
+			shortcut = "shift+ctrl+r"			
+			spriteType = "GFX_tpt_reset_slot_amount_icon"
+			pdx_tooltip = "TPT_RESET_RS_SLOTS"
+			scale = 0.7
+		}
+### ECONOMIC ###
+		buttonType = {
+			name ="debt_bg"
+			spriteType = "GFX_generic_box_wider"
+			position = { x = 28 y = 98 }
+			scale = 1.15
+		}
+
+		iconType = {
+			name ="debt_icon"
+			spriteType = "GFX_debt"
+			position = { x= 29 y = 99 }
+		}
+
+		instantTextBoxType = {
+			name ="debt_text"
+			position = { x= 52 y = 104 }
+			font = "hoi_18mbs"
+			text = "[debt_display]"
+			format = centre
+			maxWidth = 63
+			maxHeight = 24
+			fixedsize = yes
+
+			pdx_tooltip = "DEBT_TOOLTIP"
+			pdx_tooltip_delayed = "DEBT_TOOLTIP_DELAYED"
+		}
+		
+		buttonType ={
+			name ="treasury_bg"
+			spriteType = "GFX_generic_box_wider"
+			position = { x = 28 y = 135 }
+			scale = 1.15
+		}
+
+		iconType = {
+			name ="treasury_icon"
+			spriteType = "GFX_treasury"
+			position = { x = 30 y = 136 }
+		}
+
+		instantTextBoxType = {
+			name ="treasury_text"
+			position = { x = 55 y = 140 }
+			font = "hoi_18mbs"
+			text = "[?treasury|3]"
+			format = centre
+			maxWidth = 55
+			maxHeight = 24
+			fixedsize = yes
+
+			pdx_tooltip = "TREASURY_TOOLTIP"
+			pdx_tooltip_delayed = "TREASURY_TOOLTIP_DELAYED"
+		}
+		
+		buttonType ={
+			name ="int_investments_bg"
+			spriteType = "GFX_generic_box_wider"
+			position = { x = 28 y = 173 }
+			scale = 1.15
+		}
+
+		iconType = {
+			name ="int_investments_icon"
+			spriteType = "GFX_int_investments"
+			position = { x = 30 y = 174 }
+		}
+
+		instantTextBoxType = {
+			name ="int_investments_text"
+			position = { x = 52 y = 178 }
+			font = "hoi_18mbs"
+			text = "[?int_investments]"
+			format = centre
+			maxWidth = 55
+			maxHeight = 24
+			fixedsize = yes
+
+			pdx_tooltip = "INT_INVESTMENTS_TOOLTIP"
+			pdx_tooltip_delayed = "INT_INVESTMENTS_TOOLTIP_DELAYED"
+		}
+		
+		buttonType ={
+			name = "depression_bg" 
+			spriteType = "GFX_idea_depression"
+			position = { x = 198 y = 30 }
+			scale = 1
+			pdx_tooltip = "tpt_depression_bg_tt"
+		}
+		
+		buttonType ={
+			name = "recession_bg" 
+			spriteType = "GFX_idea_recession"
+			position = { x = 198 y = 100 }
+			scale = 1
+			pdx_tooltip = "tpt_recession_bg_tt"
+		}
+		
+		buttonType ={
+			name = "stagnation_bg" 
+			spriteType = "GFX_idea_stagnation"
+			position = { x = 198 y = 170 }
+			scale = 1
+			pdx_tooltip = "tpt_stagnation_bg_tt"
+		}
+		
+		buttonType ={
+			name = "stable_growth_bg" 
+			spriteType = "GFX_idea_stable_growth"
+			position = { x = 298 y = 30 }
+			scale = 1
+			pdx_tooltip = "tpt_stable_growth_bg_tt"
+		}
+		
+		buttonType ={
+			name = "fast_growth_bg" 
+			spriteType = "GFX_idea_fast_growth"
+			position = { x = 298 y = 100 }
+			scale = 1
+			pdx_tooltip = "tpt_fast_growth_bg_tt"
+		}
+		
+		buttonType ={
+			name = "economic_boom_bg" 
+			spriteType = "GFX_idea_economic_boom"
+			position = { x = 298 y = 170 }
+			scale = 1
+			pdx_tooltip = "tpt_economic_boom_bg_tt"
+		}
+	}
+
+	containerWindowType = {
+		name = "tpt_cw_window"
+		position = { x = -380 y = 473 }
+		size = { width = 494 height = 255 }
+		orientation = UPPER_RIGHT
+		origo = upper_right
+
+		fade_time = 300
+		fade_type = linear
+		moveable = yes
+
+		background = {
+			name = "Background"
+			quadTextureSprite = "GFX_tpt_cw_bg"
+		}
+		buttonType = {
+			name = "tpt_cw_close_window"
+			position = { x = 109 y = 2 }
+			shortcut = "shift+ctrl+r"			
+			spriteType = "GFX_closebutton"
+			pdx_tooltip = "TPT_CLOSE_WINDOW"
+			scale = 0.7
+		}
+		buttonType = {
+			name = "tpt_cw_fascist_on"
+			position = { x = 18 y = 25 }
+			spriteType = "GFX_cat_button_off"
+			pdx_tooltip = "TPT_CW_EN_FASCIST"
+			scale = 0.7
+		}
+		buttonType = {
+			name = "tpt_cw_fascist_off" 
+			position = { x = 18 y = 25 }
+			spriteType = "GFX_cat_button_on"
+			pdx_tooltip = "TPT_CW_EN_FASCIST"
+			scale = 0.7
+		}
+		instantTextboxType = {
+			name = "tpt_cw_fascist_text"
+			position = { x = 45 y = 26 }
+			font = "hoi_16mbs"
+			text = "TPT_FASCIST"
+			maxWidth = 140
+			maxHeight = 23
+			format = left
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "tpt_cw_communist_on"
+			position = { x = 18 y = 60 }
+			spriteType = "GFX_cat_button_off"
+			pdx_tooltip = "TPT_CW_EN_COMMUNIST"
+			scale = 0.7
+		}
+		buttonType = {
+			name = "tpt_cw_communist_off" 
+			position = { x = 18 y = 60 }
+			spriteType = "GFX_cat_button_on"
+			pdx_tooltip = "TPT_CW_EN_COMMUNIST"
+			scale = 0.7
+		}
+		instantTextboxType = {
+			name = "tpt_cw_communist_text"
+			position = { x = 45 y = 61 }
+			font = "hoi_16mbs"
+			text = "TPT_COMMUNIST"
+			maxWidth = 140
+			maxHeight = 23
+			format = left
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "tpt_cw_democratic_on"
+			position = { x = 18 y = 95 }			
+			spriteType = "GFX_cat_button_off"
+			pdx_tooltip = "TPT_CW_EN_DEMOCRATIC"
+			scale = 0.7
+		}
+		buttonType = {
+			name = "tpt_cw_democratic_off" 
+			position = { x = 18 y = 95 }
+			spriteType = "GFX_cat_button_on"
+			pdx_tooltip = "TPT_CW_EN_DEMOCRATIC"
+			scale = 0.7
+		}
+		instantTextboxType = {
+			name = "tpt_cw_democratic_text"
+			position = { x = 45 y = 96 }
+			font = "hoi_16mbs"
+			text = "TPT_DEMOCRATIC"
+			maxWidth = 140
+			maxHeight = 23
+			format = left
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "tpt_cw_neutral_on"
+			position = { x = 18 y = 130 }
+			spriteType = "GFX_cat_button_off"
+			pdx_tooltip = "TPT_CW_EN_NEUTRAL"
+			scale = 0.7
+		}
+		buttonType = {
+			name = "tpt_cw_neutral_off" 
+			position = { x = 18 y = 130 }
+			spriteType = "GFX_cat_button_on"
+			pdx_tooltip = "TPT_CW_EN_NEUTRAL"
+			scale = 0.7
+		}
+		instantTextboxType = {
+			name = "tpt_cw_neutral_text"
+			position = { x = 45 y = 131 }
+			font = "hoi_16mbs"
+			text = "TPT_NEUTRAL"
+			maxWidth = 140
+			maxHeight = 23
+			format = left
+			alwaystransparent = yes
+		}
+		buttonType = {
+			name = "tpt_cw_nationalist_on"
+			position = { x = 18 y = 165 }
+			spriteType = "GFX_cat_button_off"
+			pdx_tooltip = "TPT_CW_EN_NATIONALIST"
+			scale = 0.7
+		}
+		buttonType = {
+			name = "tpt_cw_nationalist_off" 
+			position = { x = 18 y = 165 }
+			spriteType = "GFX_cat_button_on"
+			pdx_tooltip = "TPT_CW_EN_NATIONALIST"
+			scale = 0.7
+		}
+		instantTextboxType = {
+			name = "tpt_cw_nationalist_text"
+			position = { x = 45 y = 166 }
+			font = "hoi_16mbs"
+			text = "TPT_NATIONALIST"
+			maxWidth = 140
+			maxHeight = 23
+			format = left
+			alwaystransparent = yes
+		}
+	}
+	
+	containerWindowType = {
+		name = "tpt_party_window"
+		position = { x = -730 y = 173 }
+		size = { width = 436 height = 645 }
+		orientation = UPPER_RIGHT
+		origo = upper_right
+
+		fade_time = 300
+		fade_type = linear
+		moveable = yes
+		
+			background = {
+				name = "SI_Background"
+				quadTextureSprite = "GFX_SI_information_view_bg"
+			}
+			buttonType = {
+				name = "subideologies_close_button"
+				position = { x = -50 y = 15 }
+				quadTextureSprite ="GFX_closebutton"
+				buttonFont = "Main_14_black"
+				shortcut = "ESCAPE"
+				Orientation = "UPPER_RIGHT"
+				clicksound = click_close
+				pdx_tooltip = "CLOSE"
+			}
+
+			instantTextboxType = {
+				name = "si_title_text"
+				position = { x = 18 y = 15 }
+				font = "hoi_24header"
+				text = "si_title_text"
+				format = left
+				maxWidth = 240
+				fixedsize = yes
+				pdx_tooltip = "si_title_text_tt"
+			}
+
+			iconType = {
+				name = "western_icon_sub"
+				spriteType = "GFX_ideology_democratic_group"
+				position = { x = 14 y = 73 }
+				pdx_tooltip = "western_desc"
+			}
+			iconType = {
+				name = "emerging_icon_sub"
+				spriteType = "GFX_ideology_communism_group"
+				position = { x = 14 y = 180 }
+				pdx_tooltip = "emerging_desc"
+			}
+			iconType = {
+				name = "salafist_icon_sub"
+				spriteType = "GFX_ideology_fascism_group"
+				position = { x = 14 y = 290 }
+				pdx_tooltip = "salafist_desc"
+			}
+			iconType = {
+				name = "non_alligned_icon_sub"
+				spriteType = "GFX_ideology_neutrality_group"
+				position = { x = 14 y = 415 }
+				pdx_tooltip = "non_aligned_desc"
+			}
+			iconType = {
+				name = "nationalist_icon_sub"
+				spriteType = "GFX_ideology_nationalist_group"
+				position = { x = 14 y = 550 }
+				pdx_tooltip = "nationalism_desc"
+			}
+
+			instantTextboxType = {
+				name = "sif_1"
+				position = { x = 93 y = 62 }
+				font = "cg_16b"
+				text = "sif_1_tt"
+				maxWidth = 255
+				maxHeight = 18
+				format = left
+				fixedsize = yes
+				pdx_tooltip = "TT_Party_1"
+			}
+
+			buttonType = {
+				name ="opt_partyall_ban_button"
+				spriteType = "GFX_create_one_party_state"
+				position = { x=272 y=15 }
+				pdx_tooltip = "ban_all_title_tt"
+			}
+			buttonType = {
+				name ="opt_partyall_allow_button"
+				spriteType = "GFX_remove_one_party_state"
+				position = { x=272 y=15 }
+				pdx_tooltip = "allow_all_title_tt"
+			}
+			buttonType ={
+				name ="opt_party1_boost_button"
+				spriteType = "GFX_boost_party_button"
+				position = { x=352 y=60 }
+				pdx_tooltip = "boost_Party_0_TT"
+			}
+			buttonType ={
+				name ="opt_party1_attack_button"
+				spriteType = "GFX_attack_party_button"
+				position = { x=376 y=60 }
+				pdx_tooltip = "attack_Party_0_TT"
+			}
+			buttonType ={
+				name ="opt_party1_ban_button"
+				spriteType = "GFX_ban_party_button"
+				position = { x=400 y=60 }
+				pdx_tooltip = "ban_Party_0_TT"
+			}
+			buttonType ={
+				name ="opt_party1_allow_button"
+				spriteType = "GFX_allow_party_button"
+				position = { x=400 y=60 }
+				pdx_tooltip = "allow_Party_0_TT"
+			}
+			instantTextboxType = {
+				name = "sif_2"
+				position = { x = 93 y = 84 }
+				font = "cg_16b"
+				text = "sif_2_tt"
+				maxWidth = 255
+				maxHeight = 18
+				format = left
+				fixedsize = yes
+				pdx_tooltip = "TT_Party_2"
+			}
+			buttonType ={
+				name ="opt_party2_boost_button"
+				spriteType = "GFX_boost_party_button"
+				position = { x=352 y=82 }
+				pdx_tooltip = "boost_Party_1_TT"
+			}
+			buttonType ={
+				name ="opt_party2_attack_button"
+				spriteType = "GFX_attack_party_button"
+				position = { x=376 y=82 }
+				pdx_tooltip = "attack_Party_1_TT"
+			}
+			buttonType ={
+				name ="opt_party2_ban_button"
+				spriteType = "GFX_ban_party_button"
+				position = { x=400 y=82 }
+				pdx_tooltip = "ban_Party_1_TT"
+			}
+			buttonType ={
+				name ="opt_party2_allow_button"
+				spriteType = "GFX_allow_party_button"
+				position = { x=400 y=82 }
+				pdx_tooltip = "allow_Party_1_TT"
+			}
+			instantTextboxType = {
+				name = "sif_3"
+				position = { x = 93 y = 106 }
+				font = "cg_16b"
+				text = "sif_3_tt"
+				maxWidth = 255
+				maxHeight = 18
+				format = left
+				fixedsize = yes
+				pdx_tooltip = "TT_Party_3"
+			}
+			buttonType ={
+				name ="opt_party3_boost_button"
+				spriteType = "GFX_boost_party_button"
+				position = { x=352 y=104 }
+				pdx_tooltip = "boost_Party_2_TT"
+			}
+			buttonType ={
+				name ="opt_party3_attack_button"
+				spriteType = "GFX_attack_party_button"
+				position = { x=376 y=104 }
+				pdx_tooltip = "attack_Party_2_TT"
+			}
+			buttonType ={
+				name ="opt_party3_ban_button"
+				spriteType = "GFX_ban_party_button"
+				position = { x=400 y=104 }
+				pdx_tooltip = "ban_Party_2_TT"
+			}
+			buttonType ={
+				name ="opt_party3_allow_button"
+				spriteType = "GFX_allow_party_button"
+				position = { x=400 y=104 }
+				pdx_tooltip = "allow_Party_2_TT"
+			}
+			instantTextboxType = {
+				name = "sif_4"
+				position = { x = 93 y = 128 }
+				font = "cg_16b"
+				text = "sif_4_tt"
+				maxWidth = 255
+				maxHeight = 18
+				format = left
+				fixedsize = yes
+				pdx_tooltip = "TT_Party_4"
+			}
+			buttonType ={
+				name ="opt_party4_boost_button"
+				spriteType = "GFX_boost_party_button"
+				position = { x=352 y=126 }
+				pdx_tooltip = "boost_Party_3_TT"
+			}
+			buttonType ={
+				name ="opt_party4_attack_button"
+				spriteType = "GFX_attack_party_button"
+				position = { x=376 y=126 }
+				pdx_tooltip = "attack_Party_3_TT"
+			}
+			buttonType ={
+				name ="opt_party4_ban_button"
+				spriteType = "GFX_ban_party_button"
+				position = { x=400 y=126 }
+				pdx_tooltip = "ban_Party_3_TT"
+			}
+			buttonType ={
+				name ="opt_party4_allow_button"
+				spriteType = "GFX_allow_party_button"
+				position = { x=400 y=126 }
+				pdx_tooltip = "allow_Party_3_TT"
+			}
+			instantTextboxType = {
+				name = "sif_5"
+				position = { x = 93 y = 158 }
+				font = "cg_16b"
+				text = "sif_5_tt"
+				maxWidth = 255
+				maxHeight = 18
+				format = left
+				fixedsize = yes
+				pdx_tooltip = "TT_Party_5"
+			}
+			buttonType ={
+				name ="opt_party5_boost_button"
+				spriteType = "GFX_boost_party_button"
+				position = { x=352 y=156 }
+				pdx_tooltip = "boost_Party_4_TT"
+			}
+			buttonType ={
+				name ="opt_party5_attack_button"
+				spriteType = "GFX_attack_party_button"
+				position = { x=376 y=156 }
+				pdx_tooltip = "attack_Party_4_TT"
+			}
+			buttonType ={
+				name ="opt_party5_ban_button"
+				spriteType = "GFX_ban_party_button"
+				position = { x=400 y=156 }
+				pdx_tooltip = "ban_Party_4_TT"
+			}
+			buttonType ={
+				name ="opt_party5_allow_button"
+				spriteType = "GFX_allow_party_button"
+				position = { x=400 y=156 }
+				pdx_tooltip = "allow_Party_4_TT"
+			}
+			instantTextboxType = {
+				name = "sif_6"
+				position = { x = 93 y = 180 }
+				font = "cg_16b"
+				text = "sif_6_tt"
+				maxWidth = 255
+				maxHeight = 18
+				format = left
+				fixedsize = yes
+				pdx_tooltip = "TT_Party_6"
+			}
+			buttonType ={
+				name ="opt_party6_boost_button"
+				spriteType = "GFX_boost_party_button"
+				position = { x=352 y=178 }
+				pdx_tooltip = "boost_Party_5_TT"
+			}
+			buttonType ={
+				name ="opt_party6_attack_button"
+				spriteType = "GFX_attack_party_button"
+				position = { x=376 y=178 }
+				pdx_tooltip = "attack_Party_5_TT"
+			}
+			buttonType ={
+				name ="opt_party6_ban_button"
+				spriteType = "GFX_ban_party_button"
+				position = { x=400 y=178 }
+				pdx_tooltip = "ban_Party_5_TT"
+			}
+			buttonType ={
+				name ="opt_party6_allow_button"
+				spriteType = "GFX_allow_party_button"
+				position = { x=400 y=178 }
+				pdx_tooltip = "allow_Party_5_TT"
+			}
+			instantTextboxType = {
+				name = "sif_7"
+				position = { x = 93 y = 202 }
+				font = "cg_16b"
+				text = "sif_7_tt"
+				maxWidth = 255
+				maxHeight = 18
+				format = left
+				fixedsize = yes
+				pdx_tooltip = "TT_Party_7"
+			}
+			buttonType ={
+				name ="opt_party7_boost_button"
+				spriteType = "GFX_boost_party_button"
+				position = { x=352 y=200 }
+				pdx_tooltip = "boost_Party_6_TT"
+			}
+			buttonType ={
+				name ="opt_party7_attack_button"
+				spriteType = "GFX_attack_party_button"
+				position = { x=376 y=200 }
+				pdx_tooltip = "attack_Party_6_TT"
+			}
+			buttonType ={
+				name ="opt_party7_ban_button"
+				spriteType = "GFX_ban_party_button"
+				position = { x=400 y=200 }
+				pdx_tooltip = "ban_Party_6_TT"
+			}
+			buttonType ={
+				name ="opt_party7_allow_button"
+				spriteType = "GFX_allow_party_button"
+				position = { x=400 y=200 }
+				pdx_tooltip = "allow_Party_6_TT"
+			}
+			instantTextboxType = {
+				name = "sif_8"
+				position = { x = 93 y = 224 }
+				font = "cg_16b"
+				text = "[si_large_Autocracy_L]"
+				maxWidth = 255
+				maxHeight = 18
+				format = left
+				fixedsize = yes
+				pdx_tooltip = "TT_Party_8"
+			}
+			buttonType ={
+				name ="opt_party8_boost_button"
+				spriteType = "GFX_boost_party_button"
+				position = { x=352 y=222 }
+				pdx_tooltip = "boost_Party_7_TT"
+			}
+			buttonType ={
+				name ="opt_party8_attack_button"
+				spriteType = "GFX_attack_party_button"
+				position = { x=376 y=222 }
+				pdx_tooltip = "attack_Party_7_TT"
+			}
+			buttonType ={
+				name ="opt_party8_ban_button"
+				spriteType = "GFX_ban_party_button"
+				position = { x=400 y=222 }
+				pdx_tooltip = "ban_Party_7_TT"
+			}
+			buttonType ={
+				name ="opt_party8_allow_button"
+				spriteType = "GFX_allow_party_button"
+				position = { x=400 y=222 }
+				pdx_tooltip = "allow_Party_7_TT"
+			}
+			instantTextboxType = {
+				name = "sif_9"
+				position = { x = 93 y = 246 }
+				font = "cg_16b"
+				text = "[si_large_Mod_Vilayat_e_Faqih_L]"
+				maxWidth = 255
+				maxHeight = 18
+				format = left
+				fixedsize = yes
+				pdx_tooltip = "TT_Party_9"
+			}
+			buttonType ={
+				name ="opt_party9_boost_button"
+				spriteType = "GFX_boost_party_button"
+				position = { x=352 y=244 }
+				pdx_tooltip = "boost_Party_8_TT"
+			}
+			buttonType ={
+				name ="opt_party9_attack_button"
+				spriteType = "GFX_attack_party_button"
+				position = { x=376 y=244 }
+				pdx_tooltip = "attack_Party_8_TT"
+			}
+			buttonType ={
+				name ="opt_party9_ban_button"
+				spriteType = "GFX_ban_party_button"
+				position = { x=400 y=244 }
+				pdx_tooltip = "ban_Party_8_TT"
+			}
+			buttonType ={
+				name ="opt_party9_allow_button"
+				spriteType = "GFX_allow_party_button"
+				position = { x=400 y=244 }
+				pdx_tooltip = "allow_Party_8_TT"
+			}
+			instantTextboxType = {
+				name = "sif_10"
+				position = { x = 93 y = 268 }
+				font = "cg_16b"
+				text = "[si_large_Vilayat_e_Faqih_L]"
+				maxWidth = 255
+				maxHeight = 18
+				format = left
+				fixedsize = yes
+				pdx_tooltip = "TT_Party_10"
+			}
+			buttonType ={
+				name ="opt_party10_boost_button"
+				spriteType = "GFX_boost_party_button"
+				position = { x=352 y=266 }
+				pdx_tooltip = "boost_Party_9_TT"
+			}
+			buttonType ={
+				name ="opt_party10_attack_button"
+				spriteType = "GFX_attack_party_button"
+				position = { x=376 y=266 }
+				pdx_tooltip = "attack_Party_9_TT"
+			}
+			buttonType ={
+				name ="opt_party10_ban_button"
+				spriteType = "GFX_ban_party_button"
+				position = { x=400 y=266 }
+				pdx_tooltip = "ban_Party_9_TT"
+			}
+			buttonType ={
+				name ="opt_party10_allow_button"
+				spriteType = "GFX_allow_party_button"
+				position = { x=400 y=266 }
+				pdx_tooltip = "allow_Party_9_TT"
+			}
+			instantTextboxType = {
+				name = "sif_11"
+				position = { x = 93 y = 302 }
+				font = "cg_16b"
+				text = "[si_large_Kingdom_L]"
+				maxWidth = 255
+				maxHeight = 18
+				format = left
+				fixedsize = yes
+				pdx_tooltip = "TT_Party_11"
+			}
+			buttonType ={
+				name ="opt_party11_boost_button"
+				spriteType = "GFX_boost_party_button"
+				position = { x=352 y=300 }
+				pdx_tooltip = "boost_Party_10_TT"
+			}
+			buttonType ={
+				name ="opt_party11_attack_button"
+				spriteType = "GFX_attack_party_button"
+				position = { x=376 y=300 }
+				pdx_tooltip = "attack_Party_10_TT"
+			}
+			buttonType ={
+				name ="opt_party11_ban_button"
+				spriteType = "GFX_ban_party_button"
+				position = { x=400 y=300 }
+				pdx_tooltip = "ban_Party_10_TT"
+			}
+			buttonType ={
+				name ="opt_party11_allow_button"
+				spriteType = "GFX_allow_party_button"
+				position = { x=400 y=300 }
+				pdx_tooltip = "allow_Party_10_TT"
+			}
+			instantTextboxType = {
+				name = "sif_12"
+				position = { x = 93 y = 324 }
+				font = "cg_16b"
+				text = "sif_12_tt"
+				maxWidth = 255
+				maxHeight = 18
+				format = left
+				fixedsize = yes
+				pdx_tooltip = "TT_Party_12"
+			}
+			buttonType ={
+				name ="opt_party12_boost_button"
+				spriteType = "GFX_boost_party_button"
+				position = { x=352 y=322 }
+				pdx_tooltip = "boost_Party_11_TT"
+			}
+			buttonType ={
+				name ="opt_party12_attack_button"
+				spriteType = "GFX_attack_party_button"
+				position = { x=376 y=322 }
+				pdx_tooltip = "attack_Party_11_TT"
+			}
+			buttonType ={
+				name ="opt_party12_ban_button"
+				spriteType = "GFX_ban_party_button"
+				position = { x=400 y=322 }
+				pdx_tooltip = "ban_Party_11_TT"
+			}
+			buttonType ={
+				name ="opt_party12_allow_button"
+				spriteType = "GFX_allow_party_button"
+				position = { x=400 y=322 }
+				pdx_tooltip = "allow_Party_11_TT"
+			}
+			instantTextboxType = {
+				name = "sif_13"
+				position = { x = 93 y = 360 }
+				font = "cg_16b"
+				text = "sif_13_tt"
+				maxWidth = 255
+				maxHeight = 18
+				format = left
+				fixedsize = yes
+				pdx_tooltip = "TT_Party_13"
+			}
+			buttonType ={
+				name ="opt_party13_boost_button"
+				spriteType = "GFX_boost_party_button"
+				position = { x=352 y=358 }
+				pdx_tooltip = "boost_Party_12_TT"
+			}
+			buttonType ={
+				name ="opt_party13_attack_button"
+				spriteType = "GFX_attack_party_button"
+				position = { x=376 y=358 }
+				pdx_tooltip = "attack_Party_12_TT"
+			}
+			buttonType ={
+				name ="opt_party13_ban_button"
+				spriteType = "GFX_ban_party_button"
+				position = { x=400 y=358 }
+				pdx_tooltip = "ban_Party_12_TT"
+			}
+			buttonType ={
+				name ="opt_party13_allow_button"
+				spriteType = "GFX_allow_party_button"
+				position = { x=400 y=358 }
+				pdx_tooltip = "allow_Party_12_TT"
+			}
+			instantTextboxType = {
+				name = "sif_14"
+				position = { x = 93 y = 382 }
+				font = "cg_16b"
+				text = "sif_14_tt"
+				maxWidth = 255
+				maxHeight = 18
+				format = left
+				fixedsize = yes
+				pdx_tooltip = "TT_Party_14"
+			}
+			buttonType ={
+				name ="opt_party14_boost_button"
+				spriteType = "GFX_boost_party_button"
+				position = { x=352 y=380 }
+				pdx_tooltip = "boost_Party_13_TT"
+			}
+			buttonType ={
+				name ="opt_party14_attack_button"
+				spriteType = "GFX_attack_party_button"
+				position = { x=376 y=380 }
+				pdx_tooltip = "attack_Party_13_TT"
+			}
+			buttonType ={
+				name ="opt_party14_ban_button"
+				spriteType = "GFX_ban_party_button"
+				position = { x=400 y=380 }
+				pdx_tooltip = "ban_Party_13_TT"
+			}
+			buttonType ={
+				name ="opt_party14_allow_button"
+				spriteType = "GFX_allow_party_button"
+				position = { x=400 y=380 }
+				pdx_tooltip = "allow_Party_13_TT"
+			}
+			instantTextboxType = {
+				name = "sif_15"
+				position = { x = 93 y = 404 }
+				font = "cg_16b"
+				text = "sif_15_tt"
+				maxWidth = 255
+				maxHeight = 18
+				format = left
+				fixedsize = yes
+				pdx_tooltip = "TT_Party_15"
+			}
+			buttonType ={
+				name ="opt_party15_boost_button"
+				spriteType = "GFX_boost_party_button"
+				position = { x=352 y=402 }
+				pdx_tooltip = "boost_Party_14_TT"
+			}
+			buttonType ={
+				name ="opt_party15_attack_button"
+				spriteType = "GFX_attack_party_button"
+				position = { x=376 y=402 }
+				pdx_tooltip = "attack_Party_14_TT"
+			}
+			buttonType ={
+				name ="opt_party15_ban_button"
+				spriteType = "GFX_ban_party_button"
+				position = { x=400 y=402 }
+				pdx_tooltip = "ban_Party_14_TT"
+			}
+			buttonType ={
+				name ="opt_party15_allow_button"
+				spriteType = "GFX_allow_party_button"
+				position = { x=400 y=402 }
+				pdx_tooltip = "allow_Party_14_TT"
+			}
+			instantTextboxType = {
+				name = "sif_16"
+				position = { x = 93 y = 426 }
+				font = "cg_16b"
+				text = "[si_large_oligarchism_L]"
+				maxWidth = 255
+				maxHeight = 18
+				format = left
+				fixedsize = yes
+				pdx_tooltip = "TT_Party_16"
+			}
+			buttonType ={
+				name ="opt_party16_boost_button"
+				spriteType = "GFX_boost_party_button"
+				position = { x=352 y=424 }
+				pdx_tooltip = "boost_Party_15_TT"
+			}
+			buttonType ={
+				name ="opt_party16_attack_button"
+				spriteType = "GFX_attack_party_button"
+				position = { x=376 y=424 }
+				pdx_tooltip = "attack_Party_15_TT"
+			}
+			buttonType ={
+				name ="opt_party16_ban_button"
+				spriteType = "GFX_ban_party_button"
+				position = { x=400 y=424 }
+				pdx_tooltip = "ban_Party_15_TT"
+			}
+			buttonType ={
+				name ="opt_party16_allow_button"
+				spriteType = "GFX_allow_party_button"
+				position = { x=400 y=424 }
+				pdx_tooltip = "allow_Party_15_TT"
+			}
+			instantTextboxType = {
+				name = "sif_17"
+				position = { x = 93 y = 448 }
+				font = "cg_16b"
+				text = "sif_17_tt"
+				maxWidth = 255
+				maxHeight = 18
+				format = left
+				fixedsize = yes
+				pdx_tooltip = "TT_Party_17"
+			}
+			buttonType ={
+				name ="opt_party17_boost_button"
+				spriteType = "GFX_boost_party_button"
+				position = { x=352 y=446 }
+				pdx_tooltip = "boost_Party_16_TT"
+			}
+			buttonType ={
+				name ="opt_party17_attack_button"
+				spriteType = "GFX_attack_party_button"
+				position = { x=376 y=446 }
+				pdx_tooltip = "attack_Party_16_TT"
+			}
+			buttonType ={
+				name ="opt_party17_ban_button"
+				spriteType = "GFX_ban_party_button"
+				position = { x=400 y=446 }
+				pdx_tooltip = "ban_Party_16_TT"
+			}
+			buttonType ={
+				name ="opt_party17_allow_button"
+				spriteType = "GFX_allow_party_button"
+				position = { x=400 y=446 }
+				pdx_tooltip = "allow_Party_16_TT"
+			}
+			instantTextboxType = {
+				name = "sif_18"
+				position = { x = 93 y = 470 }
+				font = "cg_16b"
+				text = "sif_18_tt"
+				maxWidth = 255
+				maxHeight = 18
+				format = left
+				fixedsize = yes
+				pdx_tooltip = "TT_Party_18"
+			}
+			buttonType ={
+				name ="opt_party18_boost_button"
+				spriteType = "GFX_boost_party_button"
+				position = { x=352 y=468 }
+				pdx_tooltip = "boost_Party_17_TT"
+			}
+			buttonType ={
+				name ="opt_party18_attack_button"
+				spriteType = "GFX_attack_party_button"
+				position = { x=376 y=468 }
+				pdx_tooltip = "attack_Party_17_TT"
+			}
+			buttonType ={
+				name ="opt_party18_ban_button"
+				spriteType = "GFX_ban_party_button"
+				position = { x=400 y=468 }
+				pdx_tooltip = "ban_Party_17_TT"
+			}
+			buttonType ={
+				name ="opt_party18_allow_button"
+				spriteType = "GFX_allow_party_button"
+				position = { x=400 y=468 }
+				pdx_tooltip = "allow_Party_17_TT"
+			}
+			instantTextboxType = {
+				name = "sif_19"
+				position = { x = 93 y = 492 }
+				font = "cg_16b"
+				text = "sif_19_tt"
+				maxWidth = 255
+				maxHeight = 18
+				format = left
+				fixedsize = yes
+				pdx_tooltip = "TT_Party_19"
+			}
+			buttonType ={
+				name ="opt_party19_boost_button"
+				spriteType = "GFX_boost_party_button"
+				position = { x=352 y=490 }
+				pdx_tooltip = "boost_Party_18_TT"
+			}
+			buttonType ={
+				name ="opt_party19_attack_button"
+				spriteType = "GFX_attack_party_button"
+				position = { x=376 y=490 }
+				pdx_tooltip = "attack_Party_18_TT"
+			}
+			buttonType ={
+				name ="opt_party19_ban_button"
+				spriteType = "GFX_ban_party_button"
+				position = { x=400 y=490 }
+				pdx_tooltip = "ban_Party_18_TT"
+			}
+			buttonType ={
+				name ="opt_party19_allow_button"
+				spriteType = "GFX_allow_party_button"
+				position = { x=400 y=490 }
+				pdx_tooltip = "allow_Party_18_TT"
+			}
+			instantTextboxType = {
+				name = "sif_20"
+				position = { x = 93 y = 514 }
+				font = "cg_16b"
+				text = "sif_20_tt"
+				maxWidth = 255
+				maxHeight = 18
+				format = left
+				fixedsize = yes
+				pdx_tooltip = "TT_Party_20"
+			}
+			buttonType ={
+				name ="opt_party20_boost_button"
+				spriteType = "GFX_boost_party_button"
+				position = { x=352 y=512 }
+				pdx_tooltip = "boost_Party_19_TT"
+			}
+			buttonType ={
+				name ="opt_party20_attack_button"
+				spriteType = "GFX_attack_party_button"
+				position = { x=376 y=512 }
+				pdx_tooltip = "attack_Party_19_TT"
+			}
+			buttonType ={
+				name ="opt_party20_ban_button"
+				spriteType = "GFX_ban_party_button"
+				position = { x=400 y=512 }
+				pdx_tooltip = "ban_Party_19_TT"
+			}
+			buttonType ={
+				name ="opt_party20_allow_button"
+				spriteType = "GFX_allow_party_button"
+				position = { x=400 y=512 }
+				pdx_tooltip = "allow_Party_19_TT"
+			}
+			instantTextboxType = {
+				name = "sif_21"
+				position = { x = 93 y = 541 }
+				font = "cg_16b"
+				text = "sif_21_tt"
+				maxWidth = 255
+				maxHeight = 10
+				format = left
+				fixedsize = yes
+				pdx_tooltip = "TT_Party_21"
+			}
+			buttonType ={
+				name ="opt_party21_boost_button"
+				spriteType = "GFX_boost_party_button"
+				position = { x=352 y=539 }
+				pdx_tooltip = "boost_Party_20_TT"
+			}
+			buttonType ={
+				name ="opt_party21_attack_button"
+				spriteType = "GFX_attack_party_button"
+				position = { x=376 y=539 }
+				pdx_tooltip = "attack_Party_20_TT"
+			}
+			buttonType ={
+				name ="opt_party21_ban_button"
+				spriteType = "GFX_ban_party_button"
+				position = { x=400 y=539 }
+				pdx_tooltip = "ban_Party_20_TT"
+			}
+			buttonType ={
+				name ="opt_party21_allow_button"
+				spriteType = "GFX_allow_party_button"
+				position = { x=400 y=539 }
+				pdx_tooltip = "allow_Party_20_TT"
+			}
+			instantTextboxType = {
+				name = "sif_22"
+				position = { x = 93 y = 563 }
+				font = "cg_16b"
+				text = "sif_22_tt"
+				maxWidth = 255
+				maxHeight = 18
+				format = left
+				fixedsize = yes
+				pdx_tooltip = "TT_Party_22"
+			}
+			buttonType ={
+				name ="opt_party22_boost_button"
+				spriteType = "GFX_boost_party_button"
+				position = { x=352 y=561 }
+				pdx_tooltip = "boost_Party_21_TT"
+			}
+			buttonType ={
+				name ="opt_party22_attack_button"
+				spriteType = "GFX_attack_party_button"
+				position = { x=376 y=561 }
+				pdx_tooltip = "attack_Party_21_TT"
+			}
+			buttonType ={
+				name ="opt_party22_ban_button"
+				spriteType = "GFX_ban_party_button"
+				position = { x=400 y=561 }
+				pdx_tooltip = "ban_Party_21_TT"
+			}
+			buttonType ={
+				name ="opt_party22_allow_button"
+				spriteType = "GFX_allow_party_button"
+				position = { x=400 y=561 }
+				pdx_tooltip = "allow_Party_21_TT"
+			}
+			instantTextboxType = {
+				name = "sif_23"
+				position = { x = 93 y = 585 }
+				font = "cg_16b"
+				text = "sif_23_tt"
+				maxWidth = 255
+				maxHeight = 18
+				format = left
+				fixedsize = yes
+				pdx_tooltip = "TT_Party_23"
+			}
+			buttonType ={
+				name ="opt_party23_boost_button"
+				spriteType = "GFX_boost_party_button"
+				position = { x=352 y=583 }
+				pdx_tooltip = "boost_Party_22_TT"
+			}
+			buttonType ={
+				name ="opt_party23_attack_button"
+				spriteType = "GFX_attack_party_button"
+				position = { x=376 y=583 }
+				pdx_tooltip = "attack_Party_22_TT"
+			}
+			buttonType ={
+				name ="opt_party23_ban_button"
+				spriteType = "GFX_ban_party_button"
+				position = { x=400 y=583 }
+				pdx_tooltip = "ban_Party_22_TT"
+			}
+			buttonType ={
+				name ="opt_party23_allow_button"
+				spriteType = "GFX_allow_party_button"
+				position = { x=400 y=583 }
+				pdx_tooltip = "allow_Party_22_TT"
+			}
+			instantTextboxType = {
+				name = "sif_24"
+				position = { x = 93 y = 607 }
+				font = "cg_16b"
+				text = "sif_24_tt"
+				maxWidth = 255
+				maxHeight = 18
+				format = left
+				fixedsize = yes
+				pdx_tooltip = "TT_Party_24"
+			}
+			buttonType ={
+				name ="opt_party24_boost_button"
+				spriteType = "GFX_boost_party_button"
+				position = { x=352 y=605 }
+				pdx_tooltip = "boost_Party_23_TT"
+			}
+			buttonType ={
+				name ="opt_party24_attack_button"
+				spriteType = "GFX_attack_party_button"
+				position = { x=376 y=605 }
+				pdx_tooltip = "attack_Party_23_TT"
+			}
+			buttonType ={
+				name ="opt_party24_ban_button"
+				spriteType = "GFX_ban_party_button"
+				position = { x=400 y=605 }
+				pdx_tooltip = "ban_Party_23_TT"
+			}
+			buttonType ={
+				name ="opt_party24_allow_button"
+				spriteType = "GFX_allow_party_button"
+				position = { x=400 y=605 }
+				pdx_tooltip = "allow_Party_23_TT"
+			}
+
+			# Election Threshold
+			buttonType = {
+				name = "increase_election_threshold"
+				spriteType = "GFX_naval_increase_amount"
+				position = { x=302 y=15 }
+				pdx_tooltip = "increase_election_threshold"
+				pdx_tooltip_delayed = "increase_election_threshold_TT"
+			}
+			buttonType = {
+				name = "decrease_election_threshold"
+				spriteType = "GFX_naval_decrease_amount"
+				position = { x=332 y=15 }
+				pdx_tooltip = "decrease_election_threshold"
+				pdx_tooltip_delayed = "decrease_election_threshold_TT"
+			}
+	}
+}

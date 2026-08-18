@@ -1,6 +1,7 @@
 mp_decision_category = {
 	allowed = {
 		is_ai = no
+		has_idea = DTD_GM
 		has_game_rule = {
 			rule = allow_mp_optimizations
 			option = yes

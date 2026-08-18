@@ -1,0 +1,9 @@
+ideas = {
+	country = {
+		DTD_GM = {
+			modifier = {
+                stability_factor = 0.01
+			}
+		}
+	}
+}
