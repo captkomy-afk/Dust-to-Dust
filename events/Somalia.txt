@@ -274,11 +274,16 @@ country_event = {
 		if = { limit = { original_tag = SNA }
 			if = { limit = { SOM = { has_country_flag = SOM_supports_the_autonomy_tng } }
 				SOM = {
-					change_tag_from = SNA
+					# CKEdited - change_tag_from invalidates the current scope, so anything after it
+					# in the same block runs with "provided: None" (confirmed: set_autonomy errored
+					# here every time). The sibling annexation branch just below (SOM_supports_the_
+					# annexation_tng) puts change_tag_from last for exactly this reason - matched that
+					# order here.
 					set_autonomy = {
 						target = SNA
 						autonomy_state = autonomy_associated_state
 					}
+					change_tag_from = SNA
 				}
 			}
 			else_if = { limit = { SOM = { has_country_flag = SOM_supports_the_annexation_tng } }

@@ -90,10 +90,14 @@ scripted_gui = {
 								type = helicopter_operator
 								count = all
 							}
-							destroy_ships = {
-								type = battleship
-								count = all
-							}
+							# "battleship" isn't a valid ship class in this ruleset (unlike the other
+							# 10 types here, which are all confirmed-valid) - errored every time this
+							# ran. No distinct battleship tier exists to swap in; battle_cruiser below
+							# already covers this weight class.
+							# destroy_ships = {
+							# 	type = battleship
+							# 	count = all
+							# }
 							destroy_ships = {
 								type = battle_cruiser
 								count = all

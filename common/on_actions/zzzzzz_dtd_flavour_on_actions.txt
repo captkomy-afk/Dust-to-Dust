@@ -2,87 +2,89 @@ on_actions = {
     on_startup = {
         effect = {
             USA = {
-                news_event = {
-                    id = dtd_flavour.1
-                    days = 2
-                }                
+                # dtd_flavour.1 was never written (no such event exists anywhere in the mod) -
+                # this fired "*Tried to trigger non-existant event: dtd_flavour.1" every game.
+                # Commented out until the event is actually written; re-enable by uncommenting.
+                # news_event = {
+                #     id = dtd_flavour.1
+                #     days = 2
+                # }
 				news_event = {
                     id = dtd_flavour.2
                     days = 14
-					
+
                 }
                 news_event = {
                     id = dtd_flavour.3
                     days = 70
-                }                
+                }
 				news_event = {
                     id = dtd_flavour.4
                     days = 125
-					
+
                 }
                 news_event = {
                     id = dtd_flavour.5
                     days = 500
-                }                
+                }
 				news_event = {
                     id = dtd_flavour.6
                     days = 454
-					
+
                 }
-                news_event = {
-                    id = dtd_flavour.7
-                    days = 5
-                }                
-				news_event = {
-                    id = dtd_flavour.8
-                    days = 10
-					
-                }
-                news_event = {
-                    id = dtd_flavour.9
-                    days = 5
-                }                
-				news_event = {
-                    id = dtd_flavour.10
-                    days = 10
-					
-                }
-                news_event = {
-                    id = dtd_flavour.11
-                    days = 5
-                }                
-				news_event = {
-                    id = dtd_flavour.12
-                    days = 10
-					
-                }
-                news_event = {
-                    id = dtd_flavour.13
-                    days = 5
-                }                
-				news_event = {
-                    id = dtd_flavour.14
-                    days = 10
-					
-                }
-                news_event = {
-                    id = dtd_flavour.15
-                    days = 5
-                }                
-				news_event = {
-                    id = dtd_flavour.16
-                    days = 10
-					
-                }
-                news_event = {
-                    id = dtd_flavour.17
-                    days = 5
-                }                
-				news_event = {
-                    id = dtd_flavour.18
-                    days = 454
-					
-                }
+                # dtd_flavour.7 through .11 (below) have event definitions in dtd_flavour_events.txt
+                # but no localisation entries (title/desc/option text) anywhere - firing them shows
+                # a blank/raw-key popup. Commented out until loc is written; re-enable by uncommenting.
+                # news_event = {
+                #     id = dtd_flavour.7
+                #     days = 5
+                # }
+				# news_event = {
+                #     id = dtd_flavour.8
+                #     days = 10
+                # }
+                # news_event = {
+                #     id = dtd_flavour.9
+                #     days = 5
+                # }
+				# news_event = {
+                #     id = dtd_flavour.10
+                #     days = 10
+                # }
+                # news_event = {
+                #     id = dtd_flavour.11
+                #     days = 5
+                # }
+                # dtd_flavour.12 through .18 (below) were never written either - same
+                # non-existant-event error every game. Commented out until they're written.
+				# news_event = {
+                #     id = dtd_flavour.12
+                #     days = 10
+                # }
+                # news_event = {
+                #     id = dtd_flavour.13
+                #     days = 5
+                # }
+				# news_event = {
+                #     id = dtd_flavour.14
+                #     days = 10
+                # }
+                # news_event = {
+                #     id = dtd_flavour.15
+                #     days = 5
+                # }
+				# news_event = {
+                #     id = dtd_flavour.16
+                #     days = 10
+                # }
+                # news_event = {
+                #     id = dtd_flavour.17
+                #     days = 5
+                # }
+				# news_event = {
+                #     id = dtd_flavour.18
+                #     days = 454
+                # }
             }
         }
     }

@@ -1558,7 +1558,11 @@ country_event = {
 	option = {
 		name = iran_interim_admin.0.b #Set up a US Proxy State
 		log = "[GetDateText]: [This.GetName]: iran_interim_admin.0.b executed"
-		country_event = { days = 1 id = iran_interim_admin.1 }
+		# iran_interim_admin.1 has no localisation entries anywhere - firing it shows a blank/
+		# raw-key popup. Commented out until loc is written; re-enable by uncommenting. (Note:
+		# iran_interim_admin.0 itself is also missing loc and is never currently fired from
+		# anywhere else in the mod, so this whole chain is unreachable today regardless.)
+		# country_event = { days = 1 id = iran_interim_admin.1 }
 	}
 
 	option = {

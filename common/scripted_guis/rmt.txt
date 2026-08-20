@@ -182,10 +182,8 @@ scripted_gui = {
 					}
 					if = {
 						limit = { has_global_flag = rmt_coal_enabled }
-						add_resource = {
-							type = coal
-							amount = 1
-						}
+						# CKEdited - coal was removed from this mod own resource list, add_resource type=coal errored every time this toolpack button fired. Commented out, no replacement resource available.
+						# add_resource = { type = coal amount = 1 }
 					}
 					if = {
 						limit = { has_global_flag = rmt_state_modifier_enabled }
@@ -245,10 +243,8 @@ scripted_gui = {
 						}
 						if = {
 							limit = { has_global_flag = rmt_coal_enabled }
-							add_resource = {
-								type = coal
-								amount = 1
-							}
+							# CKEdited - coal was removed from this mod own resource list, add_resource type=coal errored every time this toolpack button fired. Commented out, no replacement resource available.
+							# add_resource = { type = coal amount = 1 }
 						}
 						if = {
 							limit = { has_global_flag = rmt_state_modifier_enabled }
@@ -322,10 +318,8 @@ scripted_gui = {
 					}
 					if = {
 						limit = { has_global_flag = rmt_coal_enabled }
-						add_resource = {
-							type = coal
-							amount = 5
-						}
+						# CKEdited - coal was removed from this mod own resource list, add_resource type=coal errored every time this toolpack button fired. Commented out, no replacement resource available.
+						# add_resource = { type = coal amount = 5 }
 					}
 					if = {
 						limit = { has_global_flag = rmt_state_modifier_enabled }
@@ -385,10 +379,8 @@ scripted_gui = {
 						}
 						if = {
 							limit = { has_global_flag = rmt_coal_enabled }
-							add_resource = {
-								type = coal
-								amount = 5
-							}
+							# CKEdited - coal was removed from this mod own resource list, add_resource type=coal errored every time this toolpack button fired. Commented out, no replacement resource available.
+							# add_resource = { type = coal amount = 5 }
 						}
 						if = {
 							limit = { has_global_flag = rmt_state_modifier_enabled }
@@ -462,10 +454,8 @@ scripted_gui = {
 					}
 					if = {
 						limit = { has_global_flag = rmt_coal_enabled }
-						add_resource = {
-							type = coal
-							amount = 25
-						}
+						# CKEdited - coal was removed from this mod own resource list, add_resource type=coal errored every time this toolpack button fired. Commented out, no replacement resource available.
+						# add_resource = { type = coal amount = 25 }
 					}
 					if = {
 						limit = { has_global_flag = rmt_state_modifier_enabled }
@@ -525,10 +515,8 @@ scripted_gui = {
 						}
 						if = {
 							limit = { has_global_flag = rmt_coal_enabled }
-							add_resource = {
-								type = coal
-								amount = 25
-							}
+							# CKEdited - coal was removed from this mod own resource list, add_resource type=coal errored every time this toolpack button fired. Commented out, no replacement resource available.
+							# add_resource = { type = coal amount = 25 }
 						}
 						if = {
 							limit = { has_global_flag = rmt_state_modifier_enabled }
@@ -602,10 +590,8 @@ scripted_gui = {
 					}
 					if = {
 						limit = { has_global_flag = rmt_coal_enabled }
-						add_resource = {
-							type = coal
-							amount = 200
-						}
+						# CKEdited - coal was removed from this mod own resource list, add_resource type=coal errored every time this toolpack button fired. Commented out, no replacement resource available.
+						# add_resource = { type = coal amount = 200 }
 					}
 					if = {
 						limit = { has_global_flag = rmt_state_modifier_enabled }
@@ -665,10 +651,8 @@ scripted_gui = {
 						}
 						if = {
 							limit = { has_global_flag = rmt_coal_enabled }
-							add_resource = {
-								type = coal
-								amount = 200
-							}
+							# CKEdited - coal was removed from this mod own resource list, add_resource type=coal errored every time this toolpack button fired. Commented out, no replacement resource available.
+							# add_resource = { type = coal amount = 200 }
 						}
 						if = {
 							limit = { has_global_flag = rmt_state_modifier_enabled }
@@ -742,10 +726,8 @@ scripted_gui = {
 					}
 					if = {
 						limit = { has_global_flag = rmt_coal_enabled }
-						add_resource = {
-							type = coal
-							amount = -1
-						}
+						# CKEdited - coal was removed from this mod own resource list, add_resource type=coal errored every time this toolpack button fired. Commented out, no replacement resource available.
+						# add_resource = { type = coal amount = -1 }
 					}
 					if = {
 						limit = {
@@ -809,10 +791,8 @@ scripted_gui = {
 						}
 						if = {
 							limit = { has_global_flag = rmt_coal_enabled }
-							add_resource = {
-								type = coal
-								amount = -1
-							}
+							# CKEdited - coal was removed from this mod own resource list, add_resource type=coal errored every time this toolpack button fired. Commented out, no replacement resource available.
+							# add_resource = { type = coal amount = -1 }
 						}
 						if = {
 							limit = {
@@ -890,10 +870,8 @@ scripted_gui = {
 					}
 					if = {
 						limit = { has_global_flag = rmt_coal_enabled }
-						add_resource = {
-							type = coal
-							amount = -5
-						}
+						# CKEdited - coal was removed from this mod own resource list, add_resource type=coal errored every time this toolpack button fired. Commented out, no replacement resource available.
+						# add_resource = { type = coal amount = -5 }
 					}
 					if = {
 						limit = {
@@ -957,10 +935,8 @@ scripted_gui = {
 						}
 						if = {
 							limit = { has_global_flag = rmt_coal_enabled }
-							add_resource = {
-								type = coal
-								amount = -5
-							}
+							# CKEdited - coal was removed from this mod own resource list, add_resource type=coal errored every time this toolpack button fired. Commented out, no replacement resource available.
+							# add_resource = { type = coal amount = -5 }
 						}
 						if = {
 							limit = {
@@ -1038,10 +1014,8 @@ scripted_gui = {
 					}
 					if = {
 						limit = { has_global_flag = rmt_coal_enabled }
-						add_resource = {
-							type = coal
-							amount = -25
-						}
+						# CKEdited - coal was removed from this mod own resource list, add_resource type=coal errored every time this toolpack button fired. Commented out, no replacement resource available.
+						# add_resource = { type = coal amount = -25 }
 					}
 					if = {
 						limit = {
@@ -1105,10 +1079,8 @@ scripted_gui = {
 						}
 						if = {
 							limit = { has_global_flag = rmt_coal_enabled }
-							add_resource = {
-								type = coal
-								amount = -25
-							}
+							# CKEdited - coal was removed from this mod own resource list, add_resource type=coal errored every time this toolpack button fired. Commented out, no replacement resource available.
+							# add_resource = { type = coal amount = -25 }
 						}
 						if = {
 							limit = {
@@ -1186,10 +1158,8 @@ scripted_gui = {
 					}
 					if = {
 						limit = { has_global_flag = rmt_coal_enabled }
-						add_resource = {
-							type = coal
-							amount = -200
-						}
+						# CKEdited - coal was removed from this mod own resource list, add_resource type=coal errored every time this toolpack button fired. Commented out, no replacement resource available.
+						# add_resource = { type = coal amount = -200 }
 					}
 					if = {
 						limit = {
@@ -1253,10 +1223,8 @@ scripted_gui = {
 						}
 						if = {
 							limit = { has_global_flag = rmt_coal_enabled }
-							add_resource = {
-								type = coal
-								amount = -200
-							}
+							# CKEdited - coal was removed from this mod own resource list, add_resource type=coal errored every time this toolpack button fired. Commented out, no replacement resource available.
+							# add_resource = { type = coal amount = -200 }
 						}
 						if = {
 							limit = {

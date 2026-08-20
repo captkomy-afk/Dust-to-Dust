@@ -2980,18 +2980,21 @@ PER_domestic_politics = {
 				remove_core_of = PER
 			}
 			hidden_effect = {
-				TUR = {
-					country_event = {
-						id = iranian_events.2282
-						days = 5
-					}
-				}
-				AZE = {
-					country_event = {
-						id = iranian_events.2282
-						days = 5
-					}
-				}
+				# iranian_events.2282 has an event definition in events/Iran.txt but no localisation
+				# entries anywhere - firing it shows a blank/raw-key popup. Commented out until loc
+				# is written; re-enable by uncommenting.
+				# TUR = {
+				# 	country_event = {
+				# 		id = iranian_events.2282
+				# 		days = 5
+				# 	}
+				# }
+				# AZE = {
+				# 	country_event = {
+				# 		id = iranian_events.2282
+				# 		days = 5
+				# 	}
+				# }
 			}
 		}
 	}

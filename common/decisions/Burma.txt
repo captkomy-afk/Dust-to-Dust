@@ -1482,7 +1482,10 @@ ethnic_insurgency_category = {
 			}
 			else_if = {
 				limit = { original_tag = NHN }
-				BRM = { country_event = Insurgency.28 }
+				# Insurgency.28 has an event definition in events/Burma.txt but no localisation
+				# entries anywhere - firing it shows a blank/raw-key popup. Commented out until
+				# loc is written; re-enable by uncommenting.
+				# BRM = { country_event = Insurgency.28 }
 			}
 		}
 

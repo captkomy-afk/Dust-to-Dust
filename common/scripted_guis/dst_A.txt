@@ -412,16 +412,16 @@ scripted_gui = {
 						if = {
 							limit = {
 								has_global_flag = dst_motorized_enabled
-								NOT = { has_tech = motorised_infantry }
+								NOT = { has_tech = util_vehicle_1 }
 							}
-							set_technology = { motorised_infantry = 1 }
+							set_technology = { util_vehicle_1 = 1 }
 						}
 						if = {
 							limit = {
 								has_global_flag = dst_armor_enabled
-								NOT = { has_tech = gwtank }
+								NOT = { has_tech = Early_APC }
 							}
-							set_technology = { gwtank = 1}
+							set_technology = { Early_APC = 1}
 						}
 					}
 				}
@@ -435,16 +435,16 @@ scripted_gui = {
 						if = {
 							limit = {
 								has_global_flag = dst_motorized_enabled
-								NOT = { has_tech = motorised_infantry }
+								NOT = { has_tech = util_vehicle_1 }
 							}
-							set_technology = { motorised_infantry = 1 }
+							set_technology = { util_vehicle_1 = 1 }
 						}
 						if = {
 							limit = {
 								has_global_flag = dst_armor_enabled
-								NOT = { has_tech = gwtank }
+								NOT = { has_tech = Early_APC }
 							}
-							set_technology = { gwtank = 1 }
+							set_technology = { Early_APC = 1 }
 						}
 					}
 				}
@@ -484,16 +484,16 @@ scripted_gui = {
 						if = {
 							limit = {
 								has_global_flag = dst_motorized_enabled
-								NOT = { has_tech = motorised_infantry }
+								NOT = { has_tech = util_vehicle_1 }
 							}
-							set_technology = { motorised_infantry = 1 }
+							set_technology = { util_vehicle_1 = 1 }
 						}
 						if = {
 							limit = {
 								has_global_flag = dst_armor_enabled
-								NOT = { has_tech = gwtank }
+								NOT = { has_tech = Early_APC }
 							}
-							set_technology = { gwtank = 1}
+							set_technology = { Early_APC = 1}
 						}
 					}
 				}
@@ -507,16 +507,16 @@ scripted_gui = {
 						if = {
 							limit = {
 								has_global_flag = dst_motorized_enabled
-								NOT = { has_tech = motorised_infantry }
+								NOT = { has_tech = util_vehicle_1 }
 							}
-							set_technology = { motorised_infantry = 1 }
+							set_technology = { util_vehicle_1 = 1 }
 						}
 						if = {
 							limit = {
 								has_global_flag = dst_armor_enabled
-								NOT = { has_tech = gwtank }
+								NOT = { has_tech = Early_APC }
 							}
-							set_technology = { gwtank = 1 }
+							set_technology = { Early_APC = 1 }
 						}
 					}
 				}
@@ -564,16 +564,16 @@ scripted_gui = {
 						if = {
 							limit = {
 								has_global_flag = dst_motorized_enabled
-								NOT = { has_tech = motorised_infantry }
+								NOT = { has_tech = util_vehicle_1 }
 							}
-							set_technology = { motorised_infantry = 1 }
+							set_technology = { util_vehicle_1 = 1 }
 						}
 						if = {
 							limit = {
 								has_global_flag = dst_armor_enabled
-								NOT = { has_tech = gwtank }
+								NOT = { has_tech = Early_APC }
 							}
-							set_technology = { gwtank = 1}
+							set_technology = { Early_APC = 1}
 						}
 					}
 				}
@@ -587,16 +587,16 @@ scripted_gui = {
 						if = {
 							limit = {
 								has_global_flag = dst_motorized_enabled
-								NOT = { has_tech = motorised_infantry }
+								NOT = { has_tech = util_vehicle_1 }
 							}
-							set_technology = { motorised_infantry = 1 }
+							set_technology = { util_vehicle_1 = 1 }
 						}
 						if = {
 							limit = {
 								has_global_flag = dst_armor_enabled
-								NOT = { has_tech = gwtank }
+								NOT = { has_tech = Early_APC }
 							}
-							set_technology = { gwtank = 1 }
+							set_technology = { Early_APC = 1 }
 						}
 					}
 				}
@@ -654,16 +654,16 @@ scripted_gui = {
 						if = {
 							limit = {
 								has_global_flag = dst_motorized_enabled
-								NOT = { has_tech = motorised_infantry }
+								NOT = { has_tech = util_vehicle_1 }
 							}
-							set_technology = { motorised_infantry = 1 }
+							set_technology = { util_vehicle_1 = 1 }
 						}
 						if = {
 							limit = {
 								has_global_flag = dst_armor_enabled
-								NOT = { has_tech = gwtank }
+								NOT = { has_tech = Early_APC }
 							}
-							set_technology = { gwtank = 1}
+							set_technology = { Early_APC = 1}
 						}
 					}
 				}
@@ -677,16 +677,16 @@ scripted_gui = {
 						if = {
 							limit = {
 								has_global_flag = dst_motorized_enabled
-								NOT = { has_tech = motorised_infantry }
+								NOT = { has_tech = util_vehicle_1 }
 							}
-							set_technology = { motorised_infantry = 1 }
+							set_technology = { util_vehicle_1 = 1 }
 						}
 						if = {
 							limit = {
 								has_global_flag = dst_armor_enabled
-								NOT = { has_tech = gwtank }
+								NOT = { has_tech = Early_APC }
 							}
-							set_technology = { gwtank = 1 }
+							set_technology = { Early_APC = 1 }
 						}
 					}
 				}

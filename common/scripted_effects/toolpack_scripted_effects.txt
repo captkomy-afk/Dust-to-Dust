@@ -3546,13 +3546,20 @@ sst_spawn_ship = {
 		CARRIER_HULL = "[This.GetSSTCarrierTier]"	#Carriers dont start at 1 for MTG owners
 	}
 }
-sst_destroy_ship = {	#edit to actually match types on cruisers
+sst_destroy_ship = {
+	# CKEdited - destroy_ships.type takes a ship unit class (destroyer, cruiser, corvette,
+	# battle_cruiser, carrier, attack_submarine, missile_submarine - confirmed valid via the
+	# working destroy_ships calls in common/scripted_guis/cat.txt), not a hull-equipment
+	# archetype name like "ship_hull_heavy"/"ship_hull_light" - those aren't valid database
+	# objects for this effect and errored 112 times a session ("invalid database object...").
+	# The old block also had 3 different flags (corvette/bc/attack_sub) all mistakenly pointing
+	# at the same ship_hull_heavy value instead of their own distinct types.
 	if = {
 		limit = {
 			has_global_flag = sst_destroyer_enabled
 		}
 		destroy_ships = {
-			type = ship_hull_light
+			type = destroyer
 			count = all
 		}
 	}
@@ -3561,7 +3568,7 @@ sst_destroy_ship = {	#edit to actually match types on cruisers
 			has_global_flag = sst_lc_enabled
 		}
 		destroy_ships = {
-			type = ship_hull_cruiser
+			type = cruiser
 			count = all
 		}
 	}
@@ -3570,7 +3577,7 @@ sst_destroy_ship = {	#edit to actually match types on cruisers
 			has_global_flag = sst_corvette_enabled
 		}
 		destroy_ships = {
-			type = ship_hull_heavy
+			type = corvette
 			count = all
 		}
 	}
@@ -3579,7 +3586,7 @@ sst_destroy_ship = {	#edit to actually match types on cruisers
 			has_global_flag = sst_bc_enabled
 		}
 		destroy_ships = {
-			type = ship_hull_heavy
+			type = battle_cruiser
 			count = all
 		}
 	}
@@ -3588,7 +3595,7 @@ sst_destroy_ship = {	#edit to actually match types on cruisers
 			has_global_flag = sst_attack_sub_enabled
 		}
 		destroy_ships = {
-			type = ship_hull_heavy
+			type = attack_submarine
 			count = all
 		}
 	}
@@ -3597,7 +3604,7 @@ sst_destroy_ship = {	#edit to actually match types on cruisers
 			has_global_flag = sst_carrier_enabled
 		}
 		destroy_ships = {
-			type = ship_hull_carrier
+			type = carrier
 			count = all
 		}
 	}
@@ -3606,7 +3613,7 @@ sst_destroy_ship = {	#edit to actually match types on cruisers
 			has_global_flag = sst_sub_enabled
 		}
 		destroy_ships = {
-			type = ship_hull_submarine
+			type = missile_submarine
 			count = all
 		}
 	}

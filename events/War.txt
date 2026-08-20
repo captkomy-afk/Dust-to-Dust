@@ -518,10 +518,13 @@ country_event = {
 					}
 				}
 				CHI = {
-					country_event = {
-						id = world_war.12
-						days = 10
-					}
+					# world_war.12 has no localisation entries anywhere - firing it shows a
+					# blank/raw-key popup. Commented out until loc is written; re-enable by
+					# uncommenting.
+					# country_event = {
+					# 	id = world_war.12
+					# 	days = 10
+					# }
 				}
 			}
 		}

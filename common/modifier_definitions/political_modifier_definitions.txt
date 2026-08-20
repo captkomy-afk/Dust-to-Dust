@@ -11,3 +11,14 @@ popularity_boost_modifier = {
 	precision = 2
 	category = country
 }
+
+# Read by calculate_democracy_index_value (common/scripted_effects/dtd_democracy_index_effects.txt)
+# via modifier@democracy_index_equilibrium - was never registered here, so every idea granting it
+# (common/ideas/national_ideas_1.txt) silently failed to load and the whole democracy-index
+# equilibrium mechanic was reading a permanent 0 from every country.
+democracy_index_equilibrium = {
+	color_type = good
+	value_type = number
+	precision = 0
+	category = country
+}

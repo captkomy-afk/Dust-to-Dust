@@ -1,6 +1,10 @@
 scripted_gui = {
 	# Fund Transfer amount picker. ROOT = sender, current scope = recipient.
 	mt_money_transfer_scripted_gui = {
+		# Parser emits an "Unexpected token: context_type" warning in the error log for this
+		# value, but the GUI works correctly at runtime -- same known false positive documented
+		# in 02_conditional_peace_deals_scripted_gui.txt. Do not change this to player_context
+		# or selected_country_context; that breaks the diplomatic-action entry point.
 		context_type = diplomatic_action
 		window_name = "mt_money_transfer_scripted_gui"
 
@@ -42,6 +46,10 @@ scripted_gui = {
 
 	# Weekly Subsidies amount picker. ROOT = payer, current scope = recipient.
 	mt_subsidies_scripted_gui = {
+		# Parser emits an "Unexpected token: context_type" warning in the error log for this
+		# value, but the GUI works correctly at runtime -- same known false positive documented
+		# in 02_conditional_peace_deals_scripted_gui.txt. Do not change this to player_context
+		# or selected_country_context; that breaks the diplomatic-action entry point.
 		context_type = diplomatic_action
 		window_name = "mt_subsidies_scripted_gui"
 
@@ -85,6 +93,10 @@ scripted_gui = {
 	# Available regardless of the target's current debt - this creates a new private loan, not
 	# a refinancing of existing debt. ROOT = buyer/creditor, current scope = seller/debtor.
 	mt_bond_purchase_scripted_gui = {
+		# Parser emits an "Unexpected token: context_type" warning in the error log for this
+		# value, but the GUI works correctly at runtime -- same known false positive documented
+		# in 02_conditional_peace_deals_scripted_gui.txt. Do not change this to player_context
+		# or selected_country_context; that breaks the diplomatic-action entry point.
 		context_type = diplomatic_action
 		window_name = "mt_bond_purchase_scripted_gui"
 
@@ -165,6 +177,10 @@ scripted_gui = {
 
 	# Bond Buyback picker: capped at what the creditor (current scope) is owed by ROOT (debtor).
 	mt_bond_buyback_scripted_gui = {
+		# Parser emits an "Unexpected token: context_type" warning in the error log for this
+		# value, but the GUI works correctly at runtime -- same known false positive documented
+		# in 02_conditional_peace_deals_scripted_gui.txt. Do not change this to player_context
+		# or selected_country_context; that breaks the diplomatic-action entry point.
 		context_type = diplomatic_action
 		window_name = "mt_bond_buyback_scripted_gui"
 
@@ -206,6 +222,10 @@ scripted_gui = {
 
 	# Bond Sell (to market) picker: ROOT = creditor selling, current scope = the debtor the bond is issued against.
 	mt_bond_sell_scripted_gui = {
+		# Parser emits an "Unexpected token: context_type" warning in the error log for this
+		# value, but the GUI works correctly at runtime -- same known false positive documented
+		# in 02_conditional_peace_deals_scripted_gui.txt. Do not change this to player_context
+		# or selected_country_context; that breaks the diplomatic-action entry point.
 		context_type = diplomatic_action
 		window_name = "mt_bond_sell_scripted_gui"
 

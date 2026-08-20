@@ -76,7 +76,9 @@ compliance_80 = {
 					NOT = { state = 556 }
 				}
 			}
-			country_event = occupied_countries.1
+			# occupied_countries.1 has no localisation entries anywhere - firing it shows a
+			# blank/raw-key popup. Commented out until loc is written; re-enable by uncommenting.
+			# country_event = occupied_countries.1
 		}
 	}
 }

@@ -55,6 +55,16 @@
 @spending_cost_clamp_max = 100000000
 # Population Tax Adjuster
 @population_tax_adjuster = 0.008
+# Subsistence-agriculture employment share curve (share of workforce_total working in ag),
+# as a smooth hyperbolic decay in gdpc_converging_var ($K/capita, ~USD thousands):
+# share = floor + (max-floor) / (1 + gdpc_converging_var/scale)
+# Replaces an old piecewise formula that was ~flat 87-90% for any gdpc_converging_var below 1.3
+# then had a hard discontinuity down to a clamped 0% for a wide band just above 1.3 - i.e. the
+# model could never produce a realistic mid-range agricultural employment share, which is also
+# what was silently absorbing all the workforce that should have shown up as unemployment.
+@agri_employment_floor = 0.02
+@agri_employment_max = 0.85
+@agri_employment_scale = 0.71
 
 # GDP per-building contribution coefficients: output = total * (base_factor + prod_factor * productivity) * manpower_fulfillment
 # Retuned sector weights: each sector's base:prod_factor ratio (i.e. how much of its output swings
@@ -277,7 +287,7 @@ calculate_tax_rate = {
 
 		set_variable = {
 			tax_rate_change_5 = {
-				value = 250
+				value = 75
 				multiply = {
 					value = 1
 					add = modifier@tax_rate_change_multiplier_modifier
@@ -287,7 +297,7 @@ calculate_tax_rate = {
 		}
 		set_variable = {
 			tax_rate_change = {
-				value = 50
+				value = 15
 				multiply = {
 					value = 1
 					add = modifier@tax_rate_change_multiplier_modifier
@@ -5139,40 +5149,32 @@ calculate_gdp = {
 	}
 
 	# Employment in Subsistence Agriculture
-	if = {
-		limit = { check_variable = { gdpc_converging_var < 1.3 } }
-		set_variable = {
-			agriculture_workers = {
-				value = workforce_total
-				multiply = {
-					value = gdpc_converging_var
-					multiply = -0.02
-					add = 0.9
-				}
-			}
+	# Smooth, continuous share curve (see @agri_employment_* constants above) - no more cliff
+	# between the old sub-1.3 and above-1.3 branches.
+	set_temp_variable = {
+		agri_employment_denom = {
+			value = gdpc_converging_var
+			divide = @agri_employment_scale
+			add = 1
 		}
 	}
-	else = {
-		set_variable = {
-			agriculture_workers = {
-				value = workforce_total
-				multiply = {
-					value = 1.076
-					multiply = 0.9
-					divide = gdpc_converging_var
-					multiply = {
-						value = 1.076
-						multiply = -1
-						divide = gdpc_converging_var
-						add = 2
-					}
-					multiply = {
-						value = 1
-						add = modifier@agriculture_workers_modifier
-					}
-					clamp = { min = 0.0 max = 0.9 }
-				}
+	set_variable = {
+		agriculture_worker_share = {
+			value = @agri_employment_max
+			subtract = @agri_employment_floor
+			divide = agri_employment_denom
+			add = @agri_employment_floor
+			multiply = {
+				value = 1
+				add = modifier@agriculture_workers_modifier
 			}
+			clamp = { min = @agri_employment_floor max = @agri_employment_max }
+		}
+	}
+	set_variable = {
+		agriculture_workers = {
+			value = workforce_total
+			multiply = agriculture_worker_share
 		}
 	}
 
@@ -6164,21 +6166,8 @@ calculate_gdp = {
 		}
 	}
 
-	## Second pass: below-average-productivity countries get another shaft, combined with
-	## removing a lot of the game's native gdp/c penalties.
-	if = {
-		limit = { check_variable = { overall_productivity < global.productivity_center } }
-		set_temp_variable = { mt_gdp_extra_p = overall_productivity }
-		divide_temp_variable = { mt_gdp_extra_p = global.productivity_center }
-		multiply_variable = { gdp_total = mt_gdp_extra_p }
-	}
-
 	## Manual per-nation adjustments (purely balance levers, not meant to represent real economics).
 	if = {
-		limit = { tag = USA }
-		multiply_variable = { gdp_total = 1.0 }
-	}
-	else_if = {
 		# Time-decaying bonus, phased out by 2030.
 		limit = {
 			tag = JAP
@@ -6192,12 +6181,6 @@ calculate_gdp = {
 		subtract_from_temp_variable = { mt_jap_t = mt_jap_t_y }
 
 		multiply_variable = { gdp_total = mt_jap_t }
-	}
-	else_if = {
-		limit = {
-			NOT = { tag = CHI }
-		}
-		multiply_variable = { gdp_total = 0.80 }
 	}
 
 	if = {

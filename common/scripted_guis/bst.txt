@@ -1599,7 +1599,11 @@ scripted_gui = {
 						}
 						OWNER = {
 							set_technology = {
-								synth_oil_experiments = 1
+								# CKEdited - synth_oil_experiments was a vanilla tech; this mod's own
+								# common/technologies/industry.txt (which replaces the vanilla file)
+								# doesn't define it, so this errored every session load. fuel_silos is
+								# the tech that actually unlocks the synthetic_refinery building here.
+								fuel_silos = 1
 								# oil_processing = 1
 								# improved_oil_processing = 1
 								# advanced_oil_processing = 1
@@ -3655,11 +3659,11 @@ scripted_gui = {
 						all_state = {
 							NOT = { has_state_flag = bst_marked }
 						}
-						TEL_base > 0
+						rocket_site > 0
 					}
 					any_state = {
 						has_state_flag = bst_marked
-						TEL_base > 0
+						rocket_site > 0
 					}
 					has_global_flag = bst_suspend_limits
 				}
@@ -3670,11 +3674,11 @@ scripted_gui = {
 						all_state = {
 							NOT = { has_state_flag = bst_marked }
 						}
-						TEL_base > 0
+						rocket_site > 0
 					}
 					any_state = {
 						has_state_flag = bst_marked
-						TEL_base > 0
+						rocket_site > 0
 					}
 					has_global_flag = bst_suspend_limits
 				}
@@ -3685,11 +3689,11 @@ scripted_gui = {
 						all_state = {
 							NOT = { has_state_flag = bst_marked }
 						}
-						TEL_base < 2
+						rocket_site < 2
 					}
 					any_state = {
 						has_state_flag = bst_marked
-						TEL_base < 2
+						rocket_site < 2
 					}
 					has_global_flag = bst_suspend_limits
 				}
@@ -3700,11 +3704,11 @@ scripted_gui = {
 						all_state = {
 							NOT = { has_state_flag = bst_marked }
 						}
-						TEL_base < 2
+						rocket_site < 2
 					}
 					any_state = {
 						has_state_flag = bst_marked
-						TEL_base < 2
+						rocket_site < 2
 					}
 					has_global_flag = bst_suspend_limits
 				}

@@ -44,10 +44,16 @@ update_hostile_attitude_flags = { # CKEdited
 						}
 					}
 				}
-				set_country_flag = computed_hostile_attitude@PREV
+				# CKEdited - set_country_flag/clr_country_flag don't support a "flag@SCOPE" suffix the
+				# way variable reads and has_country_flag triggers do (readers correctly use
+				# has_country_flag = computed_hostile_attitude@FROM in 01_raids_triggers.txt). The old
+				# "computed_hostile_attitude@PREV" form set a garbage-named flag on ROOT instead of the
+				# real flag on PREV (the neighbor being evaluated), and the clr_ version outright errored
+				# ("Invalid Scope, provided: None") 860+ times a session. Switch scope explicitly instead.
+				PREV = { set_country_flag = computed_hostile_attitude }
 			}
 			else = {
-				clr_country_flag = computed_hostile_attitude@PREV
+				PREV = { clr_country_flag = computed_hostile_attitude }
 			}
 		}
 	}

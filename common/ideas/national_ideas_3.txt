@@ -250,7 +250,7 @@ ideas = {
 			experience_gain_army = 0.15
 			experience_gain_army_unit = 0.15
 			army_core_attack_factor = 0.05
-			army_core_defense_factor = 0.10
+			army_core_defence_factor = 0.10
 			}
 			research_bonus = {	
 

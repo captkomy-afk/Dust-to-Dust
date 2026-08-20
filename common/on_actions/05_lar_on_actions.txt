@@ -90,10 +90,13 @@ on_actions = {
 			random_list = {
 				log = yes
 				85 = { #regular #TALL its cool and fun when this happens - original = 90
-					operative_leader_event = {
-						id = lar_operative_event.1
-						set_from_from = ROOT
-					}
+					# lar_operative_event.1 has no localisation entries anywhere - firing it shows
+					# a blank/raw-key popup. Commented out until loc is written; re-enable by
+					# uncommenting.
+					# operative_leader_event = {
+					# 	id = lar_operative_event.1
+					# 	set_from_from = ROOT
+					# }
 				}
 				15 = { #operative turned #TALL its cool and fun when this happens - original = 10
 					modifier = {
@@ -107,10 +110,13 @@ on_actions = {
 					turn_operative = { turned_by = ROOT }
 					# ensure the operative has the nationality of the country he is coming from
 					add_nationality = FROM
-					operative_leader_event = {
-						id = lar_operative_event.5
-						set_from_from = FROM #tells the event which nationality to add
-					}
+					# lar_operative_event.5 has no localisation entries anywhere - firing it shows
+					# a blank/raw-key popup. Commented out until loc is written; re-enable by
+					# uncommenting.
+					# operative_leader_event = {
+					# 	id = lar_operative_event.5
+					# 	set_from_from = FROM #tells the event which nationality to add
+					# }
 				}
 			}
 		}
@@ -127,10 +133,12 @@ on_actions = {
 				}
 
 				# operative killed by a country, likely while on mission
-				operative_leader_event = {
-					id = lar_operative_event.3
-					set_from_from = ROOT
-				}
+				# lar_operative_event.3 has no localisation entries anywhere - firing it shows a
+				# blank/raw-key popup. Commented out until loc is written; re-enable by uncommenting.
+				# operative_leader_event = {
+				# 	id = lar_operative_event.3
+				# 	set_from_from = ROOT
+				# }
 			}
 			else = {
 				# other cause of death
@@ -147,10 +155,13 @@ on_actions = {
 			random_list = {
 				40 = {
 					force_operative_leader_into_hiding = 45
-					operative_leader_event = {
-						id = lar_operative_event.2
-						set_from_from = FROM
-					}
+					# lar_operative_event.2 has no localisation entries anywhere - firing it shows
+					# a blank/raw-key popup. Commented out until loc is written; re-enable by
+					# uncommenting.
+					# operative_leader_event = {
+					# 	id = lar_operative_event.2
+					# 	set_from_from = FROM
+					# }
 				}
 				35 = {
 					capture_operative = {
@@ -159,10 +170,13 @@ on_actions = {
 				}
 				20 = {
 					harm_operative_leader = 90
-					operative_leader_event = {
-						id = lar_operative_event.4
-						set_from_from = FROM
-					}
+					# lar_operative_event.4 has no localisation entries anywhere - firing it shows
+					# a blank/raw-key popup. Commented out until loc is written; re-enable by
+					# uncommenting.
+					# operative_leader_event = {
+					# 	id = lar_operative_event.4
+					# 	set_from_from = FROM
+					# }
 				}
 				5 = {
 					kill_operative = {
